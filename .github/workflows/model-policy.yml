@@ -2,7 +2,12 @@ name: Recheck model policy
 on:
   push:
     branches: [main]
-    paths: ['.github/fingerprint-policy.json', '.github/fingerprint-legacy.json']
+    paths:
+      - '.github/fingerprint-policy.json'
+      - '.github/fingerprint-legacy.json'
+      - '.github/scripts/model-gate.mjs'
+      - '.github/scripts/fingerprint-lib.mjs'
+      - '.github/scripts/protocol.cjs'
   workflow_dispatch:
 permissions:
   contents: read
