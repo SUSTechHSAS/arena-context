@@ -9,20 +9,22 @@ const { inspectPullRequest } = require('./protocol.cjs');
 const { createTaskFiles } = require('./task-scaffold.cjs');
 const seed = JSON.parse(fs.readFileSync(new URL('../vendor/modeltrace/seed.json', import.meta.url)));
 const example = JSON.parse(fs.readFileSync(new URL('./fixtures/fingerprint.json', import.meta.url))).fixtures.find(f => f.expected.status === 'match');
+const ambiguityRaw = fs.readFileSync(new URL('./fixtures/allowed-ambiguity.json', import.meta.url), 'utf8');
 
-function fixture({ recorded = true, legacy = false, advanced = false, domainChange = false } = {}) {
+function fixture({ recorded = true, legacy = false, advanced = false, domainChange = false, raw = example.raw,
+  acceptedModels = ['claude-fable-5-1'] } = {}) {
   const branch = 'arena/test', old = 'a'.repeat(40), head = advanced ? 'b'.repeat(40) : old;
   const repo = { owner: 'SUSTechHSAS', repo: 'arena-context' }, full_name = 'SUSTechHSAS/arena-context';
   const files = createTaskFiles({ issue: { number: 1, title: 'Test', html_url: `https://github.com/${full_name}/issues/1`, body: 'Goal' }, branch: 'AerraGen-main', protocolSha: old });
   files['.context/STATE.md'] = files['.context/STATE.md'].replace('Work branch / PR: not created', 'Work branch / PR: ' + branch);
-  const central = { schema: 1, accepted_models: ['claude-fable-5-1'] };
+  const central = { schema: 1, accepted_models: acceptedModels };
   const prefix = '.context/fingerprints/20261007T000000Z-aabbccdd';
   let report;
   if (recorded) {
-    const graded = scoreSample(example.raw, seed, seed.code_sha256);
-    report = { identity_verified: false, same_model_within_turn: 'assumed_by_user', raw_sha256: hash(example.raw),
+    const graded = scoreSample(raw, seed, seed.code_sha256);
+    report = { identity_verified: false, same_model_within_turn: 'assumed_by_user', raw_sha256: hash(raw),
       package_id: packageId(seed), bank_sha256: seed.bank_sha256, bank_version: seed.bank_version, ...graded, gate: decideWork(graded, central) };
-    files[`${prefix}/raw.json`] = example.raw; files[`${prefix}/report.json`] = JSON.stringify(report);
+    files[`${prefix}/raw.json`] = raw; files[`${prefix}/report.json`] = JSON.stringify(report);
     files[`.context/fingerprints/banks/${packageId(seed)}.json`] = JSON.stringify(seed);
     files['.context/STATE.md'] = files['.context/STATE.md'].replace('## Current objective', `- Fingerprint: ${prefix}/report.json\n\n## Current objective`);
   }
@@ -48,6 +50,34 @@ test('a denied original report cannot retroactively authorize work after list ex
   const f = fixture(); f.report.gate = { allowed: false, action: 'END_TURN' };
   f.files[f.prefix + '/report.json'] = JSON.stringify(f.report);
   assert.ok((await inspectPullRequest(f)).errors.some(x => x.includes('original turn')));
+});
+test('CI independently accepts allowed ambiguity and rejects revocation or a forged incomplete set', async () => {
+  const f = fixture({ raw: ambiguityRaw, acceptedModels: ['gpt-6-astra', 'gpt-6.1-sol'] });
+  assert.deepEqual((await inspectPullRequest(f)).errors, []);
+  f.central.accepted_models = ['gpt-6-astra'];
+  assert.ok((await inspectPullRequest(f)).errors.some(x => x.includes('ambiguous_model_not_accepted')));
+  f.report.ambiguous_models = ['gpt-6-astra'];
+  f.files[f.prefix + '/report.json'] = JSON.stringify(f.report);
+  assert.ok((await inspectPullRequest(f)).errors.some(x => x.includes('ambiguity set mismatch')));
+});
+test('CI does not retroactively allow a previously denied Close call or accept missing ambiguity evidence', async () => {
+  const f = fixture({ raw: ambiguityRaw, acceptedModels: ['gpt-6-astra', 'gpt-6.1-sol'] });
+  f.report.gate = { allowed: false, action: 'END_TURN' };
+  f.files[f.prefix + '/report.json'] = JSON.stringify(f.report);
+  assert.ok((await inspectPullRequest(f)).errors.some(x => x.includes('original turn')));
+  delete f.report.ambiguous_models;
+  f.report.gate = { allowed: true, action: 'CONTINUE' };
+  f.files[f.prefix + '/report.json'] = JSON.stringify(f.report);
+  assert.ok((await inspectPullRequest(f)).errors.some(x => x.includes('ambiguity set mismatch')));
+});
+test('old accepted Clear match and explicitly preserved pre-gate Close call records remain reviewable', async () => {
+  const f = fixture(); delete f.report.ambiguous_models;
+  f.files[f.prefix + '/report.json'] = JSON.stringify(f.report);
+  assert.deepEqual((await inspectPullRequest(f)).errors, []);
+  const old = fixture({ raw: ambiguityRaw, legacy: true });
+  delete old.report.gate; delete old.report.ambiguous_models;
+  old.files[old.prefix + '/report.json'] = JSON.stringify(old.report);
+  assert.deepEqual((await inspectPullRequest(old)).errors, []);
 });
 test('only explicitly fixed legacy work survives without a fingerprint; new domain work does not', async () => {
   assert.deepEqual((await inspectPullRequest(fixture({ recorded: false, legacy: true }))).errors, []);
