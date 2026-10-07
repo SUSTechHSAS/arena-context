@@ -58,6 +58,8 @@ test('CLI emits END_TURN/exit 20 immediately after a non-accepted Clear match, w
     let bankRequests = 0;
     const denied = await prepare(root, { policyFetcher: async () => ({ ok: false, status: 503 }), fetcher: async () => { bankRequests++; throw new Error('must not fetch bank'); } });
     assert.equal(denied.action, 'END_TURN'); assert.equal(bankRequests, 0);
-    assert.equal(JSON.parse(fs.readFileSync(path.join(root, '.context/fingerprints', denied.turn_id, 'report.json'))).gate.allowed, false);
+    const saved = JSON.parse(fs.readFileSync(path.join(root, '.context/fingerprints', denied.turn_id, 'report.json')));
+    assert.equal(saved.gate.allowed, false); assert.equal(saved.gate.detail, saved.detail);
+    assert.match(saved.detail, /503/); assert.ok(!saved.detail.includes('invalid_model_policy'));
   } finally { fs.rmSync(root, { recursive: true, force: true }); }
 });

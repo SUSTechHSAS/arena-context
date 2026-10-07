@@ -16,6 +16,8 @@ node .github/scripts/fingerprint.mjs score <turn_id>
 
 prepare 不调用模型，也不生成探针数字。它先读取受保护 main 上的中央名单，冻结本轮政策快照，再同步上游数据并输出提示词；工作分支中的名单副本不能自行授予权限。政策读取失败就直接 END_TURN。score 只运行本地确定性统计程序，立即给出结果和 gate，不等待 GitHub Actions。每个目录保存 manifest.json、raw.json、report.json；banks/ 按内容哈希保存本轮实际数据。
 
+名单使用 `api.github.com/repos/SUSTechHSAS/arena-context/contents/.github/fingerprint-policy.json?ref=main` 的文件接口，不访问 `raw.githubusercontent.com`，也不跟随 API 返回的 download_url。HTTP 请求优先使用 curl，遵循标准代理和系统 CA 设置；只有未配置代理时才允许回退到 Node fetch，不关闭 TLS 校验。名单读取失败会显示实际 HTTP/连接错误，不再错误地附加 invalid_model_policy。
+
 `status=match` 对应网站的 Clear match；还必须满足确切模型 ID 在接受列表内，才有 `gate.action=CONTINUE`。否则是 END_TURN、退出码 20。它是预期的拒绝，不是让 agent 修复或重试的普通错误。拒绝后只输出原因并结束，不继续分析任务、修改文件、执行工具、提交或推送。记录已由命令保存到本地；若会话随后丢失，不保证该拒绝记录已同步到 GitHub。通过后才更新 STATE 并按原流程远程保存。
 
 记录包含原始样本哈希、提示词、实际长度、候选/拟合/差距、bank 版本与哈希、数据是否新鲜，以及 `same_model_within_turn=assumed_by_user`。重复 score 返回已冻结结果；样本被改动会报错，不能通过补数或重复采样筛选模型。
@@ -27,6 +29,8 @@ prepare 不调用模型，也不生成探针数字。它先读取受保护 main 
 每轮 prepare 读取 https://whatsmyllm.com/ 的版本、bank URL、发布的 SHA-256 和当前英文 JSON 探针，并获取 `/data/gates.json`、`/data/verdict.json` 的数值规则。新的兼容模型指纹数据会在下一次 prepare 立即采用，冻结为本轮快照；score 不在生成样本后更换参考库。
 
 联网失败时优先使用已保存的最近兼容快照，再退回随仓库提供的 seed，并明确输出 cached-fallback 与失败原因。可单独运行 `node .github/scripts/fingerprint.mjs refresh` 检查上游版本，不调用任何模型、不生成样本。
+
+如果 Arena 允许访问 GitHub API，但不允许访问 whatsmyllm.com，使用 `node .github/scripts/fingerprint.mjs prepare --offline`。这个选项只跳过指纹站更新，名单仍须从允许的 GitHub API 在线读取；评分使用有版本和校验和的缓存/内置指纹库，门槛不变。不要为了测试连通性请求环境明确禁止的主机。
 
 只自动更新数据，不自动执行外站的新代码。检查了网站 core、gates、verdict 脚本的已审阅哈希：若评分逻辑变化，记录 engine_update_required 并保留旧兼容快照，需维护 PR 更新后才使用新的算法。这避免把新数据与不兼容的旧算法混用。实时同步以成功联网及上游仍兼容为前提。
 
