@@ -20,7 +20,7 @@
 
 | ID | 指标 | 测量方法（测试/公式） | 阈值 | 阶段 | 证据 | 性质 |
 |---|---|---|---|---|---|---|
-| NX-01 | 圆截面几何精度 | `Meridian::circle(R,r,4096)`：L_m、R_ref、A、V 与解析解 2πr、R、4π²Rr、2π²Rr² 对比 | 相对误差 < 1e-9 | M1 | 测试输出 | GATE |
+| NX-01 | 圆截面几何精度 | `tg_geom::meridian::tests::test_circle_geometry`：`Meridian::circle(R,r,4096)` 的 L_m、R_ref、A、V 与解析解 2πr、R、4π²Rr、2π²Rr² 对比 | 相对误差 < 1e-9 | M1 | `cargo test -p tg-geom meridian` | GATE |
 | NX-02 | 标架与逆映射 | 随机 1000 点：\|e_u×e_σ − n\|、正交性；`inverse(position(u,σ,h))` 往返（\|h\| ≤ 20 km） | < 1e-12；往返误差 < 1e-6 m | M1 | 测试输出 | GATE |
 | NX-03 | 离散散度定理与 Laplacian 收敛 | 随机通量场 Σdiv·A；f(σ) 型函数 Laplacian 与解析 (1/ρ)d/dσ(ρ df/dσ) 对比；N 翻倍 | Σdiv·A 相对误差 < 1e-12；O(Δσ²)；N 翻倍误差降至 ~1/4 | M1 | 测试输出 | GATE |
 | NX-04 | SCF 收敛与对称 | test 与 mini 预设 SCF：表面 Ψ 相对起伏；128×64 vs 256×128 的 Ω；镜像对称；尺度不变性（test vs mini 归一化截面、Ω/√(Gρ)） | Ψ 起伏 < 1e-5；Ω 差 < 1%；镜像误差 < 1e-9·r；截面差 < 1e-6·r，Ω/√(Gρ) 相对差 < 1e-6 | M1 | 测试输出 + `figure` 报告 | GATE |
@@ -39,7 +39,7 @@
 | NX-15 | 泥沙质量守恒 | ξ–q 闭合：侵蚀体积 = 沉积 + 入海 + 内流汇 | 相对误差 < 1e-6 | M3 | 测试输出 | GATE |
 | NX-16 | 扩散与冰川 | 高斯脉冲扩散 vs 解析解（L2、二阶收敛）；Halfar 相似解（平坦床、无物质平衡、关闭滑动）1 万年 | L2 < 1%；体积 < 1%、剖面 < 5% | M3 | 测试输出 | GATE |
 | NX-17 | 均衡核 | 归一化（总反弹体积 = (ρ_c/ρ_m)·卸载体积）；挠曲宽度随 α 线性缩放；α 按 g(σ) 变化 | 相对误差 < 1e-6；线性；逐行变化 | M3 | 测试输出 | GATE |
-| NX-18 | EBM | ① 无扩散稳态 vs 局地辐射平衡解析解；② 全球 TOA 净通量；③ 自遮挡的季节放大：用日照表直接验证 `q(σ_inner, δ=0) = 0`（数值 ≤ 1e-6·q_ann）且 `q_ann(σ_inner)/q_ann(σ=0) ≤ 0.6`；④ EBM 解的季节振幅：内赤道赤道带 `max−min` 月温 ≥ 2× 外赤道的季节振幅 | ① < 0.01 K；② < 0.1 W/m²；③ 等式成立且比值 ≤ 0.6（解析量，来自 astro 表，不依赖 EBM 调参）；④ ≥ 2×（由 ③ 的几何必然导出；若 EBM 未体现，说明长波/环光项实现有误） | M4 | 测试输出 + 报告 | GATE |
+| NX-18 | EBM | `tg_climate::ebm::tests::{test_radiative_equilibrium, test_toa_balance, test_inner_equator_shadow_cooling}`：① 无扩散稳态 vs 局地辐射平衡解析解；② 全球 TOA 净通量；③ 自遮挡的季节放大：用日照表直接验证 `q(σ_inner, δ=0) = 0`（数值 ≤ 1e-6·q_ann）且 `q_ann(σ_inner)/q_ann(σ=0) ≤ 0.6`；④ EBM 解的季节振幅：内赤道带 `max−min` 月温 ≥ 2× 外赤道；⑤ 内赤道 δ≈0 时段（σ=L_m/2，5 个代表日）T 明显低于外赤道 | ① < 0.01 K；② < 0.1 W/m²；③ 等式成立且比值 ≤ 0.6（解析量，来自 astro 表，不依赖 EBM 调参）；④ ≥ 2×（由 ③ 的几何必然导出）；⑤ 温差 > 10 K | M4 | `cargo test -p tg-climate ebm` + 报告 | GATE |
 | NX-19 | 降水模拟器 | 无风时 P = E（全球）；南北走向高斯山脊 + 均匀西风：迎风坡 P 增、背风坡低于上游（雨影）；关闭地形项后差异消失 | P=E < 1%；雨影定性成立；关闭后消失 | M4 | 测试输出 | GATE |
 | NX-20a | GCM 动力核 · 静止大气 | 静止等温大气 + 平坦地形 + 均匀 p_s（π = p_s/g 随 σ 变）：积分 10 天后 `max\|V\|` | < 1e-8 m/s | M4 | 测试输出 | GATE |
 | NX-20b | GCM 动力核 · 地形伪风 | 等温 + 高斯山：积分 10 天后伪风 `max\|V\|` | < 0.5 m/s | M4 | 测试输出 | GATE |
@@ -63,11 +63,11 @@
 |---|---|---|---|---|---|---|
 | RS-01 | 高程双峰性 | L0 高程直方图（100 m bin），双峰检测（两峰间谷深 > 10% 峰高），峰距 = 两峰中心高程差 | 峰距 > 3 km | M5–M6 | `metrics.json` | GATE |
 | RS-02 | 海洋面积占比 | 海洋单元面积 / 总面积（默认水量下） | 0.5–0.8 | M6 | `metrics.json` | RAIL |
-| RS-03 | 高程功率谱斜率 | 沿 σ 行去趋势高程 FFT，径向平均 PSD，log-log 线性拟合 10–1000 km 波段斜率 | −2.6 ~ −1.6 | M6 | `metrics.json` + 图 | RAIL |
+| RS-03 | 高程功率谱斜率 | `tg_metrics::spectral::compute_slope`：沿 σ 行去趋势高程 FFT（Hann 窗），径向平均 PSD，log-log 线性拟合 10–1000 km 波段斜率；排除 < 3 个样本的波数桶 | −2.6 ~ −1.6 | M6 | `metrics.json` 的 `spectral_slope` + `previews/metrics/spectrum.png` | RAIL |
 | RS-04 | 坡度–面积凹度 θ | 河道单元（A > 50 km²）log S 对 log A 最小二乘，θ = −斜率 | 0.35–0.6 | M6 | `metrics.json` | GATE |
 | RS-05 | Hack 指数 h | 各河流主干长度 L（沿程至源头）vs 汇水面积 A：log L = h·log A + c，最小二乘 | 0.5–0.65 | M6 | `metrics.json` | GATE |
 | RS-06 | Horton 分叉比/长度比 | 各 Strahler 级的河段数 N_o 与平均长度 L_o：R_b = N_o/N_{o+1}，R_l = L_{o+1}/L_o（面积加权平均） | R_b ∈ 3–5；R_l ∈ 1.5–3.5 | M6 | `metrics.json` | RAIL |
-| RS-07 | 山地坡度分布 | L3–L4 山地瓦片（流域平均坡度 > 10° 的瓦片）坡度直方图 | 众数 15°–35°；> 45° 占比 < 10% | M7 | `metrics.json` + 图 | RAIL |
+| RS-07 | 山地坡度分布 | `tg_metrics::terrain::slope_histogram`：L3–L4 山地瓦片（流域平均坡度 > 10°）坡度直方图（1° bin），加权按单元面积 A_j | 众数 15°–35°；> 45° 占比 < 10%（按面积加权） | M7 | `metrics.json` 的 `slope_hist` + `previews/metrics/slope_hist.png` | RAIL |
 | RS-08 | 生物群系 Whittaker 符合率 | 陆地单元（年均温 °C, 年降水 cm）落入正确 Whittaker 多边形（表固化在 `tg-eco/src/whittaker.rs`）的比例 | ≥ 90% | M6 | `metrics.json` | GATE |
 | RS-09 | 陆壳占比 | 面积加权陆壳（ctype≠0）占比，mini 长程 1 Gyr 终态 | 0.25–0.45（调参只动 k_arc） | M5 | `tecto/metrics.csv` | GATE |
 | RS-10 | 超大陆旋回 | 最大陆块占全部陆壳比例的时序：至少 1 次 > 60%（聚合）与随后的裂解（< 40%） | 至少 1 次完整旋回 | M5 | `tecto/metrics.csv` + 动画 | GATE |

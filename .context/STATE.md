@@ -2,11 +2,11 @@
 
 - Task: #1
 - Unit: plan-review
-- Work branch / PR: work/1/plan-review
+- Work branch / PR: work/1/plan-review (PR #2)
 - Accepted base at unit start: dbff749aa10312629a68be9be66bb17af530e265
-- Updated: 2026-10-07T08:35:00.000Z
-- Latest session: 2nd Arena relay session (checkpoint on branch `arena/acd9bfef-arena-context`)
-- Candidate stage: working
+- Updated: 2026-10-07T09:00:00Z
+- Latest session: arena/acd9bfef-arena-context（并已整合并行会话 arena/f7309931-arena-context @ 7752195 的内容）
+- Candidate stage: ready-for-review（v3 合并版）
 
 This card does not establish approval; check the actual task branch and PR.
 
@@ -16,26 +16,35 @@ This card does not establish approval; check the actual task branch and PR.
 
 ## Candidate progress
 
-- 第 1 轮（前一会话）：`docs/plan/00-audit.md`（F1–F12、V1–V15）、`01-implementation-plan.md`、`02-acceptance-matrix.md`、`03-open-decisions.md`（D1–D7）。
-- 第 2 轮（本会话）：独立复核并细化——新增 `docs/plan/04-refinement-log.md` 与可复现脚本 `docs/plan/analysis/verify_plan_numbers.py`（+ `verify_output.txt`）。
-  - 复核：参考快照 24/24 SHA256 通过；V1–V15 中 13 项确认、**V13 更正（Q 少算一半，E = 1.02 mm/yr）**、**V2 更正（2πGρr 只是圆柱近似，R/r=4 真实外赤道 g ≈ 3.36 m/s²，−19%）**。
-  - 新证据：earth T_rot = 4.334 h、Ω² = 1.622e-7 s⁻²、(C−A)/C = 0.4851、进动 ≈ 3.0 kyr；earth-g 真实 g ≈ 7.95（非 9.8，D2 已列二选一）；薄环 R/r=20 圆柱偏差 −2.2%（NX-06b 阈值 15% 安全）。
-  - 验收矩阵修订：AC-1 改写 + 新增 AC-1b（导出重采样 C′：V 精确 1 m³、相位对齐、max_offset ≤ 0.63 m）；AC-2 重力判据改写；NX-06 → a/b/c；NX-18 具体化；NX-20 → a–e；新增 NX-29/30、RS-17（过程 vs 噪声对照，直接对应“地形较噪声更接近真实”）、PF-09/10、QE-07/08/09、§02.G 证据留存政策。
-  - 计划细化：`01 §1.4.0` 派生网格表与 `Δσ = x/round(x)` 证明（严格 1 m 在规则嵌套网格上不可达）；G1 扩为 6 条（含质量记账守恒）；§5 存储预算实数（α ≈ 1.927 GB；β ≈ 1.499 GB，余量 +0.001 GB）。
-  - **新增 D8（阻塞级）**：本沙箱无 Rust 工具链（cargo/rustc 不存在），且 static.rust-lang.org / crates.io / index.crates.io 不可达（仅 github.com 可达）⇒ M0 起的 cargo 类验收无法在此环境产生证据，建议户主先提供环境。
+- 第 1 轮（arena/d97b3c57-arena-context）：`docs/plan/00-audit.md`（F1–F12、V1–V15）、`01-implementation-plan.md`、`02-acceptance-matrix.md`、`03-open-decisions.md`（D1–D7）。
+- 并行会话（arena/f7309931-arena-context @ 7752195，已取回检视并**内容整合**，其分支未被覆盖）：`01` 补 `Meridian`/`GravityTable`/`Body`/`LevelSpec`/`Field2d` 具体 Rust 类型签名、SCF 奇点处理/边界条件/Kahan 求和、SDF 分桶加速、§01.8.1 确定性细化与 §01.8.2 检查点/恢复；`02` 补测试函数路径（NX-01/NX-18）与 RS-03/07 计算函数；`03` 补依赖列与 P0/P1/P2 优先级。
+- 本会话（arena/acd9bfef-arena-context）：独立复算脚本 `docs/plan/analysis/verify_plan_numbers.py` + `verify_output.txt`（快照 24/24 SHA256；V1–V15 中 13 项确认、**V13/V2 更正**），新增 `docs/plan/04-refinement-log.md`；
+  - `01`：§1.4.0 派生网格六预设表与 `Δσ = x/round(x)` 证明（严格 1 m 在 16 整除 + 4× 嵌套下不可达）；G1 扩为 6 条可执行判据；1 m³ 处理细化为 **D1 方案 C′**；存储实数（α ≈ 1.927 GB、β ≈ 1.499 GB）；§1.8 证据留存政策；§1.9 D8 风险行；Δ13–Δ18。
+  - `02`：AC-1 改写 + AC-1b；AC-2 重力判据重写；NX-06 → a/b/c；NX-18 重写；NX-20 → a–e；新增 NX-29/30、RS-17（过程 vs 噪声基线）、PF-09/10、QE-07–09、§02.G 证据留存。
+  - `03`：D1 → C′；D2 更正（earth-g 需二选一）；D6 精确断言；**新增 D8**；汇总表 8 项 + 依赖/优先级。
+- 整合结果：上述两条接力会话的细化已以 `04ad908` 为基三方合并为**同一检查点**（4 处文本冲突全部按“并集/保留更具体者”解决，见 `04 §04.8`）；`arena/f7309931-arena-context` 分支与提交 `7752195` 原样保留。
 
 ## Verification
 
-- 本会话实际运行：`python3 docs/plan/analysis/verify_plan_numbers.py`（stdout 保存为 `verify_output.txt`）；参考快照 SHA256 24/24 校验；`git ls-remote` 核对远程 head；协议校验器 `.github/scripts/protocol.cjs` 由 CI 在 PR 事件上运行（不在沙箱内伪造结论）。
-- 未运行（诚实标注）：任何 `cargo` 命令（无工具链，D8）、SCF 实际解、GCM、性能实测、真实性统计——均属实现阶段，D8 解决前不得声称已通过。
+- 本会话实际运行：`python3 docs/plan/analysis/verify_plan_numbers.py`（输出存为 `verify_output.txt`）；参考快照 SHA256 24/24；`git ls-remote` 核对远程 head；协议校验器 `node .github/scripts/protocol.cjs`（本地 0 错误）。
+- 未运行（诚实标注）：任何 `cargo` 命令（D8：无工具链、crates.io 不可达）、SCF 实际解、GCM、性能实测、真实性统计——均属实现阶段。
+- 整合的机械验证：三方合并仅 4 处文本冲突（01/02/03/STATE），逐处记录解决方式；表格列数一致性与协议校验通过。
 
 ## Blockers and unresolved owner feedback
 
 - **D8（阻塞 M0）**：实现环境缺 Rust 工具链与 crates.io 访问。
 - D1（推荐 C′：内部名义 1 m + 导出双向重采样到严格 1 m³）、D2（earth 默认；earth-g 需选 (i) r≈5.24e6 m 或 (ii) ρ≈6777 kg/m³）、D3–D7 待 Kibiandkimi 决策。
-- 分支接力限制：本会话按规则只能推送 `arena/acd9bfef-arena-context`；PR #2 的 head `work/1/plan-review` 需快进同步后才能显示 `docs/plan/` 内容（无需 force-push）。
-- 待办：`docs/plan/03` 的决策若获批准，需在 M0 前把 D8 解决方式写入 ENVIRONMENT.md。
+- 分支同步限制：本会话按规则只能推送 `arena/acd9bfef-arena-context`；PR #2 的 head `work/1/plan-review` 需快进同步（无需 force-push）后才会显示 `docs/plan/`。
 
 ## Next action
 
-请 Kibiandkimi 审核 `docs/plan/00–04` + `analysis/verify_output.txt`，优先决策 **D1 / D2 / D8**；计划获批后第一小步是：把参考快照校验、派生网格公式（NX-30）与工作区骨架作为 M0 的第一批测试，并且在环境（D8）就绪后再跑 `cargo`。不得在最终验收前解码 `.context/DEFERRED_TASK.txt`。
+请 Kibiandkimi 审核 `docs/plan/00–04` + `docs/plan/analysis/verify_output.txt`，优先决策 **D1 / D2 / D8**；批准后 M0 第一小步：工作区骨架 + 参考快照校验 + 派生网格（NX-30）测试；**D8 解决前不跑 `cargo`、不得声称 cargo 类验收通过**。不得在最终验收前解码 `.context/DEFERRED_TASK.txt`。
+
+## Read next
+
+- `docs/plan/00-audit.md`（F1–F12、V1–V15 与勘误）
+- `docs/plan/01-implementation-plan.md`（v3 合并版）
+- `docs/plan/02-acceptance-matrix.md`（v3 合并版）
+- `docs/plan/03-open-decisions.md`（D1–D8）
+- `docs/plan/04-refinement-log.md`（第 2 轮复核与整合记录）
+- `reference/terragen7/docs/plan/00-overview.md`（参考总览）

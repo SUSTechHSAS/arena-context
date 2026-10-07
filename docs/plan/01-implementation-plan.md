@@ -133,7 +133,7 @@ N^L   = N^0·4^L（L = 0..levels）       实际 L_max 格距：Δx_planar = 2π
 1. 初值 D = 圆截面（中心 (R,0)，半径 r）占据分数（单元内 4×4 子采样）
 2. repeat:
    a. 全网格引力位势 Φ_g（环形格林函数，见下；利用 z 镜像对称；近场 ≤2 格距拆 8×8 子点；
-      目标点并行，求和顺序固定）
+      目标点并行，求和顺序固定——按 ρ 升序、z 升序扫描源单元）
    b. 由固定点 A=(ρ_A,0)、B=(ρ_B,0)：Ω² = 2(Φ_g(A)−Φ_g(B))/(ρ_A²−ρ_B²)，C = Φ_g(A) − ½Ω²ρ_A²；
       Ω² ≤ 0 → NoEquilibrium
    c. Ψ = Φ_g − ½Ω²ρ² − C；新占据 = {Ψ<0} 中与 (R,0) 连通的分量（洪泛填充，4 邻接）
@@ -143,11 +143,11 @@ N^L   = N^0·4^L（L = 0..levels）       实际 L_max 格距：Δx_planar = 2π
 4. 派生：Ω、T_rot、V、M、A、L_m、R_ref、GravityTable（σ×高程表）、Sdf2
 ```
 
-- 环形格林函数：质量 dm 的细圆环（半径 a、高度 z₀）在 (ρ,z) 处：`Φ = −(2G dm/π)·K(k)/√((ρ+a)²+(z−z₀)²)`，`k² = 4aρ/((ρ+a)²+(z−z₀)²)`；K(k) 用 AGM 迭代至相对差 < 1e-15。
-- 半平面网格：ρ ∈ [max(0, R−1.6r), R+1.6r]，z ∈ [0, 1.6r]。
+- 环形格林函数：质量 dm 的细圆环（半径 a、高度 z₀）在 (ρ,z) 处：`Φ = −(2G dm/π)·K(k)/√((ρ+a)²+(z−z₀)²)`，`k² = 4aρ/((ρ+a)²+(z−z₀)²)`；K(k) 用 AGM 迭代至相对差 < 1e-15。**奇点处理**：k² > 0.9999 时用展开式 `K ≈ ln(4/√(1−k²))` 避免精度损失；目标点恰好在源单元中心时偏移 1e-6·Δ。
+- 半平面网格：ρ ∈ [max(0, R−1.6r), R+1.6r]，z ∈ [0, 1.6r]。**边界条件**：网格外边缘 Φ_g 用单极矩近似（总质量集中于原点），误差 < 0.1%（验证：网格扩大 1.5× 后 Ω 变化 < 0.1%）。
 - `Meridian`：闭合折线，等弧长 M 点，数组 `rho/z/drho/dz/kappa[k]`；周期三次 Hermite 插值；构造保证并测试 z=0 镜像对称；派生 A = 2π∮ρdσ、V = π∮ρ²z′dσ（周期梯形，谱精度）。
-- 重力表：1024 个 σ 采样 × 17 个高程（−12 km .. +60 km），中心差分（步长 50 m，f64）；记录 g(σ,h) 与切向残差比 |g_tan|/|g|；查询：σ 周期三次 + h 线性插值。
-- SDF：旋转体性质 → 三维点到表面距离 = 子午半平面点到子午线的二维距离；预计算 2048×1024 f32 二维 SDF；球追踪 `ray_hits_body`（命中阈值 1e-4·r）。
+- 重力表：1024 个 σ 采样 × 17 个高程（−12 km .. +60 km），中心差分（步长 50 m，f64）；记录 g(σ,h) 与切向残差比 |g_tan|/|g|；查询：σ 周期三次 + h 线性插值。**精度保证**：f64 全程；位势求和用 Kahan 补偿求和（每目标点累积误差 < 1e-14·|Φ|）。
+- SDF：旋转体性质 → 三维点到表面距离 = 子午半平面点到子午线的二维距离；预计算 2048×1024 f32 二维 SDF；球追踪 `ray_hits_body`（命中阈值 1e-4·r）。**SDF 构建**：对每条网格线段（共 M 段）用点到线段距离的解析公式，取所有线段的最小值（分桶加速：ρ 方向 64 桶，z 方向 32 桶，每点只检查相邻 3×3 桶内的线段）。
 
 **可行性数值（第 2 轮独立积分，圆截面均匀密度；SCF 实算须以本组数为量级参考并覆盖报告）**：
 `earth` 预设 `Ω² ≈ 1.622e-7 s⁻²`（`T_rot ≈ 4.334 h`，落在参考预期 2.5–5 h 内）、`(C−A)/C ≈ 0.485`
@@ -172,7 +172,97 @@ earth 的归一化重力（`g` 相同、`T_rot` 之比 = `√(ρ_mini/ρ_earth) 
 **回退**：调整 R/r 或 Ω 上限；或 `figure.mode="rigid"`（圆截面 + 用户给定自转周期，
 报告等效大地水准面偏差 `(max−min)Ψ/g`，> 100 m 时警告），并在 manifest 与报告中标注 `figure_mode=rigid`。
 
-**数据结构**：同参考 §01.7 `Body { meridian, omega, mass, density, r_ref, l_m, gravity, sdf }`、`LevelSpec { level, n_u, n_s, du, ds }`；单元中心约定：上一级单元恰含下一级 4×4；层级内索引 `i64`，数组下标 `usize`，`wrap` 对负数正确。
+**数据结构（具体类型签名）**：
+
+```rust
+/// 子午线闭合折线（等弧长 M 点）
+pub struct Meridian {
+    pub rho: Vec<f64>,   // ρ(σ_k)，长度 M
+    pub z: Vec<f64>,     // z(σ_k)
+    pub drho: Vec<f64>,  // dρ/dσ（单位切向量分量）
+    pub dz: Vec<f64>,    // dz/dσ
+    pub kappa: Vec<f64>, // 曲率 κ(σ_k)
+    pub l_m: f64,        // 子午线周长 (m)
+    pub r_ref: f64,      // 平面化参考半径 (m)
+    pub m: usize,        // 采样点数
+}
+impl Meridian {
+    /// 圆截面（R, r, M=4096）
+    pub fn circle(r_major: f64, r_minor: f64, m: usize) -> Self;
+    /// SCF 输出重采样
+    pub fn from_contour(points: &[(f64, f64)], m: usize) -> Self;
+    /// 周期三次 Hermite 插值
+    pub fn eval(&self, sigma: f64) -> (f64, f64, f64, f64); // (ρ, z, dρ/dσ, dz/dσ)
+    pub fn rho(&self, sigma: f64) -> f64;
+    pub fn drho(&self, sigma: f64) -> f64;
+    pub fn kappa(&self, sigma: f64) -> f64;
+    pub fn surface_area(&self, density: f64) -> f64; // A = 2π∮ρdσ
+    pub fn volume(&self) -> f64;                      // V = π∮ρ²z'dσ
+}
+
+/// 重力/位势查询表（σ × 高程）
+pub struct GravityTable {
+    pub sigma_samples: Vec<f64>,  // 1024 个 σ 采样
+    pub h_samples: Vec<f64>,     // 17 个高程 (m)
+    pub g_magnitude: Vec<f32>,   // [1024×17] g 大小 (m/s²)
+    pub tangential_ratio: Vec<f32>, // [1024×17] |g_tan|/|g|
+}
+impl GravityTable {
+    /// σ 周期三次 + h 线性插值
+    pub fn g(&self, sigma: f64, h: f64) -> f64;
+    pub fn tangential_residual(&self, sigma: f64, h: f64) -> f64;
+}
+
+/// 星体（完整几何 + 物理）
+pub struct Body {
+    pub meridian: Meridian,
+    pub omega: f64,     // 自转角速度 (rad/s)
+    pub mass: f64,      // 总质量 (kg)
+    pub density: f64,   // 均匀密度 (kg/m³)
+    pub r_ref: f64,     // 平面化参考半径 (m)
+    pub l_m: f64,       // 子午线周长 (m)
+    pub gravity: GravityTable,
+    pub sdf: Sdf2,      // 二维有符号距离场
+}
+impl Body {
+    pub fn position(&self, u: f64, s: f64, h: f64) -> DVec3;       // P + h·n
+    pub fn frame(&self, u: f64, s: f64) -> Frame;                    // e_u, e_σ, n
+    pub fn rho(&self, s: f64) -> f64;
+    pub fn drho(&self, s: f64) -> f64;
+    pub fn g(&self, s: f64, h: f64) -> f64;                          // 查表 + 插值
+    pub fn coriolis(&self, s: f64) -> f64;                           // f = 2Ω n_z
+    pub fn x_scale(&self, s: f64) -> f64;                            // k(σ) = ρ/R_ref
+    pub fn inverse(&self, p: DVec3) -> (f64, f64, f64);              // (u, σ, h) 最近点
+}
+
+/// 层级网格规范
+pub struct LevelSpec {
+    pub level: u8,
+    pub n_u: i64,   // 环向格数
+    pub n_s: i64,   // 子午线格数
+    pub du: f64,    // 环向步长 (rad)
+    pub ds: f64,    // 子午线步长 (m)
+}
+impl LevelSpec {
+    pub fn center(&self, i: i64, j: i64) -> (f64, f64); // (u, σ)，自动 wrap
+    pub fn cell_of(&self, u: f64, s: f64) -> (i64, i64);
+}
+
+/// 二维周期场（SoA 布局，rayon 友好）
+pub struct Field2d<T: Copy + Send + Sync> {
+    pub data: Vec<T>,  // 长度 n_u × n_s，行优先 (i, j) → i + j * n_u
+    pub n_u: i64,
+    pub n_s: i64,
+}
+impl<T: Copy + Send + Sync> Field2d<T> {
+    pub fn new(n_u: i64, n_s: i64, fill: T) -> Self;
+    pub fn get(&self, i: i64, j: i64) -> T;    // 自动 wrap
+    pub fn set(&mut self, i: i64, j: i64, v: T);
+    pub fn par_iter_cells(&self) -> impl ParallelIterator<Item = (i64, i64)>; // rayon
+}
+```
+
+单元中心约定：上一级单元 (I,J) 恰好包含下一级 `i∈[4I,4I+4)`, `j∈[4J,4J+4)`。所有层级、构造网格、气候网格都用此约定。索引类型：层级内 `i64`（earth L6 的 N_u ≈ 4.5×10⁷）；数组下标 `usize`。`wrap(i, n)` 对负数正确：`((i % n) + n) % n`（Rust 的 `%` 对负数返回负值，须修正）。
 
 ### 01.4.2 S2 天文（`tg-astro`）
 
@@ -350,7 +440,36 @@ T00→T01→T02→T03→T10→T11→T12→T20→T21→T50→T51→T52→T53─�
   1. **可复现证据（首选）**：每个 GATE 项必须能由仓库内的代码/脚本 + 固定 preset + seed + 命令复现，PR 中写明该命令、实测结果与耗时；重现命令必须在文档中可执行（例如 `terragen bench --preset mini --seed 42`）。
   2. **随 PR 提交的证据**：阶段报告（`docs/reports/M<k>.md`）、`metrics.json` / `bench.json` / `diag.json` 等小型 JSON、`verify_output.txt`、单张 ≤ 5 MB 的审查图；大图/动画只提交 SHA256 与生成命令。
   3. **不可保留的产物**（world 目录、`target/`、视频）：必须在报告中给出**生成命令 + 产物 SHA256 + 关键统计量**，不得以沙箱路径或 Actions artifact 作为唯一副本。评审复现以命令为准。
-- 确定性（参考 §08.4 四规则 + 审计 F11 扩展）：SplitMix64 终结 + FNV-1a 标签的 `hash(seed, tag, a, b, c)`；xoshiro256** 按用途分流；哈希噪声在**全局平面坐标**求值且**周期**（格点数 n_x = max(1, round(2πR_ref/λ))，n_y = max(1, round(L_m/λ))，取模）；不依赖 HashMap/HashSet 迭代顺序；浮点归约顺序固定（固定大小块部分和）；并行只写互不重叠区域；不用时间/线程 id/地址作随机源。**扩展：导出路径（瓦片/区域/体素块/PLY）纳入确定性测试（NX-28）。**
+
+### 01.8.1 确定性规则（参考 §08.4 四规则 + 审计 F11 扩展）
+
+1. **RNG 与哈希**：`hash(seed: u64, tag: &str, a: i64, b: i64, c: i64) -> u64` = SplitMix64 终结(FNV-1a(seed) ⊕ FNV-1a(tag) ⊕ a ⊕ (b << 17) ⊕ (c << 31))；xoshiro256** 按用途分流（构造、裂谷、热点、沙丘、植物各用独立 seed 流）。
+2. **噪声周期性**：哈希噪声在**全局平面坐标**求值且**周期**：格点数 `n_x = max(1, round(2πR_ref/λ))`，`n_y = max(1, round(L_m/λ))`，取模。不同 λ 值的噪声叠加（分形）。
+3. **并行归约**：不依赖 HashMap/HashSet 迭代顺序；浮点归约顺序固定（固定大小块部分和——每块 1024 元素，块内 Kahan 求和，块间按块索引顺序累加）；并行只写互不重叠区域；不用时间/线程 id/地址作随机源。
+4. **扩展（审计 F11）**：导出路径（瓦片/区域/体素块/PLY）纳入确定性测试（NX-28）；缓存键含 config 哈希与 `REFINE_VERSION`。
+
+**验证方法**：`tg_core::testing::assert_deterministic(seed, f)`：运行 `f` 两次（1 线程 vs 16 线程专用线程池），比较所有输出的字节哈希。每个并行模块（SCF、构造平流、LEM 步、GCM 步、细化窗口）都须有此测试。
+
+### 01.8.2 检查点与恢复
+
+**文件命名**：`<world>/ckpt_<stage>_<timestamp>.bin`（stage = init/figure/astro/tecto_a/tecto_b/climate/eco/hydro/assets）。
+
+**恢复算法**：
+1. 扫描世界目录，找最新检查点（按时间戳降序）。
+2. 读取 `manifest.json`，校验 `config_hash` 与当前配置一致（不一致 → 警告并中止，除非 `--force`）。
+3. 恢复阶段状态（反序列化到对应结构体）。
+4. 从下一阶段继续（manifest 记录每个阶段的 started/finished 时间戳）。
+5. 若检查点损坏（magic/version 不匹配、zstd 解压失败、校验和不一致）→ 尝试前一个检查点，或从头重跑。
+
+**检查点内容**（每阶段不同，详见各阶段输出节）：
+- `init`：配置 TOML 副本 + 派生参数 JSON。
+- `figure`：Meridian (rho/z/drho/dz/kappa f64×M) + GravityTable (f32×1024×17×2) + Sdf2 (f32×2048×1024) + 派生标量 (Omega, T_rot, Mass, A, V)。
+- `astro`：ShadowTable (压缩区间列表) + QTable (f32×1024×n_delta) + ViewFactors (f32×256×256 + f32×256)。
+- `tecto_a`/`tecto_b`：构造网格全状态（plate u16, ctype u8, thick/age/orogeny/tm/weak f32, bnd_type u8, bnd_time f32, strain [f32;3], strat [Layer;8]）+ 板块表 + 当前时间 t_yr + 全局统计。
+- `climate`：EBM/GCM 月均场 (f32) + 诊断 JSON。
+- `eco`：土壤/植被状态 (f32) + 土纲 (u8)。
+- `hydro`：流向 (u8) + 湖泊集合 + 河网 postcard。
+- `assets`：谱斜率表 (f32) + 沙丘纹理索引。
 - 测试分层：`cargo test`（test 预设，全工作区 < 3 min）；`cargo test --release -- --ignored`（mini 长程）；`scripts/check.sh`（fmt --check、clippy -D warnings、快速测试）；`scripts/slow.sh`；`scripts/preview.sh <task>`（审查图到 `artifacts/<task>/`，不入 git）。
 - 编码规范（参考 §08.9）：公共项文档注释；库中不 `unwrap()`（测试除外），不变量 `expect("原因")`；`thiserror`/`anyhow`；`tracing` 日志（长任务每 ≥ 5 s 进度）；无全局可变状态；需要 g 处一律 `Body::g(σ,h)`。
 - 预览（`tg-viz`）：平面地图（y=σ，外赤道居中；真实度量晕渲；叠加河网/板块/湖泊/冰川/等值线）；环面三维 CPU 光线追踪渲染（SDF 球追踪，太阳方向含阴影）；帧序列；细层缩放序列与体素块等轴测渲染。写入 `<world>/previews/` 与 `artifacts/<Txx>/`。
