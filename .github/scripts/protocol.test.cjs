@@ -45,8 +45,14 @@ test('foreign PR head is rejected without reading its content', async () => {
 });
 test('API file-list truncation and duplicate identity fields cannot pass', () => {
   const a = fixture(); a.pr.changed_files = 3001; assert.ok(validate(a).errors.length);
-  const b = fixture(); b.candidate['.context/TASK.md'] += '\n- Task Issue: https://github.com/SUSTechHSAS/arena-context/issues/12\n';
+  const b = fixture(); b.candidate['.context/TASK.md'] = b.candidate['.context/TASK.md'].replace('- Task Issue:', '- Task Issue: https://github.com/SUSTechHSAS/arena-context/issues/12\n- Task Issue:');
   assert.ok(validate(b).errors.length);
+});
+test('quoted metadata in the supplied Issue brief does not override task identity', () => {
+  const a = fixture();
+  a.trustedTask += '\n## Quoted reference\n- Accepted branch: unrelated\n- Task Issue: https://github.com/other/repo/issues/99\n';
+  a.candidate['.context/TASK.md'] = a.trustedTask;
+  assert.deepEqual(validate(a).errors, []);
 });
 test('task initialization preserves supplied brief verbatim and blocks unauthorized actor/ref', async () => {
   const body = 'An opaque deferred payload must remain untouched: opaque-payload';
