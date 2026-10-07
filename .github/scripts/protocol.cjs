@@ -34,9 +34,11 @@ function validate({ pr, files, trustedTask, candidate }) {
   if (!/^[1-9]\d*$/.test(issue)) return { errors: [...errors, 'Accepted TASK.md needs this repository\'s Issue URL.'], summary: '' };
   if (standard && standard[1] !== issue) fail('Task branch number differs from its accepted Issue.');
   if (field(trustedTask, 'Accepted branch') !== base) fail('Accepted TASK.md names a different base branch.');
-  const normal = new RegExp(`^work/${issue}/[a-z0-9][a-z0-9/_-]*$`).test(head);
+  // Arena chooses opaque branch names. Task identity comes from the accepted
+  // TASK.md, never from a UUID or from a branch name guessed by the model.
+  const normal = new RegExp(`^work/${issue}/[a-z0-9][a-z0-9/_-]*$`).test(head) || /^arena\/[a-z0-9][a-z0-9/_-]*$/.test(head);
   const maintenance = new RegExp(`^meta/${issue}/[a-z0-9][a-z0-9/_-]*$`).test(head);
-  if (!normal && !maintenance) fail(`Use work/${issue}/<unit> or meta/${issue}/<unit>.`);
+  if (!normal && !maintenance) fail(`Use work/${issue}/<unit>, arena/<generated-name>, or meta/${issue}/<unit>.`);
   for (const path of REQUIRED) {
     if (typeof candidate[path] !== 'string' || !candidate[path].trim()) fail(`Missing handoff file: ${path}`);
   }
@@ -58,15 +60,17 @@ function validate({ pr, files, trustedTask, candidate }) {
       if (!state.split(/\r?\n/).includes(`## ${section}`)) fail(`STATE.md is missing section: ${section}`);
     }
   }
-  return { errors, summary: maintenance ? `Task #${issue} protocol proposal; human review is required.` : `Task #${issue} routing and handoff match; content still needs human review.` };
+  return { errors, maintenance, summary: maintenance ? `Task #${issue} protocol proposal; human review is required.` : `Task #${issue} routing and handoff match; content still needs human review.` };
 }
 
-async function readText(github, repo, path, ref) {
+async function readText(github, repo, path, ref, maxBytes = 65536) {
   try {
-    const { data } = await github.rest.repos.getContent({ ...repo, path, ref });
-    if (Array.isArray(data) || data.type !== 'file' || data.encoding !== 'base64' || data.size > 65536) {
-      throw new Error(`Expected a regular handoff file no larger than 64 KiB: ${path}`);
+    let { data } = await github.rest.repos.getContent({ ...repo, path, ref });
+    if (Array.isArray(data) || data.type !== 'file' || data.size > maxBytes) {
+      throw new Error(`Expected a regular handoff file within the size limit: ${path}`);
     }
+    if (data.encoding === 'none') data = (await github.rest.git.getBlob({ ...repo, file_sha: data.sha })).data;
+    if (data.encoding !== 'base64' || data.size > maxBytes) throw new Error(`Unsupported file encoding: ${path}`);
     return Buffer.from(data.content, 'base64').toString('utf8');
   } catch (error) {
     if (error.status === 404) return undefined;
@@ -81,7 +85,39 @@ async function inspectPullRequest({ github, repo, pr }) {
   const trustedTask = await readText(github, repo, '.context/TASK.md', pr.base.sha);
   const candidate = {};
   for (const path of REQUIRED) candidate[path] = await readText(github, repo, path, pr.head.sha);
-  return validate({ pr, files, trustedTask, candidate });
+  const report = validate({ pr, files, trustedTask, candidate });
+  if (!report.errors.length && !report.maintenance) {
+    const fp = field(candidate['.context/STATE.md'] || '', 'Fingerprint');
+    if (!fp || fp === 'not recorded') {
+      report.warnings = ['No fingerprint recorded for this checkpoint; do not infer a model identity.'];
+    } else if (!/^\.context\/fingerprints\/\d{8}T\d{6}Z-[a-f0-9]{8}\/report\.json$/.test(fp)) {
+      report.errors.push('Fingerprint must link to a per-turn report path.');
+    } else {
+      try {
+        const result = JSON.parse(await readText(github, repo, fp, pr.head.sha));
+        const raw = await readText(github, repo, fp.replace('report.json', 'raw.json'), pr.head.sha);
+        const { hash, packageId, scoreSample } = await import('./fingerprint-lib.mjs');
+        if (result.identity_verified !== false || result.same_model_within_turn !== 'assumed_by_user') throw new Error('Invalid fingerprint evidence labels.');
+        if (result.raw_sha256 !== (raw === undefined ? null : hash(raw))) throw new Error('Fingerprint raw hash mismatch.');
+        if (result.status !== 'unscored') {
+          if (!/^[a-f0-9]{64}$/.test(result.package_id)) throw new Error('Invalid fingerprint package ID.');
+          const bundle = JSON.parse(await readText(github, repo, `.context/fingerprints/banks/${result.package_id}.json`, pr.head.sha, 10000000));
+          if (packageId(bundle) !== result.package_id) throw new Error('Fingerprint package changed.');
+          const trusted = require('../vendor/modeltrace/provenance.json').website_code_sha256;
+          const verified = scoreSample(raw, bundle, trusted);
+          if (result.bank_sha256 !== bundle.bank_sha256 || result.bank_version !== bundle.bank_version) throw new Error('Fingerprint bank metadata mismatch.');
+          for (const key of ['status', 'nearest_model', 'identified_candidate', 'family']) {
+            if (verified[key] !== result[key]) throw new Error(`Fingerprint score mismatch: ${key}`);
+          }
+          for (const key of ['fit', 'separation']) {
+            if (verified[key] !== undefined && (!Number.isFinite(result[key]) || Math.abs(verified[key] - result[key]) > 1e-12)) throw new Error(`Fingerprint numeric mismatch: ${key}`);
+          }
+          if (JSON.stringify(verified.candidates) !== JSON.stringify(result.candidates)) throw new Error('Fingerprint candidate list mismatch.');
+        }
+      } catch (error) { report.errors.push(`Fingerprint record invalid: ${error.message}`); }
+    }
+  }
+  return report;
 }
 
-module.exports = { field, validate, inspectPullRequest };
+module.exports = { field, validate, inspectPullRequest, readText };

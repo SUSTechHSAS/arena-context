@@ -17,6 +17,14 @@ function fixture(branch = 'task/12/main') {
 test('ordinary and legacy task branches accept consistent candidate checkpoints', () => {
   for (const branch of ['task/12/main', 'AerraGen-main']) assert.deepEqual(validate(fixture(branch)).errors, []);
 });
+test('Arena opaque branches bind to accepted task metadata and must record the real head', () => {
+  const a = fixture('AerraGen-main'); a.pr.head.ref = 'arena/abcd-arena-context';
+  assert.ok(validate(a).errors.some(x => x.includes('exact work branch')));
+  a.candidate['.context/STATE.md'] = a.candidate['.context/STATE.md'].replace('work/12/first', a.pr.head.ref);
+  assert.deepEqual(validate(a).errors, []);
+  a.candidate['.context/TASK.md'] = a.candidate['.context/TASK.md'].replace('/issues/12', '/issues/99');
+  assert.ok(validate(a).errors.some(x => x.includes('Issue identity')));
+});
 test('rejects wrong task, wrong main base, and candidate attempts to change identity', () => {
   const a = fixture(); a.pr.head.ref = 'work/13/first'; assert.ok(validate(a).errors.length);
   const b = fixture(); b.pr.base.ref = 'main'; assert.ok(validate(b).errors.length);
