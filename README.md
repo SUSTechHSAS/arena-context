@@ -45,6 +45,10 @@ Arena 自动创建分支不等于自动保存。agent 必须主动 commit、push
 
 每次 prepare 都检查 WhatsMyLLM 最新 bank 和阈值；数据兼容且校验通过便立即使用，无需等仓库升级。离线时明确标记缓存版本，评分算法变化时提示需要更新检查器，不下载执行新远程代码。原始样本、结果和所用 bank 快照随检查点保存。详细说明见 [docs/FINGERPRINT.md](docs/FINGERPRINT.md)。
 
+**工作门槛：必须是接受列表内模型的 Clear match。** 当前接受 Opus 5.5、Sonnet 5.5、Fable 5.1、GPT-6 Astra、GPT-6.1 Sol、GPT-6 Sol。列表位于 main 的 [.github/fingerprint-policy.json](.github/fingerprint-policy.json)，逐个具体模型 ID 匹配。
+
+score 在本地即时输出 CONTINUE 或 END_TURN，不等待 CI。其他模型、Close call、Weak match、无效样本、评分或政策读取失败，都返回退出码 20，要求 agent 输出原因后直接结束轮次，不重测、不继续任务。拒绝记录已写本地，不再额外 commit/push；通过后才继续原来的检查点流程。
+
 三个交接文件：`TASK.md` 写目标/约束/验收，`STATE.md` 写候选进度/验证/下一步，`DECISIONS.md` 写关键理由和证据。工作分支中的结论仍未经人工审核。
 
 `arena/protocol` 检查分支归属、交接文件和规则变更范围；代码、调研和文档仍需各自的证据与人工审核。`Kibiandkimi` 是唯一必需 CODEOWNER，新增修改撤销旧批准。

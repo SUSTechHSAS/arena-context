@@ -89,7 +89,11 @@ async function inspectPullRequest({ github, repo, pr }) {
   if (!report.errors.length && !report.maintenance) {
     const fp = field(candidate['.context/STATE.md'] || '', 'Fingerprint');
     if (!fp || fp === 'not recorded') {
-      report.warnings = ['No fingerprint recorded for this checkpoint; do not infer a model identity.'];
+      if (await isLegacyCheckpoint({ github, repo, pr })) {
+        report.warnings = ['Pre-gate checkpoint preserved for human review; no model identity is claimed. New task changes require an accepted Clear match.'];
+      } else {
+        report.errors.push('No current fingerprint: new task changes require Clear match from an accepted model.');
+      }
     } else if (!/^\.context\/fingerprints\/\d{8}T\d{6}Z-[a-f0-9]{8}\/report\.json$/.test(fp)) {
       report.errors.push('Fingerprint must link to a per-turn report path.');
     } else {
@@ -97,14 +101,19 @@ async function inspectPullRequest({ github, repo, pr }) {
         const result = JSON.parse(await readText(github, repo, fp, pr.head.sha));
         const raw = await readText(github, repo, fp.replace('report.json', 'raw.json'), pr.head.sha);
         const { hash, packageId, scoreSample } = await import('./fingerprint-lib.mjs');
+        const { decideWork, validatePolicy } = await import('./model-gate.mjs');
+        // The accepted list is centrally controlled on protected main. A
+        // candidate's copy of policy.json or self-written gate cannot grant access.
+        const currentPolicy = validatePolicy(JSON.parse(await readText(github, repo, '.github/fingerprint-policy.json', 'main')));
         if (result.identity_verified !== false || result.same_model_within_turn !== 'assumed_by_user') throw new Error('Invalid fingerprint evidence labels.');
         if (result.raw_sha256 !== (raw === undefined ? null : hash(raw))) throw new Error('Fingerprint raw hash mismatch.');
+        let verified = { status: 'unscored' };
         if (result.status !== 'unscored') {
           if (!/^[a-f0-9]{64}$/.test(result.package_id)) throw new Error('Invalid fingerprint package ID.');
           const bundle = JSON.parse(await readText(github, repo, `.context/fingerprints/banks/${result.package_id}.json`, pr.head.sha, 10000000));
           if (packageId(bundle) !== result.package_id) throw new Error('Fingerprint package changed.');
           const trusted = require('../vendor/modeltrace/provenance.json').website_code_sha256;
-          const verified = scoreSample(raw, bundle, trusted);
+          verified = scoreSample(raw, bundle, trusted);
           if (result.bank_sha256 !== bundle.bank_sha256 || result.bank_version !== bundle.bank_version) throw new Error('Fingerprint bank metadata mismatch.');
           for (const key of ['status', 'nearest_model', 'identified_candidate', 'family']) {
             if (verified[key] !== result[key]) throw new Error(`Fingerprint score mismatch: ${key}`);
@@ -114,10 +123,29 @@ async function inspectPullRequest({ github, repo, pr }) {
           }
           if (JSON.stringify(verified.candidates) !== JSON.stringify(result.candidates)) throw new Error('Fingerprint candidate list mismatch.');
         }
+        if (!result.gate && await isLegacyCheckpoint({ github, repo, pr })) {
+          report.warnings = ['Historical fingerprint predates the model gate; it does not authorize a new turn.'];
+        } else {
+          const decision = decideWork(verified, currentPolicy);
+          if (!decision.allowed) throw new Error(`Model gate denied: ${decision.reason}. End the user turn; do not perform task work.`);
+          if (result.gate?.allowed !== true || result.gate?.action !== 'CONTINUE') throw new Error('This report did not authorize work in its original turn. Obtain a new accepted Clear match in a new user turn.');
+        }
       } catch (error) { report.errors.push(`Fingerprint record invalid: ${error.message}`); }
     }
   }
   return report;
 }
 
-module.exports = { field, validate, inspectPullRequest, readText };
+async function isLegacyCheckpoint({ github, repo, pr }) {
+  const text = await readText(github, repo, '.github/fingerprint-legacy.json', 'main');
+  if (!text) return false;
+  const legacy = JSON.parse(text).heads?.[pr.head.ref];
+  if (!/^[a-f0-9]{40}$/.test(legacy || '')) return false;
+  if (legacy === pr.head.sha) return true;
+  const { data } = await github.rest.repos.compareCommitsWithBasehead({ ...repo, basehead: `${legacy}...${pr.head.sha}` });
+  const protocolOnly = p => protectedPath(p) || ['README.md', 'docs/OPERATIONS.md', 'docs/FINGERPRINT.md', '.context/STATE.md'].includes(p);
+  return ['ahead', 'identical'].includes(data.status) && Array.isArray(data.files) && data.files.length < 300 &&
+    data.files.every(f => protocolOnly(f.filename) && (!f.previous_filename || protocolOnly(f.previous_filename)));
+}
+
+module.exports = { field, validate, inspectPullRequest, readText, isLegacyCheckpoint };
