@@ -1,0 +1,43 @@
+name: Ensure task PR
+on:
+  workflow_run:
+    workflows: [Checkpoint]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Existing arena/... or work/... branch
+        required: true
+        type: string
+permissions:
+  contents: read
+  pull-requests: write
+  statuses: write
+concurrency:
+  group: arena-pr-${{ github.event.workflow_run.head_branch || inputs.branch }}
+  cancel-in-progress: false
+jobs:
+  ensure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
+        env:
+          REQUESTED_BRANCH: ${{ inputs.branch }}
+        with:
+          script: |
+            const run = context.payload.workflow_run;
+            if (run && run.head_repository.full_name !== `${context.repo.owner}/${context.repo.repo}`) {
+              throw new Error('Only checkpoints in this repository are eligible.');
+            }
+            if (!run && context.ref !== 'refs/heads/main') throw new Error('Run this workflow from main.');
+            const { ensureTaskPR } = require('./.github/scripts/auto-pr.cjs');
+            const result = await ensureTaskPR({ github, repo: context.repo,
+              branch: run?.head_branch || process.env.REQUESTED_BRANCH,
+              runURL: `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}` });
+            await core.summary.addHeading('Saved task checkpoint').addRaw(JSON.stringify(result, null, 2)).write();
+            if (result.report?.errors.length) core.setFailed(result.report.errors.join('\n'));
