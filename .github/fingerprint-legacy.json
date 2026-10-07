@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "description": "Pre-gate checkpoints retained for human review, not model identity approval. Only protocol/metadata updates may follow without a new passing fingerprint.",
+  "heads": {
+    "arena/acd9bfef-arena-context": "7d8a584413023bec3d470fd3932981ca9aad36a0",
+    "arena/d97b3c57-arena-context": "b2697c618a5b1e11db910b67a37a1c94e6915f29",
+    "arena/f7309931-arena-context": "19fcbeee50924c40002a5e5b953e5366fecbef33",
+    "work/1/plan-review": "db134b339f34bcbee7425b92eea3ee7a0bd84ec1"
+  }
+}

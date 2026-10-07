@@ -8,6 +8,7 @@ import { downloadBundle, hash, packageId, scoreSample, validateBundle, websiteMa
 import { prepare, score } from './fingerprint.mjs';
 const seed = JSON.parse(fs.readFileSync(new URL('../vendor/modeltrace/seed.json', import.meta.url)));
 const fixtures = JSON.parse(fs.readFileSync(new URL('./fixtures/fingerprint.json', import.meta.url))).fixtures;
+const policyFetcher = async () => ({ ok: true, text: async () => JSON.stringify({ schema: 1, accepted_models: ['claude-fable-5-1'] }) });
 
 test('matches website ranking/verdict/fit/separation for nine recorded examples', () => {
   for (const f of fixtures) {
@@ -50,12 +51,13 @@ test('offline turn records are frozen, independently scored, and never reused fo
     const git = args => execFileSync('git', args, { cwd: root, stdio: 'pipe' });
     git(['init', '-b', 'arena/test']); fs.mkdirSync(path.join(root, '.context')); fs.writeFileSync(path.join(root, '.context/TASK.md'), 'Test fixture');
     git(['add', '.']); git(['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-m', 'fixture']);
-    const first = await prepare(root, { offline: true }); assert.equal(first.freshness, 'cached-fallback');
+    const first = await prepare(root, { offline: true, policyFetcher }); assert.equal(first.freshness, 'cached-fallback');
     const rawPath = path.join(root, first.raw_path); fs.writeFileSync(rawPath, fixtures[0].raw);
     const report = score(root, first.turn_id); assert.equal(report.raw_sha256, hash(fixtures[0].raw));
     assert.deepEqual(score(root, first.turn_id), report);
     fs.appendFileSync(rawPath, '\n'); assert.throws(() => score(root, first.turn_id), /sample changed/);
-    const next = await prepare(root, { offline: true }); assert.notEqual(next.turn_id, first.turn_id);
+    const next = await prepare(root, { offline: true, policyFetcher }); assert.notEqual(next.turn_id, first.turn_id);
     assert.equal(score(root, next.turn_id).status, 'unscored');
+    assert.equal(score(root, next.turn_id).gate.action, 'END_TURN');
   } finally { fs.rmSync(root, { recursive: true, force: true }); }
 });

@@ -7,6 +7,7 @@ function mock() {
   const repo = { owner: 'SUSTechHSAS', repo: 'arena-context' }, full_name = 'SUSTechHSAS/arena-context';
   const issue = { number: 1, title: 'Task', html_url: `https://github.com/${full_name}/issues/1`, body: 'Goal' };
   const branch = 'arena/abcd-arena-context', files = createTaskFiles({ issue, branch: 'AerraGen-main', protocolSha: 'a'.repeat(40) });
+  files['.github/fingerprint-legacy.json'] = JSON.stringify({ schema: 1, heads: { [branch]: 'b'.repeat(40) } });
   files['.context/STATE.md'] = files['.context/STATE.md'].replace('Work branch / PR: not created', 'Work branch / PR: ' + branch);
   const pr = { number: 9, html_url: 'https://github.com/example/pr/9', changed_files: 1,
     base: { ref: 'AerraGen-main', sha: 'a'.repeat(40), repo: { full_name } }, head: { ref: branch, sha: 'b'.repeat(40), repo: { full_name } } };
