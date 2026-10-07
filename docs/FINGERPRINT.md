@@ -2,7 +2,7 @@
 
 用户明确要求每个工作轮次独立采样，并假定同轮的多个模型请求来自相同模型。实施顺序：prepare → 当前模型直接生成数字 → 原样写 raw.json → score → 输出摘要 → 同轮继续任务。
 
-现在最后一步受接受名单控制：仅 Clear match 且具体模型 ID 在 main 的 `.github/fingerprint-policy.json` 中才继续。其他结果直接结束轮次。接受名单不按系列或名称前缀扩展，上游新增模型也不会自动获得工作权限。
+最后一步受接受名单控制：Clear match 的具体模型 ID，或 Close call 的完整歧义集合中的所有模型 ID，都在 main 的 `.github/fingerprint-policy.json` 中时才继续。其他结果直接结束轮次。接受名单不按系列或名称前缀扩展，上游新增模型也不会自动获得工作权限。
 
 ## 命令与记录
 
@@ -18,7 +18,11 @@ prepare 不调用模型，也不生成探针数字。它先读取受保护 main 
 
 名单使用 `api.github.com/repos/SUSTechHSAS/arena-context/contents/.github/fingerprint-policy.json?ref=main` 的文件接口，不访问 `raw.githubusercontent.com`，也不跟随 API 返回的 download_url。HTTP 请求优先使用 curl，遵循标准代理和系统 CA 设置；只有未配置代理时才允许回退到 Node fetch，不关闭 TLS 校验。名单读取失败会显示实际 HTTP/连接错误，不再错误地附加 invalid_model_policy。
 
-`status=match` 对应网站的 Clear match；还必须满足确切模型 ID 在接受列表内，才有 `gate.action=CONTINUE`。否则是 END_TURN、退出码 20。它是预期的拒绝，不是让 agent 修复或重试的普通错误。拒绝后只输出原因并结束，不继续分析任务、修改文件、执行工具、提交或推送。记录已由命令保存到本地；若会话随后丢失，不保证该拒绝记录已同步到 GitHub。通过后才更新 STATE 并按原流程远程保存。
+`status=match` 对应网站的 Clear match；确切模型 ID 在接受列表内时，返回 `gate.reason=accepted_clear_match`。`status=family_only` 对应 Close call；完整 `ambiguous_models` 至少包含两个不同模型、包含最近候选且全部在接受列表内时，返回 `gate.reason=accepted_ambiguity`。两者均有 `gate.allowed=true`、`gate.action=CONTINUE`。Close call 保留 `identified_candidate=null`，通过名单门槛不等于确认唯一身份。
+
+歧义集合使用原有 `margin_min` 阈值，遍历完整指纹库：保留满足 `nearest.fit - candidate.fit < margin_min` 的每个具体模型，不按系列过滤，也不截断为展示用的前三名。恰好达到阈值的模型已被区分；拟合比最近候选更高的模型也保留。Close call 本身仍须通过原有输入、`fit_min` 和 `family_min` 门槛。集合内只要有一个未获准 ID 就拒绝，即使最近候选已获准。
+
+不满足上述条件时返回 END_TURN、退出码 20。它是预期的拒绝，不是让 agent 修复或重试的普通错误。拒绝后只输出原因并结束，不继续分析任务、修改文件、执行工具、提交或推送。记录已由命令保存到本地；若会话随后丢失，不保证该拒绝记录已同步到 GitHub。通过后才更新 STATE 并按原流程远程保存。
 
 记录包含原始样本哈希、提示词、实际长度、候选/拟合/差距、bank 版本与哈希、数据是否新鲜，以及 `same_model_within_turn=assumed_by_user`。重复 score 返回已冻结结果；样本被改动会报错，不能通过补数或重复采样筛选模型。
 
@@ -38,9 +42,11 @@ prepare 不调用模型，也不生成探针数字。它先读取受保护 main 
 
 核心来自 MIT 许可的 [ModelTrace](https://github.com/xqy2006/ModelTrace)，原样保存及附带 LICENSE；来源提交、网站代码哈希在 `.github/vendor/modeltrace/provenance.json`。输入门槛和拟合判定按网站公开的数值规则独立实现，并用网站示例校验一致性。输入通道限定为一个 JSON 整数数组，避免把说明文字混进样本。
 
-结果为 match、family_only、insufficient、invalid 或 unscored，均保留 `identity_verified=false`、`arena_protocol_calibrated=false`。只有接受列表中的 match 才允许工作，其余结束轮次。展示候选与拟合值，不把候选库内 softmax 份额称作真实身份概率。单轮单样本不沿用网站三份独立样本的准确率。
+结果为 match、family_only、insufficient、invalid 或 unscored，均保留 `identity_verified=false`、`arena_protocol_calibrated=false`。接受列表中的 match，以及歧义仅限于接受列表的 family_only，允许工作；其余结束轮次。展示候选与拟合值，不把候选库内 softmax 份额称作真实身份概率。单轮单样本不沿用网站三份独立样本的准确率。
 
-协议 CI 核对原始样本哈希、重新评分，并用受保护 main 上的当前名单再次检查门槛。历史记录不能冒充本轮通行证，已拒绝的报告不能用于工作。修改 main 上的名单会自动重检开放任务 PR；不必为每个任务复制一份新名单。
+协议 CI 核对原始样本哈希、重新评分及完整歧义集合，并用受保护 main 上的当前名单再次检查门槛。历史记录不能冒充本轮通行证，已拒绝的报告不能因本次放宽门槛而追溯授权工作；下一用户轮次须重新采样。修改 main 上的名单或门控逻辑会自动重检开放任务 PR；不必为每个任务复制一份新名单。旧任务仍须通过独立 `meta/<任务号>/<名称>` PR 更新评分脚本、协议校验和 AGENTS.md，才能在本地及后续常规 CI 中使用新规则。
+
+回归样本 `.github/scripts/fixtures/allowed-ambiguity.json` 原样来自用户报告，作为测试数据，不是当前 agent 的指纹。内置 bank `2026.10.2` 将其评为 family_only：最近候选 GPT-6 Astra，拟合约 0.329177；GPT-6.1 Sol 约 0.262969，差距约 0.066208，小于 `margin_min=0.08`。歧义集合只有这两个已获准模型，因此允许继续；展示第三名 GPT-5.6 Terra 的差距超过门槛，不属于歧义集合。
 
 引入门槛前已经保存的检查点在 `.github/fingerprint-legacy.json` 中固定，仍可由用户审核，不追溯伪造指纹。无新指纹时只允许这些既有文件及其协议/交接元数据迁移；新增业务文件、修改计划/代码等需要本轮通过的报告。
 

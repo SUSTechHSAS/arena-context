@@ -49,8 +49,21 @@ export function decideWork(result, policy) {
     return { allowed: false, action: 'END_TURN', reason: 'model_policy_unavailable', detail: error.message };
   }
   const common = { policy_sha256: policyHash(verified), accepted_model_count: verified.accepted_models.length };
-  if (result.status !== 'match' || typeof result.identified_candidate !== 'string' || result.identified_candidate !== result.nearest_model) {
-    return { ...common, allowed: false, action: 'END_TURN', reason: 'clear_match_required' };
+  if (result?.status === 'family_only') {
+    const models = result.ambiguous_models;
+    if (result.identified_candidate !== null || !Array.isArray(models) || models.length < 2 ||
+        models.some(id => typeof id !== 'string' || !id) || new Set(models).size !== models.length ||
+        !models.includes(result.nearest_model)) {
+      return { ...common, allowed: false, action: 'END_TURN', reason: 'complete_ambiguity_required' };
+    }
+    const rejected = models.filter(id => !verified.accepted_models.includes(id));
+    if (rejected.length) {
+      return { ...common, allowed: false, action: 'END_TURN', reason: 'ambiguous_model_not_accepted', models, rejected_models: rejected };
+    }
+    return { ...common, allowed: true, action: 'CONTINUE', reason: 'accepted_ambiguity', models };
+  }
+  if (result?.status !== 'match' || typeof result.identified_candidate !== 'string' || result.identified_candidate !== result.nearest_model) {
+    return { ...common, allowed: false, action: 'END_TURN', reason: 'clear_match_or_accepted_ambiguity_required' };
   }
   if (!verified.accepted_models.includes(result.identified_candidate)) {
     return { ...common, allowed: false, action: 'END_TURN', reason: 'model_not_accepted', model: result.identified_candidate };
