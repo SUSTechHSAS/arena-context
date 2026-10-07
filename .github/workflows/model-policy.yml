@@ -1,0 +1,39 @@
+name: Recheck model policy
+on:
+  push:
+    branches: [main]
+    paths: ['.github/fingerprint-policy.json', '.github/fingerprint-legacy.json']
+  workflow_dispatch:
+permissions:
+  contents: read
+  pull-requests: read
+  statuses: write
+jobs:
+  recheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
+        with:
+          script: |
+            if (context.ref !== 'refs/heads/main') throw new Error('Run from main.');
+            const { inspectPullRequest } = require('./.github/scripts/protocol.cjs');
+            const prs = await github.paginate(github.rest.pulls.list, { ...context.repo, state: 'open', per_page: 100 });
+            const notes = [];
+            for (const pr of prs) {
+              if (pr.base.ref !== 'AerraGen-main' && !/^task\/[1-9]\d*\/main$/.test(pr.base.ref)) continue;
+              if (pr.head.repo?.full_name !== `${context.repo.owner}/${context.repo.repo}`) continue;
+              let errors;
+              try { errors = (await inspectPullRequest({ github, repo: context.repo, pr })).errors; }
+              catch (error) { errors = [error.message]; }
+              await github.rest.repos.createCommitStatus({ ...context.repo, sha: pr.head.sha,
+                context: 'arena/protocol', state: errors.length ? 'failure' : 'success',
+                description: (errors[0] || 'Current model policy and protocol checks passed').slice(0, 140),
+                target_url: `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}` });
+              notes.push(`#${pr.number}: ${errors.length ? errors.join('; ') : 'passed'}`);
+            }
+            await core.summary.addHeading('Model policy rechecked').addList(notes.length ? notes : ['No task PRs open.']).write();
