@@ -71,6 +71,40 @@ game. The full task remains open.
 
 ## Verification
 
-Baseline checkpoint: source files fetched at the pinned commit; SHA-256/byte sizes
-recorded. No application tests have run yet. Implementation and test evidence follow
-in this document before final handoff.
+Implementation checkpoint:
+
+- `npm run check --prefix app`: reference hashes, TypeScript, **43 tests**, deliberate
+  mutation detection, and Vite production build all passed on 2026-10-07.
+- Forty domain tests include **4,608** exhaustive comparisons (512 wall layouts ×
+  9 starts), plus explicit walls in both directions, terrain/item predicates,
+  JS truthiness, detours, blocked starts, Infinity and distance 99/100/101 cases.
+- Two tests check reference integrity/tamper rejection; one server-render smoke
+  test checks 49 accessible cells, scope notice and GPL link. Real-browser input
+  integration has not been tested.
+- The deliberate change `> 99` → `>= 99` caused an assertion failure in the
+  horizon differential test; the actual source was restored byte-for-byte.
+- A fresh VM executes exact parsed original declarations, with no HTML startup.
+  Original concrete class prototypes preserve instanceof checks; their parent is
+  stubbed and constructors are not invoked. Item lifecycle and integration with
+  real game-state objects are not covered. The new engine uses typed item tags.
+- Old and new input data are checked for observable mutation. Matrices cross VM
+  realms by array copying, never JSON serialization (which would lose Infinity).
+- Source HTML has upstream trailing whitespace: full baseline diff whitespace
+  checking fails on that unmodified file. Checking all other changed files passes;
+  preserving the source checksum takes precedence over formatting vendor content.
+- Dependencies installed with zero reported vulnerabilities. Clean `npm ci` and
+  preview HTTP smoke verification remain to be run before final handoff.
+
+## Remote review and protocol status
+
+- Auto-created Draft PR: https://github.com/SUSTechHSAS/arena-context/pull/14
+- Base/head confirmed: `task/10/main` ← `arena/b6d0b7cd-arena-context`.
+- Baseline checkpoint `179ede80d9cc7fff793da7d50fecf7e49ce319fa` was pushed and
+  verified against `git ls-remote`.
+- `arena/protocol` failed. API annotation on check run `112762076334` states:
+  **No current fingerprint: new task changes require Clear match from an accepted model.**
+- Full Actions log archive could not be downloaded (redirected host inaccessible);
+  GitHub API annotations were accessible and provided the failure reason.
+- No owner comments, reviews, or unresolved review threads were present when checked.
+- No checks were bypassed; no auto-merge or merge was requested. The full task,
+  broad compatibility, and protocol resolution still require further work/review.

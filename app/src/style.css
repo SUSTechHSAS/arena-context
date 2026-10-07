@@ -1,0 +1,44 @@
+:root { font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif; color: #22332e; background: #f3f2eb; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 3px solid #a05d22; outline-offset: 4px; }
+main { max-width: 1120px; margin: auto; padding: 30px 40px; }
+.masthead { display: flex; align-items: center; justify-content: space-between; padding-bottom: 24px; border-bottom: 1px solid #d2d8cc; gap: 20px; }
+.brand { font-size: 28px; font-weight: 800; color: #243c31; text-decoration: none; display: flex; align-items: center; gap: 18px; }
+.brand span { font-size: 10px; letter-spacing: .18em; }
+.badge { font-size: 10px; font-weight: 700; letter-spacing: .13em; background: #e3e8dc; border: 1px solid #cbd5bf; padding: 8px 12px; border-radius: 30px; white-space: nowrap; }
+.intro { padding: 42px 0 26px; }
+.eyebrow { font-size: 10px; letter-spacing: .2em; font-weight: 700; color: #5c7159; margin: 0 0 14px; }
+h1 { font-size: clamp(26px, 4vw, 42px); font-weight: 600; letter-spacing: -.035em; margin: 0 0 16px; }
+.intro > p:last-child { font-size: 14px; color: #5b6960; line-height: 1.8; }
+strong { font-weight: 600; }
+.workspace { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(260px, 1fr); gap: 30px; align-items: start; }
+.map-panel { background: #182625; border: 1px solid #293c36; border-radius: 16px; color: #eef2e3; padding: 26px; box-shadow: 0 12px 32px #172a2310; }
+.panel-heading { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.panel-heading .eyebrow { color: #9caf96; font-size: 9px; margin-bottom: 8px; }
+h2 { font-size: 20px; font-weight: 600; margin: 0; }
+.size-label { font-family: monospace; font-size: 12px; color: #b0c4b3; border: 1px solid #496056; padding: 7px 10px; border-radius: 5px; }
+.map { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+.cell { min-width: 0; padding: 0; aspect-ratio: 1; border: 1px solid #466054; background: #283d34; color: #ccdec7; border-radius: 5px; font-family: monospace; font-size: 16px; transition: background .15s; }
+.cell:hover { background: #425d48; border-color: #adbf99; }
+.cell.blocked { background: #121e1d; color: #94a59c; border-color: #34483f; }
+.cell.player { background: #c9dc98; border-color: #dcebaf; color: #1e3425; font-weight: 800; }
+.map-caption { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 20px; color: #b3c4b6; font-size: 11px; }
+.map-caption i { display: inline-block; background: #c9dc98; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; }
+.live-status { margin: 16px 0 0; padding-top: 16px; border-top: 1px solid #3e5147; color: #d2dec7; font-size: 12px; }
+.controls { padding: 18px 0; }
+.controls > p:not(.eyebrow) { line-height: 1.8; font-size: 13px; color: #607061; margin: 16px 0 24px; }
+.tools { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.tools button { border: 1px solid #c3ccbb; border-radius: 7px; background: #f9faf4; padding: 12px 8px; color: #43553d; font-size: 13px; }
+.tools button[aria-pressed="true"] { background: #304b38; color: #fff; border-color: #304b38; }
+.tools button:hover { box-shadow: inset 0 0 0 1px #67785b; }
+.reset { width: 100%; padding: 12px; background: transparent; border: 1px dashed #acb99f; border-radius: 7px; color: #485b3f; margin-top: 13px; font-size: 13px; }
+.note { margin-top: 28px; padding: 18px; background: #e8ecdf; border-radius: 8px; }
+h3 { margin: 0 0 10px; font-size: 13px; }
+.note ul { margin: 0; padding-left: 18px; font-size: 12px; color: #526149; line-height: 2; }
+footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-top: 1px solid #d2d8cc; margin-top: 36px; padding-top: 20px; color: #63725b; font-size: 10px; line-height: 1.8; }
+footer a { color: inherit; }
+@media (max-width: 740px) { main { padding: 22px 18px; } .workspace { grid-template-columns: 1fr; gap: 12px; } .intro { padding-top: 30px; } .brand span { display: none; } .map-panel { padding: 20px; } .controls { padding-top: 16px; } }
+@media (prefers-reduced-motion: reduce) { .cell { transition: none; } }
