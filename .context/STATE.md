@@ -2,11 +2,12 @@
 
 - Task: #1
 - Unit: plan-review
-- Work branch / PR: work/1/plan-review (PR #2)
+- Work branch / PR: arena/f7309931-arena-context (automatic task PR)
 - Accepted base at unit start: dbff749aa10312629a68be9be66bb17af530e265
 - Updated: 2026-10-07
 - Latest session: arena/f7309931-arena-context (successor to arena/d97b3c57-arena-context)
 - Candidate stage: ready-for-review (v3 — review + strengthen)
+- Fingerprint: not recorded
 
 This card does not establish approval; check the actual task branch and PR.
 
@@ -53,3 +54,7 @@ Kibiandkimi reviews docs/plan/00–03 in PR #2 and decides D1–D7. On approval,
 - docs/plan/02-acceptance-matrix.md (acceptance matrix)
 - docs/plan/03-open-decisions.md (decisions D1–D7)
 - reference/terragen7/docs/plan/00-overview.md (reference overview)
+
+## Protocol routing update
+
+Actual working branch: arena/f7309931-arena-context. The current review PR is the open PR whose head is this branch and base is AerraGen-main. Starter PR #2 contains historical discussion, not these current plan files. This saved work predates the fingerprint protocol; no retrospective fingerprint is claimed. Subsequent user turns must sample before new task work. Domain plan files were preserved unchanged during this protocol update.
