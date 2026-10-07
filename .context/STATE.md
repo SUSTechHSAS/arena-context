@@ -2,11 +2,12 @@
 
 - Task: #1
 - Unit: plan-review
-- Work branch / PR: work/1/plan-review (PR #2)
+- Work branch / PR: arena/acd9bfef-arena-context (automatic task PR)
 - Accepted base at unit start: dbff749aa10312629a68be9be66bb17af530e265
 - Updated: 2026-10-07T09:00:00Z
 - Latest session: arena/acd9bfef-arena-context（并已整合并行会话 arena/f7309931-arena-context @ 7752195 的内容）
 - Candidate stage: ready-for-review（v3 合并版）
+- Fingerprint: not recorded
 
 This card does not establish approval; check the actual task branch and PR.
 
@@ -48,3 +49,7 @@ This card does not establish approval; check the actual task branch and PR.
 - `docs/plan/03-open-decisions.md`（D1–D8）
 - `docs/plan/04-refinement-log.md`（第 2 轮复核与整合记录）
 - `reference/terragen7/docs/plan/00-overview.md`（参考总览）
+
+## Protocol routing update
+
+Actual working branch: arena/acd9bfef-arena-context. The current review PR is the open PR whose head is this branch and base is AerraGen-main. Starter PR #2 contains historical discussion, not these current plan files. This saved work predates the fingerprint protocol; no retrospective fingerprint is claimed. Subsequent user turns must sample before new task work. Domain plan files were preserved unchanged during this protocol update.
