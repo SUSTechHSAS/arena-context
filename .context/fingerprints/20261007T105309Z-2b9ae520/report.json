@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "turn_id": "20261007T105309Z-2b9ae520",
+  "branch": "arena/b6d0b7cd-arena-context",
+  "scope": "user-turn",
+  "same_model_within_turn": "assumed_by_user",
+  "identity_verified": false,
+  "arena_protocol_calibrated": false,
+  "sample_count": 1,
+  "raw_sha256": "3c3cbb061d6324ed6110592ddf8d22884e5c88ad4df928da5a3f4d020bb39c1e",
+  "package_id": "072a76d2f51a70cf691f5f79532019eebe546b08a960e51bacf9f5ccc384086a",
+  "bank_version": "2026.10.2",
+  "bank_sha256": "d8c7cf308c5f3d2b7d7492542a1a059b0d54725add7f6e33085d34e5256033f9",
+  "freshness": "cached-fallback",
+  "refresh_error": "offline_requested",
+  "scored_at": "2026-10-07T10:53:47.372Z",
+  "parsed_numbers": 311,
+  "exact_count": false,
+  "input_gate": {
+    "level": "ok",
+    "rule": null,
+    "stats": {
+      "length": 311,
+      "unique_count": 311,
+      "unique_ratio": 1,
+      "monotone_fraction": 0.5580645161290323,
+      "arithmetic_fraction": 0.01935483870967742,
+      "min_length": 166
+    }
+  },
+  "status": "family_only",
+  "nearest_model": "gpt-6-astra",
+  "identified_candidate": null,
+  "family": "gpt",
+  "fit": 0.33980812067688587,
+  "separation": 0.0031224776272311683,
+  "candidates": [
+    {
+      "model": "gpt-6-astra",
+      "display_name": "gpt-6-astra",
+      "family": "gpt",
+      "fit": 0.33980812067688587
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "display_name": "gpt-6.1-sol",
+      "family": "gpt",
+      "fit": 0.3366856430496547
+    },
+    {
+      "model": "gpt-5.4",
+      "display_name": "gpt-5.4",
+      "family": "gpt",
+      "fit": 0.23253605112915796
+    }
+  ],
+  "policy_source": "https://api.github.com/repos/SUSTechHSAS/arena-context/contents/.github/fingerprint-policy.json?ref=main",
+  "gate": {
+    "policy_sha256": "84453e964a63118f8b0ad012240a70fdfa2741b70661c5465c8359ddd4168a02",
+    "accepted_model_count": 6,
+    "allowed": false,
+    "action": "END_TURN",
+    "reason": "clear_match_required"
+  }
+}

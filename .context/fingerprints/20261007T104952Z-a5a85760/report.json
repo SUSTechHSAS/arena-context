@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "turn_id": "20261007T104952Z-a5a85760",
+  "branch": "arena/b6d0b7cd-arena-context",
+  "scope": "user-turn",
+  "same_model_within_turn": "assumed_by_user",
+  "identity_verified": false,
+  "arena_protocol_calibrated": false,
+  "sample_count": 1,
+  "raw_sha256": "3674f043be25372704f34d6c942522fe393ff472e4d2ba836085cd9084289687",
+  "package_id": "072a76d2f51a70cf691f5f79532019eebe546b08a960e51bacf9f5ccc384086a",
+  "bank_version": "2026.10.2",
+  "bank_sha256": "d8c7cf308c5f3d2b7d7492542a1a059b0d54725add7f6e33085d34e5256033f9",
+  "freshness": "cached-fallback",
+  "refresh_error": "offline_requested",
+  "scored_at": "2026-10-07T10:50:31.328Z",
+  "status": "invalid",
+  "reason": "integers_1_to_355_required",
+  "candidates": [],
+  "policy_source": "https://api.github.com/repos/SUSTechHSAS/arena-context/contents/.github/fingerprint-policy.json?ref=main",
+  "gate": {
+    "policy_sha256": "84453e964a63118f8b0ad012240a70fdfa2741b70661c5465c8359ddd4168a02",
+    "accepted_model_count": 6,
+    "allowed": false,
+    "action": "END_TURN",
+    "reason": "clear_match_required"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/SUSTechHSAS/chinese-dungeon",
+  "commit": "8d80b5a4dd3d737ed6d3060f05611eaa3de611ab",
+  "license": "GPL-3.0; see unchanged upstream LICENSE",
+  "files": [
+    {
+      "path": "ChineseDungeon.html",
+      "bytes": 2796381,
+      "sha256": "7125146155c481a6dce4a405d0b3d41cecefe88179597e130776b40dd79c2e58"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    }
+  ]
+}
