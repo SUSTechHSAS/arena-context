@@ -2,11 +2,12 @@
 
 - Task: #1
 - Unit: plan-review
-- Work branch / PR: work/1/plan-review (PR #2)
+- Work branch / PR: arena/d97b3c57-arena-context (automatic task PR)
 - Accepted base at unit start: dbff749aa10312629a68be9be66bb17af530e265
 - Updated: 2026-10-07T07:44:44Z
 - Latest session: arena/d97b3c57-arena-context
 - Candidate stage: ready-for-review
+- Fingerprint: not recorded
 
 This card does not establish approval; check the actual task branch and PR.
 
@@ -34,11 +35,11 @@ Complete the plan-review unit: audit the TerraGen7 reference plan, refine implem
 
 - D1 (1 m^3 voxel strictness vs nominal stretched voxels) and D2 (planet-size criterion: area-equal vs gravity-equal) are the two root decisions shaping acceptance wording and all budgets; recommendations in docs/plan/03-open-decisions.md, need Kibiandkimi's decision.
 - D3: earth-preset target machine to be confirmed (current sandbox cannot run earth preset: peak 6 GB > 3.8 GB RAM).
-- PR #2 remains Draft; not merged. Arena session branch arena/d97b3c57-arena-context carries this checkpoint (pushed and remote head verified).
+- the PR for arena/d97b3c57-arena-context remains Draft; not merged. Arena session branch arena/d97b3c57-arena-context carries this checkpoint (pushed and remote head verified).
 
 ## Next action
 
-Kibiandkimi reviews docs/plan/00-audit.md, 01-implementation-plan.md, 02-acceptance-matrix.md, 03-open-decisions.md in PR #2 and decides D1-D7 (approval of the plan = approval of the recommendations unless noted otherwise). On approval, start implementation at M0 (workspace skeleton, config/RNG/grid core, PF-01 baseline bench) per docs/plan/01-implementation-plan.md section 01.7.
+Kibiandkimi reviews docs/plan/00-audit.md, 01-implementation-plan.md, 02-acceptance-matrix.md, 03-open-decisions.md in the PR for arena/d97b3c57-arena-context and decides D1-D7 (approval of the plan = approval of the recommendations unless noted otherwise). On approval, start implementation at M0 (workspace skeleton, config/RNG/grid core, PF-01 baseline bench) per docs/plan/01-implementation-plan.md section 01.7.
 
 ## Read next, only if needed
 
@@ -47,3 +48,7 @@ Kibiandkimi reviews docs/plan/00-audit.md, 01-implementation-plan.md, 02-accepta
 - docs/plan/02-acceptance-matrix.md (acceptance matrix)
 - docs/plan/03-open-decisions.md (decisions D1-D7)
 - reference/terragen7/docs/plan/00-overview.md (reference overview)
+
+## Protocol migration
+
+The working branch is arena/d97b3c57-arena-context. The old starter PR #2 does not contain these plan files. The server now creates or reuses a PR from the actual Arena branch to AerraGen-main. The existing plan predates fingerprint sampling; no retrospective model identity is claimed. New user work turns must run the fingerprint protocol before continuing.
