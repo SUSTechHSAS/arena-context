@@ -5,7 +5,9 @@ const STATE_SECTIONS = ['Current objective', 'Candidate progress', 'Verification
 
 function field(text, key) {
   const prefix = `- ${key}:`;
-  const lines = text.split(/\r?\n/).filter(line => line.startsWith(prefix));
+  // Issue briefs and evidence may quote fields; only the top metadata block is authoritative.
+  const header = text.split(/^##\s/m, 1)[0];
+  const lines = header.split(/\r?\n/).filter(line => line.startsWith(prefix));
   return lines.length === 1 ? lines[0].slice(prefix.length).trim() : '';
 }
 
