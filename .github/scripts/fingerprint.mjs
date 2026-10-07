@@ -24,11 +24,12 @@ export async function prepare(root, { offline = false, fetcher, policyFetcher } 
   let policy;
   try { policy = await loadLivePolicy(policyFetcher); }
   catch (e) {
+    const gate = { allowed: false, action: 'END_TURN', reason: 'model_policy_unavailable', detail: e.message };
     const report = { schema: 1, turn_id: turn, branch, scope: 'user-turn', same_model_within_turn: 'assumed_by_user',
       identity_verified: false, arena_protocol_calibrated: false, sample_count: 0, raw_sha256: null,
       status: 'unscored', reason: 'model_policy_unavailable', detail: e.message, candidates: [],
-      gate: decideWork({ status: 'unscored' }, null), scored_at: new Date().toISOString() };
-    writeNew(path.join(turnDir, 'manifest.json'), { schema: 1, turn_id: turn, branch, policy_error: e.message });
+      gate, diagnostics: e.diagnostics || [], scored_at: new Date().toISOString() };
+    writeNew(path.join(turnDir, 'manifest.json'), { schema: 1, turn_id: turn, branch, policy_error: e.message, diagnostics: e.diagnostics || [] });
     writeNew(path.join(turnDir, 'report.json'), report);
     return { action: 'END_TURN', ...report, next: 'Report the policy error and end this user turn. Do not retry or perform task work.' };
   }
