@@ -7,10 +7,13 @@ import { fileURLToPath } from 'node:url';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { decideWork, validatePolicy, loadLivePolicy, exitCode, STOP_EXIT_CODE } from './model-gate.mjs';
 import { prepare } from './fingerprint.mjs';
+import { scoreSample } from './fingerprint-lib.mjs';
 
 const policy = { schema: 1, accepted_models: ['claude-opus-5-5', 'claude-sonnet-5-5', 'claude-fable-5-1', 'gpt-6-astra', 'gpt-6.1-sol', 'gpt-6-sol'] };
 const match = id => ({ status: 'match', identified_candidate: id, nearest_model: id });
-test('only an exact accepted model with Clear match can continue', () => {
+const seed = JSON.parse(fs.readFileSync(new URL('../vendor/modeltrace/seed.json', import.meta.url)));
+const ambiguityRaw = fs.readFileSync(new URL('./fixtures/allowed-ambiguity.json', import.meta.url), 'utf8');
+test('Clear match still requires an exact accepted model; other statuses cannot use the nearest model alone', () => {
   for (const id of policy.accepted_models) assert.equal(decideWork(match(id), policy).action, 'CONTINUE');
   for (const id of ['claude-opus-5', 'gpt-6-luna', 'claude-opus-5-50', 'gpt-6-astra-mini']) {
     assert.equal(decideWork(match(id), policy).action, 'END_TURN');
@@ -18,6 +21,38 @@ test('only an exact accepted model with Clear match can continue', () => {
   for (const status of ['family_only', 'insufficient', 'invalid', 'unscored', undefined]) {
     assert.equal(decideWork({ ...match('gpt-6-astra'), status }, policy).allowed, false);
   }
+});
+test('owner sample continues only when every ambiguous model is accepted', () => {
+  const result = scoreSample(ambiguityRaw, seed, seed.code_sha256);
+  assert.equal(result.status, 'family_only');
+  assert.equal(result.identified_candidate, null);
+  assert.deepEqual(result.ambiguous_models, ['gpt-6-astra', 'gpt-6.1-sol']);
+  assert.equal(result.candidates[2].model, 'gpt-5.6-terra');
+  const gate = decideWork(result, policy);
+  assert.equal(gate.reason, 'accepted_ambiguity');
+  assert.equal(gate.action, 'CONTINUE');
+  assert.deepEqual(gate.models, result.ambiguous_models);
+  assert.equal(gate.model, undefined);
+  for (const excluded of result.ambiguous_models) {
+    const denied = decideWork(result, { schema: 1, accepted_models: policy.accepted_models.filter(id => id !== excluded) });
+    assert.equal(denied.allowed, false);
+    assert.equal(denied.reason, 'ambiguous_model_not_accepted');
+    assert.deepEqual(denied.rejected_models, [excluded]);
+  }
+});
+test('missing, empty, duplicate, malformed, or inconsistent ambiguity evidence fails closed', () => {
+  const result = scoreSample(ambiguityRaw, seed, seed.code_sha256);
+  for (const models of [undefined, null, [], ['gpt-6-astra'], ['gpt-6-astra', 'gpt-6-astra'],
+    ['gpt-6-sol', 'gpt-6.1-sol'], ['gpt-6-astra', null], ['gpt-6-astra', 'gpt-*']]) {
+    assert.equal(decideWork({ ...result, ambiguous_models: models }, policy).allowed, false);
+  }
+  assert.equal(decideWork({ ...result, identified_candidate: result.nearest_model }, policy).allowed, false);
+  assert.equal(decideWork(result, null).allowed, false);
+  assert.equal(decideWork(result, { schema: 1, accepted_models: [] }).allowed, false);
+  for (const status of ['insufficient', 'invalid', 'unscored', undefined]) {
+    assert.equal(decideWork({ ...result, status }, policy).allowed, false);
+  }
+  assert.equal(decideWork(null, policy).allowed, false);
 });
 test('invalid/empty policy, mismatched labels and top candidate alone fail closed', () => {
   assert.equal(decideWork(match('gpt-6-astra'), null).action, 'END_TURN');
@@ -62,4 +97,29 @@ test('CLI emits END_TURN/exit 20 immediately after a non-accepted Clear match, w
     assert.equal(saved.gate.allowed, false); assert.equal(saved.gate.detail, saved.detail);
     assert.match(saved.detail, /503/); assert.ok(!saved.detail.includes('invalid_model_policy'));
   } finally { fs.rmSync(root, { recursive: true, force: true }); }
+});
+test('CLI freezes the original sample and emits CONTINUE or END_TURN for an allowed or mixed ambiguity', async () => {
+  for (const accepted of [true, false]) {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'arena-ambiguity-gate-'));
+    try {
+      const git = args => execFileSync('git', args, { cwd: root, stdio: 'pipe' });
+      git(['init', '-b', 'arena/test']); fs.mkdirSync(path.join(root, '.context'));
+      fs.writeFileSync(path.join(root, '.context/TASK.md'), 'Do not change task');
+      git(['add', '.']); git(['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-m', 'fixture']);
+      const current = accepted ? policy : { schema: 1, accepted_models: ['gpt-6-astra'] };
+      const first = await prepare(root, { offline: true, policyFetcher: async () => ({ ok: true, text: async () => JSON.stringify(current) }) });
+      const rawPath = path.join(root, first.raw_path); fs.writeFileSync(rawPath, ambiguityRaw);
+      const cli = fileURLToPath(new URL('./fingerprint.mjs', import.meta.url));
+      const ran = spawnSync(process.execPath, [cli, 'score', first.turn_id], { cwd: root, encoding: 'utf8' });
+      assert.equal(ran.status, accepted ? 0 : 20, ran.stderr);
+      const result = JSON.parse(ran.stdout);
+      assert.equal(result.status, 'family_only'); assert.equal(result.identified_candidate, null);
+      assert.equal(result.action, accepted ? 'CONTINUE' : 'END_TURN');
+      assert.deepEqual(result.ambiguous_models, ['gpt-6-astra', 'gpt-6.1-sol']);
+      assert.equal(fs.readFileSync(rawPath, 'utf8'), ambiguityRaw);
+      assert.equal(fs.readFileSync(path.join(root, '.context/TASK.md'), 'utf8'), 'Do not change task');
+      const frozen = JSON.parse(fs.readFileSync(path.join(root, '.context/fingerprints', first.turn_id, 'report.json')));
+      assert.equal(frozen.gate.allowed, accepted);
+    } finally { fs.rmSync(root, { recursive: true, force: true }); }
+  }
 });
