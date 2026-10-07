@@ -1,0 +1,48 @@
+name: Protocol
+
+on:
+  pull_request_target:
+    branches: [main, 'task/**', AerraGen-main]
+    types: [opened, reopened, synchronize, edited, ready_for_review, converted_to_draft]
+
+permissions:
+  contents: read
+  pull-requests: read
+  statuses: write
+
+concurrency:
+  group: arena-protocol-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  protocol:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # Never checkout a PR head in this workflow.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+      - uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const target_url = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const status = async (state, description) => github.rest.repos.createCommitStatus({
+              ...context.repo, sha: pr.head.sha, state, context: 'arena/protocol',
+              description: description.slice(0, 140), target_url
+            });
+            await status('pending', 'Checking branch routing and the saved handoff');
+            try {
+              const { inspectPullRequest } = require('./.github/scripts/protocol.cjs');
+              const report = await inspectPullRequest({ github, repo: context.repo, pr });
+              await status(report.errors.length ? 'failure' : 'success', report.errors[0] || report.summary);
+              await core.summary.addHeading('Arena protocol')
+                .addRaw(`PR #${pr.number}; checked head ${pr.head.sha}\n\n`)
+                .addList(report.errors.length ? report.errors : [report.summary]).write();
+              if (report.errors.length) core.setFailed(report.errors.join('\n'));
+            } catch (error) {
+              await status('failure', 'Protocol check could not complete; inspect the run log');
+              throw error;
+            }

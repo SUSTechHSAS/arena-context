@@ -1,0 +1,4 @@
+# Install as .github/CODEOWNERS on every protected PR base branch.
+# Kibiandkimi must have write access or repository ownership.
+# Enable required code-owner reviews in the applicable GitHub ruleset.
+* @Kibiandkimi

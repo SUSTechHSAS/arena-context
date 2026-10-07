@@ -1,0 +1,38 @@
+name: Task
+description: 创建一个独立任务，提供目标、验收条件和输入资料
+title: "[Task] "
+body:
+  - type: markdown
+    attributes:
+      value: 创建后，用 Kibiandkimi 运行 Actions → New task，填入本 Issue 编号。
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 任务类型
+      options: [混合任务, 代码, 调研, 文档]
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: 目标
+      description: 需要得到什么结果？
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 验收条件
+      description: 如何判断完成，需要哪些证据？
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: 范围与约束
+      description: 非目标、语言、受众、成本或兼容性要求。
+  - type: textarea
+    id: inputs
+    attributes:
+      label: 输入资料
+      description: 必要文件、来源链接和已有决定。

@@ -1,0 +1,46 @@
+name: New task
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Task Issue number (without '#')
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  issues: read
+
+concurrency:
+  group: arena-new-task-${{ inputs.issue_number }}
+  cancel-in-progress: false
+
+jobs:
+  initialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          script: |
+            if (context.actor.toLowerCase() !== 'kibiandkimi' || context.ref !== 'refs/heads/main') {
+              throw new Error('Run as Kibiandkimi from main.');
+            }
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        env:
+          TASK_ISSUE_NUMBER: ${{ inputs.issue_number }}
+        with:
+          script: |
+            const { initializeTask } = require('./.github/scripts/task-scaffold.cjs');
+            const result = await initializeTask({ github, repo: context.repo,
+              issueNumber: process.env.TASK_ISSUE_NUMBER, actor: context.actor,
+              ref: context.ref, protocolSha: context.sha });
+            const url = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/tree/${result.branch}`;
+            await core.summary.addHeading('Task initialized').addLink(result.branch, url)
+              .addRaw('\n\n').addLink('Task Issue', result.issue)
+              .addRaw(`\n\nCommit: ${result.sha}\n\nCreate work/<issue>/<unit> from this branch, then select it in Arena.\n`).write();
