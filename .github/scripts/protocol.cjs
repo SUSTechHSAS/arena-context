@@ -90,9 +90,9 @@ async function inspectPullRequest({ github, repo, pr }) {
     const fp = field(candidate['.context/STATE.md'] || '', 'Fingerprint');
     if (!fp || fp === 'not recorded') {
       if (await isLegacyCheckpoint({ github, repo, pr })) {
-        report.warnings = ['Pre-gate checkpoint preserved for human review; no model identity is claimed. New task changes require an accepted Clear match.'];
+        report.warnings = ['Pre-gate checkpoint preserved for human review; no model identity is claimed. New task changes require an accepted fingerprint gate.'];
       } else {
-        report.errors.push('No current fingerprint: new task changes require Clear match from an accepted model.');
+        report.errors.push('No current fingerprint: new task changes require an accepted Clear match or ambiguity confined to accepted models.');
       }
     } else if (!/^\.context\/fingerprints\/\d{8}T\d{6}Z-[a-f0-9]{8}\/report\.json$/.test(fp)) {
       report.errors.push('Fingerprint must link to a per-turn report path.');
@@ -122,13 +122,19 @@ async function inspectPullRequest({ github, repo, pr }) {
             if (verified[key] !== undefined && (!Number.isFinite(result[key]) || Math.abs(verified[key] - result[key]) > 1e-12)) throw new Error(`Fingerprint numeric mismatch: ${key}`);
           }
           if (JSON.stringify(verified.candidates) !== JSON.stringify(result.candidates)) throw new Error('Fingerprint candidate list mismatch.');
+          // Older Clear match reports did not record this field. Close calls
+          // must carry the complete set, independently recomputed from raw data.
+          if (((verified.status === 'family_only' && result.gate) || result.ambiguous_models !== undefined) &&
+              JSON.stringify(verified.ambiguous_models) !== JSON.stringify(result.ambiguous_models)) {
+            throw new Error('Fingerprint ambiguity set mismatch.');
+          }
         }
         if (!result.gate && await isLegacyCheckpoint({ github, repo, pr })) {
           report.warnings = ['Historical fingerprint predates the model gate; it does not authorize a new turn.'];
         } else {
           const decision = decideWork(verified, currentPolicy);
           if (!decision.allowed) throw new Error(`Model gate denied: ${decision.reason}. End the user turn; do not perform task work.`);
-          if (result.gate?.allowed !== true || result.gate?.action !== 'CONTINUE') throw new Error('This report did not authorize work in its original turn. Obtain a new accepted Clear match in a new user turn.');
+          if (result.gate?.allowed !== true || result.gate?.action !== 'CONTINUE') throw new Error('This report did not authorize work in its original turn. Obtain a new accepted fingerprint gate in a new user turn.');
         }
       } catch (error) { report.errors.push(`Fingerprint record invalid: ${error.message}`); }
     }
