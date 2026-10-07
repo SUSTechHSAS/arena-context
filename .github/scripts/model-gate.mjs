@@ -1,6 +1,9 @@
 import { createHash } from 'node:crypto';
+import { httpFetch, errorDetail } from './http-client.mjs';
 
-export const POLICY_URL = 'https://raw.githubusercontent.com/SUSTechHSAS/arena-context/main/.github/fingerprint-policy.json';
+// Arena permits api.github.com; raw.githubusercontent.com is not an allowed
+// egress host in the reported sandbox. Never request or follow a raw download URL.
+export const POLICY_URL = 'https://api.github.com/repos/SUSTechHSAS/arena-context/contents/.github/fingerprint-policy.json?ref=main';
 export const STOP_EXIT_CODE = 20;
 
 export function validatePolicy(value) {
@@ -14,14 +17,30 @@ export function validatePolicy(value) {
 
 export const policyHash = policy => createHash('sha256').update(JSON.stringify(validatePolicy(policy))).digest('hex');
 
-export async function loadLivePolicy(fetcher = fetch) {
-  const response = await fetcher(POLICY_URL, { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' }, signal: AbortSignal.timeout(10000) });
-  if (!response.ok) throw new Error(`model_policy_http_${response.status}`);
-  if (response.url && new URL(response.url).origin !== 'https://raw.githubusercontent.com') throw new Error('unexpected_policy_redirect');
-  const text = await response.text();
-  if (Buffer.byteLength(text) > 65536) throw new Error('model_policy_too_large');
-  const policy = validatePolicy(JSON.parse(text));
-  return { ...policy, source: POLICY_URL, sha256: policyHash(policy), fetched_at: new Date().toISOString() };
+export async function loadLivePolicy(fetcher = httpFetch) {
+  try {
+    const response = await fetcher(POLICY_URL, { cache: 'no-store', maxBytes: 65536, redirect: 'error',
+      headers: { 'Cache-Control': 'no-cache', Accept: 'application/vnd.github.raw+json',
+        'User-Agent': 'arena-context-fingerprint', 'X-GitHub-Api-Version': '2022-11-28' }, signal: AbortSignal.timeout(10000) });
+    if (!response.ok) throw new Error(`model_policy_http_${response.status}`);
+    if (response.url && new URL(response.url).origin !== 'https://api.github.com') throw new Error('unexpected_policy_redirect');
+    const text = await response.text();
+    if (Buffer.byteLength(text) > 65536) throw new Error('model_policy_too_large');
+    let document = JSON.parse(text);
+    // Some API gateways return the Contents envelope despite the raw media type.
+    // Decode the inline bytes only; do not follow its forbidden download_url.
+    if (document.type === 'file' && document.path === '.github/fingerprint-policy.json' && document.encoding === 'base64' && typeof document.content === 'string') {
+      document = JSON.parse(Buffer.from(document.content, 'base64').toString('utf8'));
+    }
+    const policy = validatePolicy(document);
+    return { ...policy, source: POLICY_URL, transport: response.transport || 'fetch',
+      sha256: policyHash(policy), fetched_at: new Date().toISOString() };
+  } catch (cause) {
+    const detail = errorDetail(cause);
+    const error = new Error(`github_api: ${detail}`);
+    error.diagnostics = [{ endpoint: 'github_api', detail }];
+    throw error;
+  }
 }
 
 export function decideWork(result, policy) {
