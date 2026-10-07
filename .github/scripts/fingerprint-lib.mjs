@@ -109,7 +109,13 @@ export function scoreSample(raw, bundle, acceptedCode) {
   const familyWeight = ranking.filter(x => x.family === first.family).reduce((s, x) => s + x.weight, 0);
   const t = bundle.verdict.thresholds;
   const status = first.fit < t.fit_min ? 'insufficient' : margin >= t.margin_min ? 'match' : familyWeight >= t.family_min ? 'family_only' : 'insufficient';
+  // A model is ruled out only when the same margin used for Clear match
+  // separates it from the nearest model. Use the full bank, across families;
+  // the three display candidates below are not an exhaustive ambiguity set.
+  const ambiguousModels = status === 'family_only'
+    ? ranking.filter(x => first.fit - x.fit < t.margin_min).map(x => x.model) : [];
   return { ...common, status, nearest_model: first.model, identified_candidate: status === 'match' ? first.model : null,
     family: ['match', 'family_only'].includes(status) ? first.family : null, fit: first.fit, separation: margin,
+    ambiguous_models: ambiguousModels,
     candidates: ranking.slice(0, 3).map(({ weight, ...rest }) => rest) };
 }
