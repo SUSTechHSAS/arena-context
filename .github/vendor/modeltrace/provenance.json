@@ -1,0 +1,14 @@
+{
+  "core_source": "https://github.com/xqy2006/ModelTrace",
+  "core_commit": "d4131b30243dfa05e70180b5eedde742103f1d73",
+  "core_path": "static/fingerprint-core.js",
+  "license": "MIT",
+  "website": "https://whatsmyllm.com",
+  "website_code_sha256": {
+    "fingerprint-core.js": "83fa5bd611e18f8339122582335123c8ea168ed242298bb31f4e363abeeb6e4a",
+    "gates.js": "523095d5208610cb3dd72e160c64b12f9989cb810046a4d709d6ee3028430a46",
+    "verdict.js": "e34ad77272fb04358c2d44bd318e8b57046158e333eccb0d6e1a2be005d6d121"
+  },
+  "seed_bank_version": "2026.10.2",
+  "seed_bank_sha256": "d8c7cf308c5f3d2b7d7492542a1a059b0d54725add7f6e33085d34e5256033f9"
+}
