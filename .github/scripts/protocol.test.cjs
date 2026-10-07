@@ -57,6 +57,14 @@ test('task initialization preserves supplied brief verbatim and blocks unauthori
 });
 test('existing branch cannot be overwritten by task initialization', async () => {
   const github = { rest: { issues: { get: async () => ({ data: { number: 12, state: 'open', user: { login: 'Kibiandkimi' }, body: 'Goal' } }) },
+    repos: { getContent: async () => { const error = new Error('Not found'); error.status = 404; throw error; } },
     git: { getRef: async () => ({ data: {} }) } } };
   await assert.rejects(initializeTask({ github, repo: {}, actor: 'Kibiandkimi', ref: 'refs/heads/main', issueNumber: '12' }), /already exists/);
+});
+test('legacy task identity cannot be initialized again under a standard branch name', async () => {
+  const issue = { number: 1, html_url: 'https://github.com/SUSTechHSAS/arena-context/issues/1', state: 'open', user: { login: 'SUSTechHSAS' }, body: 'Goal' };
+  const github = { rest: { issues: { get: async () => ({ data: issue }) }, repos: { getContent: async () => ({ data: {
+    type: 'file', encoding: 'base64', content: Buffer.from(`- Task Issue: ${issue.html_url}\n`).toString('base64'),
+  } }) } } };
+  await assert.rejects(initializeTask({ github, repo: {}, actor: 'Kibiandkimi', ref: 'refs/heads/main', issueNumber: '1' }), /already exists: AerraGen-main/);
 });

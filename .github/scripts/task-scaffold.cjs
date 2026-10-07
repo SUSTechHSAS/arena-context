@@ -20,6 +20,16 @@ async function initializeTask({ github, repo, issueNumber, actor, ref, protocolS
   if (issue.pull_request || issue.state !== 'open') throw new Error('Use an open task Issue, not a PR.');
   if (!['kibiandkimi', 'sustechhsas'].includes(issue.user.login.toLowerCase())) throw new Error('Task Issue must be authored by a designated account.');
   if (!issue.body?.trim()) throw new Error('Fill in the task brief first.');
+  // The existing AerraGen task retains its legacy base name.
+  try {
+    const { data } = await github.rest.repos.getContent({ ...repo, path: '.context/TASK.md', ref: 'AerraGen-main' });
+    if (data.type === 'file' && data.encoding === 'base64') {
+      const { field } = require('./protocol.cjs');
+      if (field(Buffer.from(data.content, 'base64').toString('utf8'), 'Task Issue') === issue.html_url) {
+        throw new Error('Task branch already exists: AerraGen-main');
+      }
+    }
+  } catch (error) { if (error.status !== 404) throw error; }
   const branch = `task/${number}/main`;
   try {
     await github.rest.git.getRef({ ...repo, ref: `heads/${branch}` });
