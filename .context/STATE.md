@@ -2,7 +2,7 @@
 
 - Task: #10
 - Unit: planning / awaiting owner approval
-- Work branch / PR: arena/0bbc694b-arena-context / Draft PR pending creation
+- Work branch / PR: arena/0bbc694b-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/15 (Draft, base task/10/main)
 - Accepted base at unit start: task/10/main @ 4bfcad36bd762e206576387038836f8848fc40ee
 - Updated: 2026-10-07
 - Latest session: user-authorized planning without a new fingerprint
@@ -28,6 +28,8 @@ Upstream main SHA: `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`; GPL-3.0. Read dir
 
 Plan and metrics require approval. Browser binaries and production service access are unverified; allowed outbound hosts exclude legacy CDNs/services. Central protocol may reject this manually waived checkpoint; do not claim fingerprint passed or bypass checks.
 
+Planning checkpoint `8a21f91492d710425b47e74377c0e2a573f4657f` pushed and remote SHA verified equal. `git diff --check` passed. No automatic run/PR visible after push and recheck; manually created the single Draft PR #15 with explicit task base. Actions permissions inspection returned HTTP 403 (integration lacks access); automation availability is not established.
+
 ## Next action
 
-Commit/push this planning checkpoint to the actual branch and verify remote SHA and Draft PR base `task/10/main`. Report checks honestly. Await owner approval; then begin phase A only.
+Await owner approval of docs/TASK-10-PLAN.md; then begin phase A only. Final STATE/PR-link checkpoint SHA is provided in the handoff (not self-referentially embedded here). Never merge or bypass protocol checks.
