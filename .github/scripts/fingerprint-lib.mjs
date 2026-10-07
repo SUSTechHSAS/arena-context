@@ -2,6 +2,7 @@
 // gates/verdict. Only the MIT ModelTrace scoring core is vendored unchanged.
 import { createHash } from 'node:crypto';
 import { analyzeGlobalOutputs, countNumbers } from '../vendor/modeltrace/fingerprint-core.mjs';
+import { httpFetch } from './http-client.mjs';
 
 export const SITE = 'https://whatsmyllm.com';
 export const hash = value => createHash('sha256').update(value).digest('hex');
@@ -41,9 +42,9 @@ export function validateBundle(bundle, acceptedCode) {
   return bank;
 }
 
-export async function downloadBundle(acceptedCode, fetcher = fetch) {
+export async function downloadBundle(acceptedCode, fetcher = httpFetch) {
   async function get(url, limit = 8_000_000) {
-    const response = await fetcher(url, { signal: AbortSignal.timeout(10000), cache: 'no-store' });
+    const response = await fetcher(url, { signal: AbortSignal.timeout(10000), cache: 'no-store', maxBytes: limit });
     if (!response.ok) throw new Error(`upstream_http_${response.status}`);
     if (response.url && new URL(response.url).origin !== SITE) throw new Error('unexpected_upstream_redirect');
     const text = await response.text(); if (Buffer.byteLength(text) > limit) throw new Error('upstream_response_too_large'); return text;
