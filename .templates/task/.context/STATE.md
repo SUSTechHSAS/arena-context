@@ -7,6 +7,7 @@
 - Updated: <UTC timestamp>
 - Latest session: <session ID; model if known, otherwise unknown>
 - Candidate stage: <working / ready-for-review / needs-changes / blocked / not started>
+- Fingerprint: not recorded
 
 This card does not establish acceptance. Check the actual task branch and PR status. The current checkpoint SHA is the remote branch head, not a self-referential field in this file.
 

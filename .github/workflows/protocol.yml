@@ -40,7 +40,7 @@ jobs:
               await status(report.errors.length ? 'failure' : 'success', report.errors[0] || report.summary);
               await core.summary.addHeading('Arena protocol')
                 .addRaw(`PR #${pr.number}; checked head ${pr.head.sha}\n\n`)
-                .addList(report.errors.length ? report.errors : [report.summary]).write();
+                .addList(report.errors.length ? report.errors : [report.summary, ...(report.warnings || [])]).write();
               if (report.errors.length) core.setFailed(report.errors.join('\n'));
             } catch (error) {
               await status('failure', 'Protocol check could not complete; inspect the run log');

@@ -4,7 +4,7 @@
 
 Arena 使用 `SUSTechHSAS`；人工负责人/审核者是 `Kibiandkimi`，在仓库中具有协作者写权限。仓库保留原地址，不依赖 Arena 发现协作仓库。初始化及权限配置由用户授权，日常任务 agent 不得改变设置。
 
-正式分支要求 PR、至少一项批准、CODEOWNER 批准、解决审核讨论、`arena/protocol` 成功，禁止 force-push 和删除，无 bypass。`work/**` 禁止 force-push，保留人工清理能力。
+正式分支要求 PR、至少一项批准、CODEOWNER 批准、解决审核讨论、`arena/protocol` 成功，禁止 force-push 和删除，无 bypass。`work/**`、`arena/**` 和 `meta/**` 禁止 force-push，保留人工清理能力。
 
 这要求普通合并路径先获得人工批准；不移除仓库所有者修改规则的能力，也不单独阻止 agent 在已批准后点击合并。AGENTS.md 明确要求由你执行最终合并。PR 应由 `SUSTechHSAS` 创建，避免人工账户成为无法自批的 PR 作者。
 
@@ -38,11 +38,21 @@ STATE 保持简短，详细证据另存文件。当前 checkpoint SHA 从远程 
 
 `Protocol` 使用 `pull_request_target`，只检出受信任的 base SHA，再从 API 读取候选文件作为数据；不会执行 PR head 的脚本或安装其依赖。检查把 `arena/protocol` 状态明确写到 PR head SHA。
 
-普通任务 PR 要求：同仓库 work 分支的任务号匹配 base 的 TASK.md；三个交接文件存在；候选 TASK.md 不改变任务身份；STATE 写明任务号、工作分支、必要交接段落，且本 PR 的 diff 包含其更新。
+普通任务 PR 要求：同仓库 work 分支任务号匹配 base 的 TASK.md，或使用 Arena 自动生成的 arena 分支并从 TASK.md 绑定任务；三个交接文件存在；候选 TASK.md 不改变任务身份；STATE 写明任务号、真实工作分支、必要交接段落，且本 PR 的 diff 包含其更新。有指纹报告时，检查样本哈希并重新计算关键评分字段。
 
 `AGENTS.md`、`.github/**`、`.templates/**` 的修改必须使用 meta 分支提案。main 接受 `meta/<名称>`，任务分支接受 `meta/<任务号>/<名称>`。维护 PR 由原 base 版本检查，仍需人工审核。新任务继承当时的协议版本，旧任务通过独立 meta PR 更新。
 
 PR base 改动、推送、重新打开等事件触发检查；分支过滤针对 base。超过 GitHub 文件列表 API 3,000 文件限制的 PR 需拆分。Actions 固定完整提交 SHA。检查不证明代码正确或调研事实真实；实际项目测试可另加只读权限的 `pull_request` 工作流，不在这个具备状态写权限的工作流中执行候选代码。
+
+## Arena 自动分支与自动 PR
+
+Arena 可能从你选择的分支创建新的 arena/<opaque-name>。不要重命名它或假定新提交仍属于旧 PR。TASK.md 是任务归属依据，STATE 的 Work branch / PR 必须记录真实 head。新会话如果产生新分支，建立指向同一个正式任务分支的后继 PR。
+
+agent 负责 commit、push；本仓库的服务端自动化只能处理已经推送的文件。`Checkpoint` 是无权限的推送通知工作流；完成后由默认分支上的 `Ensure task PR` 读取工作分支数据，核对受保护任务约定，再创建或复用 Draft PR。它只检出 main，不执行工作分支代码，也不下载工作流 artifact。没有文件差异就不创建 PR。
+
+如果旧分支尚未带上 Checkpoint 工作流，可在 main 手动运行 Ensure task PR 并填分支名。用 GITHUB_TOKEN 创建 PR 不会自动触发普通 PR 事件，因此自动化会显式运行协议检查并把状态写到实际 head SHA。
+
+GitHub 将“允许 Actions 创建和批准 PR”合为一个仓库开关，自动建 PR 需要启用它；此处没有任何自动批准操作，机器人也不是 CODEOWNER，必需的 Kibiandkimi 审核不变。候选代码不运行在有 PR 写权限的自动化环境中。
 
 ## 环境和已有资料
 
