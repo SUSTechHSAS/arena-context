@@ -1,0 +1,11 @@
+name: Checkpoint
+on:
+  push:
+    branches: ['arena/**', 'work/**']
+permissions: {}
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - run: echo 'A work checkpoint was pushed; the trusted default-branch workflow will check its PR.'
