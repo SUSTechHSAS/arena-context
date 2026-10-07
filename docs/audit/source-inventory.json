@@ -1,0 +1,8441 @@
+{
+  "referenceCommit": "8d80b5a4dd3d737ed6d3060f05611eaa3de611ab",
+  "pages": [
+    {
+      "page": "ChineseDungeon.html",
+      "declarations": [
+        {
+          "name": "初始化创意工坊",
+          "kind": "FunctionDeclaration",
+          "line": 5877,
+          "endLine": 5933
+        },
+        {
+          "name": "大地图点击信息",
+          "kind": "FunctionDeclaration",
+          "line": 7807,
+          "endLine": 7835
+        },
+        {
+          "name": "打开大地图",
+          "kind": "FunctionDeclaration",
+          "line": 7836,
+          "endLine": 7872
+        },
+        {
+          "name": "切换大地图标记模式",
+          "kind": "FunctionDeclaration",
+          "line": 7874,
+          "endLine": 7894
+        },
+        {
+          "name": "切换大地图传送模式",
+          "kind": "FunctionDeclaration",
+          "line": 7895,
+          "endLine": 7915
+        },
+        {
+          "name": "切换大地图楼层",
+          "kind": "FunctionDeclaration",
+          "line": 7916,
+          "endLine": 7930
+        },
+        {
+          "name": "更新大地图楼层显示",
+          "kind": "FunctionDeclaration",
+          "line": 7932,
+          "endLine": 7939
+        },
+        {
+          "name": "绘制大地图",
+          "kind": "FunctionDeclaration",
+          "line": 7941,
+          "endLine": 8338
+        },
+        {
+          "name": "大地图拖拽开始",
+          "kind": "FunctionDeclaration",
+          "line": 8340,
+          "endLine": 8411
+        },
+        {
+          "name": "关闭大地图",
+          "kind": "FunctionDeclaration",
+          "line": 8414,
+          "endLine": 8437
+        },
+        {
+          "name": "绘制大地图循环",
+          "kind": "FunctionDeclaration",
+          "line": 8439,
+          "endLine": 8443
+        },
+        {
+          "name": "居中大地图",
+          "kind": "FunctionDeclaration",
+          "line": 8446,
+          "endLine": 8469
+        },
+        {
+          "name": "调整大地图缩放",
+          "kind": "FunctionDeclaration",
+          "line": 8471,
+          "endLine": 8490
+        },
+        {
+          "name": "大地图拖拽移动",
+          "kind": "FunctionDeclaration",
+          "line": 8493,
+          "endLine": 8513
+        },
+        {
+          "name": "大地图拖拽结束",
+          "kind": "FunctionDeclaration",
+          "line": 8515,
+          "endLine": 8525
+        },
+        {
+          "name": "大地图滚轮缩放",
+          "kind": "FunctionDeclaration",
+          "line": 8527,
+          "endLine": 8534
+        },
+        {
+          "name": "大地图触摸开始",
+          "kind": "FunctionDeclaration",
+          "line": 8537,
+          "endLine": 8547
+        },
+        {
+          "name": "大地图触摸移动",
+          "kind": "FunctionDeclaration",
+          "line": 8549,
+          "endLine": 8567
+        },
+        {
+          "name": "大地图触摸结束",
+          "kind": "FunctionDeclaration",
+          "line": 8569,
+          "endLine": 8576
+        },
+        {
+          "name": "添加大地图事件监听",
+          "kind": "FunctionDeclaration",
+          "line": 8578,
+          "endLine": 8588
+        },
+        {
+          "name": "移除大地图事件监听",
+          "kind": "FunctionDeclaration",
+          "line": 8590,
+          "endLine": 8600
+        },
+        {
+          "name": "大地图悬停信息",
+          "kind": "FunctionDeclaration",
+          "line": 8602,
+          "endLine": 8623
+        },
+        {
+          "name": "玩家等待",
+          "kind": "FunctionDeclaration",
+          "line": 8627,
+          "endLine": 8638
+        },
+        {
+          "name": "开始休息",
+          "kind": "FunctionDeclaration",
+          "line": 8640,
+          "endLine": 8664
+        },
+        {
+          "name": "停止休息",
+          "kind": "FunctionDeclaration",
+          "line": 8666,
+          "endLine": 8672
+        },
+        {
+          "name": "整理背包",
+          "kind": "FunctionDeclaration",
+          "line": 8680,
+          "endLine": 8727
+        },
+        {
+          "name": "checkCdnAvailability",
+          "kind": "FunctionDeclaration",
+          "line": 8733,
+          "endLine": 8758
+        },
+        {
+          "name": "getIconChar",
+          "kind": "FunctionDeclaration",
+          "line": 8760,
+          "endLine": 8764
+        },
+        {
+          "name": "getIconHTML",
+          "kind": "FunctionDeclaration",
+          "line": 8766,
+          "endLine": 8785
+        },
+        {
+          "name": "fetchAndCacheEmoji",
+          "kind": "FunctionDeclaration",
+          "line": 8788,
+          "endLine": 8806
+        },
+        {
+          "name": "drawIcon",
+          "kind": "FunctionDeclaration",
+          "line": 8808,
+          "endLine": 8860
+        },
+        {
+          "name": "handleCanvasTouchStart",
+          "kind": "FunctionDeclaration",
+          "line": 8862,
+          "endLine": 8907
+        },
+        {
+          "name": "handleCanvasTouchMove",
+          "kind": "FunctionDeclaration",
+          "line": 8909,
+          "endLine": 8956
+        },
+        {
+          "name": "handleCanvasTouchEnd",
+          "kind": "FunctionDeclaration",
+          "line": 8958,
+          "endLine": 8991
+        },
+        {
+          "name": "processSwipeMove",
+          "kind": "FunctionDeclaration",
+          "line": 8993,
+          "endLine": 9017
+        },
+        {
+          "name": "handleCanvasWheelZoom",
+          "kind": "FunctionDeclaration",
+          "line": 9028,
+          "endLine": 9071
+        },
+        {
+          "name": "注册全局类",
+          "kind": "FunctionDeclaration",
+          "line": 9072,
+          "endLine": 9337
+        },
+        {
+          "name": "获取所有可用的定义",
+          "kind": "FunctionDeclaration",
+          "line": 9338,
+          "endLine": 9437
+        },
+        {
+          "name": "处理地图点击",
+          "kind": "FunctionDeclaration",
+          "line": 9458,
+          "endLine": 9462
+        },
+        {
+          "name": "处理地图单击",
+          "kind": "FunctionDeclaration",
+          "line": 9464,
+          "endLine": 9466
+        },
+        {
+          "name": "状态效果",
+          "kind": "ClassDeclaration",
+          "line": 9469,
+          "endLine": 9714
+        },
+        {
+          "name": "处理点击",
+          "kind": "FunctionDeclaration",
+          "line": 9717,
+          "endLine": 9825
+        },
+        {
+          "name": "门",
+          "kind": "ClassDeclaration",
+          "line": 9827,
+          "endLine": 9846
+        },
+        {
+          "name": "生成玩家距离图",
+          "kind": "FunctionDeclaration",
+          "line": 9848,
+          "endLine": 9902
+        },
+        {
+          "name": "怪物",
+          "kind": "ClassDeclaration",
+          "line": 9903,
+          "endLine": 11812
+        },
+        {
+          "name": "幽灵怪物",
+          "kind": "ClassDeclaration",
+          "line": 11813,
+          "endLine": 11983,
+          "extends": "怪物"
+        },
+        {
+          "name": "超速怪物",
+          "kind": "ClassDeclaration",
+          "line": 11984,
+          "endLine": 12006,
+          "extends": "怪物"
+        },
+        {
+          "name": "蜈蚣部位",
+          "kind": "ClassDeclaration",
+          "line": 12007,
+          "endLine": 12109,
+          "extends": "怪物"
+        },
+        {
+          "name": "蜈蚣怪物",
+          "kind": "ClassDeclaration",
+          "line": 12111,
+          "endLine": 12522,
+          "extends": "怪物"
+        },
+        {
+          "name": "吸血鬼",
+          "kind": "ClassDeclaration",
+          "line": 12523,
+          "endLine": 12551,
+          "extends": "怪物"
+        },
+        {
+          "name": "水怪",
+          "kind": "ClassDeclaration",
+          "line": 12553,
+          "endLine": 12711,
+          "extends": "怪物"
+        },
+        {
+          "name": "分裂怪物",
+          "kind": "ClassDeclaration",
+          "line": 12713,
+          "endLine": 12761,
+          "extends": "怪物"
+        },
+        {
+          "name": "追踪风弹弹头",
+          "kind": "ClassDeclaration",
+          "line": 12762,
+          "endLine": 12847,
+          "extends": "怪物"
+        },
+        {
+          "name": "巨人部位",
+          "kind": "ClassDeclaration",
+          "line": 12848,
+          "endLine": 12909,
+          "extends": "怪物"
+        },
+        {
+          "name": "巨人怪物",
+          "kind": "ClassDeclaration",
+          "line": 12912,
+          "endLine": 13239,
+          "extends": "怪物"
+        },
+        {
+          "name": "复活怪物",
+          "kind": "ClassDeclaration",
+          "line": 13243,
+          "endLine": 13317,
+          "extends": "怪物"
+        },
+        {
+          "name": "娃娃怪物",
+          "kind": "ClassDeclaration",
+          "line": 13318,
+          "endLine": 13360,
+          "extends": "怪物"
+        },
+        {
+          "name": "皇家守卫",
+          "kind": "ClassDeclaration",
+          "line": 13361,
+          "endLine": 13536,
+          "extends": "怪物"
+        },
+        {
+          "name": "移动弹幕",
+          "kind": "ClassDeclaration",
+          "line": 13537,
+          "endLine": 13588,
+          "extends": "怪物"
+        },
+        {
+          "name": "墓碑",
+          "kind": "ClassDeclaration",
+          "line": 13590,
+          "endLine": 13638,
+          "extends": "怪物"
+        },
+        {
+          "name": "王座守护者",
+          "kind": "ClassDeclaration",
+          "line": 13639,
+          "endLine": 14480,
+          "extends": "怪物"
+        },
+        {
+          "name": "魔法师",
+          "kind": "ClassDeclaration",
+          "line": 14482,
+          "endLine": 14557,
+          "extends": "怪物"
+        },
+        {
+          "name": "大魔法师",
+          "kind": "ClassDeclaration",
+          "line": 14558,
+          "endLine": 15584,
+          "extends": "怪物"
+        },
+        {
+          "name": "反弹怪物",
+          "kind": "ClassDeclaration",
+          "line": 15587,
+          "endLine": 15651,
+          "extends": "怪物"
+        },
+        {
+          "name": "蜘蛛怪物",
+          "kind": "ClassDeclaration",
+          "line": 15654,
+          "endLine": 15696,
+          "extends": "怪物"
+        },
+        {
+          "name": "腐蚀怪物",
+          "kind": "ClassDeclaration",
+          "line": 15697,
+          "endLine": 15796,
+          "extends": "怪物"
+        },
+        {
+          "name": "盗贼怪物",
+          "kind": "ClassDeclaration",
+          "line": 15797,
+          "endLine": 16093,
+          "extends": "怪物"
+        },
+        {
+          "name": "吸能怪物",
+          "kind": "ClassDeclaration",
+          "line": 16094,
+          "endLine": 16256,
+          "extends": "怪物"
+        },
+        {
+          "name": "剧毒云雾怪物",
+          "kind": "ClassDeclaration",
+          "line": 16258,
+          "endLine": 16383,
+          "extends": "怪物"
+        },
+        {
+          "name": "骷髅仆从",
+          "kind": "ClassDeclaration",
+          "line": 16384,
+          "endLine": 16587,
+          "extends": "怪物"
+        },
+        {
+          "name": "召唤师怪物",
+          "kind": "ClassDeclaration",
+          "line": 16592,
+          "endLine": 16909,
+          "extends": "怪物"
+        },
+        {
+          "name": "幽灵仆从",
+          "kind": "ClassDeclaration",
+          "line": 16911,
+          "endLine": 16955,
+          "extends": "怪物"
+        },
+        {
+          "name": "萨满怪物",
+          "kind": "ClassDeclaration",
+          "line": 16957,
+          "endLine": 17104,
+          "extends": "怪物"
+        },
+        {
+          "name": "大史莱姆怪物",
+          "kind": "ClassDeclaration",
+          "line": 17106,
+          "endLine": 17226,
+          "extends": "怪物"
+        },
+        {
+          "name": "小史莱姆怪物",
+          "kind": "ClassDeclaration",
+          "line": 17228,
+          "endLine": 17274,
+          "extends": "怪物"
+        },
+        {
+          "name": "瞬移怪物",
+          "kind": "ClassDeclaration",
+          "line": 17276,
+          "endLine": 17521,
+          "extends": "怪物"
+        },
+        {
+          "name": "伪装怪物",
+          "kind": "ClassDeclaration",
+          "line": 17523,
+          "endLine": 17622,
+          "extends": "怪物"
+        },
+        {
+          "name": "炸弹怪物",
+          "kind": "ClassDeclaration",
+          "line": 17624,
+          "endLine": 17770,
+          "extends": "怪物"
+        },
+        {
+          "name": "旋风怪物",
+          "kind": "ClassDeclaration",
+          "line": 17771,
+          "endLine": 17912,
+          "extends": "怪物"
+        },
+        {
+          "name": "旋风",
+          "kind": "ClassDeclaration",
+          "line": 17913,
+          "endLine": 18076,
+          "extends": "怪物"
+        },
+        {
+          "name": "盔甲怪物",
+          "kind": "ClassDeclaration",
+          "line": 18077,
+          "endLine": 18098,
+          "extends": "怪物"
+        },
+        {
+          "name": "敏捷怪物",
+          "kind": "ClassDeclaration",
+          "line": 18099,
+          "endLine": 18121,
+          "extends": "怪物"
+        },
+        {
+          "name": "远攻怪物",
+          "kind": "ClassDeclaration",
+          "line": 18122,
+          "endLine": 18147,
+          "extends": "怪物"
+        },
+        {
+          "name": "仙人掌怪物",
+          "kind": "ClassDeclaration",
+          "line": 18148,
+          "endLine": 18192,
+          "extends": "怪物"
+        },
+        {
+          "name": "冰冻怪物",
+          "kind": "ClassDeclaration",
+          "line": 18193,
+          "endLine": 18288,
+          "extends": "怪物"
+        },
+        {
+          "name": "米诺陶",
+          "kind": "ClassDeclaration",
+          "line": 18289,
+          "endLine": 18979,
+          "extends": "怪物"
+        },
+        {
+          "name": "恐惧怪物",
+          "kind": "ClassDeclaration",
+          "line": 18981,
+          "endLine": 19173,
+          "extends": "怪物"
+        },
+        {
+          "name": "物品",
+          "kind": "ClassDeclaration",
+          "line": 19175,
+          "endLine": 19479
+        },
+        {
+          "name": "武器类",
+          "kind": "ClassDeclaration",
+          "line": 19481,
+          "endLine": 20127,
+          "extends": "物品"
+        },
+        {
+          "name": "钥匙",
+          "kind": "ClassDeclaration",
+          "line": 20128,
+          "endLine": 20192,
+          "extends": "物品"
+        },
+        {
+          "name": "金币",
+          "kind": "ClassDeclaration",
+          "line": 20193,
+          "endLine": 20214,
+          "extends": "物品"
+        },
+        {
+          "name": "卷轴类",
+          "kind": "ClassDeclaration",
+          "line": 20216,
+          "endLine": 20343,
+          "extends": "物品"
+        },
+        {
+          "name": "防御装备类",
+          "kind": "ClassDeclaration",
+          "line": 20344,
+          "endLine": 20595,
+          "extends": "物品"
+        },
+        {
+          "name": "扫帚",
+          "kind": "ClassDeclaration",
+          "line": 20596,
+          "endLine": 20770,
+          "extends": "武器类"
+        },
+        {
+          "name": "吸血剑",
+          "kind": "ClassDeclaration",
+          "line": 20771,
+          "endLine": 20832,
+          "extends": "武器类"
+        },
+        {
+          "name": "棋子",
+          "kind": "ClassDeclaration",
+          "line": 20833,
+          "endLine": 20906,
+          "extends": "物品"
+        },
+        {
+          "name": "国际象棋车",
+          "kind": "ClassDeclaration",
+          "line": 20908,
+          "endLine": 20929,
+          "extends": "棋子"
+        },
+        {
+          "name": "国际象棋马",
+          "kind": "ClassDeclaration",
+          "line": 20931,
+          "endLine": 20956,
+          "extends": "棋子"
+        },
+        {
+          "name": "国际象棋象",
+          "kind": "ClassDeclaration",
+          "line": 20958,
+          "endLine": 20991,
+          "extends": "棋子"
+        },
+        {
+          "name": "中国象棋炮",
+          "kind": "ClassDeclaration",
+          "line": 20993,
+          "endLine": 21037,
+          "extends": "棋子"
+        },
+        {
+          "name": "药水类",
+          "kind": "ClassDeclaration",
+          "line": 21039,
+          "endLine": 21182,
+          "extends": "物品"
+        },
+        {
+          "name": "治疗药水",
+          "kind": "ClassDeclaration",
+          "line": 21184,
+          "endLine": 21231,
+          "extends": "药水类"
+        },
+        {
+          "name": "能量药水",
+          "kind": "ClassDeclaration",
+          "line": 21233,
+          "endLine": 21256,
+          "extends": "药水类"
+        },
+        {
+          "name": "狂暴药水",
+          "kind": "ClassDeclaration",
+          "line": 21257,
+          "endLine": 21290,
+          "extends": "药水类"
+        },
+        {
+          "name": "神龟药水",
+          "kind": "ClassDeclaration",
+          "line": 21291,
+          "endLine": 21312,
+          "extends": "药水类"
+        },
+        {
+          "name": "隐身药水",
+          "kind": "ClassDeclaration",
+          "line": 21313,
+          "endLine": 21346,
+          "extends": "药水类"
+        },
+        {
+          "name": "透视药水",
+          "kind": "ClassDeclaration",
+          "line": 21347,
+          "endLine": 21369,
+          "extends": "药水类"
+        },
+        {
+          "name": "神秘药水",
+          "kind": "ClassDeclaration",
+          "line": 21370,
+          "endLine": 21437,
+          "extends": "药水类"
+        },
+        {
+          "name": "硫酸药水",
+          "kind": "ClassDeclaration",
+          "line": 21441,
+          "endLine": 21608,
+          "extends": "药水类"
+        },
+        {
+          "name": "中毒药水",
+          "kind": "ClassDeclaration",
+          "line": 21609,
+          "endLine": 21646,
+          "extends": "药水类"
+        },
+        {
+          "name": "失明药水",
+          "kind": "ClassDeclaration",
+          "line": 21647,
+          "endLine": 21674,
+          "extends": "药水类"
+        },
+        {
+          "name": "冰冻药水",
+          "kind": "ClassDeclaration",
+          "line": 21675,
+          "endLine": 21709,
+          "extends": "药水类"
+        },
+        {
+          "name": "抗火药水",
+          "kind": "ClassDeclaration",
+          "line": 21710,
+          "endLine": 21737,
+          "extends": "药水类"
+        },
+        {
+          "name": "死灵法杖",
+          "kind": "ClassDeclaration",
+          "line": 21738,
+          "endLine": 21817,
+          "extends": "武器类"
+        },
+        {
+          "name": "火箭筒",
+          "kind": "ClassDeclaration",
+          "line": 21819,
+          "endLine": 21938,
+          "extends": "武器类"
+        },
+        {
+          "name": "冰霜法杖",
+          "kind": "ClassDeclaration",
+          "line": 21940,
+          "endLine": 22155,
+          "extends": "武器类"
+        },
+        {
+          "name": "荆棘种子",
+          "kind": "ClassDeclaration",
+          "line": 22156,
+          "endLine": 22273,
+          "extends": "物品"
+        },
+        {
+          "name": "荆棘丛",
+          "kind": "ClassDeclaration",
+          "line": 22275,
+          "endLine": 22383,
+          "extends": "物品"
+        },
+        {
+          "name": "能量熔炉",
+          "kind": "ClassDeclaration",
+          "line": 22385,
+          "endLine": 22478,
+          "extends": "物品"
+        },
+        {
+          "name": "引雷针护符",
+          "kind": "ClassDeclaration",
+          "line": 22479,
+          "endLine": 22603,
+          "extends": "防御装备类"
+        },
+        {
+          "name": "重力锤",
+          "kind": "ClassDeclaration",
+          "line": 22604,
+          "endLine": 22893,
+          "extends": "武器类"
+        },
+        {
+          "name": "旋风物品",
+          "kind": "ClassDeclaration",
+          "line": 22894,
+          "endLine": 22958,
+          "extends": "物品"
+        },
+        {
+          "name": "磨刀石",
+          "kind": "ClassDeclaration",
+          "line": 22959,
+          "endLine": 22987,
+          "extends": "物品"
+        },
+        {
+          "name": "刷怪笼",
+          "kind": "ClassDeclaration",
+          "line": 22988,
+          "endLine": 23082,
+          "extends": "物品"
+        },
+        {
+          "name": "卷轴滚动墙",
+          "kind": "ClassDeclaration",
+          "line": 23084,
+          "endLine": 23111,
+          "extends": "物品"
+        },
+        {
+          "name": "传送带",
+          "kind": "ClassDeclaration",
+          "line": 23112,
+          "endLine": 23145,
+          "extends": "物品"
+        },
+        {
+          "name": "巡逻怪物",
+          "kind": "ClassDeclaration",
+          "line": 23147,
+          "endLine": 23374,
+          "extends": "怪物"
+        },
+        {
+          "name": "同步怪物",
+          "kind": "ClassDeclaration",
+          "line": 23376,
+          "endLine": 23433,
+          "extends": "怪物"
+        },
+        {
+          "name": "急救绷带",
+          "kind": "ClassDeclaration",
+          "line": 23435,
+          "endLine": 23500,
+          "extends": "物品"
+        },
+        {
+          "name": "照明弹光源",
+          "kind": "ClassDeclaration",
+          "line": 23502,
+          "endLine": 23540,
+          "extends": "物品"
+        },
+        {
+          "name": "照明弹",
+          "kind": "ClassDeclaration",
+          "line": 23542,
+          "endLine": 23579,
+          "extends": "物品"
+        },
+        {
+          "name": "开关脉冲器",
+          "kind": "ClassDeclaration",
+          "line": 23580,
+          "endLine": 23747,
+          "extends": "物品"
+        },
+        {
+          "name": "压感开关",
+          "kind": "ClassDeclaration",
+          "line": 23749,
+          "endLine": 23833,
+          "extends": "物品"
+        },
+        {
+          "name": "红蓝开关",
+          "kind": "ClassDeclaration",
+          "line": 23835,
+          "endLine": 23942,
+          "extends": "物品"
+        },
+        {
+          "name": "绿紫开关",
+          "kind": "ClassDeclaration",
+          "line": 23943,
+          "endLine": 24034,
+          "extends": "物品"
+        },
+        {
+          "name": "红砖块",
+          "kind": "ClassDeclaration",
+          "line": 24036,
+          "endLine": 24063,
+          "extends": "物品"
+        },
+        {
+          "name": "蓝砖块",
+          "kind": "ClassDeclaration",
+          "line": 24065,
+          "endLine": 24093,
+          "extends": "物品"
+        },
+        {
+          "name": "绿砖块",
+          "kind": "ClassDeclaration",
+          "line": 24094,
+          "endLine": 24121,
+          "extends": "物品"
+        },
+        {
+          "name": "紫砖块",
+          "kind": "ClassDeclaration",
+          "line": 24123,
+          "endLine": 24150,
+          "extends": "物品"
+        },
+        {
+          "name": "挑战石碑",
+          "kind": "ClassDeclaration",
+          "line": 24151,
+          "endLine": 24311,
+          "extends": "物品"
+        },
+        {
+          "name": "剧毒匕首",
+          "kind": "ClassDeclaration",
+          "line": 24312,
+          "endLine": 24466,
+          "extends": "武器类"
+        },
+        {
+          "name": "荆棘鞭",
+          "kind": "ClassDeclaration",
+          "line": 24468,
+          "endLine": 24708,
+          "extends": "武器类"
+        },
+        {
+          "name": "回旋镖",
+          "kind": "ClassDeclaration",
+          "line": 24709,
+          "endLine": 25030,
+          "extends": "武器类"
+        },
+        {
+          "name": "闪电链法杖",
+          "kind": "ClassDeclaration",
+          "line": 25032,
+          "endLine": 25257,
+          "extends": "武器类"
+        },
+        {
+          "name": "大地猛击锤",
+          "kind": "ClassDeclaration",
+          "line": 25259,
+          "endLine": 25414,
+          "extends": "武器类"
+        },
+        {
+          "name": "穿云箭",
+          "kind": "ClassDeclaration",
+          "line": 25416,
+          "endLine": 25696,
+          "extends": "武器类"
+        },
+        {
+          "name": "守卫者盔甲",
+          "kind": "ClassDeclaration",
+          "line": 25697,
+          "endLine": 25710,
+          "extends": "防御装备类"
+        },
+        {
+          "name": "钢制长剑",
+          "kind": "ClassDeclaration",
+          "line": 25711,
+          "endLine": 25728,
+          "extends": "武器类"
+        },
+        {
+          "name": "橡木法杖",
+          "kind": "ClassDeclaration",
+          "line": 25730,
+          "endLine": 25749,
+          "extends": "武器类"
+        },
+        {
+          "name": "沉浸式传送门",
+          "kind": "ClassDeclaration",
+          "line": 25751,
+          "endLine": 25782,
+          "extends": "物品"
+        },
+        {
+          "name": "冲撞牛角",
+          "kind": "ClassDeclaration",
+          "line": 25783,
+          "endLine": 25911,
+          "extends": "武器类"
+        },
+        {
+          "name": "护卫种子",
+          "kind": "ClassDeclaration",
+          "line": 25912,
+          "endLine": 25962,
+          "extends": "物品"
+        },
+        {
+          "name": "护卫植物",
+          "kind": "ClassDeclaration",
+          "line": 25964,
+          "endLine": 26069,
+          "extends": "物品"
+        },
+        {
+          "name": "远射种子",
+          "kind": "ClassDeclaration",
+          "line": 26071,
+          "endLine": 26121,
+          "extends": "物品"
+        },
+        {
+          "name": "远射植物",
+          "kind": "ClassDeclaration",
+          "line": 26123,
+          "endLine": 26281,
+          "extends": "物品"
+        },
+        {
+          "name": "追踪风弹",
+          "kind": "ClassDeclaration",
+          "line": 26283,
+          "endLine": 26320,
+          "extends": "武器类"
+        },
+        {
+          "name": "泉水",
+          "kind": "ClassDeclaration",
+          "line": 26321,
+          "endLine": 26367,
+          "extends": "物品"
+        },
+        {
+          "name": "书架",
+          "kind": "ClassDeclaration",
+          "line": 26369,
+          "endLine": 26468,
+          "extends": "物品"
+        },
+        {
+          "name": "神偷手",
+          "kind": "ClassDeclaration",
+          "line": 26472,
+          "endLine": 26780,
+          "extends": "武器类"
+        },
+        {
+          "name": "迅捷卷轴",
+          "kind": "ClassDeclaration",
+          "line": 26781,
+          "endLine": 26833,
+          "extends": "卷轴类"
+        },
+        {
+          "name": "神秘卷轴",
+          "kind": "ClassDeclaration",
+          "line": 26834,
+          "endLine": 26856,
+          "extends": "卷轴类"
+        },
+        {
+          "name": "贪婪卷轴",
+          "kind": "ClassDeclaration",
+          "line": 26857,
+          "endLine": 26908,
+          "extends": "卷轴类"
+        },
+        {
+          "name": "清净卷轴",
+          "kind": "ClassDeclaration",
+          "line": 26909,
+          "endLine": 26936,
+          "extends": "卷轴类"
+        },
+        {
+          "name": "金币手枪",
+          "kind": "ClassDeclaration",
+          "line": 26937,
+          "endLine": 27065,
+          "extends": "武器类"
+        },
+        {
+          "name": "附魔卷轴",
+          "kind": "ClassDeclaration",
+          "line": 27067,
+          "endLine": 27361,
+          "extends": "卷轴类"
+        },
+        {
+          "name": "易位卷轴",
+          "kind": "ClassDeclaration",
+          "line": 27362,
+          "endLine": 27498,
+          "extends": "卷轴类"
+        },
+        {
+          "name": "灌木丛",
+          "kind": "ClassDeclaration",
+          "line": 27500,
+          "endLine": 27559,
+          "extends": "防御装备类"
+        },
+        {
+          "name": "雷电法杖",
+          "kind": "ClassDeclaration",
+          "line": 27561,
+          "endLine": 27703,
+          "extends": "武器类"
+        },
+        {
+          "name": "太阳卷轴",
+          "kind": "ClassDeclaration",
+          "line": 27705,
+          "endLine": 27773,
+          "extends": "卷轴类"
+        },
+        {
+          "name": "跃迁卷轴",
+          "kind": "ClassDeclaration",
+          "line": 27775,
+          "endLine": 27871,
+          "extends": "卷轴类"
+        },
+        {
+          "name": "真言卷轴",
+          "kind": "ClassDeclaration",
+          "line": 27873,
+          "endLine": 27990,
+          "extends": "卷轴类"
+        },
+        {
+          "name": "恐惧魔杖",
+          "kind": "ClassDeclaration",
+          "line": 27991,
+          "endLine": 28115,
+          "extends": "武器类"
+        },
+        {
+          "name": "调试工具",
+          "kind": "ClassDeclaration",
+          "line": 28119,
+          "endLine": 28556,
+          "extends": "物品"
+        },
+        {
+          "name": "磁铁",
+          "kind": "ClassDeclaration",
+          "line": 28557,
+          "endLine": 28721,
+          "extends": "武器类"
+        },
+        {
+          "name": "陷阱基类",
+          "kind": "ClassDeclaration",
+          "line": 28722,
+          "endLine": 28792,
+          "extends": "物品"
+        },
+        {
+          "name": "隐形落石陷阱",
+          "kind": "ClassDeclaration",
+          "line": 28794,
+          "endLine": 28811,
+          "extends": "陷阱基类"
+        },
+        {
+          "name": "隐形地刺陷阱",
+          "kind": "ClassDeclaration",
+          "line": 28813,
+          "endLine": 28832,
+          "extends": "陷阱基类"
+        },
+        {
+          "name": "隐形毒气陷阱",
+          "kind": "ClassDeclaration",
+          "line": 28834,
+          "endLine": 28887,
+          "extends": "物品"
+        },
+        {
+          "name": "隐形失明陷阱",
+          "kind": "ClassDeclaration",
+          "line": 28889,
+          "endLine": 28910,
+          "extends": "陷阱基类"
+        },
+        {
+          "name": "召唤怪物陷阱",
+          "kind": "ClassDeclaration",
+          "line": 28912,
+          "endLine": 28956,
+          "extends": "陷阱基类"
+        },
+        {
+          "name": "烈焰触发陷阱",
+          "kind": "ClassDeclaration",
+          "line": 28958,
+          "endLine": 28998,
+          "extends": "陷阱基类"
+        },
+        {
+          "name": "隐形虫洞陷阱",
+          "kind": "ClassDeclaration",
+          "line": 29000,
+          "endLine": 29102,
+          "extends": "陷阱基类"
+        },
+        {
+          "name": "远射陷阱",
+          "kind": "ClassDeclaration",
+          "line": 29104,
+          "endLine": 29185,
+          "extends": "怪物"
+        },
+        {
+          "name": "狙击金币枪",
+          "kind": "ClassDeclaration",
+          "line": 29186,
+          "endLine": 29309,
+          "extends": "武器类"
+        },
+        {
+          "name": "便携障碍物",
+          "kind": "ClassDeclaration",
+          "line": 29310,
+          "endLine": 29334,
+          "extends": "物品"
+        },
+        {
+          "name": "已放置的障碍物",
+          "kind": "ClassDeclaration",
+          "line": 29336,
+          "endLine": 29370,
+          "extends": "物品"
+        },
+        {
+          "name": "洗身砚",
+          "kind": "ClassDeclaration",
+          "line": 29371,
+          "endLine": 29455,
+          "extends": "物品"
+        },
+        {
+          "name": "岩浆",
+          "kind": "ClassDeclaration",
+          "line": 29457,
+          "endLine": 29539,
+          "extends": "物品"
+        },
+        {
+          "name": "黑曜石",
+          "kind": "ClassDeclaration",
+          "line": 29542,
+          "endLine": 29659,
+          "extends": "物品"
+        },
+        {
+          "name": "岩浆桶",
+          "kind": "ClassDeclaration",
+          "line": 29660,
+          "endLine": 29716,
+          "extends": "物品"
+        },
+        {
+          "name": "水桶",
+          "kind": "ClassDeclaration",
+          "line": 29718,
+          "endLine": 29804,
+          "extends": "物品"
+        },
+        {
+          "name": "空桶",
+          "kind": "ClassDeclaration",
+          "line": 29806,
+          "endLine": 29902,
+          "extends": "物品"
+        },
+        {
+          "name": "冰桶",
+          "kind": "ClassDeclaration",
+          "line": 29904,
+          "endLine": 29985,
+          "extends": "物品"
+        },
+        {
+          "name": "血水桶",
+          "kind": "ClassDeclaration",
+          "line": 29987,
+          "endLine": 30054,
+          "extends": "物品"
+        },
+        {
+          "name": "水鞋",
+          "kind": "ClassDeclaration",
+          "line": 30056,
+          "endLine": 30070,
+          "extends": "防御装备类"
+        },
+        {
+          "name": "时空罗盘",
+          "kind": "ClassDeclaration",
+          "line": 30072,
+          "endLine": 30143,
+          "extends": "物品"
+        },
+        {
+          "name": "毒气",
+          "kind": "ClassDeclaration",
+          "line": 30145,
+          "endLine": 30210,
+          "extends": "物品"
+        },
+        {
+          "name": "毒气瓶",
+          "kind": "ClassDeclaration",
+          "line": 30212,
+          "endLine": 30265,
+          "extends": "物品"
+        },
+        {
+          "name": "万能钥匙",
+          "kind": "ClassDeclaration",
+          "line": 30267,
+          "endLine": 30291,
+          "extends": "钥匙"
+        },
+        {
+          "name": "陨石法杖",
+          "kind": "ClassDeclaration",
+          "line": 30293,
+          "endLine": 30415,
+          "extends": "武器类"
+        },
+        {
+          "name": "配方卷轴",
+          "kind": "ClassDeclaration",
+          "line": 30416,
+          "endLine": 30485,
+          "extends": "物品"
+        },
+        {
+          "name": "湮灭卷轴",
+          "kind": "ClassDeclaration",
+          "line": 30486,
+          "endLine": 30563,
+          "extends": "卷轴类"
+        },
+        {
+          "name": "秘银锁甲",
+          "kind": "ClassDeclaration",
+          "line": 30565,
+          "endLine": 30581,
+          "extends": "防御装备类"
+        },
+        {
+          "name": "防化服",
+          "kind": "ClassDeclaration",
+          "line": 30582,
+          "endLine": 30596,
+          "extends": "防御装备类"
+        },
+        {
+          "name": "钢制板甲",
+          "kind": "ClassDeclaration",
+          "line": 30597,
+          "endLine": 30613,
+          "extends": "防御装备类"
+        },
+        {
+          "name": "锅盖",
+          "kind": "ClassDeclaration",
+          "line": 30615,
+          "endLine": 30631,
+          "extends": "防御装备类"
+        },
+        {
+          "name": "冰盾",
+          "kind": "ClassDeclaration",
+          "line": 30633,
+          "endLine": 30677,
+          "extends": "防御装备类"
+        },
+        {
+          "name": "纵火狂",
+          "kind": "ClassDeclaration",
+          "line": 30678,
+          "endLine": 30692,
+          "extends": "防御装备类"
+        },
+        {
+          "name": "存档点",
+          "kind": "ClassDeclaration",
+          "line": 30693,
+          "endLine": 30742,
+          "extends": "物品"
+        },
+        {
+          "name": "重铸台",
+          "kind": "ClassDeclaration",
+          "line": 30743,
+          "endLine": 30792,
+          "extends": "物品"
+        },
+        {
+          "name": "火把",
+          "kind": "ClassDeclaration",
+          "line": 30794,
+          "endLine": 30987,
+          "extends": "物品"
+        },
+        {
+          "name": "喷火枪",
+          "kind": "ClassDeclaration",
+          "line": 30989,
+          "endLine": 31244,
+          "extends": "武器类"
+        },
+        {
+          "name": "斜方刀",
+          "kind": "ClassDeclaration",
+          "line": 31245,
+          "endLine": 31364,
+          "extends": "武器类"
+        },
+        {
+          "name": "神龛",
+          "kind": "ClassDeclaration",
+          "line": 31365,
+          "endLine": 31422,
+          "extends": "物品"
+        },
+        {
+          "name": "神秘商人",
+          "kind": "ClassDeclaration",
+          "line": 31425,
+          "endLine": 31521,
+          "extends": "物品"
+        },
+        {
+          "name": "探险家",
+          "kind": "ClassDeclaration",
+          "line": 31522,
+          "endLine": 31666,
+          "extends": "物品"
+        },
+        {
+          "name": "赌徒",
+          "kind": "ClassDeclaration",
+          "line": 31668,
+          "endLine": 31706,
+          "extends": "物品"
+        },
+        {
+          "name": "佣兵契约",
+          "kind": "ClassDeclaration",
+          "line": 31708,
+          "endLine": 31744,
+          "extends": "物品"
+        },
+        {
+          "name": "佣兵单位",
+          "kind": "ClassDeclaration",
+          "line": 31745,
+          "endLine": 31769,
+          "extends": "骷髅仆从"
+        },
+        {
+          "name": "自定义NPC",
+          "kind": "ClassDeclaration",
+          "line": 31771,
+          "endLine": 31790,
+          "extends": "物品"
+        },
+        {
+          "name": "许愿井",
+          "kind": "ClassDeclaration",
+          "line": 31792,
+          "endLine": 31861,
+          "extends": "物品"
+        },
+        {
+          "name": "蛛网",
+          "kind": "ClassDeclaration",
+          "line": 31864,
+          "endLine": 31915,
+          "extends": "物品"
+        },
+        {
+          "name": "渔网陷阱",
+          "kind": "ClassDeclaration",
+          "line": 31916,
+          "endLine": 31955,
+          "extends": "物品"
+        },
+        {
+          "name": "渔网",
+          "kind": "ClassDeclaration",
+          "line": 31957,
+          "endLine": 32005,
+          "extends": "物品"
+        },
+        {
+          "name": "充能魔杖",
+          "kind": "ClassDeclaration",
+          "line": 32007,
+          "endLine": 32240,
+          "extends": "武器类"
+        },
+        {
+          "name": "魔力远射植物",
+          "kind": "ClassDeclaration",
+          "line": 32242,
+          "endLine": 32271,
+          "extends": "远射植物"
+        },
+        {
+          "name": "时间卷轴",
+          "kind": "ClassDeclaration",
+          "line": 32273,
+          "endLine": 32295,
+          "extends": "卷轴类"
+        },
+        {
+          "name": "潜行靴子",
+          "kind": "ClassDeclaration",
+          "line": 32297,
+          "endLine": 32309,
+          "extends": "防御装备类"
+        },
+        {
+          "name": "钩索",
+          "kind": "ClassDeclaration",
+          "line": 32311,
+          "endLine": 32424,
+          "extends": "武器类"
+        },
+        {
+          "name": "嗜血战斧",
+          "kind": "ClassDeclaration",
+          "line": 32426,
+          "endLine": 32441,
+          "extends": "武器类"
+        },
+        {
+          "name": "祭坛类",
+          "kind": "ClassDeclaration",
+          "line": 32442,
+          "endLine": 32677,
+          "extends": "物品"
+        },
+        {
+          "name": "物品祭坛",
+          "kind": "ClassDeclaration",
+          "line": 32678,
+          "endLine": 32741,
+          "extends": "祭坛类"
+        },
+        {
+          "name": "耐久祭坛",
+          "kind": "ClassDeclaration",
+          "line": 32743,
+          "endLine": 32775,
+          "extends": "祭坛类"
+        },
+        {
+          "name": "背包扩容祭坛",
+          "kind": "ClassDeclaration",
+          "line": 32777,
+          "endLine": 32804,
+          "extends": "祭坛类"
+        },
+        {
+          "name": "灵能盾牌",
+          "kind": "ClassDeclaration",
+          "line": 32805,
+          "endLine": 32894,
+          "extends": "防御装备类"
+        },
+        {
+          "name": "毒液物品",
+          "kind": "ClassDeclaration",
+          "line": 32895,
+          "endLine": 32997,
+          "extends": "物品"
+        },
+        {
+          "name": "饰品",
+          "kind": "ClassDeclaration",
+          "line": 32998,
+          "endLine": 33010,
+          "extends": "物品"
+        },
+        {
+          "name": "陷阱先锋饰品",
+          "kind": "ClassDeclaration",
+          "line": 33012,
+          "endLine": 33023,
+          "extends": "饰品"
+        },
+        {
+          "name": "飞毛腿饰品",
+          "kind": "ClassDeclaration",
+          "line": 33025,
+          "endLine": 33036,
+          "extends": "饰品"
+        },
+        {
+          "name": "瞬间移动饰品",
+          "kind": "ClassDeclaration",
+          "line": 33038,
+          "endLine": 33049,
+          "extends": "饰品"
+        },
+        {
+          "name": "博士之卷饰品",
+          "kind": "ClassDeclaration",
+          "line": 33051,
+          "endLine": 33062,
+          "extends": "饰品"
+        },
+        {
+          "name": "恢复之心饰品",
+          "kind": "ClassDeclaration",
+          "line": 33064,
+          "endLine": 33075,
+          "extends": "饰品"
+        },
+        {
+          "name": "以牙还牙饰品",
+          "kind": "ClassDeclaration",
+          "line": 33077,
+          "endLine": 33088,
+          "extends": "饰品"
+        },
+        {
+          "name": "嗅探之鼻饰品",
+          "kind": "ClassDeclaration",
+          "line": 33089,
+          "endLine": 33100,
+          "extends": "饰品"
+        },
+        {
+          "name": "宠物",
+          "kind": "ClassDeclaration",
+          "line": 33101,
+          "endLine": 34110,
+          "extends": "物品"
+        },
+        {
+          "name": "马",
+          "kind": "ClassDeclaration",
+          "line": 34112,
+          "endLine": 34143,
+          "extends": "宠物"
+        },
+        {
+          "name": "熊猫",
+          "kind": "ClassDeclaration",
+          "line": 34145,
+          "endLine": 34277,
+          "extends": "宠物"
+        },
+        {
+          "name": "火蜥蜴",
+          "kind": "ClassDeclaration",
+          "line": 34278,
+          "endLine": 34414,
+          "extends": "宠物"
+        },
+        {
+          "name": "定位器地图",
+          "kind": "ClassDeclaration",
+          "line": 34415,
+          "endLine": 34430,
+          "extends": "物品"
+        },
+        {
+          "name": "烟雾弹",
+          "kind": "ClassDeclaration",
+          "line": 34431,
+          "endLine": 34506,
+          "extends": "物品"
+        },
+        {
+          "name": "烟雾",
+          "kind": "ClassDeclaration",
+          "line": 34508,
+          "endLine": 34549,
+          "extends": "物品"
+        },
+        {
+          "name": "水母",
+          "kind": "ClassDeclaration",
+          "line": 34550,
+          "endLine": 34685,
+          "extends": "宠物"
+        },
+        {
+          "name": "魔法水晶",
+          "kind": "ClassDeclaration",
+          "line": 34686,
+          "endLine": 34758,
+          "extends": "物品"
+        },
+        {
+          "name": "旗帜",
+          "kind": "ClassDeclaration",
+          "line": 34759,
+          "endLine": 34802,
+          "extends": "物品"
+        },
+        {
+          "name": "符文圈",
+          "kind": "ClassDeclaration",
+          "line": 34804,
+          "endLine": 34896,
+          "extends": "物品"
+        },
+        {
+          "name": "奖杯物品",
+          "kind": "ClassDeclaration",
+          "line": 34898,
+          "endLine": 34918,
+          "extends": "物品"
+        },
+        {
+          "name": "获取结局评级",
+          "kind": "FunctionDeclaration",
+          "line": 34921,
+          "endLine": 34989
+        },
+        {
+          "name": "生成结算粒子",
+          "kind": "FunctionDeclaration",
+          "line": 34991,
+          "endLine": 35003
+        },
+        {
+          "name": "显示结算界面",
+          "kind": "FunctionDeclaration",
+          "line": 35005,
+          "endLine": 35092
+        },
+        {
+          "name": "魔法师法杖",
+          "kind": "ClassDeclaration",
+          "line": 35093,
+          "endLine": 35289,
+          "extends": "武器类"
+        },
+        {
+          "name": "大师附魔卷轴",
+          "kind": "ClassDeclaration",
+          "line": 35291,
+          "endLine": 35433,
+          "extends": "卷轴类"
+        },
+        {
+          "name": "小书魔",
+          "kind": "ClassDeclaration",
+          "line": 35434,
+          "endLine": 35507,
+          "extends": "宠物"
+        },
+        {
+          "name": "罐子",
+          "kind": "ClassDeclaration",
+          "line": 35508,
+          "endLine": 35781,
+          "extends": "物品"
+        },
+        {
+          "name": "空罐子",
+          "kind": "ClassDeclaration",
+          "line": 35782,
+          "endLine": 35795,
+          "extends": "罐子"
+        },
+        {
+          "name": "吸能种子",
+          "kind": "ClassDeclaration",
+          "line": 35796,
+          "endLine": 35858,
+          "extends": "物品"
+        },
+        {
+          "name": "能量草",
+          "kind": "ClassDeclaration",
+          "line": 35859,
+          "endLine": 35890,
+          "extends": "物品"
+        },
+        {
+          "name": "栅栏",
+          "kind": "ClassDeclaration",
+          "line": 35892,
+          "endLine": 35957,
+          "extends": "物品"
+        },
+        {
+          "name": "木栅栏",
+          "kind": "ClassDeclaration",
+          "line": 35959,
+          "endLine": 35974,
+          "extends": "栅栏"
+        },
+        {
+          "name": "石栅栏",
+          "kind": "ClassDeclaration",
+          "line": 35976,
+          "endLine": 35991,
+          "extends": "栅栏"
+        },
+        {
+          "name": "铁栅栏",
+          "kind": "ClassDeclaration",
+          "line": 35993,
+          "endLine": 36008,
+          "extends": "栅栏"
+        },
+        {
+          "name": "火焰物品",
+          "kind": "ClassDeclaration",
+          "line": 36010,
+          "endLine": 36177,
+          "extends": "物品"
+        },
+        {
+          "name": "寻宝戒指",
+          "kind": "ClassDeclaration",
+          "line": 36178,
+          "endLine": 36275,
+          "extends": "物品"
+        },
+        {
+          "name": "传送门",
+          "kind": "ClassDeclaration",
+          "line": 36276,
+          "endLine": 36373,
+          "extends": "物品"
+        },
+        {
+          "name": "折跃门",
+          "kind": "ClassDeclaration",
+          "line": 36374,
+          "endLine": 36453,
+          "extends": "物品"
+        },
+        {
+          "name": "炸弹",
+          "kind": "ClassDeclaration",
+          "line": 36455,
+          "endLine": 36816,
+          "extends": "物品"
+        },
+        {
+          "name": "引爆烟雾网络",
+          "kind": "FunctionDeclaration",
+          "line": 36818,
+          "endLine": 36871
+        },
+        {
+          "name": "药水弹",
+          "kind": "ClassDeclaration",
+          "line": 36873,
+          "endLine": 37059,
+          "extends": "炸弹"
+        },
+        {
+          "name": "药水桶",
+          "kind": "ClassDeclaration",
+          "line": 37061,
+          "endLine": 37177,
+          "extends": "物品"
+        },
+        {
+          "name": "药水液",
+          "kind": "ClassDeclaration",
+          "line": 37178,
+          "endLine": 37272,
+          "extends": "物品"
+        },
+        {
+          "name": "文本展示框",
+          "kind": "ClassDeclaration",
+          "line": 37273,
+          "endLine": 37302,
+          "extends": "物品"
+        },
+        {
+          "name": "垃圾桶",
+          "kind": "ClassDeclaration",
+          "line": 37304,
+          "endLine": 37356,
+          "extends": "物品"
+        },
+        {
+          "name": "推箱子箱子",
+          "kind": "ClassDeclaration",
+          "line": 37357,
+          "endLine": 37372,
+          "extends": "物品"
+        },
+        {
+          "name": "推箱子目标",
+          "kind": "ClassDeclaration",
+          "line": 37374,
+          "endLine": 37389,
+          "extends": "物品"
+        },
+        {
+          "name": "告示牌",
+          "kind": "ClassDeclaration",
+          "line": 37390,
+          "endLine": 37481,
+          "extends": "物品"
+        },
+        {
+          "name": "侦测器",
+          "kind": "ClassDeclaration",
+          "line": 37482,
+          "endLine": 37507,
+          "extends": "物品"
+        },
+        {
+          "name": "发生器",
+          "kind": "ClassDeclaration",
+          "line": 37509,
+          "endLine": 37532,
+          "extends": "物品"
+        },
+        {
+          "name": "箭头",
+          "kind": "ClassDeclaration",
+          "line": 37533,
+          "endLine": 37556,
+          "extends": "物品"
+        },
+        {
+          "name": "临时墙壁计时器",
+          "kind": "ClassDeclaration",
+          "line": 37557,
+          "endLine": 37596,
+          "extends": "物品"
+        },
+        {
+          "name": "界面元素基类",
+          "kind": "ClassDeclaration",
+          "line": 37599,
+          "endLine": 37618
+        },
+        {
+          "name": "文本元素",
+          "kind": "ClassDeclaration",
+          "line": 37621,
+          "endLine": 37655,
+          "extends": "界面元素基类"
+        },
+        {
+          "name": "进度条元素",
+          "kind": "ClassDeclaration",
+          "line": 37658,
+          "endLine": 37722,
+          "extends": "界面元素基类"
+        },
+        {
+          "name": "setFill",
+          "kind": "FunctionDeclaration",
+          "line": 37748,
+          "endLine": 37748
+        },
+        {
+          "name": "setStroke",
+          "kind": "FunctionDeclaration",
+          "line": 37749,
+          "endLine": 37749
+        },
+        {
+          "name": "setLineWidth",
+          "kind": "FunctionDeclaration",
+          "line": 37750,
+          "endLine": 37750
+        },
+        {
+          "name": "setFont",
+          "kind": "FunctionDeclaration",
+          "line": 37751,
+          "endLine": 37751
+        },
+        {
+          "name": "setAlign",
+          "kind": "FunctionDeclaration",
+          "line": 37752,
+          "endLine": 37755
+        },
+        {
+          "name": "setShadow",
+          "kind": "FunctionDeclaration",
+          "line": 37756,
+          "endLine": 37761
+        },
+        {
+          "name": "获取字体预设",
+          "kind": "FunctionDeclaration",
+          "line": 37763,
+          "endLine": 37781
+        },
+        {
+          "name": "同步Ctx缓存到真实值",
+          "kind": "FunctionDeclaration",
+          "line": 37784,
+          "endLine": 37801
+        },
+        {
+          "name": "单元格",
+          "kind": "ClassDeclaration",
+          "line": 37806,
+          "endLine": 38176
+        },
+        {
+          "name": "drawPath",
+          "kind": "FunctionDeclaration",
+          "line": 38178,
+          "endLine": 38205
+        },
+        {
+          "name": "handleResize",
+          "kind": "FunctionDeclaration",
+          "line": 38211,
+          "endLine": 38218
+        },
+        {
+          "name": "开始移动",
+          "kind": "FunctionDeclaration",
+          "line": 38223,
+          "endLine": 38225
+        },
+        {
+          "name": "控制键处理移动",
+          "kind": "FunctionDeclaration",
+          "line": 38227,
+          "endLine": 38283
+        },
+        {
+          "name": "停止移动",
+          "kind": "FunctionDeclaration",
+          "line": 38284,
+          "endLine": 38295
+        },
+        {
+          "name": "显示HUD",
+          "kind": "FunctionDeclaration",
+          "line": 38296,
+          "endLine": 38307
+        },
+        {
+          "name": "隐藏HUD",
+          "kind": "FunctionDeclaration",
+          "line": 38309,
+          "endLine": 38312
+        },
+        {
+          "name": "切换HUD模式",
+          "kind": "FunctionDeclaration",
+          "line": 38314,
+          "endLine": 38336
+        },
+        {
+          "name": "触发HUD显示",
+          "kind": "FunctionDeclaration",
+          "line": 38337,
+          "endLine": 38345
+        },
+        {
+          "name": "深度比较",
+          "kind": "FunctionDeclaration",
+          "line": 38372,
+          "endLine": 38391
+        },
+        {
+          "name": "更新界面状态",
+          "kind": "FunctionDeclaration",
+          "line": 38394,
+          "endLine": 38397
+        },
+        {
+          "name": "初始化canvas",
+          "kind": "FunctionDeclaration",
+          "line": 38399,
+          "endLine": 38428
+        },
+        {
+          "name": "回溯路径",
+          "kind": "FunctionDeclaration",
+          "line": 38429,
+          "endLine": 38458
+        },
+        {
+          "name": "生成红蓝开关谜题",
+          "kind": "FunctionDeclaration",
+          "line": 38460,
+          "endLine": 38591
+        },
+        {
+          "name": "生成地牢",
+          "kind": "FunctionDeclaration",
+          "line": 38592,
+          "endLine": 38884
+        },
+        {
+          "name": "生成迷宫地牢",
+          "kind": "FunctionDeclaration",
+          "line": 38885,
+          "endLine": 38911
+        },
+        {
+          "name": "移除死胡同",
+          "kind": "FunctionDeclaration",
+          "line": 38912,
+          "endLine": 39015
+        },
+        {
+          "name": "确保所有房间均已连接",
+          "kind": "FunctionDeclaration",
+          "line": 39016,
+          "endLine": 39134
+        },
+        {
+          "name": "放置房间群",
+          "kind": "FunctionDeclaration",
+          "line": 39135,
+          "endLine": 39231
+        },
+        {
+          "name": "填充迷宫",
+          "kind": "FunctionDeclaration",
+          "line": 39233,
+          "endLine": 39244
+        },
+        {
+          "name": "生长树算法",
+          "kind": "FunctionDeclaration",
+          "line": 39246,
+          "endLine": 39293
+        },
+        {
+          "name": "连接所有区域",
+          "kind": "FunctionDeclaration",
+          "line": 39295,
+          "endLine": 39347
+        },
+        {
+          "name": "_放置门",
+          "kind": "FunctionDeclaration",
+          "line": 39349,
+          "endLine": 39423
+        },
+        {
+          "name": "最终化地牢",
+          "kind": "FunctionDeclaration",
+          "line": 39425,
+          "endLine": 39511
+        },
+        {
+          "name": "生成陷阱",
+          "kind": "FunctionDeclaration",
+          "line": 39512,
+          "endLine": 39560
+        },
+        {
+          "name": "计算距离图",
+          "kind": "FunctionDeclaration",
+          "line": 39561,
+          "endLine": 39614
+        },
+        {
+          "name": "寻找可放置位置",
+          "kind": "FunctionDeclaration",
+          "line": 39615,
+          "endLine": 39639
+        },
+        {
+          "name": "生成罐子房间内容",
+          "kind": "FunctionDeclaration",
+          "line": 39640,
+          "endLine": 39652
+        },
+        {
+          "name": "生成植物房间内容",
+          "kind": "FunctionDeclaration",
+          "line": 39654,
+          "endLine": 39674
+        },
+        {
+          "name": "生成药水房内容",
+          "kind": "FunctionDeclaration",
+          "line": 39676,
+          "endLine": 39697
+        },
+        {
+          "name": "生成书库房间内容",
+          "kind": "FunctionDeclaration",
+          "line": 39698,
+          "endLine": 39714
+        },
+        {
+          "name": "状态节点",
+          "kind": "ClassDeclaration",
+          "line": 39735,
+          "endLine": 39759
+        },
+        {
+          "name": "状态",
+          "kind": "ClassDeclaration",
+          "line": 39762,
+          "endLine": 39898
+        },
+        {
+          "name": "求解器",
+          "kind": "ClassDeclaration",
+          "line": 39900,
+          "endLine": 39975
+        },
+        {
+          "name": "关卡生成",
+          "kind": "ClassDeclaration",
+          "line": 39977,
+          "endLine": 40032
+        },
+        {
+          "name": "关卡质量评估器",
+          "kind": "ClassDeclaration",
+          "line": 40035,
+          "endLine": 40052
+        },
+        {
+          "name": "推箱子关卡生成器",
+          "kind": "ClassDeclaration",
+          "line": 40055,
+          "endLine": 40186
+        },
+        {
+          "name": "生成推箱子谜题",
+          "kind": "FunctionDeclaration",
+          "line": 40188,
+          "endLine": 40268
+        },
+        {
+          "name": "检查推箱子解谜完成",
+          "kind": "FunctionDeclaration",
+          "line": 40272,
+          "endLine": 40311
+        },
+        {
+          "name": "解谜成功_推箱子",
+          "kind": "FunctionDeclaration",
+          "line": 40313,
+          "endLine": 40339
+        },
+        {
+          "name": "解谜成功",
+          "kind": "FunctionDeclaration",
+          "line": 40340,
+          "endLine": 40365
+        },
+        {
+          "name": "生成特殊房间",
+          "kind": "FunctionDeclaration",
+          "line": 40367,
+          "endLine": 40438
+        },
+        {
+          "name": "显示等待界面",
+          "kind": "FunctionDeclaration",
+          "line": 40439,
+          "endLine": 40449
+        },
+        {
+          "name": "隐藏等待界面",
+          "kind": "FunctionDeclaration",
+          "line": 40451,
+          "endLine": 40459
+        },
+        {
+          "name": "生成寻宝戒指",
+          "kind": "FunctionDeclaration",
+          "line": 40460,
+          "endLine": 40469
+        },
+        {
+          "name": "连接特殊房间",
+          "kind": "FunctionDeclaration",
+          "line": 40471,
+          "endLine": 40504
+        },
+        {
+          "name": "生成墙壁",
+          "kind": "FunctionDeclaration",
+          "line": 40505,
+          "endLine": 40621
+        },
+        {
+          "name": "添加额外走廊",
+          "kind": "FunctionDeclaration",
+          "line": 40622,
+          "endLine": 40648
+        },
+        {
+          "name": "恢复挑战区域",
+          "kind": "FunctionDeclaration",
+          "line": 40649,
+          "endLine": 40670
+        },
+        {
+          "name": "生成奖励",
+          "kind": "FunctionDeclaration",
+          "line": 40671,
+          "endLine": 40781
+        },
+        {
+          "name": "应用难度预设",
+          "kind": "FunctionDeclaration",
+          "line": 40782,
+          "endLine": 40854
+        },
+        {
+          "name": "处理创意关卡死亡事件",
+          "kind": "FunctionDeclaration",
+          "line": 40857,
+          "endLine": 40914
+        },
+        {
+          "name": "死亡动画循环",
+          "kind": "FunctionDeclaration",
+          "line": 40887,
+          "endLine": 40900
+        },
+        {
+          "name": "玩家死亡",
+          "kind": "FunctionDeclaration",
+          "line": 40915,
+          "endLine": 40927
+        },
+        {
+          "name": "显示死亡界面",
+          "kind": "FunctionDeclaration",
+          "line": 40928,
+          "endLine": 41179
+        },
+        {
+          "name": "生成物品",
+          "kind": "FunctionDeclaration",
+          "line": 41182,
+          "endLine": 41264
+        },
+        {
+          "name": "生成怪物引入计划",
+          "kind": "FunctionDeclaration",
+          "line": 41267,
+          "endLine": 41327
+        },
+        {
+          "name": "生成怪物",
+          "kind": "FunctionDeclaration",
+          "line": 41328,
+          "endLine": 41483
+        },
+        {
+          "name": "加权随机选择",
+          "kind": "FunctionDeclaration",
+          "line": 41485,
+          "endLine": 41514
+        },
+        {
+          "name": "生成死亡粒子",
+          "kind": "FunctionDeclaration",
+          "line": 41516,
+          "endLine": 41566
+        },
+        {
+          "name": "处理重生",
+          "kind": "FunctionDeclaration",
+          "line": 41567,
+          "endLine": 41786
+        },
+        {
+          "name": "切换楼层",
+          "kind": "FunctionDeclaration",
+          "line": 41789,
+          "endLine": 42061
+        },
+        {
+          "name": "显示编辑器教程",
+          "kind": "FunctionDeclaration",
+          "line": 42063,
+          "endLine": 42090
+        },
+        {
+          "name": "关闭编辑器教程",
+          "kind": "FunctionDeclaration",
+          "line": 42092,
+          "endLine": 42095
+        },
+        {
+          "name": "更新编辑器教程内容",
+          "kind": "FunctionDeclaration",
+          "line": 42097,
+          "endLine": 42102
+        },
+        {
+          "name": "保存传送点",
+          "kind": "FunctionDeclaration",
+          "line": 42103,
+          "endLine": 42155
+        },
+        {
+          "name": "打开传送菜单",
+          "kind": "FunctionDeclaration",
+          "line": 42157,
+          "endLine": 42224
+        },
+        {
+          "name": "刷新传送菜单",
+          "kind": "FunctionDeclaration",
+          "line": 42225,
+          "endLine": 42299
+        },
+        {
+          "name": "关闭传送菜单",
+          "kind": "FunctionDeclaration",
+          "line": 42302,
+          "endLine": 42313
+        },
+        {
+          "name": "执行传送",
+          "kind": "FunctionDeclaration",
+          "line": 42315,
+          "endLine": 42377
+        },
+        {
+          "name": "删除传送点",
+          "kind": "FunctionDeclaration",
+          "line": 42378,
+          "endLine": 42385
+        },
+        {
+          "name": "放置楼梯",
+          "kind": "FunctionDeclaration",
+          "line": 42386,
+          "endLine": 42417
+        },
+        {
+          "name": "生成金币",
+          "kind": "FunctionDeclaration",
+          "line": 42419,
+          "endLine": 42442
+        },
+        {
+          "name": "区域是否空闲",
+          "kind": "FunctionDeclaration",
+          "line": 42443,
+          "endLine": 42487
+        },
+        {
+          "name": "放置房间",
+          "kind": "FunctionDeclaration",
+          "line": 42489,
+          "endLine": 42505
+        },
+        {
+          "name": "更新房间墙壁",
+          "kind": "FunctionDeclaration",
+          "line": 42507,
+          "endLine": 42515
+        },
+        {
+          "name": "处理上锁的门",
+          "kind": "FunctionDeclaration",
+          "line": 42517,
+          "endLine": 42580
+        },
+        {
+          "name": "生成钥匙",
+          "kind": "FunctionDeclaration",
+          "line": 42582,
+          "endLine": 42612
+        },
+        {
+          "name": "寻找房间入口",
+          "kind": "FunctionDeclaration",
+          "line": 42614,
+          "endLine": 42647
+        },
+        {
+          "name": "连接房间",
+          "kind": "FunctionDeclaration",
+          "line": 42649,
+          "endLine": 42809
+        },
+        {
+          "name": "生成走廊",
+          "kind": "FunctionDeclaration",
+          "line": 42811,
+          "endLine": 42987
+        },
+        {
+          "name": "是否在任意房间内",
+          "kind": "FunctionDeclaration",
+          "line": 42989,
+          "endLine": 42997
+        },
+        {
+          "name": "放置门",
+          "kind": "FunctionDeclaration",
+          "line": 42999,
+          "endLine": 43156
+        },
+        {
+          "name": "randomlySetOneWayDirection",
+          "kind": "FunctionDeclaration",
+          "line": 43157,
+          "endLine": 43171
+        },
+        {
+          "name": "getMoveDirection",
+          "kind": "FunctionDeclaration",
+          "line": 43173,
+          "endLine": 43179
+        },
+        {
+          "name": "触发游戏事件",
+          "kind": "FunctionDeclaration",
+          "line": 43180,
+          "endLine": 43202
+        },
+        {
+          "name": "放置物品到房间",
+          "kind": "FunctionDeclaration",
+          "line": 43203,
+          "endLine": 43247
+        },
+        {
+          "name": "放置物品到单元格",
+          "kind": "FunctionDeclaration",
+          "line": 43248,
+          "endLine": 43288
+        },
+        {
+          "name": "位置是否可用",
+          "kind": "FunctionDeclaration",
+          "line": 43290,
+          "endLine": 43306
+        },
+        {
+          "name": "尝试互动",
+          "kind": "FunctionDeclaration",
+          "line": 43346,
+          "endLine": 43717
+        },
+        {
+          "name": "克隆物品",
+          "kind": "FunctionDeclaration",
+          "line": 43720,
+          "endLine": 43776
+        },
+        {
+          "name": "获取周围怪物",
+          "kind": "FunctionDeclaration",
+          "line": 43778,
+          "endLine": 43866
+        },
+        {
+          "name": "获取直线路径",
+          "kind": "FunctionDeclaration",
+          "line": 43867,
+          "endLine": 43884
+        },
+        {
+          "name": "获取可达格子",
+          "kind": "FunctionDeclaration",
+          "line": 43885,
+          "endLine": 43913
+        },
+        {
+          "name": "广度优先搜索路径",
+          "kind": "FunctionDeclaration",
+          "line": 43915,
+          "endLine": 43994
+        },
+        {
+          "name": "A星寻路",
+          "kind": "FunctionDeclaration",
+          "line": 43996,
+          "endLine": 44069
+        },
+        {
+          "name": "从终点回溯路径",
+          "kind": "FunctionDeclaration",
+          "line": 44070,
+          "endLine": 44083
+        },
+        {
+          "name": "检查视线",
+          "kind": "FunctionDeclaration",
+          "line": 44084,
+          "endLine": 44099
+        },
+        {
+          "name": "快速直线检查",
+          "kind": "FunctionDeclaration",
+          "line": 44100,
+          "endLine": 44147
+        },
+        {
+          "name": "获取移动方向",
+          "kind": "FunctionDeclaration",
+          "line": 44148,
+          "endLine": 44165
+        },
+        {
+          "name": "计划显示格子特效",
+          "kind": "FunctionDeclaration",
+          "line": 44167,
+          "endLine": 44188
+        },
+        {
+          "name": "显示格子特效",
+          "kind": "FunctionDeclaration",
+          "line": 44189,
+          "endLine": 44281
+        },
+        {
+          "name": "尝试进入特殊房间",
+          "kind": "FunctionDeclaration",
+          "line": 44282,
+          "endLine": 44308
+        },
+        {
+          "name": "尝试执行吹动",
+          "kind": "FunctionDeclaration",
+          "line": 44309,
+          "endLine": 44432
+        },
+        {
+          "name": "处理大风效果",
+          "kind": "FunctionDeclaration",
+          "line": 44434,
+          "endLine": 44639
+        },
+        {
+          "name": "开始挑战",
+          "kind": "FunctionDeclaration",
+          "line": 44640,
+          "endLine": 44719
+        },
+        {
+          "name": "刷新挑战房间下一波",
+          "kind": "FunctionDeclaration",
+          "line": 44721,
+          "endLine": 44746
+        },
+        {
+          "name": "生成挑战房间怪物",
+          "kind": "FunctionDeclaration",
+          "line": 44748,
+          "endLine": 44840
+        },
+        {
+          "name": "完成挑战",
+          "kind": "FunctionDeclaration",
+          "line": 44841,
+          "endLine": 44886
+        },
+        {
+          "name": "处理挑战失败",
+          "kind": "FunctionDeclaration",
+          "line": 44887,
+          "endLine": 44935
+        },
+        {
+          "name": "获取方向中文",
+          "kind": "FunctionDeclaration",
+          "line": 44936,
+          "endLine": 44942
+        },
+        {
+          "name": "显示升级界面",
+          "kind": "FunctionDeclaration",
+          "line": 44945,
+          "endLine": 45001
+        },
+        {
+          "name": "处理宠物着陆效果",
+          "kind": "FunctionDeclaration",
+          "line": 45003,
+          "endLine": 45024
+        },
+        {
+          "name": "处理回合逻辑",
+          "kind": "FunctionDeclaration",
+          "line": 45025,
+          "endLine": 45172
+        },
+        {
+          "name": "处理玩家着陆效果",
+          "kind": "FunctionDeclaration",
+          "line": 45173,
+          "endLine": 45371
+        },
+        {
+          "name": "更新洞穴视野",
+          "kind": "FunctionDeclaration",
+          "line": 45372,
+          "endLine": 45386
+        },
+        {
+          "name": "处理单向房间",
+          "kind": "FunctionDeclaration",
+          "line": 45387,
+          "endLine": 45465
+        },
+        {
+          "name": "获取实际移动步数",
+          "kind": "FunctionDeclaration",
+          "line": 45467,
+          "endLine": 45492
+        },
+        {
+          "name": "移动玩家",
+          "kind": "FunctionDeclaration",
+          "line": 45494,
+          "endLine": 45882
+        },
+        {
+          "name": "扣除能量",
+          "kind": "FunctionDeclaration",
+          "line": 45883,
+          "endLine": 45905
+        },
+        {
+          "name": "检查移动可行性",
+          "kind": "FunctionDeclaration",
+          "line": 45908,
+          "endLine": 45947
+        },
+        {
+          "name": "处理丢弃物品",
+          "kind": "FunctionDeclaration",
+          "line": 45948,
+          "endLine": 46023
+        },
+        {
+          "name": "处理天气效果",
+          "kind": "FunctionDeclaration",
+          "line": 46024,
+          "endLine": 46036
+        },
+        {
+          "name": "是否靠近火源",
+          "kind": "FunctionDeclaration",
+          "line": 46037,
+          "endLine": 46096
+        },
+        {
+          "name": "解冻药水",
+          "kind": "FunctionDeclaration",
+          "line": 46097,
+          "endLine": 46113
+        },
+        {
+          "name": "处理严寒效果",
+          "kind": "FunctionDeclaration",
+          "line": 46115,
+          "endLine": 46157
+        },
+        {
+          "name": "处理雷暴效果",
+          "kind": "FunctionDeclaration",
+          "line": 46158,
+          "endLine": 46300
+        },
+        {
+          "name": "添加到融合区",
+          "kind": "FunctionDeclaration",
+          "line": 46326,
+          "endLine": 46398
+        },
+        {
+          "name": "从融合区移除",
+          "kind": "FunctionDeclaration",
+          "line": 46404,
+          "endLine": 46437
+        },
+        {
+          "name": "执行融合",
+          "kind": "FunctionDeclaration",
+          "line": 46439,
+          "endLine": 46884
+        },
+        {
+          "name": "检查融合配方",
+          "kind": "FunctionDeclaration",
+          "line": 46887,
+          "endLine": 47283
+        },
+        {
+          "name": "更新融合窗口",
+          "kind": "FunctionDeclaration",
+          "line": 47285,
+          "endLine": 47335
+        },
+        {
+          "name": "清空融合区",
+          "kind": "FunctionDeclaration",
+          "line": 47337,
+          "endLine": 47361
+        },
+        {
+          "name": "生成单个随机融合配方",
+          "kind": "FunctionDeclaration",
+          "line": 47365,
+          "endLine": 47523
+        },
+        {
+          "name": "生成并放置随机配方卷轴",
+          "kind": "FunctionDeclaration",
+          "line": 47525,
+          "endLine": 47568
+        },
+        {
+          "name": "合并Buff列表",
+          "kind": "FunctionDeclaration",
+          "line": 47570,
+          "endLine": 47636
+        },
+        {
+          "name": "addOrUpdateBuff",
+          "kind": "FunctionDeclaration",
+          "line": 47573,
+          "endLine": 47630
+        },
+        {
+          "name": "合并附魔列表",
+          "kind": "FunctionDeclaration",
+          "line": 47638,
+          "endLine": 47654
+        },
+        {
+          "name": "addOrUpdateEnchantment",
+          "kind": "FunctionDeclaration",
+          "line": 47641,
+          "endLine": 47650
+        },
+        {
+          "name": "哈希字符串",
+          "kind": "FunctionDeclaration",
+          "line": 47656,
+          "endLine": 47665
+        },
+        {
+          "name": "种子伪随机数",
+          "kind": "FunctionDeclaration",
+          "line": 47667,
+          "endLine": 47672
+        },
+        {
+          "name": "是否为有效融合武器",
+          "kind": "FunctionDeclaration",
+          "line": 47674,
+          "endLine": 47676
+        },
+        {
+          "name": "是否为有效融合材料",
+          "kind": "FunctionDeclaration",
+          "line": 47678,
+          "endLine": 47686
+        },
+        {
+          "name": "计算融合Buff",
+          "kind": "FunctionDeclaration",
+          "line": 47688,
+          "endLine": 48372
+        },
+        {
+          "name": "格式化Buff提示",
+          "kind": "FunctionDeclaration",
+          "line": 48374,
+          "endLine": 48450
+        },
+        {
+          "name": "伤害玩家",
+          "kind": "FunctionDeclaration",
+          "line": 48452,
+          "endLine": 48627
+        },
+        {
+          "name": "更新武器冷却",
+          "kind": "FunctionDeclaration",
+          "line": 48628,
+          "endLine": 48638
+        },
+        {
+          "name": "寻找传送带最远可达点",
+          "kind": "FunctionDeclaration",
+          "line": 48639,
+          "endLine": 48668
+        },
+        {
+          "name": "处理传送带效果",
+          "kind": "FunctionDeclaration",
+          "line": 48669,
+          "endLine": 48778
+        },
+        {
+          "name": "处理怪物回合",
+          "kind": "FunctionDeclaration",
+          "line": 48779,
+          "endLine": 48963
+        },
+        {
+          "name": "切换日志显示",
+          "kind": "FunctionDeclaration",
+          "line": 48965,
+          "endLine": 48979
+        },
+        {
+          "name": "打开游戏内设置",
+          "kind": "FunctionDeclaration",
+          "line": 48980,
+          "endLine": 48990
+        },
+        {
+          "name": "切换背包显示",
+          "kind": "FunctionDeclaration",
+          "line": 48992,
+          "endLine": 49042
+        },
+        {
+          "name": "初始化背包事件监听",
+          "kind": "FunctionDeclaration",
+          "line": 49043,
+          "endLine": 49217
+        },
+        {
+          "name": "showGameInfo",
+          "kind": "FunctionDeclaration",
+          "line": 49264,
+          "endLine": 49273
+        },
+        {
+          "name": "hideGameInfo",
+          "kind": "FunctionDeclaration",
+          "line": 49275,
+          "endLine": 49284
+        },
+        {
+          "name": "获取玩家视野范围",
+          "kind": "FunctionDeclaration",
+          "line": 49476,
+          "endLine": 49498
+        },
+        {
+          "name": "是否在光源范围内",
+          "kind": "FunctionDeclaration",
+          "line": 49501,
+          "endLine": 49524
+        },
+        {
+          "name": "更新光源地图",
+          "kind": "FunctionDeclaration",
+          "line": 49526,
+          "endLine": 49595
+        },
+        {
+          "name": "切换文本模式",
+          "kind": "FunctionDeclaration",
+          "line": 49598,
+          "endLine": 49622
+        },
+        {
+          "name": "切换动画模式",
+          "kind": "FunctionDeclaration",
+          "line": 49624,
+          "endLine": 49634
+        },
+        {
+          "name": "执行连发攻击",
+          "kind": "FunctionDeclaration",
+          "line": 49635,
+          "endLine": 49653
+        },
+        {
+          "name": "使用装备槽物品",
+          "kind": "FunctionDeclaration",
+          "line": 49654,
+          "endLine": 49748
+        },
+        {
+          "name": "卸下装备槽物品",
+          "kind": "FunctionDeclaration",
+          "line": 49750,
+          "endLine": 49763
+        },
+        {
+          "name": "处理销毁物品",
+          "kind": "FunctionDeclaration",
+          "line": 49764,
+          "endLine": 49826
+        },
+        {
+          "name": "获取收集特效元素",
+          "kind": "FunctionDeclaration",
+          "line": 49829,
+          "endLine": 49836
+        },
+        {
+          "name": "回收收集特效元素",
+          "kind": "FunctionDeclaration",
+          "line": 49838,
+          "endLine": 49842
+        },
+        {
+          "name": "显示收集特效",
+          "kind": "FunctionDeclaration",
+          "line": 49844,
+          "endLine": 49863
+        },
+        {
+          "name": "尝试收集物品",
+          "kind": "FunctionDeclaration",
+          "line": 49864,
+          "endLine": 49921
+        },
+        {
+          "name": "使用背包物品",
+          "kind": "FunctionDeclaration",
+          "line": 49923,
+          "endLine": 50006
+        },
+        {
+          "name": "应用命令行风格",
+          "kind": "FunctionDeclaration",
+          "line": 50007,
+          "endLine": 50016
+        },
+        {
+          "name": "更新界面元素以适应风格",
+          "kind": "FunctionDeclaration",
+          "line": 50017,
+          "endLine": 50052
+        },
+        {
+          "name": "获取墙壁字符",
+          "kind": "FunctionDeclaration",
+          "line": 50053,
+          "endLine": 50062
+        },
+        {
+          "name": "更新背包显示",
+          "kind": "FunctionDeclaration",
+          "line": 50064,
+          "endLine": 50183
+        },
+        {
+          "name": "初始化装备系统",
+          "kind": "FunctionDeclaration",
+          "line": 50185,
+          "endLine": 50288
+        },
+        {
+          "name": "切换装备页",
+          "kind": "FunctionDeclaration",
+          "line": 50289,
+          "endLine": 50317
+        },
+        {
+          "name": "更新装备显示",
+          "kind": "FunctionDeclaration",
+          "line": 50318,
+          "endLine": 50421
+        },
+        {
+          "name": "检查防化服防护",
+          "kind": "FunctionDeclaration",
+          "line": 50423,
+          "endLine": 50465
+        },
+        {
+          "name": "怪物放置物品",
+          "kind": "FunctionDeclaration",
+          "line": 50467,
+          "endLine": 50537
+        },
+        {
+          "name": "玩家放置物品",
+          "kind": "FunctionDeclaration",
+          "line": 50539,
+          "endLine": 50609
+        },
+        {
+          "name": "放置怪物到单元格",
+          "kind": "FunctionDeclaration",
+          "line": 50610,
+          "endLine": 50622
+        },
+        {
+          "name": "刷新房间内容",
+          "kind": "FunctionDeclaration",
+          "line": 50623,
+          "endLine": 50728
+        },
+        {
+          "name": "检查解谜是否成功",
+          "kind": "FunctionDeclaration",
+          "line": 50729,
+          "endLine": 50786
+        },
+        {
+          "name": "生成解谜棋盘",
+          "kind": "FunctionDeclaration",
+          "line": 50788,
+          "endLine": 50948
+        },
+        {
+          "name": "搜索",
+          "kind": "FunctionDeclaration",
+          "line": 50870,
+          "endLine": 50918
+        },
+        {
+          "name": "可以放置",
+          "kind": "FunctionDeclaration",
+          "line": 50950,
+          "endLine": 50995
+        },
+        {
+          "name": "计算新增威胁格子数",
+          "kind": "FunctionDeclaration",
+          "line": 50997,
+          "endLine": 51056
+        },
+        {
+          "name": "显示通知",
+          "kind": "FunctionDeclaration",
+          "line": 51059,
+          "endLine": 51117
+        },
+        {
+          "name": "生成天气效果",
+          "kind": "FunctionDeclaration",
+          "line": 51119,
+          "endLine": 51164
+        },
+        {
+          "name": "放置巨人",
+          "kind": "FunctionDeclaration",
+          "line": 51165,
+          "endLine": 51187
+        },
+        {
+          "name": "处理诡魅房间刷新",
+          "kind": "FunctionDeclaration",
+          "line": 51188,
+          "endLine": 51204
+        },
+        {
+          "name": "获取视野内房间ID",
+          "kind": "FunctionDeclaration",
+          "line": 51206,
+          "endLine": 51233
+        },
+        {
+          "name": "隐藏通知",
+          "kind": "FunctionDeclaration",
+          "line": 51236,
+          "endLine": 51248
+        },
+        {
+          "name": "添加日志",
+          "kind": "FunctionDeclaration",
+          "line": 51249,
+          "endLine": 51259
+        },
+        {
+          "name": "收纳通知",
+          "kind": "FunctionDeclaration",
+          "line": 51260,
+          "endLine": 51274
+        },
+        {
+          "name": "关闭重铸界面",
+          "kind": "FunctionDeclaration",
+          "line": 51276,
+          "endLine": 51297
+        },
+        {
+          "name": "显示修复界面",
+          "kind": "FunctionDeclaration",
+          "line": 51298,
+          "endLine": 51378
+        },
+        {
+          "name": "关闭修复界面",
+          "kind": "FunctionDeclaration",
+          "line": 51380,
+          "endLine": 51395
+        },
+        {
+          "name": "执行修复",
+          "kind": "FunctionDeclaration",
+          "line": 51397,
+          "endLine": 51431
+        },
+        {
+          "name": "执行重铸",
+          "kind": "FunctionDeclaration",
+          "line": 51432,
+          "endLine": 51505
+        },
+        {
+          "name": "扣除金币",
+          "kind": "FunctionDeclaration",
+          "line": 51506,
+          "endLine": 51535
+        },
+        {
+          "name": "触发扣血特效",
+          "kind": "FunctionDeclaration",
+          "line": 51537,
+          "endLine": 51542
+        },
+        {
+          "name": "计算精确边缘位置",
+          "kind": "FunctionDeclaration",
+          "line": 51548,
+          "endLine": 51626
+        },
+        {
+          "name": "更新物体指示器",
+          "kind": "FunctionDeclaration",
+          "line": 51628,
+          "endLine": 51755
+        },
+        {
+          "name": "hexToRgba",
+          "kind": "FunctionDeclaration",
+          "line": 51756,
+          "endLine": 51768
+        },
+        {
+          "name": "hexToRgb",
+          "kind": "FunctionDeclaration",
+          "line": 51770,
+          "endLine": 51777
+        },
+        {
+          "name": "blendColors",
+          "kind": "FunctionDeclaration",
+          "line": 51778,
+          "endLine": 51885
+        },
+        {
+          "name": "rgbToHsl",
+          "kind": "FunctionDeclaration",
+          "line": 51782,
+          "endLine": 51809
+        },
+        {
+          "name": "hslToRgb",
+          "kind": "FunctionDeclaration",
+          "line": 51812,
+          "endLine": 51836
+        },
+        {
+          "name": "rgbToHex",
+          "kind": "FunctionDeclaration",
+          "line": 51839,
+          "endLine": 51849
+        },
+        {
+          "name": "打开收购窗口",
+          "kind": "FunctionDeclaration",
+          "line": 51886,
+          "endLine": 51959
+        },
+        {
+          "name": "关闭收购窗口",
+          "kind": "FunctionDeclaration",
+          "line": 51961,
+          "endLine": 51971
+        },
+        {
+          "name": "尝试出售",
+          "kind": "FunctionDeclaration",
+          "line": 51973,
+          "endLine": 52050
+        },
+        {
+          "name": "打开交易窗口",
+          "kind": "FunctionDeclaration",
+          "line": 52051,
+          "endLine": 52093
+        },
+        {
+          "name": "尝试购买",
+          "kind": "FunctionDeclaration",
+          "line": 52095,
+          "endLine": 52140
+        },
+        {
+          "name": "关闭交易窗口",
+          "kind": "FunctionDeclaration",
+          "line": 52142,
+          "endLine": 52151
+        },
+        {
+          "name": "进入教程层",
+          "kind": "FunctionDeclaration",
+          "line": 52153,
+          "endLine": 52167
+        },
+        {
+          "name": "跳过教程",
+          "kind": "FunctionDeclaration",
+          "line": 52169,
+          "endLine": 52183
+        },
+        {
+          "name": "重置玩家状态",
+          "kind": "FunctionDeclaration",
+          "line": 52185,
+          "endLine": 52211
+        },
+        {
+          "name": "生成教程地牢",
+          "kind": "FunctionDeclaration",
+          "line": 52213,
+          "endLine": 52328
+        },
+        {
+          "name": "显示教程提示",
+          "kind": "FunctionDeclaration",
+          "line": 52329,
+          "endLine": 52350
+        },
+        {
+          "name": "打开教程回放窗口",
+          "kind": "FunctionDeclaration",
+          "line": 52352,
+          "endLine": 52373
+        },
+        {
+          "name": "获取上一个有效阶段",
+          "kind": "FunctionDeclaration",
+          "line": 52375,
+          "endLine": 52385
+        },
+        {
+          "name": "获取下一个有效阶段",
+          "kind": "FunctionDeclaration",
+          "line": 52387,
+          "endLine": 52398
+        },
+        {
+          "name": "显示回放教程页",
+          "kind": "FunctionDeclaration",
+          "line": 52400,
+          "endLine": 52425
+        },
+        {
+          "name": "关闭教程回放窗口",
+          "kind": "FunctionDeclaration",
+          "line": 52427,
+          "endLine": 52435
+        },
+        {
+          "name": "获取教程文本",
+          "kind": "FunctionDeclaration",
+          "line": 52436,
+          "endLine": 52578
+        },
+        {
+          "name": "关闭教程提示",
+          "kind": "FunctionDeclaration",
+          "line": 52579,
+          "endLine": 52591
+        },
+        {
+          "name": "生成死亡凭证",
+          "kind": "FunctionDeclaration",
+          "line": 52611,
+          "endLine": 52640
+        },
+        {
+          "name": "验证死亡凭证",
+          "kind": "FunctionDeclaration",
+          "line": 52642,
+          "endLine": 52667
+        },
+        {
+          "name": "CopyTextToClipboard",
+          "kind": "FunctionDeclaration",
+          "line": 52669,
+          "endLine": 52682
+        },
+        {
+          "name": "获取附魔描述",
+          "kind": "FunctionDeclaration",
+          "line": 52683,
+          "endLine": 52706
+        },
+        {
+          "name": "切换设置菜单",
+          "kind": "FunctionDeclaration",
+          "line": 52708,
+          "endLine": 52746
+        },
+        {
+          "name": "获取单元格字符",
+          "kind": "FunctionDeclaration",
+          "line": 52748,
+          "endLine": 52771
+        },
+        {
+          "name": "复制命令行画面",
+          "kind": "FunctionDeclaration",
+          "line": 52773,
+          "endLine": 52796
+        },
+        {
+          "name": "关闭设置菜单",
+          "kind": "FunctionDeclaration",
+          "line": 52798,
+          "endLine": 52807
+        },
+        {
+          "name": "导出当前状态为创意关卡",
+          "kind": "FunctionDeclaration",
+          "line": 52808,
+          "endLine": 52859
+        },
+        {
+          "name": "生成水怪",
+          "kind": "FunctionDeclaration",
+          "line": 52861,
+          "endLine": 52918
+        },
+        {
+          "name": "全局生成环境",
+          "kind": "FunctionDeclaration",
+          "line": 52920,
+          "endLine": 53000
+        },
+        {
+          "name": "生成环境簇",
+          "kind": "FunctionDeclaration",
+          "line": 53002,
+          "endLine": 53030
+        },
+        {
+          "name": "引燃烟雾网络",
+          "kind": "FunctionDeclaration",
+          "line": 53032,
+          "endLine": 53084
+        },
+        {
+          "name": "触发药水水域效果",
+          "kind": "FunctionDeclaration",
+          "line": 53086,
+          "endLine": 53149
+        },
+        {
+          "name": "更新视口",
+          "kind": "FunctionDeclaration",
+          "line": 53151,
+          "endLine": 53203
+        },
+        {
+          "name": "查找配对传送门",
+          "kind": "FunctionDeclaration",
+          "line": 53204,
+          "endLine": 53212
+        },
+        {
+          "name": "寻找传送出口",
+          "kind": "FunctionDeclaration",
+          "line": 53214,
+          "endLine": 53224
+        },
+        {
+          "name": "方向到向量",
+          "kind": "FunctionDeclaration",
+          "line": 53226,
+          "endLine": 53232
+        },
+        {
+          "name": "向量到角度",
+          "kind": "FunctionDeclaration",
+          "line": 53234,
+          "endLine": 53236
+        },
+        {
+          "name": "旋转方向",
+          "kind": "FunctionDeclaration",
+          "line": 53237,
+          "endLine": 53254
+        },
+        {
+          "name": "应用旋转",
+          "kind": "FunctionDeclaration",
+          "line": 53256,
+          "endLine": 53263
+        },
+        {
+          "name": "寻找传送门出口向量",
+          "kind": "FunctionDeclaration",
+          "line": 53265,
+          "endLine": 53280
+        },
+        {
+          "name": "旋转墙壁属性",
+          "kind": "FunctionDeclaration",
+          "line": 53281,
+          "endLine": 53309
+        },
+        {
+          "name": "快速检查相邻移动",
+          "kind": "FunctionDeclaration",
+          "line": 53310,
+          "endLine": 53333
+        },
+        {
+          "name": "处理沉浸式传送门",
+          "kind": "FunctionDeclaration",
+          "line": 53334,
+          "endLine": 53452
+        },
+        {
+          "name": "动画帧",
+          "kind": "FunctionDeclaration",
+          "line": 53454,
+          "endLine": 53663
+        },
+        {
+          "name": "获取爆炸颜色",
+          "kind": "FunctionDeclaration",
+          "line": 53664,
+          "endLine": 53671
+        },
+        {
+          "name": "获取单元格类名",
+          "kind": "FunctionDeclaration",
+          "line": 53672,
+          "endLine": 53686
+        },
+        {
+          "name": "绘制",
+          "kind": "FunctionDeclaration",
+          "line": 53687,
+          "endLine": 54215
+        },
+        {
+          "name": "绘制小地图",
+          "kind": "FunctionDeclaration",
+          "line": 54223,
+          "endLine": 54477
+        },
+        {
+          "name": "停止自动移动",
+          "kind": "FunctionDeclaration",
+          "line": 54478,
+          "endLine": 54483
+        },
+        {
+          "name": "startAutoMove",
+          "kind": "FunctionDeclaration",
+          "line": 54484,
+          "endLine": 54534
+        },
+        {
+          "name": "打开配方书",
+          "kind": "FunctionDeclaration",
+          "line": 54535,
+          "endLine": 54620
+        },
+        {
+          "name": "关闭配方书",
+          "kind": "FunctionDeclaration",
+          "line": 54622,
+          "endLine": 54638
+        },
+        {
+          "name": "应用永久Buffs",
+          "kind": "FunctionDeclaration",
+          "line": 54640,
+          "endLine": 54659
+        },
+        {
+          "name": "检查直线移动可行性",
+          "kind": "FunctionDeclaration",
+          "line": 54660,
+          "endLine": 54695
+        },
+        {
+          "name": "收集所有定义",
+          "kind": "FunctionDeclaration",
+          "line": 54705,
+          "endLine": 54709
+        },
+        {
+          "name": "显示主菜单",
+          "kind": "FunctionDeclaration",
+          "line": 54711,
+          "endLine": 54756
+        },
+        {
+          "name": "隐藏主菜单",
+          "kind": "FunctionDeclaration",
+          "line": 54758,
+          "endLine": 54777
+        },
+        {
+          "name": "显示游戏模式选择",
+          "kind": "FunctionDeclaration",
+          "line": 54779,
+          "endLine": 54809
+        },
+        {
+          "name": "隐藏游戏模式选择",
+          "kind": "FunctionDeclaration",
+          "line": 54811,
+          "endLine": 54824
+        },
+        {
+          "name": "启动游戏",
+          "kind": "FunctionDeclaration",
+          "line": 54826,
+          "endLine": 54917
+        },
+        {
+          "name": "显示浮动文字",
+          "kind": "FunctionDeclaration",
+          "line": 54919,
+          "endLine": 54944
+        },
+        {
+          "name": "揭示并激活陷阱群",
+          "kind": "FunctionDeclaration",
+          "line": 54946,
+          "endLine": 54980
+        },
+        {
+          "name": "生成毒气陷阱群",
+          "kind": "FunctionDeclaration",
+          "line": 54982,
+          "endLine": 55043
+        },
+        {
+          "name": "生成时间随机数",
+          "kind": "FunctionDeclaration",
+          "line": 55044,
+          "endLine": 55055
+        },
+        {
+          "name": "重置所有游戏状态",
+          "kind": "FunctionDeclaration",
+          "line": 55057,
+          "endLine": 55225
+        },
+        {
+          "name": "打开全局设置窗口",
+          "kind": "FunctionDeclaration",
+          "line": 55226,
+          "endLine": 55353
+        },
+        {
+          "name": "关闭全局设置窗口",
+          "kind": "FunctionDeclaration",
+          "line": 55355,
+          "endLine": 55363
+        },
+        {
+          "name": "显示楼层选择窗口",
+          "kind": "FunctionDeclaration",
+          "line": 55364,
+          "endLine": 55457
+        },
+        {
+          "name": "关闭楼层选择窗口",
+          "kind": "FunctionDeclaration",
+          "line": 55459,
+          "endLine": 55464
+        },
+        {
+          "name": "处理HUD切换按钮点击",
+          "kind": "FunctionDeclaration",
+          "line": 55465,
+          "endLine": 55471
+        },
+        {
+          "name": "保存全局设置",
+          "kind": "FunctionDeclaration",
+          "line": 55473,
+          "endLine": 55511
+        },
+        {
+          "name": "生成签名",
+          "kind": "FunctionDeclaration",
+          "line": 55513,
+          "endLine": 55521
+        },
+        {
+          "name": "检查胜利条件",
+          "kind": "FunctionDeclaration",
+          "line": 55522,
+          "endLine": 55547
+        },
+        {
+          "name": "导入创意关卡",
+          "kind": "FunctionDeclaration",
+          "line": 55556,
+          "endLine": 55599
+        },
+        {
+          "name": "重置创意关卡",
+          "kind": "FunctionDeclaration",
+          "line": 55600,
+          "endLine": 55617
+        },
+        {
+          "name": "发布关卡",
+          "kind": "FunctionDeclaration",
+          "line": 55618,
+          "endLine": 55667
+        },
+        {
+          "name": "显示教程选择菜单",
+          "kind": "FunctionDeclaration",
+          "line": 55668,
+          "endLine": 55699
+        },
+        {
+          "name": "隐藏教程选择菜单",
+          "kind": "FunctionDeclaration",
+          "line": 55700,
+          "endLine": 55719
+        },
+        {
+          "name": "加载并开始教程",
+          "kind": "FunctionDeclaration",
+          "line": 55721,
+          "endLine": 55745
+        },
+        {
+          "name": "净化HTML",
+          "kind": "FunctionDeclaration",
+          "line": 55796,
+          "endLine": 55803
+        },
+        {
+          "name": "显示创意关卡浏览器",
+          "kind": "FunctionDeclaration",
+          "line": 55805,
+          "endLine": 55854
+        },
+        {
+          "name": "隐藏创意关卡浏览器",
+          "kind": "FunctionDeclaration",
+          "line": 55856,
+          "endLine": 55884
+        },
+        {
+          "name": "safeEncode",
+          "kind": "FunctionDeclaration",
+          "line": 55885,
+          "endLine": 55888
+        },
+        {
+          "name": "safeDecode",
+          "kind": "FunctionDeclaration",
+          "line": 55890,
+          "endLine": 55898
+        },
+        {
+          "name": "上传关卡处理函数",
+          "kind": "FunctionDeclaration",
+          "line": 55925,
+          "endLine": 55998
+        },
+        {
+          "name": "uploadLevel",
+          "kind": "FunctionDeclaration",
+          "line": 56000,
+          "endLine": 56022
+        },
+        {
+          "name": "searchLevels",
+          "kind": "FunctionDeclaration",
+          "line": 56024,
+          "endLine": 56040
+        },
+        {
+          "name": "getLevelList",
+          "kind": "FunctionDeclaration",
+          "line": 56042,
+          "endLine": 56046
+        },
+        {
+          "name": "刷新关卡列表",
+          "kind": "FunctionDeclaration",
+          "line": 56048,
+          "endLine": 56127
+        },
+        {
+          "name": "游玩创意关卡",
+          "kind": "FunctionDeclaration",
+          "line": 56128,
+          "endLine": 56163
+        },
+        {
+          "name": "显示关卡详情",
+          "kind": "FunctionDeclaration",
+          "line": 56166,
+          "endLine": 56270
+        },
+        {
+          "name": "绘制详情小地图",
+          "kind": "FunctionDeclaration",
+          "line": 56271,
+          "endLine": 56396
+        },
+        {
+          "name": "隐藏关卡详情",
+          "kind": "FunctionDeclaration",
+          "line": 56397,
+          "endLine": 56423
+        },
+        {
+          "name": "点赞或点踩",
+          "kind": "FunctionDeclaration",
+          "line": 56425,
+          "endLine": 56451
+        },
+        {
+          "name": "删除关卡",
+          "kind": "FunctionDeclaration",
+          "line": 56453,
+          "endLine": 56500
+        },
+        {
+          "name": "显示胜利界面",
+          "kind": "FunctionDeclaration",
+          "line": 56503,
+          "endLine": 56561
+        },
+        {
+          "name": "切换编辑器工具栏模式",
+          "kind": "FunctionDeclaration",
+          "line": 56563,
+          "endLine": 56569
+        },
+        {
+          "name": "应用编辑器工具栏模式",
+          "kind": "FunctionDeclaration",
+          "line": 56571,
+          "endLine": 56605
+        },
+        {
+          "name": "编辑器鼠标按下处理",
+          "kind": "FunctionDeclaration",
+          "line": 56606,
+          "endLine": 56606
+        },
+        {
+          "name": "编辑器鼠标移动处理",
+          "kind": "FunctionDeclaration",
+          "line": 56607,
+          "endLine": 56607
+        },
+        {
+          "name": "编辑器鼠标抬起处理",
+          "kind": "FunctionDeclaration",
+          "line": 56608,
+          "endLine": 56608
+        },
+        {
+          "name": "编辑器触摸开始处理",
+          "kind": "FunctionDeclaration",
+          "line": 56609,
+          "endLine": 56609
+        },
+        {
+          "name": "编辑器触摸移动处理",
+          "kind": "FunctionDeclaration",
+          "line": 56610,
+          "endLine": 56610
+        },
+        {
+          "name": "编辑器触摸结束处理",
+          "kind": "FunctionDeclaration",
+          "line": 56611,
+          "endLine": 56611
+        },
+        {
+          "name": "进入地图编辑器",
+          "kind": "FunctionDeclaration",
+          "line": 56612,
+          "endLine": 56678
+        },
+        {
+          "name": "初始化编辑器工具栏",
+          "kind": "FunctionDeclaration",
+          "line": 56679,
+          "endLine": 56722
+        },
+        {
+          "name": "深度克隆",
+          "kind": "FunctionDeclaration",
+          "line": 56727,
+          "endLine": 56767
+        },
+        {
+          "name": "创建编辑器快照",
+          "kind": "FunctionDeclaration",
+          "line": 56769,
+          "endLine": 56798
+        },
+        {
+          "name": "恢复编辑器快照",
+          "kind": "FunctionDeclaration",
+          "line": 56800,
+          "endLine": 56838
+        },
+        {
+          "name": "保存编辑器状态",
+          "kind": "FunctionDeclaration",
+          "line": 56840,
+          "endLine": 56854
+        },
+        {
+          "name": "undoEditorAction",
+          "kind": "FunctionDeclaration",
+          "line": 56856,
+          "endLine": 56871
+        },
+        {
+          "name": "redoEditorAction",
+          "kind": "FunctionDeclaration",
+          "line": 56873,
+          "endLine": 56887
+        },
+        {
+          "name": "updateUndoRedoButtons",
+          "kind": "FunctionDeclaration",
+          "line": 56889,
+          "endLine": 56894
+        },
+        {
+          "name": "generateDungeonTemplate",
+          "kind": "FunctionDeclaration",
+          "line": 56896,
+          "endLine": 56980
+        },
+        {
+          "name": "返回编辑器模式",
+          "kind": "FunctionDeclaration",
+          "line": 56981,
+          "endLine": 57024
+        },
+        {
+          "name": "创建并放置房间",
+          "kind": "FunctionDeclaration",
+          "line": 57026,
+          "endLine": 57123
+        },
+        {
+          "name": "显示屏显大文字",
+          "kind": "FunctionDeclaration",
+          "line": 57124,
+          "endLine": 57165
+        },
+        {
+          "name": "填充编辑器背包",
+          "kind": "FunctionDeclaration",
+          "line": 57166,
+          "endLine": 57401
+        },
+        {
+          "name": "_forceAllChildren",
+          "kind": "FunctionDeclaration",
+          "line": 57238,
+          "endLine": 57247
+        },
+        {
+          "name": "推开生物",
+          "kind": "FunctionDeclaration",
+          "line": 57402,
+          "endLine": 57435
+        },
+        {
+          "name": "更新所有门朝向",
+          "kind": "FunctionDeclaration",
+          "line": 57436,
+          "endLine": 57451
+        },
+        {
+          "name": "旋转传送带",
+          "kind": "FunctionDeclaration",
+          "line": 57452,
+          "endLine": 57465
+        },
+        {
+          "name": "油漆桶填充",
+          "kind": "FunctionDeclaration",
+          "line": 57468,
+          "endLine": 57517
+        },
+        {
+          "name": "笔刷绘制",
+          "kind": "FunctionDeclaration",
+          "line": 57518,
+          "endLine": 57561
+        },
+        {
+          "name": "编辑器放置逻辑",
+          "kind": "FunctionDeclaration",
+          "line": 57562,
+          "endLine": 57855
+        },
+        {
+          "name": "寻找最近的房间",
+          "kind": "FunctionDeclaration",
+          "line": 57856,
+          "endLine": 57870
+        },
+        {
+          "name": "更新编辑器快速访问栏",
+          "kind": "FunctionDeclaration",
+          "line": 57872,
+          "endLine": 57916
+        },
+        {
+          "name": "设置编辑器选中项",
+          "kind": "FunctionDeclaration",
+          "line": 57918,
+          "endLine": 57958
+        },
+        {
+          "name": "更新扳手规则窗口",
+          "kind": "FunctionDeclaration",
+          "line": 57959,
+          "endLine": 58027
+        },
+        {
+          "name": "应用单个扳手规则",
+          "kind": "FunctionDeclaration",
+          "line": 58028,
+          "endLine": 58077
+        },
+        {
+          "name": "初始化扳手工具",
+          "kind": "FunctionDeclaration",
+          "line": 58078,
+          "endLine": 58098
+        },
+        {
+          "name": "打开扳手规则窗口",
+          "kind": "FunctionDeclaration",
+          "line": 58099,
+          "endLine": 58136
+        },
+        {
+          "name": "关闭扳手规则窗口",
+          "kind": "FunctionDeclaration",
+          "line": 58139,
+          "endLine": 58145
+        },
+        {
+          "name": "应用扳手规则",
+          "kind": "FunctionDeclaration",
+          "line": 58147,
+          "endLine": 58157
+        },
+        {
+          "name": "编辑器右键处理",
+          "kind": "FunctionDeclaration",
+          "line": 58160,
+          "endLine": 58169
+        },
+        {
+          "name": "从当前位置开始游玩",
+          "kind": "FunctionDeclaration",
+          "line": 58171,
+          "endLine": 58239
+        },
+        {
+          "name": "克隆物品编辑器",
+          "kind": "FunctionDeclaration",
+          "line": 58240,
+          "endLine": 58258
+        },
+        {
+          "name": "克隆怪物编辑器",
+          "kind": "FunctionDeclaration",
+          "line": 58260,
+          "endLine": 58285
+        },
+        {
+          "name": "克隆单元格",
+          "kind": "FunctionDeclaration",
+          "line": 58287,
+          "endLine": 58302
+        },
+        {
+          "name": "编辑器复制选区",
+          "kind": "FunctionDeclaration",
+          "line": 58304,
+          "endLine": 58343
+        },
+        {
+          "name": "编辑器粘贴选区",
+          "kind": "FunctionDeclaration",
+          "line": 58345,
+          "endLine": 58402
+        },
+        {
+          "name": "异步保存编辑器状态",
+          "kind": "FunctionDeclaration",
+          "line": 58406,
+          "endLine": 58409
+        },
+        {
+          "name": "编辑器画布事件处理",
+          "kind": "FunctionDeclaration",
+          "line": 58411,
+          "endLine": 58769
+        },
+        {
+          "name": "启动或维持玩家匀速循环",
+          "kind": "FunctionDeclaration",
+          "line": 58450,
+          "endLine": 58504
+        },
+        {
+          "name": "step",
+          "kind": "FunctionDeclaration",
+          "line": 58455,
+          "endLine": 58502
+        },
+        {
+          "name": "编辑器单击处理",
+          "kind": "FunctionDeclaration",
+          "line": 58770,
+          "endLine": 58814
+        },
+        {
+          "name": "更新胜利条件显示",
+          "kind": "FunctionDeclaration",
+          "line": 58815,
+          "endLine": 58898
+        },
+        {
+          "name": "处理房间状态",
+          "kind": "FunctionDeclaration",
+          "line": 58899,
+          "endLine": 58914
+        },
+        {
+          "name": "打开子属性编辑器",
+          "kind": "FunctionDeclaration",
+          "line": 58916,
+          "endLine": 59069
+        },
+        {
+          "name": "显示对话界面",
+          "kind": "FunctionDeclaration",
+          "line": 59071,
+          "endLine": 59295
+        },
+        {
+          "name": "打开属性编辑器",
+          "kind": "FunctionDeclaration",
+          "line": 59297,
+          "endLine": 61488
+        },
+        {
+          "name": "清空房间内容",
+          "kind": "FunctionDeclaration",
+          "line": 61490,
+          "endLine": 61516
+        },
+        {
+          "name": "重置单元格",
+          "kind": "FunctionDeclaration",
+          "line": 61518,
+          "endLine": 61563
+        },
+        {
+          "name": "关闭属性编辑器",
+          "kind": "FunctionDeclaration",
+          "line": 61564,
+          "endLine": 61570
+        },
+        {
+          "name": "下载地图文件",
+          "kind": "FunctionDeclaration",
+          "line": 61572,
+          "endLine": 61589
+        },
+        {
+          "name": "进入编辑器游玩模式",
+          "kind": "FunctionDeclaration",
+          "line": 61591,
+          "endLine": 61688
+        },
+        {
+          "name": "导出地图",
+          "kind": "FunctionDeclaration",
+          "line": 61689,
+          "endLine": 61695
+        },
+        {
+          "name": "导入地图",
+          "kind": "FunctionDeclaration",
+          "line": 61697,
+          "endLine": 61740
+        },
+        {
+          "name": "保存游戏状态",
+          "kind": "FunctionDeclaration",
+          "line": 61746,
+          "endLine": 62013
+        },
+        {
+          "name": "恢复游戏状态",
+          "kind": "FunctionDeclaration",
+          "line": 62015,
+          "endLine": 62373
+        },
+        {
+          "name": "序列化单元格",
+          "kind": "FunctionDeclaration",
+          "line": 62374,
+          "endLine": 62438
+        },
+        {
+          "name": "恢复单元格",
+          "kind": "FunctionDeclaration",
+          "line": 62440,
+          "endLine": 62545
+        },
+        {
+          "name": "序列化物品",
+          "kind": "FunctionDeclaration",
+          "line": 62547,
+          "endLine": 62662
+        },
+        {
+          "name": "序列化怪物",
+          "kind": "FunctionDeclaration",
+          "line": 62671,
+          "endLine": 62878
+        },
+        {
+          "name": "序列化楼层",
+          "kind": "FunctionDeclaration",
+          "line": 62880,
+          "endLine": 63069
+        },
+        {
+          "name": "恢复物品",
+          "kind": "FunctionDeclaration",
+          "line": 63077,
+          "endLine": 63164
+        },
+        {
+          "name": "恢复怪物",
+          "kind": "FunctionDeclaration",
+          "line": 63174,
+          "endLine": 63366
+        },
+        {
+          "name": "恢复楼层",
+          "kind": "FunctionDeclaration",
+          "line": 63368,
+          "endLine": 63834
+        },
+        {
+          "name": "导出存档",
+          "kind": "FunctionDeclaration",
+          "line": 63835,
+          "endLine": 63877
+        },
+        {
+          "name": "导入存档",
+          "kind": "FunctionDeclaration",
+          "line": 63879,
+          "endLine": 63911
+        },
+        {
+          "name": "生成图鉴地牢",
+          "kind": "FunctionDeclaration",
+          "line": 63962,
+          "endLine": 64302
+        },
+        {
+          "name": "进入图鉴地牢",
+          "kind": "FunctionDeclaration",
+          "line": 64303,
+          "endLine": 64325
+        },
+        {
+          "name": "打开图鉴分区选择",
+          "kind": "FunctionDeclaration",
+          "line": 64326,
+          "endLine": 64388
+        },
+        {
+          "name": "关闭图鉴分区选择",
+          "kind": "FunctionDeclaration",
+          "line": 64389,
+          "endLine": 64405
+        },
+        {
+          "name": "获取直线格子",
+          "kind": "FunctionDeclaration",
+          "line": 64415,
+          "endLine": 64446
+        },
+        {
+          "name": "放置怪物到房间",
+          "kind": "FunctionDeclaration",
+          "line": 64447,
+          "endLine": 64495
+        },
+        {
+          "name": "isObject",
+          "kind": "FunctionDeclaration",
+          "line": 64496,
+          "endLine": 64498
+        },
+        {
+          "name": "deepClone",
+          "kind": "FunctionDeclaration",
+          "line": 64506,
+          "endLine": 64571
+        },
+        {
+          "name": "clone",
+          "kind": "FunctionDeclaration",
+          "line": 64514,
+          "endLine": 64568
+        },
+        {
+          "name": "生成沉没的迷宫",
+          "kind": "FunctionDeclaration",
+          "line": 64572,
+          "endLine": 65117
+        },
+        {
+          "name": "生成迷宫怪物",
+          "kind": "FunctionDeclaration",
+          "line": 65119,
+          "endLine": 65165
+        },
+        {
+          "name": "生成迷宫关卡",
+          "kind": "FunctionDeclaration",
+          "line": 65166,
+          "endLine": 65377
+        },
+        {
+          "name": "生成迷宫出口",
+          "kind": "FunctionDeclaration",
+          "line": 65378,
+          "endLine": 65408
+        },
+        {
+          "name": "检查房间连通性",
+          "kind": "FunctionDeclaration",
+          "line": 65409,
+          "endLine": 65459
+        },
+        {
+          "name": "生成符文圈群组",
+          "kind": "FunctionDeclaration",
+          "line": 65461,
+          "endLine": 65510
+        },
+        {
+          "name": "生成法师图书馆",
+          "kind": "FunctionDeclaration",
+          "line": 65512,
+          "endLine": 65817
+        },
+        {
+          "name": "检查所有水晶状态",
+          "kind": "FunctionDeclaration",
+          "line": 65819,
+          "endLine": 65834
+        },
+        {
+          "name": "生成最终传送门",
+          "kind": "FunctionDeclaration",
+          "line": 65836,
+          "endLine": 65856
+        },
+        {
+          "name": "显示自定义确认对话框",
+          "kind": "FunctionDeclaration",
+          "line": 65857,
+          "endLine": 65899
+        },
+        {
+          "name": "生成最终首领楼层",
+          "kind": "FunctionDeclaration",
+          "line": 65900,
+          "endLine": 66016
+        },
+        {
+          "name": "生成通往大首领的传送门",
+          "kind": "FunctionDeclaration",
+          "line": 66018,
+          "endLine": 66045
+        },
+        {
+          "name": "加载设置",
+          "kind": "FunctionDeclaration",
+          "line": 66046,
+          "endLine": 66066
+        },
+        {
+          "name": "打开设置窗口",
+          "kind": "FunctionDeclaration",
+          "line": 66070,
+          "endLine": 66224
+        },
+        {
+          "name": "保存并应用设置",
+          "kind": "FunctionDeclaration",
+          "line": 66225,
+          "endLine": 66274
+        },
+        {
+          "name": "刷新UI中所有物品图标",
+          "kind": "FunctionDeclaration",
+          "line": 66275,
+          "endLine": 66298
+        },
+        {
+          "name": "应用所有设置",
+          "kind": "FunctionDeclaration",
+          "line": 66299,
+          "endLine": 66381
+        },
+        {
+          "name": "关闭设置窗口",
+          "kind": "FunctionDeclaration",
+          "line": 66382,
+          "endLine": 66396
+        },
+        {
+          "name": "检查Q字形彩蛋",
+          "kind": "FunctionDeclaration",
+          "line": 66408,
+          "endLine": 66452
+        },
+        {
+          "name": "触发Q字形彩蛋",
+          "kind": "FunctionDeclaration",
+          "line": 66454,
+          "endLine": 66466
+        },
+        {
+          "name": "处理燃烧木质卷轴",
+          "kind": "FunctionDeclaration",
+          "line": 66467,
+          "endLine": 66488
+        },
+        {
+          "name": "创建并播放物品移动动画",
+          "kind": "FunctionDeclaration",
+          "line": 66489,
+          "endLine": 66552
+        },
+        {
+          "name": "初始化随机数生成器",
+          "kind": "FunctionDeclaration",
+          "line": 66553,
+          "endLine": 66560
+        },
+        {
+          "name": "应用职业效果",
+          "kind": "FunctionDeclaration",
+          "line": 66561,
+          "endLine": 66606
+        },
+        {
+          "name": "显示职业选择界面",
+          "kind": "FunctionDeclaration",
+          "line": 66608,
+          "endLine": 66754
+        },
+        {
+          "name": "更新选中状态",
+          "kind": "FunctionDeclaration",
+          "line": 66642,
+          "endLine": 66662
+        },
+        {
+          "name": "显示自定义游戏界面",
+          "kind": "FunctionDeclaration",
+          "line": 66755,
+          "endLine": 66870
+        },
+        {
+          "name": "隐藏自定义游戏界面",
+          "kind": "FunctionDeclaration",
+          "line": 66872,
+          "endLine": 66878
+        },
+        {
+          "name": "隐藏职业选择界面",
+          "kind": "FunctionDeclaration",
+          "line": 66879,
+          "endLine": 66916
+        },
+        {
+          "name": "填充筛选器物品列表",
+          "kind": "FunctionDeclaration",
+          "line": 66918,
+          "endLine": 66954
+        },
+        {
+          "name": "打开种子筛选器窗口",
+          "kind": "FunctionDeclaration",
+          "line": 66957,
+          "endLine": 66972
+        },
+        {
+          "name": "关闭种子筛选器窗口",
+          "kind": "FunctionDeclaration",
+          "line": 66974,
+          "endLine": 66992
+        },
+        {
+          "name": "开始筛选种子",
+          "kind": "FunctionDeclaration",
+          "line": 66994,
+          "endLine": 67072
+        },
+        {
+          "name": "siftLoop",
+          "kind": "FunctionDeclaration",
+          "line": 67025,
+          "endLine": 67070
+        },
+        {
+          "name": "虚拟生成并检查",
+          "kind": "FunctionDeclaration",
+          "line": 67074,
+          "endLine": 67116
+        },
+        {
+          "name": "生成洞穴地牢",
+          "kind": "FunctionDeclaration",
+          "line": 67239,
+          "endLine": 67330
+        },
+        {
+          "name": "生成路障",
+          "kind": "FunctionDeclaration",
+          "line": 67332,
+          "endLine": 67414
+        },
+        {
+          "name": "生成并放置洞穴配方卷轴",
+          "kind": "FunctionDeclaration",
+          "line": 67416,
+          "endLine": 67452
+        },
+        {
+          "name": "初始化洞穴地图",
+          "kind": "FunctionDeclaration",
+          "line": 67454,
+          "endLine": 67464
+        },
+        {
+          "name": "执行元细胞自动机迭代",
+          "kind": "FunctionDeclaration",
+          "line": 67467,
+          "endLine": 67491
+        },
+        {
+          "name": "处理洞穴连通性",
+          "kind": "FunctionDeclaration",
+          "line": 67493,
+          "endLine": 67519
+        },
+        {
+          "name": "寻找所有连通区域",
+          "kind": "FunctionDeclaration",
+          "line": 67522,
+          "endLine": 67555
+        },
+        {
+          "name": "连接两个洞穴",
+          "kind": "FunctionDeclaration",
+          "line": 67557,
+          "endLine": 67588
+        },
+        {
+          "name": "生成评分图",
+          "kind": "FunctionDeclaration",
+          "line": 67590,
+          "endLine": 67653
+        },
+        {
+          "name": "放置地牢出入口",
+          "kind": "FunctionDeclaration",
+          "line": 67655,
+          "endLine": 67706
+        },
+        {
+          "name": "创建楼梯实例",
+          "kind": "FunctionDeclaration",
+          "line": 67707,
+          "endLine": 67723
+        },
+        {
+          "name": "使用评分图放置物品",
+          "kind": "FunctionDeclaration",
+          "line": 67725,
+          "endLine": 67845
+        },
+        {
+          "name": "ans",
+          "kind": "FunctionDeclaration",
+          "line": 67848,
+          "endLine": 67855
+        },
+        {
+          "name": "调试_输出当前谜题答案",
+          "kind": "FunctionDeclaration",
+          "line": 67860,
+          "endLine": 67915
+        },
+        {
+          "name": "获取当前玩家棋盘房间",
+          "kind": "FunctionDeclaration",
+          "line": 67918,
+          "endLine": 67928
+        },
+        {
+          "name": "收集房间内棋子",
+          "kind": "FunctionDeclaration",
+          "line": 67931,
+          "endLine": 67943
+        },
+        {
+          "name": "收集背包棋子类",
+          "kind": "FunctionDeclaration",
+          "line": 67946,
+          "endLine": 67974
+        },
+        {
+          "name": "_求解棋盘布局",
+          "kind": "FunctionDeclaration",
+          "line": 67977,
+          "endLine": 68043
+        },
+        {
+          "name": "选取下一棋子与域",
+          "kind": "FunctionDeclaration",
+          "line": 67992,
+          "endLine": 68011
+        },
+        {
+          "name": "回溯",
+          "kind": "FunctionDeclaration",
+          "line": 68013,
+          "endLine": 68039
+        },
+        {
+          "name": "_生成中心优先单元序列",
+          "kind": "FunctionDeclaration",
+          "line": 68046,
+          "endLine": 68058
+        },
+        {
+          "name": "_棋子难度值",
+          "kind": "FunctionDeclaration",
+          "line": 68061,
+          "endLine": 68069
+        },
+        {
+          "name": "_打印棋盘方案到控制台",
+          "kind": "FunctionDeclaration",
+          "line": 68072,
+          "endLine": 68092
+        },
+        {
+          "name": "db",
+          "kind": "FunctionDeclaration",
+          "line": 68093,
+          "endLine": 68096
+        },
+        {
+          "name": "构建联机设置窗口",
+          "kind": "FunctionDeclaration",
+          "line": 68098,
+          "endLine": 68138
+        },
+        {
+          "name": "打开联机设置窗口",
+          "kind": "FunctionDeclaration",
+          "line": 68140,
+          "endLine": 68150
+        },
+        {
+          "name": "关闭联机设置窗口",
+          "kind": "FunctionDeclaration",
+          "line": 68152,
+          "endLine": 68163
+        },
+        {
+          "name": "执行联机连接",
+          "kind": "FunctionDeclaration",
+          "line": 68165,
+          "endLine": 68184
+        },
+        {
+          "name": "初始化Socket连接",
+          "kind": "FunctionDeclaration",
+          "line": 68194,
+          "endLine": 68654
+        },
+        {
+          "name": "resizeBackgroundCanvas",
+          "kind": "FunctionDeclaration",
+          "line": 68684,
+          "endLine": 68687
+        },
+        {
+          "name": "initParticles",
+          "kind": "FunctionDeclaration",
+          "line": 68689,
+          "endLine": 68700
+        },
+        {
+          "name": "animateBackground",
+          "kind": "FunctionDeclaration",
+          "line": 68702,
+          "endLine": 68721
+        }
+      ],
+      "globals": [
+        {
+          "name": "canvas",
+          "kind": "const",
+          "line": 5872
+        },
+        {
+          "name": "ctx",
+          "kind": "const",
+          "line": 5873
+        },
+        {
+          "name": "创意工坊已启用",
+          "kind": "let",
+          "line": 5875
+        },
+        {
+          "name": "单元格大小",
+          "kind": "let",
+          "line": 5936
+        },
+        {
+          "name": "已初始化",
+          "kind": "let",
+          "line": 5937
+        },
+        {
+          "name": "画布宽度",
+          "kind": "let",
+          "line": 5938
+        },
+        {
+          "name": "画布高度",
+          "kind": "let",
+          "line": 5942
+        },
+        {
+          "name": "房间尺寸范围",
+          "kind": "const",
+          "line": 5943
+        },
+        {
+          "name": "最大房间数",
+          "kind": "let",
+          "line": 5944
+        },
+        {
+          "name": "相机显示边长",
+          "kind": "let",
+          "line": 5945
+        },
+        {
+          "name": "最大堆叠数",
+          "kind": "const",
+          "line": 5946
+        },
+        {
+          "name": "地牢大小",
+          "kind": "let",
+          "line": 5947
+        },
+        {
+          "name": "存档版本",
+          "kind": "const",
+          "line": 5948
+        },
+        {
+          "name": "游戏版本",
+          "kind": "const",
+          "line": 5949
+        },
+        {
+          "name": "MAX_EMOJI_FETCH_RETRIES",
+          "kind": "const",
+          "line": 5952
+        },
+        {
+          "name": "所有天气列表",
+          "kind": "const",
+          "line": 5953
+        },
+        {
+          "name": "大风吹动概率",
+          "kind": "const",
+          "line": 5961
+        },
+        {
+          "name": "互动冷却",
+          "kind": "let",
+          "line": 5962
+        },
+        {
+          "name": "怪物移动动画时长",
+          "kind": "const",
+          "line": 5963
+        },
+        {
+          "name": "数据完整性密钥",
+          "kind": "const",
+          "line": 5964
+        },
+        {
+          "name": "调试序列",
+          "kind": "const",
+          "line": 5966
+        },
+        {
+          "name": "当前层数",
+          "kind": "let",
+          "line": 5968
+        },
+        {
+          "name": "所有地牢层",
+          "kind": "let",
+          "line": 5969
+        },
+        {
+          "name": "命令行模式开启",
+          "kind": "let",
+          "line": 5970
+        },
+        {
+          "name": "材质角标映射",
+          "kind": "const",
+          "line": 5971
+        },
+        {
+          "name": "命令行图标映射",
+          "kind": "const",
+          "line": 5979
+        },
+        {
+          "name": "中文对照图标映射",
+          "kind": "const",
+          "line": 5980
+        },
+        {
+          "name": "图标映射",
+          "kind": "let",
+          "line": 6218
+        },
+        {
+          "name": "编辑器教程阶段",
+          "kind": "let",
+          "line": 6456
+        },
+        {
+          "name": "编辑器教程步骤",
+          "kind": "const",
+          "line": 6457
+        },
+        {
+          "name": "教程关卡列表",
+          "kind": "const",
+          "line": 6465
+        },
+        {
+          "name": "单元格类型",
+          "kind": "const",
+          "line": 6498
+        },
+        {
+          "name": "怪物状态",
+          "kind": "const",
+          "line": 6509
+        },
+        {
+          "name": "颜色表",
+          "kind": "const",
+          "line": 6514
+        },
+        {
+          "name": "效果颜色编号映射",
+          "kind": "const",
+          "line": 6523
+        },
+        {
+          "name": "效果名称编号映射",
+          "kind": "const",
+          "line": 6543
+        },
+        {
+          "name": "颜色名表",
+          "kind": "const",
+          "line": 6562
+        },
+        {
+          "name": "楼梯图标",
+          "kind": "let",
+          "line": 6563
+        },
+        {
+          "name": "环境类型",
+          "kind": "const",
+          "line": 6564
+        },
+        {
+          "name": "绘图常量",
+          "kind": "const",
+          "line": 6573
+        },
+        {
+          "name": "功能键映射",
+          "kind": "const",
+          "line": 6602
+        },
+        {
+          "name": "物品生成配置",
+          "kind": "const",
+          "line": 6629
+        },
+        {
+          "name": "创建物品池",
+          "kind": "const",
+          "line": 6663
+        },
+        {
+          "name": "创建怪物池",
+          "kind": "const",
+          "line": 6782
+        },
+        {
+          "name": "融合Buff类型",
+          "kind": "const",
+          "line": 6842
+        },
+        {
+          "name": "玩家天赋池",
+          "kind": "const",
+          "line": 6869
+        },
+        {
+          "name": "神龛效果列表",
+          "kind": "const",
+          "line": 6884
+        },
+        {
+          "name": "怪物技能池",
+          "kind": "const",
+          "line": 7006
+        },
+        {
+          "name": "地牢",
+          "kind": "let",
+          "line": 7357
+        },
+        {
+          "name": "房间列表",
+          "kind": "let",
+          "line": 7358
+        },
+        {
+          "name": "临时测试",
+          "kind": "let",
+          "line": 7359
+        },
+        {
+          "name": "玩家距离图",
+          "kind": "let",
+          "line": 7360
+        },
+        {
+          "name": "isSifting",
+          "kind": "let",
+          "line": 7361
+        },
+        {
+          "name": "当前天气效果",
+          "kind": "let",
+          "line": 7362
+        },
+        {
+          "name": "编辑器剪贴板",
+          "kind": "let",
+          "line": 7363
+        },
+        {
+          "name": "是否是自定义关卡",
+          "kind": "let",
+          "line": 7364
+        },
+        {
+          "name": "上次放置的传送带",
+          "kind": "let",
+          "line": 7365
+        },
+        {
+          "name": "上次放置的箭头",
+          "kind": "let",
+          "line": 7366
+        },
+        {
+          "name": "上次放置的开关脉冲器",
+          "kind": "let",
+          "line": 7367
+        },
+        {
+          "name": "上次放置的隐形毒气陷阱",
+          "kind": "let",
+          "line": 7368
+        },
+        {
+          "name": "绿紫开关状态",
+          "kind": "let",
+          "line": 7369
+        },
+        {
+          "name": "跳过怪物回合剩余次数",
+          "kind": "let",
+          "line": 7370
+        },
+        {
+          "name": "当前关卡存档数据字符串",
+          "kind": "let",
+          "line": 7371
+        },
+        {
+          "name": "玩家装备",
+          "kind": "let",
+          "line": 7372
+        },
+        {
+          "name": "玩家",
+          "kind": "let",
+          "line": 7373
+        },
+        {
+          "name": "材质",
+          "kind": "const",
+          "line": 7374
+        },
+        {
+          "name": "玩家死亡次数",
+          "kind": "let",
+          "line": 7382
+        },
+        {
+          "name": "红蓝开关状态",
+          "kind": "let",
+          "line": 7383
+        },
+        {
+          "name": "小地图Ctx",
+          "kind": "let",
+          "line": 7384
+        },
+        {
+          "name": "小地图缩放",
+          "kind": "const",
+          "line": 7385
+        },
+        {
+          "name": "小地图Offset",
+          "kind": "const",
+          "line": 7386
+        },
+        {
+          "name": "视口偏移X",
+          "kind": "let",
+          "line": 7387
+        },
+        {
+          "name": "视口偏移Y",
+          "kind": "let",
+          "line": 7388
+        },
+        {
+          "name": "跟踪玩家怪物数",
+          "kind": "let",
+          "line": 7389
+        },
+        {
+          "name": "房间地图",
+          "kind": "let",
+          "line": 7390
+        },
+        {
+          "name": "上锁房间列表",
+          "kind": "let",
+          "line": 7393
+        },
+        {
+          "name": "已访问房间",
+          "kind": "let",
+          "line": 7394
+        },
+        {
+          "name": "显示HUD计时器",
+          "kind": "let",
+          "line": 7395
+        },
+        {
+          "name": "玩家正在传送",
+          "kind": "let",
+          "line": 7396
+        },
+        {
+          "name": "所有传送门",
+          "kind": "let",
+          "line": 7397
+        },
+        {
+          "name": "hud模式",
+          "kind": "let",
+          "line": 7398
+        },
+        {
+          "name": "背包可见",
+          "kind": "let",
+          "line": 7399
+        },
+        {
+          "name": "玩家背包",
+          "kind": "let",
+          "line": 7400
+        },
+        {
+          "name": "最大背包容量",
+          "kind": "let",
+          "line": 7401
+        },
+        {
+          "name": "门实例列表",
+          "kind": "let",
+          "line": 7402
+        },
+        {
+          "name": "通知队列",
+          "kind": "const",
+          "line": 7403
+        },
+        {
+          "name": "移动历史",
+          "kind": "let",
+          "line": 7404
+        },
+        {
+          "name": "传送点列表",
+          "kind": "let",
+          "line": 7405
+        },
+        {
+          "name": "最大传送点数量",
+          "kind": "const",
+          "line": 7406
+        },
+        {
+          "name": "上次移动",
+          "kind": "let",
+          "line": 7407
+        },
+        {
+          "name": "移动状态",
+          "kind": "let",
+          "line": 7408
+        },
+        {
+          "name": "hud显示",
+          "kind": "let",
+          "line": 7414
+        },
+        {
+          "name": "界面可见性",
+          "kind": "let",
+          "line": 7415
+        },
+        {
+          "name": "游戏设置",
+          "kind": "let",
+          "line": 7419
+        },
+        {
+          "name": "热键绑定描述",
+          "kind": "const",
+          "line": 7468
+        },
+        {
+          "name": "随机数状态",
+          "kind": "let",
+          "line": 7482
+        },
+        {
+          "name": "玩家正在休息",
+          "kind": "let",
+          "line": 7483
+        },
+        {
+          "name": "休息定时器",
+          "kind": "let",
+          "line": 7484
+        },
+        {
+          "name": "等待触摸定时器",
+          "kind": "let",
+          "line": 7485
+        },
+        {
+          "name": "所有怪物",
+          "kind": "let",
+          "line": 7486
+        },
+        {
+          "name": "玩家动画状态",
+          "kind": "let",
+          "line": 7487
+        },
+        {
+          "name": "当前出战宠物列表",
+          "kind": "let",
+          "line": 7488
+        },
+        {
+          "name": "当前加载的关卡数据缓存",
+          "kind": "let",
+          "line": 7489
+        },
+        {
+          "name": "当前关卡ID",
+          "kind": "let",
+          "line": 7490
+        },
+        {
+          "name": "prng",
+          "kind": "let",
+          "line": 7491
+        },
+        {
+          "name": "当前游戏种子",
+          "kind": "let",
+          "line": 7492
+        },
+        {
+          "name": "玩家职业",
+          "kind": "let",
+          "line": 7493
+        },
+        {
+          "name": "怪物生成概率",
+          "kind": "const",
+          "line": 7494
+        },
+        {
+          "name": "最大怪物数",
+          "kind": "const",
+          "line": 7495
+        },
+        {
+          "name": "玩家初始位置",
+          "kind": "let",
+          "line": 7496
+        },
+        {
+          "name": "已使用存档点",
+          "kind": "let",
+          "line": 7497
+        },
+        {
+          "name": "死亡界面已显示",
+          "kind": "let",
+          "line": 7498
+        },
+        {
+          "name": "单击移动定时器",
+          "kind": "let",
+          "line": 7499
+        },
+        {
+          "name": "开始移动定时器",
+          "kind": "let",
+          "line": 7500
+        },
+        {
+          "name": "长按移动",
+          "kind": "let",
+          "line": 7501
+        },
+        {
+          "name": "当前激活卷轴列表",
+          "kind": "let",
+          "line": 7502
+        },
+        {
+          "name": "移动间隔",
+          "kind": "let",
+          "line": 7503
+        },
+        {
+          "name": "首次移动延迟",
+          "kind": "let",
+          "line": 7504
+        },
+        {
+          "name": "最后移动时间",
+          "kind": "let",
+          "line": 7505
+        },
+        {
+          "name": "移动定时器",
+          "kind": "let",
+          "line": 7506
+        },
+        {
+          "name": "教程阶段",
+          "kind": "let",
+          "line": 7507
+        },
+        {
+          "name": "教程提示已显示",
+          "kind": "let",
+          "line": 7508
+        },
+        {
+          "name": "是否为教程层",
+          "kind": "let",
+          "line": 7509
+        },
+        {
+          "name": "扳手规则集",
+          "kind": "let",
+          "line": 7510
+        },
+        {
+          "name": "当前扳手快捷槽",
+          "kind": "let",
+          "line": 7511
+        },
+        {
+          "name": "待绘制死亡标记",
+          "kind": "let",
+          "line": 7512
+        },
+        {
+          "name": "宠物状态表",
+          "kind": "let",
+          "line": 7513
+        },
+        {
+          "name": "玩家属性",
+          "kind": "let",
+          "line": 7514
+        },
+        {
+          "name": "初始玩家属性",
+          "kind": "let",
+          "line": 7540
+        },
+        {
+          "name": "自定义全局设置",
+          "kind": "let",
+          "line": 7566
+        },
+        {
+          "name": "自定义游戏设置",
+          "kind": "let",
+          "line": 7588
+        },
+        {
+          "name": "胜利条件提示元素组",
+          "kind": "let",
+          "line": 7595
+        },
+        {
+          "name": "玩家总移动回合数",
+          "kind": "let",
+          "line": 7602
+        },
+        {
+          "name": "玩家总受到伤害",
+          "kind": "let",
+          "line": 7603
+        },
+        {
+          "name": "永久Buffs",
+          "kind": "let",
+          "line": 7604
+        },
+        {
+          "name": "相机目标X",
+          "kind": "let",
+          "line": 7607
+        },
+        {
+          "name": "相机目标Y",
+          "kind": "let",
+          "line": 7608
+        },
+        {
+          "name": "当前相机X",
+          "kind": "let",
+          "line": 7609
+        },
+        {
+          "name": "当前相机Y",
+          "kind": "let",
+          "line": 7610
+        },
+        {
+          "name": "相机锁定",
+          "kind": "let",
+          "line": 7611
+        },
+        {
+          "name": "玩家仆从列表",
+          "kind": "let",
+          "line": 7612
+        },
+        {
+          "name": "相机移动速度",
+          "kind": "const",
+          "line": 7613
+        },
+        {
+          "name": "显示模式",
+          "kind": "let",
+          "line": 7614
+        },
+        {
+          "name": "日志历史",
+          "kind": "let",
+          "line": 7615
+        },
+        {
+          "name": "是否显示通知",
+          "kind": "let",
+          "line": 7616
+        },
+        {
+          "name": "日志面板可见",
+          "kind": "let",
+          "line": 7617
+        },
+        {
+          "name": "所有计时器",
+          "kind": "let",
+          "line": 7618
+        },
+        {
+          "name": "玩家状态",
+          "kind": "let",
+          "line": 7619
+        },
+        {
+          "name": "NPC互动中",
+          "kind": "let",
+          "line": 7620
+        },
+        {
+          "name": "当前NPC",
+          "kind": "let",
+          "line": 7621
+        },
+        {
+          "name": "已击杀怪物数",
+          "kind": "let",
+          "line": 7622
+        },
+        {
+          "name": "怪物状态表",
+          "kind": "let",
+          "line": 7623
+        },
+        {
+          "name": "彩蛋1触发",
+          "kind": "let",
+          "line": 7624
+        },
+        {
+          "name": "彩蛋2触发",
+          "kind": "let",
+          "line": 7625
+        },
+        {
+          "name": "彩蛋3触发",
+          "kind": "let",
+          "line": 7626
+        },
+        {
+          "name": "待显示格子特效队列",
+          "kind": "let",
+          "line": 7627
+        },
+        {
+          "name": "活动DOM特效",
+          "kind": "let",
+          "line": 7628
+        },
+        {
+          "name": "待显示爆炸范围",
+          "kind": "let",
+          "line": 7629
+        },
+        {
+          "name": "物品池",
+          "kind": "let",
+          "line": 7630
+        },
+        {
+          "name": "怪物池",
+          "kind": "let",
+          "line": 7631
+        },
+        {
+          "name": "所有物品定义",
+          "kind": "let",
+          "line": 7632
+        },
+        {
+          "name": "所有怪物定义",
+          "kind": "let",
+          "line": 7633
+        },
+        {
+          "name": "怪物动画状态",
+          "kind": "let",
+          "line": 7634
+        },
+        {
+          "name": "玩家正在放置障碍物",
+          "kind": "let",
+          "line": 7635
+        },
+        {
+          "name": "编辑器工具栏模式",
+          "kind": "let",
+          "line": 7636
+        },
+        {
+          "name": "moveQueue",
+          "kind": "let",
+          "line": 7639
+        },
+        {
+          "name": "isAutoMoving",
+          "kind": "let",
+          "line": 7640
+        },
+        {
+          "name": "最高教程阶段",
+          "kind": "let",
+          "line": 7641
+        },
+        {
+          "name": "当前回放阶段",
+          "kind": "let",
+          "line": 7642
+        },
+        {
+          "name": "中文模式",
+          "kind": "let",
+          "line": 7643
+        },
+        {
+          "name": "游戏状态",
+          "kind": "let",
+          "line": 7644
+        },
+        {
+          "name": "编辑器状态",
+          "kind": "let",
+          "line": 7645
+        },
+        {
+          "name": "音效管理器",
+          "kind": "const",
+          "line": 7672
+        },
+        {
+          "name": "音效文件",
+          "kind": "const",
+          "line": 7708
+        },
+        {
+          "name": "undoStack",
+          "kind": "let",
+          "line": 7728
+        },
+        {
+          "name": "redoStack",
+          "kind": "let",
+          "line": 7729
+        },
+        {
+          "name": "MAX_UNDO_STEPS",
+          "kind": "const",
+          "line": 7730
+        },
+        {
+          "name": "编辑器最近使用列表",
+          "kind": "let",
+          "line": 7731
+        },
+        {
+          "name": "自动回合间隔",
+          "kind": "let",
+          "line": 7732
+        },
+        {
+          "name": "上次自动回合时间",
+          "kind": "let",
+          "line": 7733
+        },
+        {
+          "name": "玩家正在钩索",
+          "kind": "let",
+          "line": 7734
+        },
+        {
+          "name": "钩索移动定时器",
+          "kind": "let",
+          "line": 7735
+        },
+        {
+          "name": "生存挑战激活",
+          "kind": "let",
+          "line": 7736
+        },
+        {
+          "name": "生存挑战备份单元格",
+          "kind": "let",
+          "line": 7737
+        },
+        {
+          "name": "物品点击监听器",
+          "kind": "let",
+          "line": 7738
+        },
+        {
+          "name": "开发者模式",
+          "kind": "let",
+          "line": 7739
+        },
+        {
+          "name": "versionClickCount",
+          "kind": "let",
+          "line": 7740
+        },
+        {
+          "name": "地牢生成方式",
+          "kind": "let",
+          "line": 7741
+        },
+        {
+          "name": "其他玩家列表",
+          "kind": "let",
+          "line": 7742
+        },
+        {
+          "name": "本地玩家ID",
+          "kind": "let",
+          "line": 7743
+        },
+        {
+          "name": "已揭示洞穴格子",
+          "kind": "let",
+          "line": 7744
+        },
+        {
+          "name": "当前装备页",
+          "kind": "let",
+          "line": 7748
+        },
+        {
+          "name": "最大装备页",
+          "kind": "let",
+          "line": 7749
+        },
+        {
+          "name": "最大装备槽数量",
+          "kind": "let",
+          "line": 7750
+        },
+        {
+          "name": "触摸起始X",
+          "kind": "let",
+          "line": 7751
+        },
+        {
+          "name": "触摸移动X",
+          "kind": "let",
+          "line": 7752
+        },
+        {
+          "name": "装备栏滑动中",
+          "kind": "let",
+          "line": 7753
+        },
+        {
+          "name": "装备栏每页装备数",
+          "kind": "let",
+          "line": 7754
+        },
+        {
+          "name": "isPinching",
+          "kind": "let",
+          "line": 7756
+        },
+        {
+          "name": "initialPinchDistance",
+          "kind": "let",
+          "line": 7757
+        },
+        {
+          "name": "pinchThreshold",
+          "kind": "const",
+          "line": 7758
+        },
+        {
+          "name": "touchStartX",
+          "kind": "let",
+          "line": 7759
+        },
+        {
+          "name": "touchStartY",
+          "kind": "let",
+          "line": 7760
+        },
+        {
+          "name": "touchCurrentX",
+          "kind": "let",
+          "line": 7761
+        },
+        {
+          "name": "touchCurrentY",
+          "kind": "let",
+          "line": 7762
+        },
+        {
+          "name": "touchStartTime",
+          "kind": "let",
+          "line": 7763
+        },
+        {
+          "name": "isSwiping",
+          "kind": "let",
+          "line": 7764
+        },
+        {
+          "name": "swipeMoveInterval",
+          "kind": "let",
+          "line": 7765
+        },
+        {
+          "name": "swipeThreshold",
+          "kind": "const",
+          "line": 7766
+        },
+        {
+          "name": "tapTimeThreshold",
+          "kind": "const",
+          "line": 7767
+        },
+        {
+          "name": "地图标记",
+          "kind": "let",
+          "line": 7768
+        },
+        {
+          "name": "大地图状态",
+          "kind": "let",
+          "line": 7769
+        },
+        {
+          "name": "大地图画布",
+          "kind": "const",
+          "line": 7792
+        },
+        {
+          "name": "大地图画布容器",
+          "kind": "const",
+          "line": 7793
+        },
+        {
+          "name": "大地图遮罩",
+          "kind": "const",
+          "line": 7794
+        },
+        {
+          "name": "大地图信息",
+          "kind": "const",
+          "line": 7795
+        },
+        {
+          "name": "大地图上次触摸距离",
+          "kind": "let",
+          "line": 8536
+        },
+        {
+          "name": "emojiImageCache",
+          "kind": "const",
+          "line": 8730
+        },
+        {
+          "name": "emojiCdnCheckInProgress",
+          "kind": "let",
+          "line": 8731
+        },
+        {
+          "name": "版本信息元素",
+          "kind": "const",
+          "line": 9439
+        },
+        {
+          "name": "旧编辑器状态",
+          "kind": "let",
+          "line": 9715
+        },
+        {
+          "name": "调试输入数据",
+          "kind": "let",
+          "line": 28116
+        },
+        {
+          "name": "调试无限生命",
+          "kind": "let",
+          "line": 28117
+        },
+        {
+          "name": "调试无限能量",
+          "kind": "let",
+          "line": 28118
+        },
+        {
+          "name": "游戏开始时间",
+          "kind": "let",
+          "line": 34897
+        },
+        {
+          "name": "游戏事件日志",
+          "kind": "let",
+          "line": 34920
+        },
+        {
+          "name": "怪物追踪提示",
+          "kind": "const",
+          "line": 37741
+        },
+        {
+          "name": "击杀提示",
+          "kind": "const",
+          "line": 37744
+        },
+        {
+          "name": "字体预设",
+          "kind": "const",
+          "line": 37762
+        },
+        {
+          "name": "resizeTimer",
+          "kind": "let",
+          "line": 38210
+        },
+        {
+          "name": "添加控制事件",
+          "kind": "const",
+          "line": 38349
+        },
+        {
+          "name": "瓦片类型",
+          "kind": "const",
+          "line": 39718
+        },
+        {
+          "name": "方向",
+          "kind": "const",
+          "line": 39728
+        },
+        {
+          "name": "推箱子任务列表",
+          "kind": "let",
+          "line": 40366
+        },
+        {
+          "name": "上次死亡地点",
+          "kind": "let",
+          "line": 40855
+        },
+        {
+          "name": "怪物引入计划",
+          "kind": "let",
+          "line": 41265
+        },
+        {
+          "name": "互动按钮长按定时器",
+          "kind": "let",
+          "line": 43307
+        },
+        {
+          "name": "互动按钮触摸移动",
+          "kind": "let",
+          "line": 43308
+        },
+        {
+          "name": "互动按钮长按已触发",
+          "kind": "let",
+          "line": 43309
+        },
+        {
+          "name": "互动按钮",
+          "kind": "const",
+          "line": 43310
+        },
+        {
+          "name": "融合区物品",
+          "kind": "let",
+          "line": 46301
+        },
+        {
+          "name": "融合结果",
+          "kind": "let",
+          "line": 46302
+        },
+        {
+          "name": "融合配方列表",
+          "kind": "const",
+          "line": 46304
+        },
+        {
+          "name": "fusionGoldQuantities",
+          "kind": "let",
+          "line": 46324
+        },
+        {
+          "name": "当前匹配的融合配方",
+          "kind": "let",
+          "line": 46400
+        },
+        {
+          "name": "已发现的程序生成配方",
+          "kind": "let",
+          "line": 47363
+        },
+        {
+          "name": "程序生成配方列表",
+          "kind": "let",
+          "line": 47364
+        },
+        {
+          "name": "gameTitle",
+          "kind": "const",
+          "line": 49288
+        },
+        {
+          "name": "gameInfoOverlay",
+          "kind": "const",
+          "line": 49289
+        },
+        {
+          "name": "closeGameInfoBtn",
+          "kind": "const",
+          "line": 49290
+        },
+        {
+          "name": "光源地图",
+          "kind": "let",
+          "line": 49499
+        },
+        {
+          "name": "图标映射_原始",
+          "kind": "const",
+          "line": 49597
+        },
+        {
+          "name": "切换动画",
+          "kind": "let",
+          "line": 49623
+        },
+        {
+          "name": "收集特效池",
+          "kind": "const",
+          "line": 49827
+        },
+        {
+          "name": "指示器缓存",
+          "kind": "let",
+          "line": 51544
+        },
+        {
+          "name": "画布缓存",
+          "kind": "const",
+          "line": 51545
+        },
+        {
+          "name": "画布缓存Rect",
+          "kind": "const",
+          "line": 51546
+        },
+        {
+          "name": "安全参数",
+          "kind": "const",
+          "line": 52593
+        },
+        {
+          "name": "动画帧运行过",
+          "kind": "let",
+          "line": 53453
+        },
+        {
+          "name": "主菜单容器",
+          "kind": "const",
+          "line": 54696
+        },
+        {
+          "name": "新建游戏按钮",
+          "kind": "const",
+          "line": 54697
+        },
+        {
+          "name": "读取存档按钮",
+          "kind": "const",
+          "line": 54698
+        },
+        {
+          "name": "图鉴按钮",
+          "kind": "const",
+          "line": 54699
+        },
+        {
+          "name": "读凭证按钮",
+          "kind": "const",
+          "line": 54700
+        },
+        {
+          "name": "地图编辑器按钮",
+          "kind": "const",
+          "line": 54701
+        },
+        {
+          "name": "游戏模式选择菜单",
+          "kind": "const",
+          "line": 55548
+        },
+        {
+          "name": "返回主菜单按钮",
+          "kind": "const",
+          "line": 55549
+        },
+        {
+          "name": "无尽地牢按钮",
+          "kind": "const",
+          "line": 55550
+        },
+        {
+          "name": "创意关卡按钮",
+          "kind": "const",
+          "line": 55551
+        },
+        {
+          "name": "创意关卡文件输入",
+          "kind": "const",
+          "line": 55552
+        },
+        {
+          "name": "无尽洞穴按钮",
+          "kind": "const",
+          "line": 55779
+        },
+        {
+          "name": "无尽迷宫按钮",
+          "kind": "const",
+          "line": 55788
+        },
+        {
+          "name": "编辑器游玩按钮双击计时器",
+          "kind": "let",
+          "line": 56723
+        },
+        {
+          "name": "编辑器状态备份",
+          "kind": "let",
+          "line": 56724
+        },
+        {
+          "name": "编辑器玩家",
+          "kind": "let",
+          "line": 56725
+        },
+        {
+          "name": "上次切换",
+          "kind": "let",
+          "line": 57466
+        },
+        {
+          "name": "编辑器切换冷却",
+          "kind": "const",
+          "line": 57467
+        },
+        {
+          "name": "editorSaveTimeout",
+          "kind": "let",
+          "line": 58403
+        },
+        {
+          "name": "EDITOR_SAVE_DEBOUNCE_DELAY",
+          "kind": "const",
+          "line": 58404
+        },
+        {
+          "name": "Q字形图案",
+          "kind": "const",
+          "line": 66399
+        },
+        {
+          "name": "sifterButton",
+          "kind": "const",
+          "line": 67218
+        },
+        {
+          "name": "closeSifterButton",
+          "kind": "const",
+          "line": 67223
+        },
+        {
+          "name": "startSiftingButton",
+          "kind": "const",
+          "line": 67228
+        },
+        {
+          "name": "cancelSiftingButton",
+          "kind": "const",
+          "line": 67233
+        },
+        {
+          "name": "联机模式",
+          "kind": "let",
+          "line": 68188
+        },
+        {
+          "name": "玩家名称",
+          "kind": "let",
+          "line": 68189
+        },
+        {
+          "name": "socket",
+          "kind": "let",
+          "line": 68190
+        },
+        {
+          "name": "storedName",
+          "kind": "const",
+          "line": 68192
+        },
+        {
+          "name": "设置按钮_主菜单",
+          "kind": "const",
+          "line": 68670
+        },
+        {
+          "name": "backgroundCanvas",
+          "kind": "const",
+          "line": 68678
+        },
+        {
+          "name": "bgCtx",
+          "kind": "const",
+          "line": 68679
+        },
+        {
+          "name": "particles",
+          "kind": "let",
+          "line": 68681
+        },
+        {
+          "name": "particleCount",
+          "kind": "const",
+          "line": 68682
+        }
+      ],
+      "registrations": [
+        {
+          "name": "门",
+          "property": "门",
+          "line": 9074
+        },
+        {
+          "name": "物品",
+          "property": "物品",
+          "line": 9075
+        },
+        {
+          "name": "怪物",
+          "property": "怪物",
+          "line": 9076
+        },
+        {
+          "name": "单元格",
+          "property": "单元格",
+          "line": 9077
+        },
+        {
+          "name": "状态效果",
+          "property": "状态效果",
+          "line": 9078
+        },
+        {
+          "name": "红蓝开关",
+          "property": "红蓝开关",
+          "line": 9079
+        },
+        {
+          "name": "红砖块",
+          "property": "红砖块",
+          "line": 9080
+        },
+        {
+          "name": "蓝砖块",
+          "property": "蓝砖块",
+          "line": 9081
+        },
+        {
+          "name": "刷怪笼",
+          "property": "刷怪笼",
+          "line": 9082
+        },
+        {
+          "name": "传送带",
+          "property": "传送带",
+          "line": 9083
+        },
+        {
+          "name": "箭头",
+          "property": "箭头",
+          "line": 9084
+        },
+        {
+          "name": "巡逻怪物",
+          "property": "巡逻怪物",
+          "line": 9085
+        },
+        {
+          "name": "同步怪物",
+          "property": "同步怪物",
+          "line": 9086
+        },
+        {
+          "name": "绿紫开关",
+          "property": "绿紫开关",
+          "line": 9087
+        },
+        {
+          "name": "绿砖块",
+          "property": "绿砖块",
+          "line": 9088
+        },
+        {
+          "name": "紫砖块",
+          "property": "紫砖块",
+          "line": 9089
+        },
+        {
+          "name": "沉浸式传送门",
+          "property": "沉浸式传送门",
+          "line": 9090
+        },
+        {
+          "name": "卷轴滚动墙",
+          "property": "卷轴滚动墙",
+          "line": 9091
+        },
+        {
+          "name": "发生器",
+          "property": "发生器",
+          "line": 9093
+        },
+        {
+          "name": "侦测器",
+          "property": "侦测器",
+          "line": 9095
+        },
+        {
+          "name": "垃圾桶",
+          "property": "垃圾桶",
+          "line": 9096
+        },
+        {
+          "name": "钥匙",
+          "property": "钥匙",
+          "line": 9099
+        },
+        {
+          "name": "金币",
+          "property": "金币",
+          "line": 9100
+        },
+        {
+          "name": "武器类",
+          "property": "武器类",
+          "line": 9101
+        },
+        {
+          "name": "卷轴类",
+          "property": "卷轴类",
+          "line": 9102
+        },
+        {
+          "name": "防御装备类",
+          "property": "防御装备类",
+          "line": 9103
+        },
+        {
+          "name": "棋子",
+          "property": "棋子",
+          "line": 9104
+        },
+        {
+          "name": "药水类",
+          "property": "药水类",
+          "line": 9105
+        },
+        {
+          "name": "宠物",
+          "property": "宠物",
+          "line": 9106
+        },
+        {
+          "name": "重铸台",
+          "property": "重铸台",
+          "line": 9107
+        },
+        {
+          "name": "神秘商人",
+          "property": "神秘商人",
+          "line": 9108
+        },
+        {
+          "name": "探险家",
+          "property": "探险家",
+          "line": 9109
+        },
+        {
+          "name": "祭坛类",
+          "property": "祭坛类",
+          "line": 9110
+        },
+        {
+          "name": "物品祭坛",
+          "property": "物品祭坛",
+          "line": 9111
+        },
+        {
+          "name": "耐久祭坛",
+          "property": "耐久祭坛",
+          "line": 9112
+        },
+        {
+          "name": "背包扩容祭坛",
+          "property": "背包扩容祭坛",
+          "line": 9113
+        },
+        {
+          "name": "寻宝戒指",
+          "property": "寻宝戒指",
+          "line": 9114
+        },
+        {
+          "name": "折跃门",
+          "property": "折跃门",
+          "line": 9115
+        },
+        {
+          "name": "传送门",
+          "property": "传送门",
+          "line": 9116
+        },
+        {
+          "name": "炸弹",
+          "property": "炸弹",
+          "line": 9117
+        },
+        {
+          "name": "旋风物品",
+          "property": "旋风物品",
+          "line": 9118
+        },
+        {
+          "name": "火焰物品",
+          "property": "火焰物品",
+          "line": 9119
+        },
+        {
+          "name": "火把",
+          "property": "火把",
+          "line": 9120
+        },
+        {
+          "name": "毒液物品",
+          "property": "毒液物品",
+          "line": 9121
+        },
+        {
+          "name": "罐子",
+          "property": "罐子",
+          "line": 9122
+        },
+        {
+          "name": "空罐子",
+          "property": "空罐子",
+          "line": 9123
+        },
+        {
+          "name": "泉水",
+          "property": "泉水",
+          "line": 9124
+        },
+        {
+          "name": "书架",
+          "property": "书架",
+          "line": 9125
+        },
+        {
+          "name": "神龛",
+          "property": "神龛",
+          "line": 9126
+        },
+        {
+          "name": "照明弹光源",
+          "property": "照明弹光源",
+          "line": 9127
+        },
+        {
+          "name": "挑战石碑",
+          "property": "挑战石碑",
+          "line": 9128
+        },
+        {
+          "name": "洗身砚",
+          "property": "洗身砚",
+          "line": 9129
+        },
+        {
+          "name": "陷阱基类",
+          "property": "陷阱基类",
+          "line": 9130
+        },
+        {
+          "name": "隐形落石陷阱",
+          "property": "隐形落石陷阱",
+          "line": 9131
+        },
+        {
+          "name": "隐形地刺陷阱",
+          "property": "隐形地刺陷阱",
+          "line": 9132
+        },
+        {
+          "name": "隐形毒气陷阱",
+          "property": "隐形毒气陷阱",
+          "line": 9133
+        },
+        {
+          "name": "远射陷阱",
+          "property": "远射陷阱",
+          "line": 9134
+        },
+        {
+          "name": "隐形失明陷阱",
+          "property": "隐形失明陷阱",
+          "line": 9135
+        },
+        {
+          "name": "召唤怪物陷阱",
+          "property": "召唤怪物陷阱",
+          "line": 9136
+        },
+        {
+          "name": "烈焰触发陷阱",
+          "property": "烈焰触发陷阱",
+          "line": 9137
+        },
+        {
+          "name": "隐形虫洞陷阱",
+          "property": "隐形虫洞陷阱",
+          "line": 9138
+        },
+        {
+          "name": "便携障碍物",
+          "property": "便携障碍物",
+          "line": 9139
+        },
+        {
+          "name": "已放置的障碍物",
+          "property": "已放置的障碍物",
+          "line": 9140
+        },
+        {
+          "name": "旗帜",
+          "property": "旗帜",
+          "line": 9141
+        },
+        {
+          "name": "临时墙壁计时器",
+          "property": "临时墙壁计时器",
+          "line": 9142
+        },
+        {
+          "name": "告示牌",
+          "property": "告示牌",
+          "line": 9143
+        },
+        {
+          "name": "存档点",
+          "property": "存档点",
+          "line": 9144
+        },
+        {
+          "name": "磨刀石",
+          "property": "磨刀石",
+          "line": 9145
+        },
+        {
+          "name": "急救绷带",
+          "property": "急救绷带",
+          "line": 9146
+        },
+        {
+          "name": "照明弹",
+          "property": "照明弹",
+          "line": 9147
+        },
+        {
+          "name": "万能钥匙",
+          "property": "万能钥匙",
+          "line": 9148
+        },
+        {
+          "name": "奖杯物品",
+          "property": "奖杯物品",
+          "line": 9149
+        },
+        {
+          "name": "开关脉冲器",
+          "property": "开关脉冲器",
+          "line": 9150
+        },
+        {
+          "name": "磁铁",
+          "property": "磁铁",
+          "line": 9151
+        },
+        {
+          "name": "蛛网",
+          "property": "蛛网",
+          "line": 9152
+        },
+        {
+          "name": "烟雾弹",
+          "property": "烟雾弹",
+          "line": 9153
+        },
+        {
+          "name": "烟雾",
+          "property": "烟雾",
+          "line": 9154
+        },
+        {
+          "name": "定位器地图",
+          "property": "定位器地图",
+          "line": 9155
+        },
+        {
+          "name": "时空罗盘",
+          "property": "时空罗盘",
+          "line": 9156
+        },
+        {
+          "name": "文本展示框",
+          "property": "文本展示框",
+          "line": 9157
+        },
+        {
+          "name": "推箱子箱子",
+          "property": "推箱子箱子",
+          "line": 9158
+        },
+        {
+          "name": "推箱子目标",
+          "property": "推箱子目标",
+          "line": 9159
+        },
+        {
+          "name": "马",
+          "property": "马",
+          "line": 9160
+        },
+        {
+          "name": "空桶",
+          "property": "空桶",
+          "line": 9161
+        },
+        {
+          "name": "水桶",
+          "property": "水桶",
+          "line": 9162
+        },
+        {
+          "name": "水鞋",
+          "property": "水鞋",
+          "line": 9163
+        },
+        {
+          "name": "药水弹",
+          "property": "药水弹",
+          "line": 9164
+        },
+        {
+          "name": "岩浆桶",
+          "property": "岩浆桶",
+          "line": 9165
+        },
+        {
+          "name": "岩浆",
+          "property": "岩浆",
+          "line": 9166
+        },
+        {
+          "name": "黑曜石",
+          "property": "黑曜石",
+          "line": 9167
+        },
+        {
+          "name": "冰桶",
+          "property": "冰桶",
+          "line": 9168
+        },
+        {
+          "name": "血水桶",
+          "property": "血水桶",
+          "line": 9169
+        },
+        {
+          "name": "药水桶",
+          "property": "药水桶",
+          "line": 9170
+        },
+        {
+          "name": "药水液",
+          "property": "药水液",
+          "line": 9171
+        },
+        {
+          "name": "赌徒",
+          "property": "赌徒",
+          "line": 9172
+        },
+        {
+          "name": "佣兵契约",
+          "property": "佣兵契约",
+          "line": 9173
+        },
+        {
+          "name": "佣兵单位",
+          "property": "佣兵单位",
+          "line": 9174
+        },
+        {
+          "name": "自定义NPC",
+          "property": "自定义NPC",
+          "line": 9175
+        },
+        {
+          "name": "许愿井",
+          "property": "许愿井",
+          "line": 9176
+        },
+        {
+          "name": "木栅栏",
+          "property": "木栅栏",
+          "line": 9177
+        },
+        {
+          "name": "石栅栏",
+          "property": "石栅栏",
+          "line": 9178
+        },
+        {
+          "name": "铁栅栏",
+          "property": "铁栅栏",
+          "line": 9179
+        },
+        {
+          "name": "压感开关",
+          "property": "压感开关",
+          "line": 9180
+        },
+        {
+          "name": "吸血剑",
+          "property": "吸血剑",
+          "line": 9183
+        },
+        {
+          "name": "冰霜法杖",
+          "property": "冰霜法杖",
+          "line": 9184
+        },
+        {
+          "name": "重力锤",
+          "property": "重力锤",
+          "line": 9185
+        },
+        {
+          "name": "剧毒匕首",
+          "property": "剧毒匕首",
+          "line": 9186
+        },
+        {
+          "name": "荆棘鞭",
+          "property": "荆棘鞭",
+          "line": 9187
+        },
+        {
+          "name": "回旋镖",
+          "property": "回旋镖",
+          "line": 9188
+        },
+        {
+          "name": "闪电链法杖",
+          "property": "闪电链法杖",
+          "line": 9189
+        },
+        {
+          "name": "大地猛击锤",
+          "property": "大地猛击锤",
+          "line": 9190
+        },
+        {
+          "name": "穿云箭",
+          "property": "穿云箭",
+          "line": 9191
+        },
+        {
+          "name": "钢制长剑",
+          "property": "钢制长剑",
+          "line": 9192
+        },
+        {
+          "name": "橡木法杖",
+          "property": "橡木法杖",
+          "line": 9193
+        },
+        {
+          "name": "金币手枪",
+          "property": "金币手枪",
+          "line": 9194
+        },
+        {
+          "name": "狙击金币枪",
+          "property": "狙击金币枪",
+          "line": 9195
+        },
+        {
+          "name": "喷火枪",
+          "property": "喷火枪",
+          "line": 9196
+        },
+        {
+          "name": "引雷针护符",
+          "property": "引雷针护符",
+          "line": 9197
+        },
+        {
+          "name": "荆棘种子",
+          "property": "荆棘种子",
+          "line": 9198
+        },
+        {
+          "name": "荆棘丛",
+          "property": "荆棘丛",
+          "line": 9199
+        },
+        {
+          "name": "能量熔炉",
+          "property": "能量熔炉",
+          "line": 9200
+        },
+        {
+          "name": "恐惧魔杖",
+          "property": "恐惧魔杖",
+          "line": 9201
+        },
+        {
+          "name": "斜方刀",
+          "property": "斜方刀",
+          "line": 9202
+        },
+        {
+          "name": "冲撞牛角",
+          "property": "冲撞牛角",
+          "line": 9203
+        },
+        {
+          "name": "护卫种子",
+          "property": "护卫种子",
+          "line": 9204
+        },
+        {
+          "name": "护卫植物",
+          "property": "护卫植物",
+          "line": 9205
+        },
+        {
+          "name": "远射种子",
+          "property": "远射种子",
+          "line": 9206
+        },
+        {
+          "name": "远射植物",
+          "property": "远射植物",
+          "line": 9207
+        },
+        {
+          "name": "能量草",
+          "property": "能量草",
+          "line": 9208
+        },
+        {
+          "name": "吸能种子",
+          "property": "吸能种子",
+          "line": 9209
+        },
+        {
+          "name": "魔法师法杖",
+          "property": "魔法师法杖",
+          "line": 9210
+        },
+        {
+          "name": "大师附魔卷轴",
+          "property": "大师附魔卷轴",
+          "line": 9211
+        },
+        {
+          "name": "小书魔",
+          "property": "小书魔",
+          "line": 9212
+        },
+        {
+          "name": "符文圈",
+          "property": "符文圈",
+          "line": 9213
+        },
+        {
+          "name": "调试工具",
+          "property": "调试工具",
+          "line": 9214
+        },
+        {
+          "name": "渔网",
+          "property": "渔网",
+          "line": 9215
+        },
+        {
+          "name": "渔网陷阱",
+          "property": "渔网陷阱",
+          "line": 9216
+        },
+        {
+          "name": "充能魔杖",
+          "property": "充能魔杖",
+          "line": 9217
+        },
+        {
+          "name": "魔力远射植物",
+          "property": "魔力远射植物",
+          "line": 9218
+        },
+        {
+          "name": "时间卷轴",
+          "property": "时间卷轴",
+          "line": 9219
+        },
+        {
+          "name": "潜行靴子",
+          "property": "潜行靴子",
+          "line": 9220
+        },
+        {
+          "name": "钩索",
+          "property": "钩索",
+          "line": 9221
+        },
+        {
+          "name": "嗜血战斧",
+          "property": "嗜血战斧",
+          "line": 9222
+        },
+        {
+          "name": "毒气瓶",
+          "property": "毒气瓶",
+          "line": 9223
+        },
+        {
+          "name": "毒气",
+          "property": "毒气",
+          "line": 9224
+        },
+        {
+          "name": "陨石法杖",
+          "property": "陨石法杖",
+          "line": 9225
+        },
+        {
+          "name": "神偷手",
+          "property": "神偷手",
+          "line": 9226
+        },
+        {
+          "name": "追踪风弹",
+          "property": "追踪风弹",
+          "line": 9227
+        },
+        {
+          "name": "扫帚",
+          "property": "扫帚",
+          "line": 9228
+        },
+        {
+          "name": "守卫者盔甲",
+          "property": "守卫者盔甲",
+          "line": 9229
+        },
+        {
+          "name": "死灵法杖",
+          "property": "死灵法杖",
+          "line": 9230
+        },
+        {
+          "name": "火箭筒",
+          "property": "火箭筒",
+          "line": 9231
+        },
+        {
+          "name": "灌木丛",
+          "property": "灌木丛",
+          "line": 9232
+        },
+        {
+          "name": "雷电法杖",
+          "property": "雷电法杖",
+          "line": 9233
+        },
+        {
+          "name": "太阳卷轴",
+          "property": "太阳卷轴",
+          "line": 9234
+        },
+        {
+          "name": "秘银锁甲",
+          "property": "秘银锁甲",
+          "line": 9237
+        },
+        {
+          "name": "钢制板甲",
+          "property": "钢制板甲",
+          "line": 9238
+        },
+        {
+          "name": "锅盖",
+          "property": "锅盖",
+          "line": 9239
+        },
+        {
+          "name": "灵能盾牌",
+          "property": "灵能盾牌",
+          "line": 9240
+        },
+        {
+          "name": "冰盾",
+          "property": "冰盾",
+          "line": 9241
+        },
+        {
+          "name": "防化服",
+          "property": "防化服",
+          "line": 9242
+        },
+        {
+          "name": "纵火狂",
+          "property": "纵火狂",
+          "line": 9243
+        },
+        {
+          "name": "迅捷卷轴",
+          "property": "迅捷卷轴",
+          "line": 9246
+        },
+        {
+          "name": "神秘卷轴",
+          "property": "神秘卷轴",
+          "line": 9247
+        },
+        {
+          "name": "贪婪卷轴",
+          "property": "贪婪卷轴",
+          "line": 9248
+        },
+        {
+          "name": "清净卷轴",
+          "property": "清净卷轴",
+          "line": 9249
+        },
+        {
+          "name": "附魔卷轴",
+          "property": "附魔卷轴",
+          "line": 9250
+        },
+        {
+          "name": "跃迁卷轴",
+          "property": "跃迁卷轴",
+          "line": 9251
+        },
+        {
+          "name": "真言卷轴",
+          "property": "真言卷轴",
+          "line": 9252
+        },
+        {
+          "name": "湮灭卷轴",
+          "property": "湮灭卷轴",
+          "line": 9253
+        },
+        {
+          "name": "配方卷轴",
+          "property": "配方卷轴",
+          "line": 9254
+        },
+        {
+          "name": "易位卷轴",
+          "property": "易位卷轴",
+          "line": 9255
+        },
+        {
+          "name": "太阳卷轴",
+          "property": "太阳卷轴",
+          "line": 9256
+        },
+        {
+          "name": "饰品",
+          "property": "饰品",
+          "line": 9259
+        },
+        {
+          "name": "陷阱先锋饰品",
+          "property": "陷阱先锋饰品",
+          "line": 9260
+        },
+        {
+          "name": "飞毛腿饰品",
+          "property": "飞毛腿饰品",
+          "line": 9261
+        },
+        {
+          "name": "瞬间移动饰品",
+          "property": "瞬间移动饰品",
+          "line": 9262
+        },
+        {
+          "name": "博士之卷饰品",
+          "property": "博士之卷饰品",
+          "line": 9263
+        },
+        {
+          "name": "恢复之心饰品",
+          "property": "恢复之心饰品",
+          "line": 9264
+        },
+        {
+          "name": "以牙还牙饰品",
+          "property": "以牙还牙饰品",
+          "line": 9265
+        },
+        {
+          "name": "嗅探之鼻饰品",
+          "property": "嗅探之鼻饰品",
+          "line": 9266
+        },
+        {
+          "name": "治疗药水",
+          "property": "治疗药水",
+          "line": 9270
+        },
+        {
+          "name": "能量药水",
+          "property": "能量药水",
+          "line": 9271
+        },
+        {
+          "name": "狂暴药水",
+          "property": "狂暴药水",
+          "line": 9272
+        },
+        {
+          "name": "神龟药水",
+          "property": "神龟药水",
+          "line": 9273
+        },
+        {
+          "name": "隐身药水",
+          "property": "隐身药水",
+          "line": 9274
+        },
+        {
+          "name": "透视药水",
+          "property": "透视药水",
+          "line": 9275
+        },
+        {
+          "name": "神秘药水",
+          "property": "神秘药水",
+          "line": 9276
+        },
+        {
+          "name": "硫酸药水",
+          "property": "硫酸药水",
+          "line": 9277
+        },
+        {
+          "name": "中毒药水",
+          "property": "中毒药水",
+          "line": 9278
+        },
+        {
+          "name": "抗火药水",
+          "property": "抗火药水",
+          "line": 9279
+        },
+        {
+          "name": "冰冻药水",
+          "property": "冰冻药水",
+          "line": 9280
+        },
+        {
+          "name": "失明药水",
+          "property": "失明药水",
+          "line": 9281
+        },
+        {
+          "name": "国际象棋车",
+          "property": "国际象棋车",
+          "line": 9284
+        },
+        {
+          "name": "国际象棋马",
+          "property": "国际象棋马",
+          "line": 9285
+        },
+        {
+          "name": "国际象棋象",
+          "property": "国际象棋象",
+          "line": 9286
+        },
+        {
+          "name": "中国象棋炮",
+          "property": "中国象棋炮",
+          "line": 9287
+        },
+        {
+          "name": "熊猫",
+          "property": "熊猫",
+          "line": 9290
+        },
+        {
+          "name": "水母",
+          "property": "水母",
+          "line": 9291
+        },
+        {
+          "name": "火蜥蜴",
+          "property": "火蜥蜴",
+          "line": 9292
+        },
+        {
+          "name": "魔法水晶",
+          "property": "魔法水晶",
+          "line": 9293
+        },
+        {
+          "name": "魔法师",
+          "property": "魔法师",
+          "line": 9296
+        },
+        {
+          "name": "大魔法师",
+          "property": "大魔法师",
+          "line": 9297
+        },
+        {
+          "name": "腐蚀怪物",
+          "property": "腐蚀怪物",
+          "line": 9298
+        },
+        {
+          "name": "盗贼怪物",
+          "property": "盗贼怪物",
+          "line": 9299
+        },
+        {
+          "name": "吸能怪物",
+          "property": "吸能怪物",
+          "line": 9300
+        },
+        {
+          "name": "剧毒云雾怪物",
+          "property": "剧毒云雾怪物",
+          "line": 9301
+        },
+        {
+          "name": "召唤师怪物",
+          "property": "召唤师怪物",
+          "line": 9302
+        },
+        {
+          "name": "幽灵仆从",
+          "property": "幽灵仆从",
+          "line": 9303
+        },
+        {
+          "name": "萨满怪物",
+          "property": "萨满怪物",
+          "line": 9304
+        },
+        {
+          "name": "大史莱姆怪物",
+          "property": "大史莱姆怪物",
+          "line": 9305
+        },
+        {
+          "name": "小史莱姆怪物",
+          "property": "小史莱姆怪物",
+          "line": 9306
+        },
+        {
+          "name": "瞬移怪物",
+          "property": "瞬移怪物",
+          "line": 9307
+        },
+        {
+          "name": "伪装怪物",
+          "property": "伪装怪物",
+          "line": 9308
+        },
+        {
+          "name": "炸弹怪物",
+          "property": "炸弹怪物",
+          "line": 9309
+        },
+        {
+          "name": "盔甲怪物",
+          "property": "盔甲怪物",
+          "line": 9310
+        },
+        {
+          "name": "敏捷怪物",
+          "property": "敏捷怪物",
+          "line": 9311
+        },
+        {
+          "name": "远攻怪物",
+          "property": "远攻怪物",
+          "line": 9312
+        },
+        {
+          "name": "仙人掌怪物",
+          "property": "仙人掌怪物",
+          "line": 9313
+        },
+        {
+          "name": "冰冻怪物",
+          "property": "冰冻怪物",
+          "line": 9314
+        },
+        {
+          "name": "旋风怪物",
+          "property": "旋风怪物",
+          "line": 9315
+        },
+        {
+          "name": "幽灵怪物",
+          "property": "幽灵怪物",
+          "line": 9316
+        },
+        {
+          "name": "旋风",
+          "property": "旋风",
+          "line": 9317
+        },
+        {
+          "name": "恐惧怪物",
+          "property": "恐惧怪物",
+          "line": 9318
+        },
+        {
+          "name": "米诺陶",
+          "property": "米诺陶",
+          "line": 9319
+        },
+        {
+          "name": "超速怪物",
+          "property": "超速怪物",
+          "line": 9320
+        },
+        {
+          "name": "复活怪物",
+          "property": "复活怪物",
+          "line": 9321
+        },
+        {
+          "name": "娃娃怪物",
+          "property": "娃娃怪物",
+          "line": 9322
+        },
+        {
+          "name": "吸血鬼",
+          "property": "吸血鬼",
+          "line": 9323
+        },
+        {
+          "name": "皇家守卫",
+          "property": "皇家守卫",
+          "line": 9324
+        },
+        {
+          "name": "王座守护者",
+          "property": "王座守护者",
+          "line": 9325
+        },
+        {
+          "name": "墓碑",
+          "property": "墓碑",
+          "line": 9326
+        },
+        {
+          "name": "分裂怪物",
+          "property": "分裂怪物",
+          "line": 9327
+        },
+        {
+          "name": "巨人怪物",
+          "property": "巨人怪物",
+          "line": 9328
+        },
+        {
+          "name": "巨人部位",
+          "property": "巨人部位",
+          "line": 9329
+        },
+        {
+          "name": "移动弹幕",
+          "property": "移动弹幕",
+          "line": 9330
+        },
+        {
+          "name": "蜘蛛怪物",
+          "property": "蜘蛛怪物",
+          "line": 9331
+        },
+        {
+          "name": "骷髅仆从",
+          "property": "骷髅仆从",
+          "line": 9332
+        },
+        {
+          "name": "反弹怪物",
+          "property": "反弹怪物",
+          "line": 9333
+        },
+        {
+          "name": "蜈蚣怪物",
+          "property": "蜈蚣怪物",
+          "line": 9334
+        },
+        {
+          "name": "蜈蚣部位",
+          "property": "蜈蚣部位",
+          "line": 9335
+        },
+        {
+          "name": "水怪",
+          "property": "水怪",
+          "line": 9336
+        },
+        {
+          "name": "窗口",
+          "property": "宠物管理窗口",
+          "line": 33807
+        },
+        {
+          "name": "ans",
+          "property": "ans",
+          "line": 67856
+        }
+      ],
+      "listeners": [
+        {
+          "event": "change",
+          "line": 5887
+        },
+        {
+          "event": "click",
+          "line": 5912
+        },
+        {
+          "event": "click",
+          "line": 5913
+        },
+        {
+          "event": "click",
+          "line": 5914
+        },
+        {
+          "event": "keypress",
+          "line": 5915
+        },
+        {
+          "event": "click",
+          "line": 5920
+        },
+        {
+          "event": "click",
+          "line": 7797
+        },
+        {
+          "event": "click",
+          "line": 7798
+        },
+        {
+          "event": "click",
+          "line": 7799
+        },
+        {
+          "event": "click",
+          "line": 7800
+        },
+        {
+          "event": "click",
+          "line": 7801
+        },
+        {
+          "event": "click",
+          "line": 7802
+        },
+        {
+          "event": "click",
+          "line": 7803
+        },
+        {
+          "event": "click",
+          "line": 7804
+        },
+        {
+          "event": "click",
+          "line": 7805
+        },
+        {
+          "event": "mousedown",
+          "line": 8579
+        },
+        {
+          "event": "mousemove",
+          "line": 8580
+        },
+        {
+          "event": "mouseup",
+          "line": 8581
+        },
+        {
+          "event": "wheel",
+          "line": 8582
+        },
+        {
+          "event": "touchstart",
+          "line": 8584
+        },
+        {
+          "event": "touchmove",
+          "line": 8585
+        },
+        {
+          "event": "touchend",
+          "line": 8586
+        },
+        {
+          "event": "mousemove",
+          "line": 8587
+        },
+        {
+          "event": "click",
+          "line": 8673
+        },
+        {
+          "event": "touchstart",
+          "line": 9019
+        },
+        {
+          "event": "touchmove",
+          "line": 9023
+        },
+        {
+          "event": "touchend",
+          "line": 9024
+        },
+        {
+          "event": "touchcancel",
+          "line": 9025
+        },
+        {
+          "event": "click",
+          "line": 9026
+        },
+        {
+          "event": "wheel",
+          "line": 9027
+        },
+        {
+          "event": "click",
+          "line": 9442
+        },
+        {
+          "event": "click",
+          "line": 27135
+        },
+        {
+          "event": "click",
+          "line": 27157
+        },
+        {
+          "event": "click",
+          "line": 27189
+        },
+        {
+          "event": "click",
+          "line": 33825
+        },
+        {
+          "event": "click",
+          "line": 33947
+        },
+        {
+          "event": "click",
+          "line": 33971
+        },
+        {
+          "event": "click",
+          "line": 34045
+        },
+        {
+          "event": "resize",
+          "line": 38220
+        },
+        {
+          "event": "<dynamic>",
+          "line": 38356
+        },
+        {
+          "event": "<dynamic>",
+          "line": 38362
+        },
+        {
+          "event": "click",
+          "line": 40991
+        },
+        {
+          "event": "click",
+          "line": 41003
+        },
+        {
+          "event": "click",
+          "line": 41011
+        },
+        {
+          "event": "click",
+          "line": 41048
+        },
+        {
+          "event": "click",
+          "line": 41143
+        },
+        {
+          "event": "click",
+          "line": 41158
+        },
+        {
+          "event": "click",
+          "line": 41165
+        },
+        {
+          "event": "touchstart",
+          "line": 43312
+        },
+        {
+          "event": "touchend",
+          "line": 43327
+        },
+        {
+          "event": "touchcancel",
+          "line": 43338
+        },
+        {
+          "event": "click",
+          "line": 49069
+        },
+        {
+          "event": "contextmenu",
+          "line": 49160
+        },
+        {
+          "event": "mouseover",
+          "line": 49199
+        },
+        {
+          "event": "mouseout",
+          "line": 49209
+        },
+        {
+          "event": "click",
+          "line": 49219
+        },
+        {
+          "event": "click",
+          "line": 49293
+        },
+        {
+          "event": "click",
+          "line": 49299
+        },
+        {
+          "event": "click",
+          "line": 49304
+        },
+        {
+          "event": "keydown",
+          "line": 49311
+        },
+        {
+          "event": "keyup",
+          "line": 49432
+        },
+        {
+          "event": "animationend",
+          "line": 49852
+        },
+        {
+          "event": "animationend",
+          "line": 49862
+        },
+        {
+          "event": "scroll",
+          "line": 50069
+        },
+        {
+          "event": "touchstart",
+          "line": 50218
+        },
+        {
+          "event": "touchmove",
+          "line": 50228
+        },
+        {
+          "event": "touchend",
+          "line": 50237
+        },
+        {
+          "event": "touchcancel",
+          "line": 50254
+        },
+        {
+          "event": "touchend",
+          "line": 50271
+        },
+        {
+          "event": "touchcancel",
+          "line": 50272
+        },
+        {
+          "event": "contextmenu",
+          "line": 50275
+        },
+        {
+          "event": "click",
+          "line": 50281
+        },
+        {
+          "event": "click",
+          "line": 51103
+        },
+        {
+          "event": "mouseenter",
+          "line": 51110
+        },
+        {
+          "event": "mouseleave",
+          "line": 51111
+        },
+        {
+          "event": "animationend",
+          "line": 51240
+        },
+        {
+          "event": "click",
+          "line": 52086
+        },
+        {
+          "event": "touchstart",
+          "line": 54216
+        },
+        {
+          "event": "click",
+          "line": 54702
+        },
+        {
+          "event": "animationend",
+          "line": 54941
+        },
+        {
+          "event": "click",
+          "line": 55750
+        },
+        {
+          "event": "click",
+          "line": 55753
+        },
+        {
+          "event": "click",
+          "line": 55757
+        },
+        {
+          "event": "click",
+          "line": 55764
+        },
+        {
+          "event": "click",
+          "line": 55771
+        },
+        {
+          "event": "click",
+          "line": 55781
+        },
+        {
+          "event": "click",
+          "line": 55790
+        },
+        {
+          "event": "load",
+          "line": 55900
+        },
+        {
+          "event": "click",
+          "line": 56068
+        },
+        {
+          "event": "click",
+          "line": 56230
+        },
+        {
+          "event": "click",
+          "line": 56542
+        },
+        {
+          "event": "click",
+          "line": 56546
+        },
+        {
+          "event": "click",
+          "line": 56552
+        },
+        {
+          "event": "mousedown",
+          "line": 56649
+        },
+        {
+          "event": "mousemove",
+          "line": 56650
+        },
+        {
+          "event": "mouseup",
+          "line": 56651
+        },
+        {
+          "event": "touchstart",
+          "line": 56652
+        },
+        {
+          "event": "touchmove",
+          "line": 56653
+        },
+        {
+          "event": "touchend",
+          "line": 56654
+        },
+        {
+          "event": "contextmenu",
+          "line": 56655
+        },
+        {
+          "event": "mousedown",
+          "line": 57009
+        },
+        {
+          "event": "mousemove",
+          "line": 57010
+        },
+        {
+          "event": "mouseup",
+          "line": 57011
+        },
+        {
+          "event": "touchstart",
+          "line": 57012
+        },
+        {
+          "event": "touchmove",
+          "line": 57013
+        },
+        {
+          "event": "touchend",
+          "line": 57014
+        },
+        {
+          "event": "contextmenu",
+          "line": 57015
+        },
+        {
+          "event": "click",
+          "line": 58200
+        },
+        {
+          "event": "change",
+          "line": 59806
+        },
+        {
+          "event": "change",
+          "line": 60804
+        },
+        {
+          "event": "change",
+          "line": 60857
+        },
+        {
+          "event": "change",
+          "line": 60932
+        },
+        {
+          "event": "click",
+          "line": 61620
+        },
+        {
+          "event": "click",
+          "line": 63913
+        },
+        {
+          "event": "click",
+          "line": 64406
+        },
+        {
+          "event": "click",
+          "line": 66184
+        },
+        {
+          "event": "keydown",
+          "line": 66199
+        },
+        {
+          "event": "mousedown",
+          "line": 66200
+        },
+        {
+          "event": "scrollend",
+          "line": 66663
+        },
+        {
+          "event": "scroll",
+          "line": 66666
+        },
+        {
+          "event": "mousedown",
+          "line": 67117
+        },
+        {
+          "event": "wheel",
+          "line": 67126
+        },
+        {
+          "event": "click",
+          "line": 67220
+        },
+        {
+          "event": "click",
+          "line": 67225
+        },
+        {
+          "event": "click",
+          "line": 67230
+        },
+        {
+          "event": "click",
+          "line": 67235
+        },
+        {
+          "event": "initGame",
+          "line": 68210
+        },
+        {
+          "event": "gameover",
+          "line": 68225
+        },
+        {
+          "event": "floorSwitch",
+          "line": 68228
+        },
+        {
+          "event": "worldUpdate",
+          "line": 68314
+        },
+        {
+          "event": "gridEffect",
+          "line": 68435
+        },
+        {
+          "event": "playerMoved",
+          "line": 68439
+        },
+        {
+          "event": "notification",
+          "line": 68451
+        },
+        {
+          "event": "logging",
+          "line": 68454
+        },
+        {
+          "event": "selfUpdate",
+          "line": 68457
+        },
+        {
+          "event": "startUpgradePhase",
+          "line": 68545
+        },
+        {
+          "event": "forceClientFloorSwitch",
+          "line": 68552
+        },
+        {
+          "event": "startPlacement",
+          "line": 68582
+        },
+        {
+          "event": "openConfirm",
+          "line": 68588
+        },
+        {
+          "event": "openUI",
+          "line": 68598
+        },
+        {
+          "event": "connect",
+          "line": 68626
+        },
+        {
+          "event": "connect_error",
+          "line": 68635
+        },
+        {
+          "event": "disconnect",
+          "line": 68642
+        },
+        {
+          "event": "click",
+          "line": 68657
+        },
+        {
+          "event": "click",
+          "line": 68671
+        },
+        {
+          "event": "click",
+          "line": 68673
+        },
+        {
+          "event": "click",
+          "line": 68674
+        },
+        {
+          "event": "resize",
+          "line": 68723
+        }
+      ]
+    },
+    {
+      "page": "ChineseDungeon-Viewer.html",
+      "declarations": [
+        {
+          "name": "单元格",
+          "kind": "ClassDeclaration",
+          "line": 114,
+          "endLine": 118
+        },
+        {
+          "name": "门",
+          "kind": "ClassDeclaration",
+          "line": 120,
+          "endLine": 126
+        },
+        {
+          "name": "哈希字符串",
+          "kind": "FunctionDeclaration",
+          "line": 128,
+          "endLine": 137
+        },
+        {
+          "name": "初始化随机数生成器",
+          "kind": "FunctionDeclaration",
+          "line": 139,
+          "endLine": 145
+        },
+        {
+          "name": "区域是否空闲",
+          "kind": "FunctionDeclaration",
+          "line": 150,
+          "endLine": 173
+        },
+        {
+          "name": "放置房间",
+          "kind": "FunctionDeclaration",
+          "line": 175,
+          "endLine": 186
+        },
+        {
+          "name": "寻找房间入口",
+          "kind": "FunctionDeclaration",
+          "line": 188,
+          "endLine": 204
+        },
+        {
+          "name": "连接房间",
+          "kind": "FunctionDeclaration",
+          "line": 206,
+          "endLine": 236
+        },
+        {
+          "name": "放置门",
+          "kind": "FunctionDeclaration",
+          "line": 238,
+          "endLine": 243
+        },
+        {
+          "name": "生成走廊",
+          "kind": "FunctionDeclaration",
+          "line": 245,
+          "endLine": 252
+        },
+        {
+          "name": "生成墙壁",
+          "kind": "FunctionDeclaration",
+          "line": 254,
+          "endLine": 274
+        },
+        {
+          "name": "添加额外走廊",
+          "kind": "FunctionDeclaration",
+          "line": 276,
+          "endLine": 288
+        },
+        {
+          "name": "处理上锁的门",
+          "kind": "FunctionDeclaration",
+          "line": 290,
+          "endLine": 316
+        },
+        {
+          "name": "放置楼梯",
+          "kind": "FunctionDeclaration",
+          "line": 318,
+          "endLine": 327
+        },
+        {
+          "name": "计算距离图",
+          "kind": "FunctionDeclaration",
+          "line": 329,
+          "endLine": 347
+        },
+        {
+          "name": "generateDungeonForLevel",
+          "kind": "FunctionDeclaration",
+          "line": 350,
+          "endLine": 428
+        },
+        {
+          "name": "drawDungeonOnCanvas",
+          "kind": "FunctionDeclaration",
+          "line": 482,
+          "endLine": 556
+        }
+      ],
+      "globals": [
+        {
+          "name": "prng",
+          "kind": "let",
+          "line": 96
+        },
+        {
+          "name": "房间尺寸范围",
+          "kind": "const",
+          "line": 97
+        },
+        {
+          "name": "最大房间数",
+          "kind": "const",
+          "line": 98
+        },
+        {
+          "name": "地牢大小",
+          "kind": "let",
+          "line": 99
+        },
+        {
+          "name": "颜色表",
+          "kind": "const",
+          "line": 100
+        },
+        {
+          "name": "单元格类型",
+          "kind": "const",
+          "line": 101
+        },
+        {
+          "name": "地牢",
+          "kind": "let",
+          "line": 104
+        },
+        {
+          "name": "房间列表",
+          "kind": "let",
+          "line": 105
+        },
+        {
+          "name": "上锁房间列表",
+          "kind": "let",
+          "line": 106
+        },
+        {
+          "name": "房间地图",
+          "kind": "let",
+          "line": 107
+        },
+        {
+          "name": "门实例列表",
+          "kind": "let",
+          "line": 108
+        },
+        {
+          "name": "玩家初始位置",
+          "kind": "let",
+          "line": 109
+        },
+        {
+          "name": "下楼楼梯位置",
+          "kind": "let",
+          "line": 110
+        },
+        {
+          "name": "上楼楼梯位置",
+          "kind": "let",
+          "line": 111
+        },
+        {
+          "name": "generateButton",
+          "kind": "const",
+          "line": 436
+        },
+        {
+          "name": "seedInput",
+          "kind": "const",
+          "line": 437
+        },
+        {
+          "name": "mapContainer",
+          "kind": "const",
+          "line": 438
+        },
+        {
+          "name": "statusDiv",
+          "kind": "const",
+          "line": 439
+        }
+      ],
+      "registrations": [],
+      "listeners": [
+        {
+          "event": "click",
+          "line": 441
+        }
+      ]
+    },
+    {
+      "page": "LevelManager.html",
+      "declarations": [
+        {
+          "name": "initializeSupabase",
+          "kind": "FunctionDeclaration",
+          "line": 250,
+          "endLine": 263
+        },
+        {
+          "name": "safeEncode",
+          "kind": "FunctionDeclaration",
+          "line": 265,
+          "endLine": 265
+        },
+        {
+          "name": "safeDecode",
+          "kind": "FunctionDeclaration",
+          "line": 266,
+          "endLine": 266
+        },
+        {
+          "name": "generateSignature",
+          "kind": "FunctionDeclaration",
+          "line": 268,
+          "endLine": 275
+        },
+        {
+          "name": "getLevelList",
+          "kind": "FunctionDeclaration",
+          "line": 277,
+          "endLine": 281
+        },
+        {
+          "name": "searchLevels",
+          "kind": "FunctionDeclaration",
+          "line": 284,
+          "endLine": 300
+        },
+        {
+          "name": "uploadLevel",
+          "kind": "FunctionDeclaration",
+          "line": 302,
+          "endLine": 317
+        },
+        {
+          "name": "deleteLevelProcess",
+          "kind": "FunctionDeclaration",
+          "line": 319,
+          "endLine": 339
+        },
+        {
+          "name": "showNotification",
+          "kind": "FunctionDeclaration",
+          "line": 360,
+          "endLine": 378
+        },
+        {
+          "name": "removeNotification",
+          "kind": "FunctionDeclaration",
+          "line": 380,
+          "endLine": 391
+        },
+        {
+          "name": "playLevel",
+          "kind": "FunctionDeclaration",
+          "line": 393,
+          "endLine": 420
+        },
+        {
+          "name": "refreshLevelList",
+          "kind": "FunctionDeclaration",
+          "line": 423,
+          "endLine": 443
+        },
+        {
+          "name": "renderLevelList",
+          "kind": "FunctionDeclaration",
+          "line": 445,
+          "endLine": 472
+        },
+        {
+          "name": "displayLevelDetails",
+          "kind": "FunctionDeclaration",
+          "line": 474,
+          "endLine": 508
+        },
+        {
+          "name": "setActive",
+          "kind": "FunctionDeclaration",
+          "line": 510,
+          "endLine": 513
+        },
+        {
+          "name": "showDeleteModal",
+          "kind": "FunctionDeclaration",
+          "line": 586,
+          "endLine": 590
+        },
+        {
+          "name": "绘制详情小地图",
+          "kind": "FunctionDeclaration",
+          "line": 628,
+          "endLine": 753
+        }
+      ],
+      "globals": [],
+      "registrations": [],
+      "listeners": [
+        {
+          "event": "DOMContentLoaded",
+          "line": 244
+        },
+        {
+          "event": "transitionend",
+          "line": 384
+        },
+        {
+          "event": "click",
+          "line": 465
+        },
+        {
+          "event": "input",
+          "line": 515
+        },
+        {
+          "event": "click",
+          "line": 520
+        },
+        {
+          "event": "click",
+          "line": 521
+        },
+        {
+          "event": "click",
+          "line": 522
+        },
+        {
+          "event": "change",
+          "line": 524
+        },
+        {
+          "event": "submit",
+          "line": 534
+        },
+        {
+          "event": "click",
+          "line": 591
+        },
+        {
+          "event": "click",
+          "line": 592
+        },
+        {
+          "event": "click",
+          "line": 594
+        }
+      ]
+    },
+    {
+      "page": "index.html",
+      "declarations": [],
+      "globals": [],
+      "registrations": [],
+      "listeners": []
+    }
+  ]
+}
