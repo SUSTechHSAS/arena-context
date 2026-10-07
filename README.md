@@ -11,6 +11,7 @@
 | `main` | 通用协议、模板、工作流 |
 | `task/<issue>/main` | 一个任务的已接受版本 |
 | `work/<issue>/<unit>` | 候选工作和远程检查点；PR 指向对应任务分支 |
+| `arena/<自动名称>` | Arena 自动创建的候选分支；从 TASK.md 确定任务，保留原名 |
 | `meta/<unit>` → `main` | 通用协议更新 |
 | `meta/<issue>/<unit>` → 任务分支 | 已有任务的协议更新 |
 | 任务 Issue | 目标、验收要求、你的新指示 |
@@ -22,7 +23,7 @@
 1. **Issues → New issue → Task**：填写目标和验收条件。
 2. 用 `Kibiandkimi` 打开 **Actions → New task → Run workflow**，选择 `main`，填写 Issue 编号。
 3. Action 生成 `task/<issue>/main` 和三个交接文件，运行摘要给出链接；已有分支不会被覆盖。
-4. 从任务分支创建 `work/<issue>/<unit>`，在 Arena 中选择它。也可先选任务分支，明确要求 agent 在修改前创建工作分支。
+4. 在 Arena 选择任务分支或已有候选分支。若 Arena 自动创建 `arena/...`，直接使用该分支；也可自行创建 `work/<issue>/<unit>`。无论哪种，都核对真正的当前分支，不靠分支名猜任务号。
 
 ## 继续任务
 
@@ -35,6 +36,14 @@
 ```
 
 `resume` 继续原工作分支；`restart` 从任务正式分支新建工作分支。普通换会话不新建 PR。每个有效步骤同步保存产物和 STATE，确认远程提交后才算保存成功；未完成或失败状态也可保存。首次推送后建立 Draft PR。
+
+Arena 自动创建分支不等于自动保存。agent 必须主动 commit、push 并验证远程 head。推送后，`Checkpoint → Ensure task PR` 自动创建或复用正确 base 的 Draft PR，随后运行检查；无需等 agent 再手动开 PR。若 Arena 换会话又生成一个分支，则为实际新 head 建立后继 PR，保留前驱链接。
+
+## 每轮模型指纹
+
+每个用户工作轮次先执行 `node .github/scripts/fingerprint.mjs prepare`，模型直接回答返回的约 300 数字探针，再保存原样数组并运行 `score <turn_id>`。评分后在同一轮继续任务，报告候选结果。按用户约定，同一轮内假定模型不变；跨轮不复用、不合并样本。
+
+每次 prepare 都检查 WhatsMyLLM 最新 bank 和阈值；数据兼容且校验通过便立即使用，无需等仓库升级。离线时明确标记缓存版本，评分算法变化时提示需要更新检查器，不下载执行新远程代码。原始样本、结果和所用 bank 快照随检查点保存。详细说明见 [docs/FINGERPRINT.md](docs/FINGERPRINT.md)。
 
 三个交接文件：`TASK.md` 写目标/约束/验收，`STATE.md` 写候选进度/验证/下一步，`DECISIONS.md` 写关键理由和证据。工作分支中的结论仍未经人工审核。
 
