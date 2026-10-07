@@ -8,6 +8,8 @@ Arena 使用 `SUSTechHSAS`；人工负责人/审核者是 `Kibiandkimi`，在仓
 
 这要求普通合并路径先获得人工批准；不移除仓库所有者修改规则的能力，也不单独阻止 agent 在已批准后点击合并。AGENTS.md 明确要求由你执行最终合并。PR 应由 `SUSTechHSAS` 创建，避免人工账户成为无法自批的 PR 作者。
 
+每轮工作还需通过模型门槛：main 的 `.github/fingerprint-policy.json` 指定接受的具体模型 ID，必须得到 Clear match 才继续。score 即时给出 END_TURN/退出码 20 时，agent 只输出原因并结束；不重测，也不再运行 checkpoint 工具。名单修改采用单独维护 PR，合入后自动重检开放任务 PR。
+
 ## 新任务
 
 创建任务 Issue 后，以 `Kibiandkimi` 在 main 运行 `New task`。它把 Issue 正文保存为任务约定，从触发时 main 的 SHA 初始化一个新任务分支，不修改已有任务，不自动发 Issue 评论。Issue 须由两个指定账户之一创建。
