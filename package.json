@@ -8,9 +8,9 @@
     "dev": "vite --host 0.0.0.0",
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src tests/engine scripts/*.mjs *.ts",
+    "lint": "eslint src tests/engine tests/e2e scripts/*.mjs *.ts",
     "test": "node scripts/verify-reference.mjs && vitest run",
-    "test:e2e": "node scripts/verify-reference.mjs && playwright test",
+    "test:e2e": "node scripts/verify-reference.mjs && node scripts/run-browser-tests.mjs",
     "audit:source": "node scripts/audit-source.mjs",
     "audit:check": "node scripts/audit-source.mjs --check",
     "verify:reference": "node scripts/verify-reference.mjs"
