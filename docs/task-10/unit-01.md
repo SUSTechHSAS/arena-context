@@ -71,7 +71,7 @@ game. The full task remains open.
 
 ## Verification
 
-Implementation checkpoint:
+Final local verification (implementation commit `64081ec93778e0689d3483146c7a6e2c3783f98a`):
 
 - `npm run check --prefix app`: reference hashes, TypeScript, **43 tests**, deliberate
   mutation detection, and Vite production build all passed on 2026-10-07.
@@ -92,8 +92,17 @@ Implementation checkpoint:
 - Source HTML has upstream trailing whitespace: full baseline diff whitespace
   checking fails on that unmodified file. Checking all other changed files passes;
   preserving the source checksum takes precedence over formatting vendor content.
-- Dependencies installed with zero reported vulnerabilities. Clean `npm ci` and
-  preview HTTP smoke verification remain to be run before final handoff.
+- Clean `npm ci --prefix app` followed by the complete check passed, with zero
+  vulnerabilities reported by npm at the time of installation. This is not a
+  security audit of the application or upstream game.
+- Production preview bound to `0.0.0.0:4173`. With a `.e2b.app` Host header, HTML,
+  JS, CSS and GPL license requests all returned 200; license bytes match the
+  pinned original. Original HTML is not in the production output.
+- Full clean-install/check output and HTTP smoke results: [verification.txt](verification.txt).
+- Real-browser clicks/keyboard interactions are unverified. The live preview is
+  available for manual review, but no interactive acceptance is claimed.
+- New source, dependency lock and mutation restoration were checked for a clean
+  diff after verification. Build output, dependencies and caches are not committed.
 
 ## Remote review and protocol status
 
@@ -105,6 +114,10 @@ Implementation checkpoint:
   **No current fingerprint: new task changes require Clear match from an accepted model.**
 - Full Actions log archive could not be downloaded (redirected host inaccessible);
   GitHub API annotations were accessible and provided the failure reason.
+- Implementation checkpoint `64081ec93778e0689d3483146c7a6e2c3783f98a` was also
+  pushed and verified against the remote head; PR head/base were rechecked.
+  Its protocol check failed as well. The final documentation checkpoint is
+  verified against the remote at handoff (a file cannot embed its own commit SHA).
 - No owner comments, reviews, or unresolved review threads were present when checked.
 - No checks were bypassed; no auto-merge or merge was requested. The full task,
   broad compatibility, and protocol resolution still require further work/review.

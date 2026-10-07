@@ -6,12 +6,12 @@
 - Accepted base at unit start: 4bfcad36bd762e206576387038836f8848fc40ee (task/10/main)
 - Updated: 2026-10-07
 - Latest session: user approved unit-01 implementation plan
-- Candidate stage: unit implemented; clean-install and preview smoke pending
+- Candidate stage: unit-01 candidate reviewable; protocol blocked
 - Fingerprint: not recorded
 
 ## Current objective
 
-Implement the approved small parity-testing unit, not the full game rewrite.
+Review the completed first parity-testing unit. The full game rewrite remains open.
 
 ## Candidate progress
 
@@ -21,10 +21,11 @@ unmodified-source oracle. Evidence/scope: `docs/task-10/unit-01.md`.
 
 ## Verification
 
-`npm run check --prefix app` passed: hashes, types, 43 tests (including 4,608
-exhaustive small-map comparisons), deliberate mutation detection and build.
-Baseline remote checkpoint verified at `179ede80d9cc7fff793da7d50fecf7e49ce319fa`.
-Clean install and HTTP smoke pending; real-browser interaction not tested.
+Clean `npm ci --prefix app` + `npm run check --prefix app` passed: hashes, types,
+43 tests (including 4,608 exhaustive comparisons), mutation detection and build.
+Preview HTTP smoke passed with .e2b.app host; real-browser interaction untested.
+Log: `docs/task-10/verification.txt`. Implementation remote HEAD verified at
+`64081ec93778e0689d3483146c7a6e2c3783f98a`; final docs push verified at handoff.
 
 ## Blockers and unresolved owner feedback
 
@@ -35,5 +36,6 @@ Rules/checks unchanged; PR #14 has no owner feedback yet. Code is not accepted.
 
 ## Next action
 
-Verify clean npm ci + full check, preview HTTP smoke, then save final evidence,
-push, verify remote head and PR routing. Do not merge or claim protocol approval.
+Owner review PR #14 and resolve the missing-current-fingerprint protocol blocker
+through the authorized process. After review, choose the next bounded parity slice;
+do not assume approval, expand into full-game work, or merge this PR.

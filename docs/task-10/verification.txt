@@ -1,0 +1,75 @@
+Unit 01 clean-install verification — 2026-10-07
+Implementation commit: 64081ec93778e0689d3483146c7a6e2c3783f98a
+v22.22.3
+10.9.8
+
+added 48 packages, and audited 49 packages in 1s
+
+13 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> reforged-chinese-dungeon@0.1.0 check
+> npm run verify:reference && npm run typecheck && npm test && npm run test:mutation && npm run build
+
+
+> reforged-chinese-dungeon@0.1.0 verify:reference
+> node scripts/verify-reference.mjs
+
+Verified 2 reference files at 8d80b5a4dd3d737ed6d3060f05611eaa3de611ab
+
+> reforged-chinese-dungeon@0.1.0 typecheck
+> tsc --noEmit
+
+
+> reforged-chinese-dungeon@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.3 /home/user/arena-context/app
+
+ ✓ tests/distance-map.test.ts (40 tests) 5253ms
+   ✓ unmodified upstream vs TypeScript distance-map behavior (40)
+     ✓ all 512 small wall layouts agree at all 9 start positions 5064ms
+ ✓ tests/reference.test.ts (2 tests) 41ms
+ ✓ tests/app.test.ts (1 test) 12ms
+
+ Test Files  3 passed (3)
+      Tests  43 passed (43)
+   Start at  11:16:14
+   Duration  5.84s (tests 96%, import 2%, transform 2%)
+
+
+> reforged-chinese-dungeon@0.1.0 test:mutation
+> node scripts/check-mutation.mjs
+
+Mutation killed: > 99 → >= 99 failed the distance-horizon parity test.
+Original implementation restored byte-for-byte.
+
+> reforged-chinese-dungeon@0.1.0 build
+> npm run typecheck && vite build
+
+
+> reforged-chinese-dungeon@0.1.0 typecheck
+> tsc --noEmit
+
+vite v8.3.3 building client environment for production...
+transforming...
+✓ 17 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.62 kB │ gzip:  0.43 kB
+dist/assets/index-DUxWwYZn.css    3.67 kB │ gzip:  1.42 kB
+dist/assets/index-BmN9krf5.js   224.53 kB │ gzip: 71.01 kB
+
+✓ built in 130ms
+
+HTTP smoke — production preview on 0.0.0.0:4173
+Host header: 4173-smoke.e2b.app
+/ => 200 text/html
+/assets/index-BmN9krf5.js => 200 text/javascript
+/assets/index-DUxWwYZn.css => 200 text/css
+/LICENSE.txt => 200; bytes match GPL license; sha256=3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986
+Original source HTML is not in app/dist.
+No real-browser interaction test performed; HTTP and server-render smoke only.
