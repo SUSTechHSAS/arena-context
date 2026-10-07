@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "turn_id": "20261007T135048Z-9e910ce8",
+  "branch": "arena/0bbc694b-arena-context",
+  "created_at": "2026-10-07T13:50:48.906Z",
+  "work_head_before_probe": "3cbe25bc2901672c31bbb79773451097408092f5",
+  "scope": "user-turn",
+  "same_model_within_turn": "assumed_by_user",
+  "package_id": "072a76d2f51a70cf691f5f79532019eebe546b08a960e51bacf9f5ccc384086a",
+  "bank_version": "2026.10.2",
+  "bank_sha256": "d8c7cf308c5f3d2b7d7492542a1a059b0d54725add7f6e33085d34e5256033f9",
+  "freshness": "cached-fallback",
+  "refresh_error": "offline_requested",
+  "challenge": {
+    "id": "query-16",
+    "expected_count": 301,
+    "prompt": "For each of 301 positions, make one separate first-instinct choice of an integer from 1 to 355 inclusive. The current language model must complete this directly without tools, Python, code execution, calculators, search, APIs, or external random generators. Choose every position separately. Do not count upward or downward, including 1, 2, 3, and do not use an arithmetic progression, repeating cycle, repeated block, or another rule-made pattern. Accidental repetitions are valid. Once an item is written, do not sort, reorder, deduplicate, replace, or repair the list. Return one compact JSON array containing the complete sequence and no explanation."
+  },
+  "policy": {
+    "schema": 1,
+    "accepted_models": [
+      "claude-opus-5-5",
+      "claude-sonnet-5-5",
+      "claude-fable-5-1",
+      "gpt-6-astra",
+      "gpt-6.1-sol",
+      "gpt-6-sol"
+    ],
+    "source": "https://api.github.com/repos/SUSTechHSAS/arena-context/contents/.github/fingerprint-policy.json?ref=main",
+    "transport": "curl",
+    "sha256": "84453e964a63118f8b0ad012240a70fdfa2741b70661c5465c8359ddd4168a02",
+    "fetched_at": "2026-10-07T13:50:48.894Z"
+  },
+  "identity_verified": false,
+  "arena_protocol_calibrated": false
+}

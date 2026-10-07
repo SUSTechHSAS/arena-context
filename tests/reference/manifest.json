@@ -1,0 +1,52 @@
+{
+  "repository": "SUSTechHSAS/Chinese-Dungeon",
+  "commit": "8d80b5a4dd3d737ed6d3060f05611eaa3de611ab",
+  "files": [
+    {
+      "path": "ChineseDungeon-Viewer.html",
+      "gitBlob": "19bda6309a6b68a3849c12313cd214a4d2059ffb",
+      "bytes": 26359,
+      "sha256": "28b53c1c83a0c005390a6cddddfbad64081895d250e15f1cc177fea2aa7abfdc"
+    },
+    {
+      "path": "ChineseDungeon.html",
+      "gitBlob": "d789cd0b17d44e02e3782c1d6147140c4880e508",
+      "bytes": 2796381,
+      "sha256": "7125146155c481a6dce4a405d0b3d41cecefe88179597e130776b40dd79c2e58"
+    },
+    {
+      "path": "LICENSE",
+      "gitBlob": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "LevelManager.html",
+      "gitBlob": "b1e75cd0190e979cb3c26ed22980515733db8802",
+      "bytes": 41357,
+      "sha256": "c4b4dc348140891b8fb6fb5545832d9df75307823bbc327283677a9e5b371de5"
+    },
+    {
+      "path": "README.md",
+      "gitBlob": "cdff45ea10b2b8c56c9dfb8157645c77d37c7de1",
+      "bytes": 1856,
+      "sha256": "72f6c48e42bc6f614ab253d015bd1fdeb974801a8414c7ba15c27059489bf6d6"
+    },
+    {
+      "path": "index.html",
+      "gitBlob": "49d97059168fd0e6817ffda83f73d3e1ec05f692",
+      "bytes": 977,
+      "sha256": "b115c1afd15a76376776f56cf87deb1c6ebeae751281189bf519b8b1dac0be80"
+    },
+    {
+      "path": "自定义NPC演示.json",
+      "gitBlob": "4ee158e54f32c29e8ca900d3709ab1e97b762180",
+      "bytes": 302208,
+      "sha256": "e6cd92b38c64869c0bf32b047e8dc6fc44f91e0cb0eaf841266fa71d62347bdd"
+    }
+  ],
+  "excluded": [
+    ".github workflows (not runtime inputs)",
+    "screenshot.png (README illustration, not runtime input)"
+  ]
+}

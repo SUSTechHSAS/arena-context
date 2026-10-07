@@ -1,35 +1,29 @@
 # Current handoff
 
 - Task: #10
-- Unit: planning / awaiting owner approval
+- Unit: A1 / frozen legacy source
 - Work branch / PR: arena/0bbc694b-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/15 (Draft, base task/10/main)
 - Accepted base at unit start: task/10/main @ 4bfcad36bd762e206576387038836f8848fc40ee
 - Updated: 2026-10-07
-- Latest session: user-authorized planning without a new fingerprint
-- Candidate stage: plan only; no implementation; not approved
+- Latest session: owner-approved implementation, explicit fingerprint continuation permission
+- Candidate stage: phase A in progress; implementation not accepted
 
 ## Current objective
 
-Submit the complete rewrite plan and consistency acceptance metrics for owner approval before implementation.
+Implement the approved [plan](../docs/TASK-10-PLAN.md), starting with audit and a differential oracle.
 
 ## Candidate progress
 
-Plan: [docs/TASK-10-PLAN.md](../docs/TASK-10-PLAN.md). Proposed React/TypeScript/Vite, isolated game logic, Vitest/Playwright, frozen legacy oracle, phased complete migration including editor and ancillary pages.
-
-User explicitly waived a new fingerprint this turn after independent validation. No new CONTINUE is claimed. Previous denial records remain unchanged at `.context/fingerprints/20261007T133600Z-8c76c38f/`; policy/workflows were not changed.
+A1: frozen seven upstream files at `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`, checksum manifest, source/permission notes, GPL license and verifier. No gameplay rewrite yet. User approval and fingerprint continuation instructions recorded in DECISIONS; denied records unchanged, no passing result claimed.
 
 ## Verification
 
-Actual branch and gh submission identity checked (`SUSTechHSAS`). Remote task base and local HEAD both equal the accepted SHA above; accepted AGENTS.md checksum equals local. Issue #10 OPEN with no comments; no existing PR for actual head at startup. Remote work branch absent before first push.
-
-Upstream main SHA: `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`; GPL-3.0. Read directory/README, main function/class/storage/dependency inventory, portions of Viewer/LevelManager via GitHub API. No runtime, tests, build, full audit or implementation performed. See plan for evidence limits.
+Task base remains `4bfcad3`; remote branch and PR #15 matched inherited `3cbe25b` at startup. gh identity SUSTechHSAS. No Issue/PR review comments. Node v22.22.3 / npm 10.9.8. `node scripts/verify-reference.mjs` passed all seven Git blob/length/SHA-256 checks.
 
 ## Blockers and unresolved owner feedback
 
-Plan and metrics require approval. Browser binaries and production service access are unverified; allowed outbound hosts exclude legacy CDNs/services. Central protocol may reject this manually waived checkpoint; do not claim fingerprint passed or bypass checks.
-
-Planning checkpoint `8a21f91492d710425b47e74377c0e2a573f4657f` pushed and remote SHA verified equal. `git diff --check` passed. No automatic run/PR visible after push and recheck; manually created the single Draft PR #15 with explicit task base. Actions permissions inspection returned HTTP 403 (integration lacks access); automation availability is not established.
+No browser executable found in PATH. CDNs/production services are outside allowed hosts. Central model checks may reject manually authorized work; no policy bypass applied. No runtime or game consistency result yet.
 
 ## Next action
 
-Await owner approval of docs/TASK-10-PLAN.md; then begin phase A only. Final STATE/PR-link checkpoint SHA is provided in the handoff (not self-referentially embedded here). Never merge or bypass protocol checks.
+Save A1 remote checkpoint; continue A2 AST inventory and modern project/test scaffold automatically. PR remains Draft; never merge.

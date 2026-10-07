@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dungeon Viewer</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #4caf50;
+            text-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+        }
+        .controls {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #2c2c2e;
+            border-radius: 8px;
+            border: 1px solid #4a4a4a;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            width: 89.7vw;
+        }
+        input[type="text"] {
+            padding: 8px 12px;
+            background-color: #1a1a1a;
+            border: 1px solid #4a4a4a;
+            color: #e0e0e0;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        button {
+            padding: 8px 16px;
+            font-size: 1em;
+            border: 2px solid #4caf50;
+            border-radius: 6px;
+            background: linear-gradient(145deg, rgba(76, 175, 80, 0.4), rgba(67, 160, 71, 0.3));
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        button:hover {
+            background: linear-gradient(145deg, rgba(76, 175, 80, 0.6), rgba(67, 160, 71, 0.5));
+            border-color: #66bb6a;
+        }
+        #map-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 1600px;
+        }
+        .level-card {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .level-card h2 {
+            margin-top: 0;
+            text-align: center;
+            color: #66bb6a;
+            font-size: 1.2em;
+        }
+        canvas {
+            border: 1px solid #555;
+            background-color: #111;
+            image-rendering: pixelated; /* Ensures sharp pixels when scaled */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dungeon Viewer</h1>
+    <div class="controls">
+        <label for="seedInput">种子</label>
+        <input type="text" id="seedInput" placeholder="留空则随机">
+        <button id="generateButton">生成地图</button>
+    </div>
+    <div id="status"></div>
+    <div id="map-container"></div>
+
+    <script>
+
+    let prng = Math.random;
+    const 房间尺寸范围 = [7, 10];
+    const 最大房间数 = 15;
+    let 地牢大小 = 100;
+    const 颜色表 = ["#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#FF0000", "#800080"];
+    const 单元格类型 = { 墙壁: 0, 房间: 1, 走廊: 2, 门: 3, 上锁的门: 4, 物品: 5, 楼梯下楼: 6, 楼梯上楼: 7, 怪物: 8 };
+    
+    
+    let 地牢 = [];
+    let 房间列表 = [];
+    let 上锁房间列表 = [];
+    let 房间地图 = [];
+    let 门实例列表 = new Map();
+    let 玩家初始位置 = { x: 0, y: 0 };
+    let 下楼楼梯位置 = null;
+    let 上楼楼梯位置 = null;
+
+    // --- Utility Classes and Functions ---
+    class 单元格 {
+        constructor(x, y) {
+            this.x = x; this.y = y; this.类型 = 单元格类型.墙壁; this.墙壁 = { 上: false, 右: false, 下: false, 左: false }; this.钥匙ID = null; this.颜色索引 = 颜色表.length; this.关联物品 = null; this.关联怪物 = null; this.背景类型 = 单元格类型.墙壁; this.isOneWay = false; this.oneWayAllowedDirection = null; this.doorOrientation = null; this.是否强制墙壁 = false; this.阻碍视野 = false;
+        }
+    }
+
+    class 门 {
+        constructor(配置) {
+            this.唯一标识 = Symbol(Date.now().toString() + prng().toString());
+            this.类型 = "门"; this.是否上锁 = false; this.房间ID = 配置.关联房间ID; this.所在位置 = 配置.位置;
+            门实例列表.set(this.唯一标识, this);
+        }
+    }
+    
+    function 哈希字符串(str) {
+        let hash = 0;
+        if (!str || str.length === 0) return hash;
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = (hash << 5) - hash + char;
+            hash |= 0;
+        }
+        return Math.abs(hash);
+    }
+
+    function 初始化随机数生成器(种子) {
+        let 当前种子 = 哈希字符串(种子.toString());
+        prng = () => {
+            当前种子 = (当前种子 * 9301 + 49297) % 233280;
+            return 当前种子 / 233280;
+        };
+    }
+
+    // --- All required dungeon generation functions ---
+    // (These are complex and numerous, so I've included them as a block)
+
+    function 区域是否空闲(x, y, w, h) {
+        for (let i = y; i < y + h; i++) {
+            for (let j = x; j < x + w; j++) {
+                if (i >= 地牢大小 || j >= 地牢大小 || 地牢[i][j].背景类型 !== 单元格类型.墙壁) return false;
+            }
+        }
+        const 缓冲距离 = 2;
+        const xStart = Math.max(0, x - 缓冲距离);
+        const xEnd = Math.min(地牢大小 - 1, x + w - 1 + 缓冲距离);
+        const yStart = Math.max(0, y - 缓冲距离);
+        const yEnd = Math.min(地牢大小 - 1, y + h - 1 + 缓冲距离);
+        for (let yi = yStart; yi <= yEnd; yi++) {
+            for (let xi = xStart; xi <= xEnd; xi++) {
+                let dx = 0, dy = 0;
+                if (xi < x) dx = x - xi;
+                else if (xi >= x + w) dx = xi - (x + w - 1);
+                if (yi < y) dy = y - yi;
+                else if (yi >= y + h) dy = yi - (y + h - 1);
+                const 总距离 = dx + dy;
+                if (总距离 <= 缓冲距离 && 地牢[yi][xi].背景类型 !== 单元格类型.墙壁) return false;
+            }
+        }
+        return true;
+    }
+
+    function 放置房间(房间) {
+        for (let y = 房间.y; y < 房间.y + 房间.h; y++) {
+            for (let x = 房间.x; x < 房间.x + 房间.w; x++) {
+                const 单元格 = 地牢[y][x];
+                单元格.背景类型 = 单元格类型.房间;
+                房间地图[y][x] = 房间.id;
+                单元格.墙壁 = { 上: y === 房间.y, 下: y === 房间.y + 房间.h - 1, 左: x === 房间.x, 右: x === 房间.x + 房间.w - 1 };
+            }
+        }
+        房间.已解锁 = false;
+        return true;
+    }
+
+    function 寻找房间入口(房间, 避开方向 = {}) {
+        const { x, y, w, h } = 房间;
+        const 候选入口 = [];
+        if (!避开方向.上 && y > 0) {
+            for (let i = x + 1; i < x + w - 1; i++) if (地牢[y - 1][i].类型 === 单元格类型.墙壁) 候选入口.push({ x: i, y: y - 1 });
+        }
+        if (!避开方向.下 && y + h < 地牢大小 - 1) {
+            for (let i = x + 1; i < x + w - 1; i++) if (地牢[y + h][i].类型 === 单元格类型.墙壁) 候选入口.push({ x: i, y: y + h });
+        }
+        if (!避开方向.左 && x > 0) {
+            for (let i = y + 1; i < y + h - 1; i++) if (地牢[i][x - 1].类型 === 单元格类型.墙壁) 候选入口.push({ x: x - 1, y: i });
+        }
+        if (!避开方向.右 && x + w < 地牢大小 - 1) {
+            for (let i = y + 1; i < y + h - 1; i++) if (地牢[i][x + w].类型 === 单元格类型.墙壁) 候选入口.push({ x: x + w, y: i });
+        }
+        return 候选入口;
+    }
+
+    function 连接房间(房间A, 房间B) {
+        if (!房间A || !房间B) return;
+        const 相对位置 = { 左: 房间A.x < 房间B.x, 右: 房间A.x > 房间B.x, 上: 房间A.y < 房间B.y, 下: 房间A.y > 房间B.y };
+        const 避开方向 = { 起始: { 左: 相对位置.左, 右: 相对位置.右, 上: 相对位置.上, 下: 相对位置.下 }, 结束: { 左: 相对位置.右, 右: 相对位置.左, 上: 相对位置.下, 下: 相对位置.上 } };
+        const 起始候选 = 寻找房间入口(房间A, 避开方向.起始);
+        const 结束候选 = 寻找房间入口(房间B, 避开方向.结束);
+        if (!起始候选 || !结束候选) return;
+        let 起始 = null, 结束 = null, 最小距离 = Infinity;
+        for (const 房间起始 of 起始候选) {
+            for (const 房间结束 of 结束候选) {
+                const 距离 = Math.abs(房间起始.x - 房间结束.x) + Math.abs(房间起始.y - 房间结束.y);
+                if (距离 < 最小距离) { 最小距离 = 距离; 起始 = 房间起始; 结束 = 房间结束; }
+            }
+        }
+        if (!起始 || !结束) return;
+        let 当前 = { x: 起始.x, y: 起始.y };
+        let 路径 = [当前];
+        let 门 = [];
+        门.push({ x: 起始.x, y: 起始.y, 进入的房间: 房间A });
+        const x轴优先 = Math.abs(结束.x - 起始.x) > Math.abs(结束.y - 起始.y);
+        while (当前.x !== 结束.x || 当前.y !== 结束.y) {
+            const dx = 结束.x - 当前.x, dy = 结束.y - 当前.y;
+            if (x轴优先 && dx !== 0) 当前.x += dx > 0 ? 1 : -1;
+            else if (dy !== 0) 当前.y += dy > 0 ? 1 : -1;
+            else if (!x轴优先 && dx !== 0) 当前.x += dx > 0 ? 1 : -1;
+            路径.push({ x: 当前.x, y: 当前.y });
+        }
+        门.push({ x: 结束.x, y: 结束.y, 进入的房间: 房间B });
+        门.forEach(door => 放置门(door.x, door.y, door.进入的房间));
+        return 路径;
+    }
+    
+    function 放置门(x,y,目标房间) {
+        const 新门 = new 门({ 关联房间ID: 目标房间.id, 位置: { x, y } });
+        地牢[y][x].标识 = 新门.唯一标识;
+        地牢[y][x].背景类型 = 单元格类型.门;
+        if (目标房间 && !目标房间.门.some(d => d.x === x && d.y === y)) 目标房间.门.push({ x, y });
+    }
+
+    function 生成走廊(路径) {
+        for (let i = 0; i < 路径.length; i++) {
+            const { x, y } = 路径[i];
+            if (地牢[y]?.[x] && 地牢[y][x].背景类型 === 单元格类型.墙壁) {
+                地牢[y][x].背景类型 = 单元格类型.走廊;
+            }
+        }
+    }
+    
+    function 生成墙壁() {
+        for (let y = 0; y < 地牢大小; y++) {
+            for (let x = 0; x < 地牢大小; x++) {
+                if ([单元格类型.墙壁, 单元格类型.走廊, 单元格类型.房间].includes(地牢[y][x].背景类型)) {
+                    地牢[y][x].墙壁 = {
+                        上: y > 0 && 地牢[y - 1][x].背景类型 !== 地牢[y][x].背景类型,
+                        下: y < 地牢大小 - 1 && 地牢[y + 1][x].背景类型 !== 地牢[y][x].背景类型,
+                        左: x > 0 && 地牢[y][x - 1].背景类型 !== 地牢[y][x].背景类型,
+                        右: x < 地牢大小 - 1 && 地牢[y][x + 1].背景类型 !== 地牢[y][x].背景类型
+                    };
+                } else {
+                    地牢[y][x].墙壁 = {
+                        上: y > 0 && 地牢[y - 1][x].背景类型 === 单元格类型.墙壁,
+                        下: y < 地牢大小 - 1 && 地牢[y + 1][x].背景类型 === 单元格类型.墙壁,
+                        左: x > 0 && 地牢[y][x - 1].背景类型 === 单元格类型.墙壁,
+                        右: x < 地牢大小 - 1 && 地牢[y][x + 1].背景类型 === 单元格类型.墙壁
+                    };
+                }
+            }
+        }
+    }
+
+    function 添加额外走廊(房间列表, 数量, 已连接房间对) {
+        let 添加次数 = 0, 尝试次数 = 0;
+        while (添加次数 < 数量 && 尝试次数 < 100) {
+            尝试次数++;
+            const 房间A = 房间列表[Math.floor(prng() * 房间列表.length)];
+            const 房间B = 房间列表[Math.floor(prng() * 房间列表.length)];
+            if (房间A === 房间B) continue;
+            const 房间对ID = [房间A.id, 房间B.id].sort().join("-");
+            if (已连接房间对.has(房间对ID)) continue;
+            const 路径 = 连接房间(房间A, 房间B);
+            if (路径) { 已连接房间对.add(房间对ID); 生成走廊(路径); 添加次数++; }
+        }
+    }
+
+    function 处理上锁的门() {
+        const 上锁起始索引 = Math.floor(房间列表.length * 0.5);
+        const 候选房间 = 房间列表.filter(房间 => 房间.门.length > 0 && 房间.id >= 上锁起始索引);
+        const 上锁数量 = Math.min(候选房间.length, Math.floor(prng() * 候选房间.length * 0.5) + 1);
+        for (let i = 0; i < 上锁数量; i++) {
+            if (候选房间.length === 0) break;
+            const 目标房间 = 候选房间.splice(Math.floor(prng() * 候选房间.length), 1)[0];
+            if (目标房间.id !== 0) {
+                const 颜色索引 = i % 颜色表.length;
+                目标房间.门.forEach(主门位置 => {
+                    const 主门单元格 = 地牢[主门位置.y]?.[主门位置.x];
+                    if (主门单元格 && 主门单元格.标识) {
+                        for (let y = 0; y < 地牢大小; y++) {
+                            for (let x = 0; x < 地牢大小; x++) {
+                                if (地牢[y]?.[x]?.标识 === 主门单元格.标识) {
+                                    地牢[y][x].背景类型 = 单元格类型.上锁的门;
+                                    地牢[y][x].钥匙ID = 目标房间.id;
+                                    地牢[y][x].颜色索引 = 颜色索引;
+                                }
+                            }
+                        }
+                    }
+                });
+                上锁房间列表.push({ ...目标房间, 颜色索引 });
+            }
+        }
+    }
+    
+    function 放置楼梯(房间, 图标, 类型) {
+        // Since we are only viewing, we create a placeholder object
+        const 楼梯 = { 图标, 类型 };
+        // We will just store the position for rendering
+        if (类型 === 单元格类型.楼梯下楼) {
+            下楼楼梯位置 = {x: 房间.x + Math.floor(房间.w / 2), y: 房间.y + Math.floor(房间.h / 2)};
+        } else {
+            上楼楼梯位置 = {x: 房间.x + Math.floor(房间.w / 2), y: 房间.y + Math.floor(房间.h / 2)};
+        }
+    }
+
+    function 计算距离图(起始X, 起始Y) {
+        const 距离图 = Array(地牢大小).fill(null).map(() => Array(地牢大小).fill(Infinity));
+        const 队列 = [[起始X, 起始Y, 0]];
+        距离图[起始Y][起始X] = 0;
+        while (队列.length > 0) {
+            const [x, y, 距离] = 队列.shift();
+            const 方向 = [{ dx: 0, dy: -1 }, { dx: 0, dy: 1 }, { dx: -1, dy: 0 }, { dx: 1, dy: 0 }];
+            for (const dir of 方向) {
+                const 新X = x + dir.dx; const 新Y = y + dir.dy;
+                if (新X < 0 || 新X >= 地牢大小 || 新Y < 0 || 新Y >= 地牢大小) continue;
+                if (距离图[新Y][新X] !== Infinity) continue;
+                if (![单元格类型.墙壁, 单元格类型.上锁的门].includes(地牢[新Y][新X].背景类型)) {
+                    距离图[新Y][新X] = 距离 + 1;
+                    队列.push([新X, 新Y, 距离 + 1]);
+                }
+            }
+        }
+        return 距离图;
+    }
+
+    // This is the main generation function adapted from your code
+    function generateDungeonForLevel(level) {
+        // Reset state for this level
+        地牢大小 = 100 + level * 2;
+        地牢 = Array(地牢大小).fill().map((_, y) => Array(地牢大小).fill().map((_, x) => new 单元格(x, y)));
+        房间地图 = Array(地牢大小).fill().map(() => Array(地牢大小).fill(-1));
+        房间列表 = [];
+        上锁房间列表 = [];
+        门实例列表 = new Map();
+        下楼楼梯位置 = null;
+        上楼楼梯位置 = null;
+
+        let 已连接房间对 = new Set();
+        let 房间宽度 = 房间尺寸范围[0] + 2 * Math.floor((prng() * (房间尺寸范围[1] - 房间尺寸范围[0])) / 2);
+        let 房间高度 = 房间尺寸范围[0] + 2 * Math.floor((prng() * (房间尺寸范围[1] - 房间尺寸范围[0])) / 2);
+        let 房间起始X = Math.floor(地牢大小 / 2 - 房间宽度 / 2);
+        let 房间起始Y = Math.floor(地牢大小 / 2 - 房间高度 / 2);
+        房间列表.push({ x: 房间起始X, y: 房间起始Y, w: 房间宽度, h: 房间高度, id: 0, 名称: `房间_0`, 门: [] });
+        放置房间(房间列表[0]);
+
+        for (let i = 1; i < 最大房间数 + level; i++) {
+            let 放置成功 = false;
+            let 尝试次数 = 0;
+            while (!放置成功 && 尝试次数 < 300) {
+                尝试次数++;
+                let 上一个房间 = 房间列表[i - 1];
+                房间宽度 = 房间尺寸范围[0] + 2 * Math.floor((prng() * (房间尺寸范围[1] - 房间尺寸范围[0])) / 2);
+                房间高度 = 房间尺寸范围[0] + 2 * Math.floor((prng() * (房间尺寸范围[1] - 房间尺寸范围[0])) / 2);
+                const 方向 = Math.floor(prng() * 4);
+                const 扩展距离 = Math.floor(prng() * Math.max(0, 尝试次数 - 10)) + 房间尺寸范围[1] + 2;
+                switch (方向) {
+                     case 0: 房间起始X = 上一个房间.x + Math.floor((上一个房间.w - 房间宽度) / 2); 房间起始Y = 上一个房间.y - 房间高度 - 扩展距离; break;
+                     case 1: 房间起始X = 上一个房间.x + 上一个房间.w + 扩展距离; 房间起始Y = 上一个房间.y + Math.floor((上一个房间.h - 房间高度) / 2); break;
+                     case 2: 房间起始X = 上一个房间.x + Math.floor((上一个房间.w - 房间宽度) / 2); 房间起始Y = 上一个房间.y + 上一个房间.h + 扩展距离; break;
+                     case 3: 房间起始X = 上一个房间.x - 房间宽度 - 扩展距离; 房间起始Y = 上一个房间.y + Math.floor((上一个房间.h - 房间高度) / 2); break;
+                }
+                房间起始X = Math.max(5, Math.min(房间起始X, 地牢大小 - 房间宽度 - 5));
+                房间起始Y = Math.max(5, Math.min(房间起始Y, 地牢大小 - 房间高度 - 5));
+                if (区域是否空闲(房间起始X, 房间起始Y, 房间宽度, 房间高度)) {
+                    const 新房间 = { x: 房间起始X, y: 房间起始Y, w: 房间宽度, h: 房间高度, id: i, 名称: `房间_${i}`, 门: [], 类型: "房间" };
+                    房间列表.push(新房间);
+                    放置房间(新房间);
+                    const 房间对ID = [房间列表[i - 1].id, 新房间.id].sort().join("-");
+                    if (!已连接房间对.has(房间对ID)) {
+                        let 路径 = 连接房间(房间列表[i - 1], 新房间);
+                        if (路径) { 生成走廊(路径); 已连接房间对.add(房间对ID); }
+                    }
+                    放置成功 = true;
+                }
+            }
+        }
+        
+        添加额外走廊(房间列表, 5 + level, 已连接房间对);
+        生成墙壁();
+
+        const 第一个房间 = 房间列表[0];
+        玩家初始位置.x = 第一个房间.x + Math.floor(第一个房间.w / 2);
+        玩家初始位置.y = 第一个房间.y + Math.floor(第一个房间.h / 2);
+        
+        if (房间列表.length > 4) 处理上锁的门();
+        
+        const 距离图 = 计算距离图(玩家初始位置.x, 玩家初始位置.y);
+        let 最远距离 = -1;
+        let 最远房间 = null;
+        const 可用房间 = 房间列表.filter(房间 => 房间.id !== 0 && 房间.类型 == "房间");
+        可用房间.forEach(房间 => {
+            const 中心X = 房间.x + Math.floor(房间.w / 2);
+            const 中心Y = 房间.y + Math.floor(房间.h / 2);
+            const 距离 = 距离图[中心Y]?.[中心X];
+            if (距离 !== undefined && 距离 !== Infinity && 距离 > 最远距离) {
+                最远距离 = 距离;
+                最远房间 = 房间;
+            }
+        });
+        
+        if (!最远房间) 最远房间 = 可用房间[Math.floor(prng() * 可用房间.length)];
+        
+        放置楼梯(最远房间, '⬇️', 单元格类型.楼梯下楼);
+        if (level > 0) 放置楼梯(第一个房间, '⬆️', 单元格类型.楼梯上楼);
+    }
+    
+    // ====================================================================================
+    // END: EXTRACTED LOGIC
+    // ====================================================================================
+
+
+    // --- Viewer Specific Logic ---
+    const generateButton = document.getElementById('generateButton');
+    const seedInput = document.getElementById('seedInput');
+    const mapContainer = document.getElementById('map-container');
+    const statusDiv = document.getElementById('status');
+
+    generateButton.addEventListener('click', () => {
+        let seed = seedInput.value.trim();
+        if (!seed) {
+            seed = Date.now().toString();
+            seedInput.value = seed;
+        }
+
+        mapContainer.innerHTML = '';
+        statusDiv.textContent = '正在生成地图... 这可能需要几秒钟。';
+        
+        // Use setTimeout to allow the UI to update before starting the heavy computation
+        setTimeout(() => {
+            for (let i = 0; i <= 15; i++) {
+                const levelCard = document.createElement('div');
+                levelCard.className = 'level-card';
+
+                const title = document.createElement('h2');
+                title.textContent = `第 ${i} 层`;
+                levelCard.appendChild(title);
+
+                const canvas = document.createElement('canvas');
+                canvas.width = 300;
+                canvas.height = 300;
+                levelCard.appendChild(canvas);
+
+                mapContainer.appendChild(levelCard);
+                
+                // --- Generate and Draw ---
+                const currentSeedForLevel = seed;
+                let 当前层数 = i; // Set global for generation function
+                初始化随机数生成器(currentSeedForLevel);
+                for (let j = 0; j < 当前层数; j++) prng(); // Critical step from game logic
+                
+                generateDungeonForLevel(i);
+
+                drawDungeonOnCanvas(canvas.getContext('2d'), 地牢, 房间列表, 玩家初始位置, 下楼楼梯位置, 上楼楼梯位置);
+            }
+            statusDiv.textContent = `为种子 "${seed}" 生成了15层地牢地图。`;
+        }, 10);
+    });
+
+    function drawDungeonOnCanvas(ctx, dungeon, rooms, playerStart, stairsDown, stairsUp) {
+        const canvasWidth = ctx.canvas.width;
+        const canvasHeight = ctx.canvas.height;
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+        let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+        rooms.forEach(room => {
+            minX = Math.min(minX, room.x);
+            minY = Math.min(minY, room.y);
+            maxX = Math.max(maxX, room.x + room.w);
+            maxY = Math.max(maxY, room.y + room.h);
+        });
+        
+        if (minX === Infinity) return; // No rooms to draw
+
+        const mapWidth = maxX - minX;
+        const mapHeight = maxY - minY;
+        const padding = 10;
+        const scale = Math.min((canvasWidth - padding * 2) / mapWidth, (canvasHeight - padding * 2) / mapHeight);
+        
+        const offsetX = (canvasWidth - mapWidth * scale) / 2 - minX * scale;
+        const offsetY = (canvasHeight - mapHeight * scale) / 2 - minY * scale;
+
+        ctx.fillStyle = '#1a1a1a';
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+        // Draw corridors first
+        ctx.fillStyle = '#2b2d42';
+        for(let y = 0; y < dungeon.length; y++) {
+            for (let x = 0; x < dungeon[y].length; x++) {
+                if (dungeon[y][x].背景类型 === 单元格类型.走廊) {
+                    ctx.fillRect(x * scale + offsetX, y * scale + offsetY, scale, scale);
+                }
+            }
+        }
+        
+        // Draw rooms
+        ctx.fillStyle = '#3a506b'; // Fill for rooms
+        ctx.strokeStyle = '#4caf50';
+        rooms.forEach(room => {
+            ctx.fillRect(room.x * scale + offsetX, room.y * scale + offsetY, room.w * scale, room.h * scale);
+            ctx.strokeRect(room.x * scale + offsetX, room.y * scale + offsetY, room.w * scale, room.h * scale);
+        });
+        
+        // Draw doors
+        ctx.fillStyle = '#8b4513';
+        for(let y = 0; y < dungeon.length; y++) {
+            for (let x = 0; x < dungeon[y].length; x++) {
+                if (dungeon[y][x].背景类型 === 单元格类型.门) {
+                    ctx.fillRect(x * scale + offsetX, y * scale + offsetY, scale, scale);
+                } else if (dungeon[y][x].背景类型 === 单元格类型.上锁的门) {
+                    ctx.fillStyle = 颜色表[dungeon[y][x].颜色索引] || '#FFD700';
+                    ctx.fillRect(x * scale + offsetX, y * scale + offsetY, scale, scale);
+                    ctx.fillStyle = '#8b4513'; // Reset
+                }
+            }
+        }
+
+        // Draw player start
+        ctx.fillStyle = 'red';
+        ctx.beginPath();
+        ctx.arc(playerStart.x * scale + offsetX + scale/2, playerStart.y * scale + offsetY + scale/2, scale * 1.5, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        // Draw stairs
+        ctx.font = `${scale*2.5}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        if (stairsDown) {
+            ctx.fillText('⬇️', stairsDown.x * scale + offsetX + scale/2, stairsDown.y * scale + offsetY + scale/2);
+        }
+        if (stairsUp) {
+            ctx.fillText('⬆️', stairsUp.x * scale + offsetX + scale/2, stairsUp.y * scale + offsetY + scale/2);
+        }
+    }
+
+    </script>
+</body>
+</html>
