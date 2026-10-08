@@ -54,7 +54,7 @@ describe('complete viewer exact-source parity (not main gameplay)', () => {
         const actualResult = (() => { try { generator.generate(floor); return null; } catch (error) { return (error as Error).name; } })();
         expect(actualResult, `seed=${seed}, floor=${floor}`).toBe(expectedResult);
         expect(draws).toEqual(Array.from(source.evaluate<number[]>('drawLog')));
-        expect(graphSnapshot(generator.snapshot(), classNames), `seed=${seed}, floor=${floor}`).toEqual(graphSnapshot(source.evaluate(snapshotCode)));
+        expect(JSON.stringify(graphSnapshot(generator.snapshot(), classNames)), `seed=${seed}, floor=${floor}`).toBe(JSON.stringify(graphSnapshot(source.evaluate(snapshotCode))));
       }
     });
   }
@@ -83,7 +83,7 @@ describe('complete viewer exact-source parity (not main gameplay)', () => {
     const second = generator.generate(1);
     expect(second.玩家初始位置).toBe(first.玩家初始位置);
     expect(second.地牢).not.toBe(first.地牢);
-    expect(graphSnapshot(second, classNames)).toEqual(graphSnapshot(source.evaluate(snapshotCode)));
+    expect(JSON.stringify(graphSnapshot(second, classNames))).toBe(JSON.stringify(graphSnapshot(source.evaluate(snapshotCode))));
   });
 
   it('empty rendering exits after clearRect as in the source', () => {
