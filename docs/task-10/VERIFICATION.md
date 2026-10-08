@@ -68,3 +68,7 @@ Not run: domain parity, candidate types/build, original or candidate browser/gam
 - Source class runs directly from its exact AST range; both implementations receive matching deterministic actor/item/UI doubles. Compare every event/state/alias/graph, non-finite/falsy durations, repeated expiry, constructor stacking, strength cap, destruction/drying duplicates and random draw order.
 - Preserved source quirks: remaining zero defaults to duration; actor-stack constructor ticks the new unregistered instance; frozen effects reference player fire even for pets; expiry/progress use the pre-extra-decrement local count. No unreviewed correction.
 - This is NOT gameplay integration: real monster/pet/item factories, their side effects, HUD and the main engine remain pending.
+
+### U03a structural-state correction
+
+Moved label formatting to a pure helper so a pre-existing structural player-effect object does not need a candidate-only method. New exact-source test covers this boundary. Strict types and **10 targeted status tests pass**, **340 isolated trajectories** total; 39 unrelated tests skipped. No original-source change or test weakening.

@@ -1,5 +1,9 @@
 import type { EffectSource, ProgressView, StatusActor, StatusItem, StatusPorts } from './status-ports';
 
+function effectLabel(effect: Pick<StatusEffect, '类型' | '强度'>, remaining: number): string {
+  return `${effect.类型} ${remaining}回合` + (effect.强度 > 1 ? ` (强度 ${effect.强度})` : '');
+}
+
 /** Full source status lifecycle, using explicit domain/UI ports instead of globals. */
 export class StatusEffect {
   #ports: StatusPorts;
@@ -38,11 +42,11 @@ export class StatusEffect {
         this.stack(existing);
         existing.持续时间 = Math.max(existing.持续时间, this.持续时间);
         existing.进度条实例?.更新({ 数值: (existing.剩余回合 / existing.持续时间) * 100,
-          标签: existing.label(existing.剩余回合) });
+          标签: effectLabel(existing, existing.剩余回合) });
         return;
       }
       ports.playerEffects.push(this);
-      this.进度条实例 = ports.progress({ 图标: icon, 颜色: color, 初始值: 100, 标签: this.label(this.剩余回合) });
+      this.进度条实例 = ports.progress({ 图标: icon, 颜色: color, 初始值: 100, 标签: effectLabel(this, this.剩余回合) });
       this.来源?.应用效果();
     } else {
       const table = this.actorTable();
@@ -60,9 +64,6 @@ export class StatusEffect {
     }
   }
 
-  private label(remaining: number): string {
-    return `${this.类型} ${remaining}回合` + (this.强度 > 1 ? ` (强度 ${this.强度})` : '');
-  }
   private stack(existing: StatusEffect): void {
     existing.剩余回合 = Math.max(existing.剩余回合, this.剩余回合);
     existing.强度 = Math.min(5, (existing.强度 || 1) + (this.强度 || 1));
@@ -139,7 +140,7 @@ export class StatusEffect {
     }
     if (this.类型 === '冻结' && ports.playerEffects.some(effect => effect.类型 === '火焰')) this.剩余回合--;
     // Source renders/expires using the local pre-extra-decrement value. Preserve it.
-    if (!actor) this.进度条实例?.更新({ 数值: (remaining / this.持续时间) * 100, 标签: this.label(remaining) });
+    if (!actor) this.进度条实例?.更新({ 数值: (remaining / this.持续时间) * 100, 标签: effectLabel(this, remaining) });
     if (remaining === 0) this.移除状态();
     else this.来源?.应用效果();
   }

@@ -122,6 +122,11 @@ describe('full status-class lifecycle against exact source with explicit actor/U
     return [fire, frozen, petFrozen];
   }));
 
+  it('stacking accepts structural pre-existing player effects without requiring new helper methods', () => compare((add, env) => {
+    env.ports.playerEffects.push({ 类型: '中毒', 剩余回合: 2, 持续时间: 3, 强度: 0 } as StatusEffect);
+    return [add('中毒', 5, null, 'player', 2)];
+  }));
+
   it('permanent actor fire immunity returns unregistered effects without a random draw', () => compare((add, env) => {
     env.pet.永久增益.push({ 类型: '永久抗火' }); env.monster.永久增益.push({ 类型: '永久抗火' });
     const pet = add('火焰', 3, null, 'pet', 1); const monster = add('火焰', 3, null, 'monster', 1);

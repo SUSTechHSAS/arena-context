@@ -14,6 +14,10 @@ Use React/TypeScript/Vite for the new client, keeping domain modules independent
 
 Pin all eight upstream root application/reference files at the independently resolved commit. Retain the original GPL-3.0 license in the snapshot; derivative app code will use the same license and attribution without relicensing the repository's separate Arena protocol. Source workflows are excluded because their behavior is not application functionality. SHA-256 and byte lengths are reviewable in `reference/manifest.json`.
 
+## U03a status-domain ports — candidate design
+
+Move the entire status class’s global actor/item/UI/RNG dependencies behind typed ports. Private port state is not an enumerable save field. Compare the exact original class with matching doubles; do not infer full actor/item/game integration from isolated contract tests. Preserve non-obvious source behavior (zero remaining defaults, newly allocated actor-stack tick, player-fire coupling, local expiry count) until explicitly reviewed. Pure label formatting must accept structural pre-existing state rather than requiring a new candidate-only method.
+
 ## Fingerprint ambiguity maintenance (historical proposal, merged in PR #18)
 
 The owner requested continuation when all statistically indistinguishable models are explicitly accepted. Use the existing fit/separation/family thresholds and the complete bank, not the three display candidates or a model-family wildcard. Preserve family_only and identified_candidate=null; any unaccepted candidate or missing evidence still denies work. CI independently recomputes the set. Previously denied turns remain denied. See docs/FINGERPRINT.md and shared PR #16 for the exact user regression sample and validation. This proposal needs owner review and does not change the domain task contract.

@@ -9,7 +9,7 @@ Original pin: `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`. Anchors refer to `refe
 | Rooms, corridors, caves, floors, stairs, transitions | Main `生成地牢`, `生成洞穴地牢`, `切换楼层`; Viewer `generateDungeonForLevel` | Not ported |
 | Tutorial, professions/custom mode, resume, death/victory | Main `应用职业效果`, `显示职业选择界面`, menus and game handlers | Not ported |
 | Combat/AI and all monster subclasses | Main classes from `怪物` through specialized monsters, minions and bosses | Not ported |
-| Status effects, environment, time, weather, terrain | Main `状态效果`, flame/water/lava/ice/poison/smoke classes and weather handlers | Complete status-class contract port, 9 tests / 339 isolated trajectories with explicit doubles; real actor/item/environment integration and other terrain/weather logic pending |
+| Status effects, environment, time, weather, terrain | Main `状态效果`, flame/water/lava/ice/poison/smoke classes and weather handlers | Complete status-class contract port, 10 tests / 340 isolated trajectories with explicit doubles; real actor/item/environment integration and other terrain/weather logic pending |
 | Items, weapon/armor, potion/scroll, traps/projectiles, durability and fusion | Main `物品`, `武器类`, `防御装备类`, subclasses and fusion handlers | Not ported |
 | Inventory/equipment, stack/sort, coins, crafting, merchant/altar/reforge/well | Main inventory/shop/reforge/altar functions and classes | Not ported |
 | Pets, vehicles, summoned allies and NPCs | Main `宠物`, `马`, `熊猫`, `水母`, `火蜥蜴`, `自定义NPC`, `佣兵单位` | Not ported |
