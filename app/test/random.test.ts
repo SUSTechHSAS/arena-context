@@ -14,8 +14,16 @@ describe('exact-source numeric/random parity', () => {
     for (const input of [...seeds.filter(seed => typeof seed === 'string'), null, undefined, false, 0]) {
       expect(hashString(input)).toBe(oracle.invoke('哈希字符串', input));
     }
-    expect(() => hashString(42)).toThrow();
-    expect(() => oracle.invoke('哈希字符串', 42)).toThrow();
+    // Source reads .length without coercion: truthy non-strings with no length hash to 0.
+    for (const input of [42, true, {}, []]) {
+      expect(hashString(input)).toBe(oracle.invoke('哈希字符串', input));
+      expect(hashString(input)).toBe(0);
+    }
+    // A positive-length object without charCodeAt really does fail in the source.
+    for (const input of [{ length: 1 }, [42]]) {
+      expect(() => hashString(input)).toThrow();
+      expect(() => oracle.invoke('哈希字符串', input)).toThrow();
+    }
   });
 
   it.each(seeds.map((seed, index) => [index, seed] as const))('seed #%i preserves 1000 draws AND states', (_index, seed) => {
