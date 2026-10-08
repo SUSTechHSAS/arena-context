@@ -24,3 +24,7 @@ Arena permits npm/GitHub hosts, not Playwright's browser-download host. `@sparti
 ## Consistency tests
 
 `test/oracle/source.ts` uses TypeScript AST ranges to execute exact original declarations in isolated Node VM contexts. Production `src/` cannot import this module. Hash/LCG/fusion tests check outputs **and** stream state; path tests preserve Infinity, JS truthiness, item constructor identity and the source's distance-100 boundary. Mutation tests compile the actual candidate with a deliberately wrong boundary and verify that the original oracle distinguishes it. Viewer tests also compare complete graphs and every draw across four seeds × sixteen floors, and real-browser tests compare every PNG against the untouched original viewer. These are primitive/viewer contracts, not full main-game parity.
+
+## Current verified checkpoint
+
+`npm run check && npm run test:e2e` passed: eight unchanged original hashes, **5 integrity tests, 110 domain tests, strict types, production build and 4 actual Chromium flows**. Main/manager codecs and defensive-equipment/base/subclass contracts are included, with explicitly matched actor/status/UI doubles. These contracts do not establish a playable main game, save cross-load/custom scripts or live service parity. The full feature matrix remains the acceptance scope.

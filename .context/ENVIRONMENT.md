@@ -13,3 +13,7 @@ Servers must bind `0.0.0.0` and allow `.e2b.app` preview hosts. Browser code mus
 Application dependencies are locked in app/package-lock.json. Run `npm ci --ignore-scripts` in app, then `npm run check` and `npm run test:e2e`. Real Chromium 153 from the npm-hosted @sparticuz/chromium package is available. Its bundled al2023 shared-library archive is explicitly inflated in app/playwright.config.ts, resolving missing NSS/NSPR libraries without apt or an unlisted download. This configuration actually passed on Linux x64; other OS/browser engines are unverified. Temporary /tmp extraction is reproducible and is not the only copy of a deliverable.
 
 Chromium multi-context testing requires filtering out the package’s Lambda-specific --single-process flag. The actual three-test browser suite (including two pages) passed after this change. No test scope was reduced.
+
+## Current live viewer preview — 2026-10-08
+
+`npm run dev -- --port 5173 --strictPort` is managed by the process tool, bound to 0.0.0.0. Host acceptance was verified using an .e2b.app Host header. It serves only the actual rewritten viewer/lab, not a completed main game. Production never enables the original test fixture route. Current functional verification remains the local 110-domain/5-integrity/4-Chromium run, separate from protocol workflow statuses.

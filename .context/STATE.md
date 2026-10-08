@@ -29,7 +29,7 @@ Full evidence/coverage/plan/proposed UI differences: docs/task-10/. Main-game ac
 - 340 isolated status trajectories with explicit doubles, 21 item/comparator tests, main-door contract, 8 codecs tests against both source pages, real browser WebCrypto; not whole-game parity.
 - Armor additions: strict types and 15 targeted differential tests passed (79 unrelated tests explicitly skipped), 438 isolated trajectories against original defense + base item. Subclasses: 16 additional tests / 257 isolated trajectories; 31 combined targeted armor tests passed with 79 others explicitly skipped. The complete 110-test suite/build/4-browser rerun subsequently passed. Two initial strict-type errors were corrected before tests, not bypassed.
 - Armor covers ordered defense/buffs/enchantments, dodge/chip/random order, fire/poison callbacks, thorns/cactus, durability strings/repeated destruction, energy/HUD, inherited equipment and hints; concrete actors/status integration and rendering are still pending.
-- Last verified remote before this checkpoint: b5c32c5838dd828e1ae59fcc84f4dfc9c3996ad9. Base still adccae2; PR #19 remains Draft; no current reviews/unresolved threads at last API check. Previous caafead checkpoint had successful arena/protocol.
+- Last verified remote before this checkpoint: f9ba1af21dd1653dd8e330be4892dd74089b3635. Base still adccae2; PR #19 remains Draft; no current reviews/unresolved threads at last API check. At f9ba1af, API reported successful latest protocol + arena/protocol and checkpoint notify; one earlier protocol run was cancelled. No action-log inference.
 - Viewer preview: 0.0.0.0:5173; .e2b.app Host accepted. npm-bundled Chromium/libs reproducible; Firefox/WebKit/live services untested. Actions logs inaccessible; API metadata accessible.
 
 ## Blockers and unresolved owner feedback
@@ -38,4 +38,4 @@ No routing/environment blocker. Full game and matrix are unfinished; UI proposal
 
 ## Next action
 
-U03e: audit/port the weapon-class contract and concrete actors/actions; all current 110-domain-test checks/build/4 browser flows pass. Preserve and review source API facade requirements before v1/scripts integration. Then integrate concrete entities/action flows and v1 facade/save hydration; keep advancing saved reviewable units.
+U03e: port weapon class (original constructor/getters at JS 13615–13681 and 14158–14259 inspected; full 使用 13683–14025, enchant/chain/target selection 14027–14156 still pending audit/port), then real actors/actions. All current 110-domain-test checks/build/4 browser flows pass. Preserve and review source API facade requirements before v1/scripts integration. Then integrate concrete entities/action flows and v1 facade/save hydration; keep advancing saved reviewable units.
