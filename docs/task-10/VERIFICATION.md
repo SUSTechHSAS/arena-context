@@ -112,3 +112,7 @@ Moved label formatting to a pure helper so a pre-existing structural player-effe
 - Full class-specific constructors/getters/attack/collection/removal/effect-source callbacks are ported; movement/weather/immunity interactions implemented elsewhere in the original game are not claimed by constructor descriptions.
 - Strict types and **31 combined targeted tests passed** (15 defense + 16 subclasses), 79 unrelated tests skipped. Subclasses: **257 isolated trajectories** (12×6 constructors/hints/inherited actions + 12×5×3 attack/draw cases + charged identity sequence + 2 bush sequences + 2 destroyed post-super branches).
 - Preserve config spread vs deliberately ignored config distinctions, overridden Map-data spread, guardian/pyromaniac zero-defense falling back through base class, unconditional post-super ice/psychic draws, lightning source identity/effect lookup, bush clearing/paint without base timer cleanup. Actor/status factories and icon lookups remain explicit doubles.
+
+## U03d complete regression — 2026-10-08
+
+`npm run check && npm run test:e2e` passed: **8 reference hashes, 5 integrity tests, strict types, 110 domain tests, production build, 4 real Chromium tests**. Defense base and all twelve subclasses are included; their **695 isolated trajectories** use explicit actor/status/icon/UI doubles. Full game/actions/movement/weather/equipment policy and save/script integration remain unimplemented, not established by this result.

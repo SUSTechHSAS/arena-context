@@ -24,12 +24,12 @@ Full evidence/coverage/plan/proposed UI differences: docs/task-10/. Main-game ac
 
 ## Verification
 
-- Latest `npm run check && npm run test:e2e` passed: 8 source hashes, 5 integrity tests, strict types, 79 domain tests, production build, 4 actual Chromium tests.
+- Latest `npm run check && npm run test:e2e` passed: 8 source hashes, 5 integrity tests, strict types, 110 domain tests, production build, 4 actual Chromium tests.
 - 20×1000 draws/states; 1024 small-map/start cases; actual boundary mutant rejected; 4×16 viewer graphs/draw trajectories, six renderer traces and 16 real PNGs match.
 - 340 isolated status trajectories with explicit doubles, 21 item/comparator tests, main-door contract, 8 codecs tests against both source pages, real browser WebCrypto; not whole-game parity.
-- Armor additions: strict types and 15 targeted differential tests passed (79 unrelated tests explicitly skipped), 438 isolated trajectories against original defense + base item. Subclasses: 16 additional tests / 257 isolated trajectories; 31 combined targeted armor tests passed with 79 others explicitly skipped. Full 110-test suite/build/browser rerun is pending. Two initial strict-type errors were corrected before tests, not bypassed.
+- Armor additions: strict types and 15 targeted differential tests passed (79 unrelated tests explicitly skipped), 438 isolated trajectories against original defense + base item. Subclasses: 16 additional tests / 257 isolated trajectories; 31 combined targeted armor tests passed with 79 others explicitly skipped. The complete 110-test suite/build/4-browser rerun subsequently passed. Two initial strict-type errors were corrected before tests, not bypassed.
 - Armor covers ordered defense/buffs/enchantments, dodge/chip/random order, fire/poison callbacks, thorns/cactus, durability strings/repeated destruction, energy/HUD, inherited equipment and hints; concrete actors/status integration and rendering are still pending.
-- Last verified remote before this unit: b44945572a9a3a0e2e2473d83c200d27d38378fb. Base still adccae2; PR #19 remains Draft; no current reviews/unresolved threads at last API check. Previous caafead checkpoint had successful arena/protocol.
+- Last verified remote before this checkpoint: b5c32c5838dd828e1ae59fcc84f4dfc9c3996ad9. Base still adccae2; PR #19 remains Draft; no current reviews/unresolved threads at last API check. Previous caafead checkpoint had successful arena/protocol.
 - Viewer preview: 0.0.0.0:5173; .e2b.app Host accepted. npm-bundled Chromium/libs reproducible; Firefox/WebKit/live services untested. Actions logs inaccessible; API metadata accessible.
 
 ## Blockers and unresolved owner feedback
@@ -38,4 +38,4 @@ No routing/environment blocker. Full game and matrix are unfinished; UI proposal
 
 ## Next action
 
-Run combined 110-domain-test check/build/4 browser flows, then port the weapon-class contract and concrete actors/actions. Preserve and review source API facade requirements before v1/scripts integration. Then integrate concrete entities/action flows and v1 facade/save hydration; keep advancing saved reviewable units.
+U03e: audit/port the weapon-class contract and concrete actors/actions; all current 110-domain-test checks/build/4 browser flows pass. Preserve and review source API facade requirements before v1/scripts integration. Then integrate concrete entities/action flows and v1 facade/save hydration; keep advancing saved reviewable units.

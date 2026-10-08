@@ -17,12 +17,12 @@ Refs #10
 
 `npm ci --ignore-scripts`, then `npm run check && npm run test:e2e` in app.
 
-- 8 unchanged reference files; 5 integrity tests; strict types; 79 domain tests; production build; 4 actual Chromium tests passed after U05a.
+- 8 unchanged reference files; 5 integrity tests; strict types; 110 domain tests; production build; 4 actual Chromium tests passed after U03d.
 - 20 seeds × 1000 draws/states; 1024 exhaustive small-map/start cases; real wrong-boundary candidate-source mutation rejected.
 - 4 seeds × 16 viewer floor trajectories compare full state/identity graphs and every draw; six ordered renderer traces; every one of 16 real canvas PNGs exactly equals untouched source viewer.
-- Status has 340 isolated trajectories with explicitly matched actor/item/UI doubles, not gameplay parity. Item constructors/equipment/slots/maps/timers/stacking/destruction and door short-circuit behavior match exact source contracts.
+- Status has 340 isolated trajectories with explicitly matched actor/item/UI doubles, not gameplay parity. Item constructors/equipment/slots/maps/timers/stacking/destruction and door short-circuit behavior match exact source contracts. Defense base + all 12 direct defensive subclasses pass 31 tests / 695 isolated trajectories with explicit doubles; concrete game interactions are pending.
 - Reproducible npm-hosted Chromium/libs, no forbidden CDN/apt download; preview binds 0.0.0.0 and accepts .e2b.app.
-- Getter/proxy-safe graph diagnostics and shared-codec/nested-oracle changes are included in the full 79-test/4-browser run. The original NPC example is unsigned version 1532; signing it is not save cross-load or authentication proof.
+- Getter/proxy-safe graph diagnostics and shared-codec/nested-oracle changes are included in the full 110-test/4-browser run. The original NPC example is unsigned version 1532; signing it is not save cross-load or authentication proof.
 
 ## Protocol and review boundaries
 
