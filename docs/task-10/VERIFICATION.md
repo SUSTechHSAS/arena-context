@@ -25,3 +25,10 @@ Not run: domain parity, candidate types/build, original or candidate browser/gam
 - `npm install --ignore-scripts --no-fund` in app: 66 packages installed, lockfile saved, audit reported zero vulnerabilities. No browser/CDN download from an unlisted host.
 - First `npm run check`: eight reference hashes and five integrity tests passed; strict TypeScript passed; Vitest **29/30 passed**, one failed assertion, so build did not run.
 - Failed assertion was in the test, not production: original hash(42) reads an absent .length and returns zero, rather than throwing. Verified against original AST body; test changed to compare non-string zero behavior and genuine positive-length/charCodeAt errors. The original/candidate source was not changed to satisfy an invented contract. Corrected rerun and Chromium validation are not yet claimed.
+
+## U01 corrected checks — 2026-10-08
+
+- `npm run check` in app passed: 8 source hashes, 5 integrity tests, strict TypeScript, **30 Vitest tests**, Vite production build.
+- 20 seeds × 1000 exact draws plus states; 1024 exhaustive two-by-two map/start combinations; asymmetric walls, instanceof/subclasses, JS truthiness, Infinity and distance-100 tested.
+- Actual TypeScript candidate text compiled with `> 99` changed to `>= 99` differs from the original oracle; unmodified implementation matches. This is primitive mutation coverage, not a gameplay trajectory.
+- `npm run test:e2e` failed before page assertions: npm-hosted Chromium executable extracted successfully but libnspr4.so, libnss3.so and libnssutil3.so missing. The package also contains al2023.tar.br; investigate local library extraction. No browser pass claimed.

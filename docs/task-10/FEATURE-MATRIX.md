@@ -4,8 +4,8 @@ Original pin: `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`. Anchors refer to `refe
 
 | Surface | Original evidence | Candidate implementation / actual verification |
 |---|---|---|
-| RNG, hashing, fusion random, seed searching | Main `哈希字符串`, `种子伪随机数`, `初始化随机数生成器`, `开始筛选种子`; Viewer L129–149 | Not ported |
-| Cell types, walls, doors, locks/keys, pathfinding and visibility | Main classes `单元格`, `门`, `生成玩家距离图`, `计算距离图`; Viewer L105+ | Not ported |
+| RNG, hashing, fusion random, seed searching | Main `哈希字符串`, `种子伪随机数`, `初始化随机数生成器`, `开始筛选种子`; Viewer L129–149 | Primitive hash/LCG/fusion ported; 24 tests pass, 20×1000 draws/states; full seed-search/game integration pending |
+| Cell types, walls, doors, locks/keys, pathfinding and visibility | Main classes `单元格`, `门`, `生成玩家距离图`, `计算距离图`; Viewer L105+ | Player-distance primitive ported; 6 tests including 1024 map/start cases and a detected boundary mutant; item/door lifecycle and game integration pending |
 | Rooms, corridors, caves, floors, stairs, transitions | Main `生成地牢`, `生成洞穴地牢`, `切换楼层`; Viewer `generateDungeonForLevel` | Not ported |
 | Tutorial, professions/custom mode, resume, death/victory | Main `应用职业效果`, `显示职业选择界面`, menus and game handlers | Not ported |
 | Combat/AI and all monster subclasses | Main classes from `怪物` through specialized monsters, minions and bosses | Not ported |
@@ -32,4 +32,4 @@ Original pin: `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`. Anchors refer to `refe
 - Multiplayer asks for a server URL and dynamically loads Socket.io. The rewrite must not introduce a hard-coded browser call to sandbox localhost. Live multiplayer/server behavior cannot be established without an accessible service.
 - A modern module's strictness, Unicode seed handling and numeric optimizations can change source behavior. Tests must catch these; do not substitute an optimized algorithm on intuition alone.
 
-All domain rows are pending at U00. Preserving the reference or listing a source function is not evidence of rewrite coverage.
+Rows are updated only with actual candidate verification. Preserving the reference or listing a source function is not evidence of rewrite coverage.
