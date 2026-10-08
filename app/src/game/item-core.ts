@@ -5,7 +5,7 @@ export interface ItemConfig {
   类型?: string; 名称?: string; 图标?: string; 品质?: number; 堆叠数量?: number; 材质?: string | null;
   最大堆叠数量?: number; 颜色索引?: number | null; 数据?: Map<unknown, unknown> | Record<string, unknown>;
   唯一标识?: symbol | null; 已装备?: boolean | number; x?: number | null; y?: number | null;
-  强化?: boolean; 能否拾起?: boolean; 是否正常物品?: boolean; 效果描述?: string;
+  强化?: boolean; 能否拾起?: boolean; 是否正常物品?: boolean; 效果描述?: string | null;
   是否隐藏?: boolean; 是否为隐藏物品?: boolean; 阻碍怪物?: boolean; 是否被丢弃?: boolean | null;
 }
 export interface ItemPorts {

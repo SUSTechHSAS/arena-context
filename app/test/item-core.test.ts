@@ -3,6 +3,7 @@ import { ItemCore, MATERIALS, type ItemConfig, type ItemPorts } from '../src/gam
 import { sourceDeepEqual } from '../src/domain/source-deep-equal';
 import { createOracle } from './oracle/source';
 import { graphSnapshot } from './oracle/graph';
+import { copyInputs } from './oracle/inputs';
 
 function world() {
   const events: unknown[][] = []; let draws = 0;
@@ -22,24 +23,6 @@ function world() {
     formatBuff: buff => JSON.stringify(buff), describeEnchantments: value => `enchant:${JSON.stringify(value)}`,
   };
   return { ports, events, FixedDate, WeaponStub, summary: () => ({ draws, events, equipment: ports.equipment, timers: ports.timers, cells: ports.cells }) };
-}
-function copyInputs<T>(value: T, seen = new Map<object, object>()): T {
-  if (value === null || typeof value !== 'object') return value;
-  if (seen.has(value)) return seen.get(value) as T;
-  if (value instanceof Map) {
-    const result = new Map(); seen.set(value, result);
-    for (const [key, item] of value) result.set(copyInputs(key, seen), copyInputs(item, seen));
-    return result as T;
-  }
-  const result = Array.isArray(value) ? new Array(value.length) : Object.create(Object.getPrototypeOf(value)) as object;
-  seen.set(value, result);
-  for (const key of Reflect.ownKeys(value)) {
-    if (Array.isArray(value) && key === 'length') continue;
-    const descriptor = Object.getOwnPropertyDescriptor(value, key)!;
-    if (!('value' in descriptor)) throw new Error('No accessor inputs in this fixture copier');
-    Object.defineProperty(result, key, { ...descriptor, value: copyInputs(descriptor.value, seen) });
-  }
-  return result as T;
 }
 function compare(configs: ItemConfig[], action: (items: ItemCore[], ports: ItemPorts) => unknown = () => null, weapon = false) {
   const first = world(); const second = world();

@@ -1,7 +1,7 @@
 # Current handoff
 
 - Task: #10
-- Unit: U05a — shared codecs verified; U03c armor next
+- Unit: U03c — defensive equipment logic
 - Work branch / PR: arena/db5ddb58-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/19
 - Accepted base at unit start: task/10/main@adccae2f9fbc13b9ffd7a5a97b9150d24409f166
 - Fingerprint: .context/fingerprints/20261008T080439Z-cbb0a01f/report.json
@@ -16,7 +16,7 @@ Fresh modern-framework rewrite with original-source consistency tests and the un
 
 ## Candidate progress
 
-Frozen all eight upstream root files at independent pin 8d80b5a with GPL and checksums. React/strict TypeScript/Vite implements the complete viewer and a seed lab. Hash/LCG/fusion/player-distance, full isolated status lifecycle, base-item data/lifecycle, main doors and shared save/workshop codecs/signature format are ported. Original code only runs in explicit test oracles/fixture mode, never production.
+Frozen all eight upstream root files at independent pin 8d80b5a with GPL and checksums. React/strict TypeScript/Vite implements the complete viewer and a seed lab. Hash/LCG/fusion/player-distance, full isolated status lifecycle, base-item data/lifecycle, main doors and shared save/workshop codecs/signature format and complete defensive-equipment logic are ported. Original code only runs in explicit test oracles/fixture mode, never production.
 
 Viewer comparisons preserve fields/aliases/Symbols/every draw and all 16 browser PNGs. Item/status ports and explicit graph diagnostics preserve non-finite/truthiness/identity semantics. Codec contracts distinguish main warnings from quiet manager fallback and sign exact strings/order, not canonical JSON or authentication. Original unsigned NPC fixture is version 1532; no save cross-load claimed.
 
@@ -27,8 +27,9 @@ Full evidence/coverage/plan/proposed UI differences: docs/task-10/. Main-game ac
 - Latest `npm run check && npm run test:e2e` passed: 8 source hashes, 5 integrity tests, strict types, 79 domain tests, production build, 4 actual Chromium tests.
 - 20×1000 draws/states; 1024 small-map/start cases; actual boundary mutant rejected; 4×16 viewer graphs/draw trajectories, six renderer traces and 16 real PNGs match.
 - 340 isolated status trajectories with explicit doubles, 21 item/comparator tests, main-door contract, 8 codecs tests against both source pages, real browser WebCrypto; not whole-game parity.
-- Proxy/getter-safe graph diagnostics included in this full run. No touched production code after tests; documentation checkpoint follows.
-- Last verified remote before this unit: 80eb477ff3bb7822da6d1241483cfdddecd1a5bd. Base still adccae2; PR #19 remains Draft; no current reviews/unresolved threads at last API check. Previous caafead checkpoint had successful arena/protocol.
+- Armor additions: strict types and 15 targeted differential tests passed (79 unrelated tests explicitly skipped), 438 isolated trajectories against original defense + base item. Full 94-test suite/build rerun pending. Two initial strict-type errors were corrected before tests, not bypassed.
+- Armor covers ordered defense/buffs/enchantments, dodge/chip/random order, fire/poison callbacks, thorns/cactus, durability strings/repeated destruction, energy/HUD, inherited equipment and hints; concrete actors/status integration and rendering are still pending.
+- Last verified remote before this unit: 071790ddb976727b56e17465fb3d46f7a88e93dd. Base still adccae2; PR #19 remains Draft; no current reviews/unresolved threads at last API check. Previous caafead checkpoint had successful arena/protocol.
 - Viewer preview: 0.0.0.0:5173; .e2b.app Host accepted. npm-bundled Chromium/libs reproducible; Firefox/WebKit/live services untested. Actions logs inaccessible; API metadata accessible.
 
 ## Blockers and unresolved owner feedback
@@ -37,4 +38,4 @@ No routing/environment blocker. Full game and matrix are unfinished; UI proposal
 
 ## Next action
 
-U03c: audit and port the defensive-equipment class against the original base item, preserving durability/material/equipment/stat callbacks with explicit ports and differential tests. Then integrate concrete entities/action flows and v1 facade/save hydration; keep advancing saved reviewable units.
+U03d: port concrete defensive-item constructor/configuration classes, then audit weapon logic; run combined checks with the new armor tests. Then integrate concrete entities/action flows and v1 facade/save hydration; keep advancing saved reviewable units.

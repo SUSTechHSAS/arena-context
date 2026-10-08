@@ -98,3 +98,10 @@ Moved label formatting to a pure helper so a pre-existing structural player-effe
 ## U05a full verification — 2026-10-08
 
 `npm run check && npm run test:e2e` passed with **8 original hashes, 5 integrity tests, strict TypeScript, 79 domain tests, production build and 4 real Chromium tests**. Includes the new codec/nested-oracle/getter/proxy changes and actual unsigned-NPC payload signing comparison against both source functions. No cross-load, actor/script integration or authentication claim. Production UI remains the viewer/lab; next unit is defensive-equipment contracts.
+
+## U03c defensive-equipment logic — 2026-10-08
+
+- Independently ported full defense constructor/getters/attack/hint/use logic on ItemCore, with explicit actor/status/player/destroy/UI ports. Base-item DOM methods and concrete actors/derived subclasses remain pending.
+- Strict types and **15 targeted tests passed**, 79 unrelated tests skipped; **438 isolated trajectories** (12 constructor profiles + 420 profile/damage/attacker cases + 1 repeated attack sequence + 5 ordered/energy cases). Exact source base + defense class execute with matched doubles; copied input graphs retain aliases.
+- Preserve first duplicate enchant selection after any-positive test; ordered fusion additions/multipliers/first synergy; post-dodge chip draw; poison draw gated on healthy source monster; repeated destroyed callbacks; unbreakable durability still becomes a decimal string; upper-only energy clamp including zero/NaN denominator. Compare every state/event/draw and hint/error result.
+- Initial TypeScript errors (structural ctor narrowing to never and deliberate explicit-undefined raw profile) were corrected without weakening strict options or bypassing logical tests.
