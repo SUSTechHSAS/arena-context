@@ -1,46 +1,38 @@
 # Current handoff
 
 - Task: #10
-- Unit: U02b — React viewer and real-source browser comparison prepared
+- Unit: U02 — complete viewer and original-browser parity
 - Work branch / PR: arena/db5ddb58-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/19
 - Accepted base at unit start: task/10/main@adccae2f9fbc13b9ffd7a5a97b9150d24409f166
 - Fingerprint: .context/fingerprints/20261008T080439Z-cbb0a01f/report.json
 - Updated: 2026-10-08
-- Candidate stage: U02 full unit checks/build pass; multi-context browser rerun pending
+- Candidate stage: U00/U01/U02 complete; full main-game rewrite pending
 
 This card does not establish approval; only Kibiandkimi decides acceptance.
 
 ## Current objective
 
-Implement a fresh modern-framework rewrite with independent original-source consistency tests, retaining the accepted TASK.md behavior contract.
+Fresh modern-framework rewrite with independent original-source consistency tests, without weakening TASK.md. Owner selected fresh work; prior candidates #14/#15 are not inherited.
 
 ## Candidate progress
 
-The owner chose a fresh implementation from the accepted task head; #14/#15 are not inherited. U00 froze all eight root application/reference files from independently resolved upstream `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`, including license, viewer, manager and NPC example. `reference/manifest.json` records exact SHA-256 and size. Verification code rejects changed bytes, identity, duplicate and escaping paths.
+All eight upstream root files are frozen at independently resolved 8d80b5a with GPL and checksums. React/strict TypeScript/Vite client has an engine lab and complete rewritten viewer (separate from main-game generation). Hash/LCG/fusion/player-distance primitives are ported. Original code executes only in AST/VM test oracles and an explicitly enabled test-dev fixture route, not production.
 
-`docs/task-10/PLAN.md` stages a React/TypeScript/Vite rewrite; `FEATURE-MATRIX.md` tracks the entire source surface and `SOURCE-INVENTORY.md` provides a lexical declaration audit. Every domain category remains unported. Proposed source defects/deviations are not approved. Recovery inputs and environment limits are recorded in RESOURCES.md and ENVIRONMENT.md.
-
-The exact current-turn fingerprint and cached bank are preserved; CONTINUE is accepted complete ambiguity, not unique identity certification.
-
-U01 independently ports UTF-16 hash, dungeon LCG, stateless fusion random and the player distance-map primitive. React/TypeScript/Vite boot has no original-script execution. A test-only AST oracle reads exact original declarations. Corrected domain suite is 30/30; 20 seeds compare 1000 draws/states each, 1024 small-map/start combinations match, and a real >=99 candidate-source mutant is rejected. Source integrity remains 5/5. Strict typecheck and production build pass. The initial real-browser launch failed on missing libraries; explicitly inflating the npm package’s bundled al2023 archive fixed it. Real Chromium now passes the offline boot/seed replay test (1/1), with zero page errors. No system dependency or unlisted download was used.
-
-U02a independently implements the complete original viewer in typed, stateful modules (not the main-game generator). It preserves cells/rooms/locks/stairs, mutable aliases, Symbols/door maps and random-call order. Rendering is a deterministic adapter with source-identical ordered canvas commands. A diagnostic graph distinguishes identity, missing/undefined, sparse holes, non-finite numbers, descriptors and symbols without invoking accessors. Production does not execute the original script.
-
-U02b adds React viewer controls/16 cards, exact renderer canvases, offline responsive layout and test-only original-page middleware enabled solely by ORACLE_TEST_MODE=1. Prepared browser tests compare all 16 source/candidate PNGs and blank-seed/mobile/keyboard flows. Source import-boundary test excludes fixture/oracle code from src; graph comparisons serialize explicit lossless tags instead of expensive recursive Vitest traversal. The full combined suite now passes 39 domain tests, 5 integrity tests, strict types and production build. Browser run passed 2/3 but source-candidate comparison failed before assertions while creating its page/context. Lambda single-process Chromium flag removed for the next multi-context rerun; do not claim canvas pixels match until it actually runs. UI proposals are listed in `docs/task-10/DEVIATIONS.md`.
+Viewer preserves every field/alias/door Symbol and random draw. Source-style ordered rendering and all 16 real browser canvas PNGs match. Responsive controls, navigation/count/error-handling differences are explicit unaccepted proposals in DEVIATIONS.md. Full matrix, staged plan and evidence: docs/task-10/.
 
 ## Verification
 
-- `node scripts/verify-reference.mjs`: all eight original files unchanged.
-- `node --test tests/reference.test.mjs`: 5/5 passed, including deliberate one-byte source mutation detection; not gameplay parity.
-- `git diff --check`: passed. Detailed evidence: `docs/task-10/VERIFICATION.md`.
-- Last verified remote checkpoint before this checkpoint: `23b87ed3201fbef106cd1bee95e2ffbafada5963`. Startup checkpoint 3b3ad88 passed arena/protocol; later domain CI/results are not inferred.
-- U02a strict typecheck passed; targeted `viewer|graph diagnostics` run passed 8 tests (30 unrelated tests deliberately skipped), including 4 seeds × floors 0–15, every draw and complete state graph, six ordered-render cases, reuse/empty-render diagnostics. Runtime was ~77 seconds. Full combined suite/build/React viewer browser checks are not yet run.
-- U01 `npm run typecheck && npm run test:e2e` after the library fix: passed strict types and 1 real Chromium test. No rewritten gameplay/other browser engines/live services yet. Actions logs inaccessible, API check metadata accessible.
+- `npm run check` in app: eight original hashes, 5 integrity tests, strict types, 39 domain tests and production build passed.
+- `npm run test:e2e` after removing Lambda single-process mode: 3/3 actual Chromium tests passed, including untouched-original/candidate 16-PNG equality, offline lab replay and mobile/time-seed/keyboard flow.
+- Primitive evidence: 20×1000 draws plus states, 1024 exhaustive small-map/start combinations and actual wrong-boundary candidate-source mutation detection.
+- Viewer evidence: 4 seeds×16 floor trajectories, all random draws/full identity-aware graphs, six render-command comparisons, session aliases/empty rendering.
+- Last verified remote checkpoint before this unit: 53effee8cad720ba0f3e36897081fc6045e40eb3. Worktree and STATE are committed/pushed together at every checkpoint.
+- No main-game trajectories, save cross-load, full entity/UI/editor or live service parity yet. Firefox/WebKit and other OS untested. Actions logs inaccessible; API status metadata accessible.
 
 ## Blockers and unresolved owner feedback
 
-No routing blocker. Full implementation and parity coverage remain pending. Record suspected defects and behavioral differences for Kibiandkimi review instead of silently changing behavior.
+No routing/environment blocker remains. Main gameplay and the rest of the matrix are unfinished, so PR stays Draft. No intentional deviation is declared owner-approved.
 
 ## Next action
 
-Rerun all real Chromium flows after removing Lambda single-process mode; if actual canvas parity passes, checkpoint U02 and continue other source features. Keep all UI deviations reviewable. Continue checkpoints without changing the accepted behavior contract. Commit/push/verify each useful unit and automatically continue. Keep PR #19 Draft and do not merge.
+Continue independently audited main-game entities/status/action/save or service modules, with exact-source tests for each small unit. Preserve source semantics and document gaps; update STATE, commit, push and verify actual remote head before long work/each checkpoint. No merge or auto-merge.

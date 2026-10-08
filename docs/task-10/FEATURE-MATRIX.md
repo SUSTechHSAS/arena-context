@@ -19,7 +19,7 @@ Original pin: `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`. Anchors refer to `refe
 | Map/camera/minimap, icons/local text and canvas effects | Main map handlers, icon tables, zoom/swipe, `绘制大地图` | Not ported |
 | Keyboard, touch, swipe, on-screen controls, wait/rest, hotkeys | Main input listeners, `玩家等待`, `开始休息` | Not ported |
 | Editor creation/tools, placement, room edit, undo/copy, NPC config | Main editor handlers, settings and tool classes | Not ported |
-| Viewer page (distinct generator), seeds/floor range and canvases | Entire ChineseDungeon-Viewer.html | Not ported |
+| Viewer page (distinct generator), seeds/floor range and canvases | Entire ChineseDungeon-Viewer.html | Complete typed generator/React viewer: 4×16 full graph/draw comparisons, six renderer traces, 16 real PNGs exactly match untouched source; UI proposals listed separately |
 | Level Manager list/search/details/upload/delete/launch/minimap | Entire LevelManager.html | Not ported |
 | In-game creative workshop/local import, upload, clearance and fallback | Main workshop methods and `初始化创意工坊` | Not ported |
 | Socket multiplayer, item syncing, login and server-driven UI | Main `执行联机连接`, `初始化Socket连接`, final event handlers | Not ported |

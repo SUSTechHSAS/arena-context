@@ -2,7 +2,7 @@
 
 Independent React 19 / TypeScript / Vite rewrite of the pinned Chinese Dungeon source. GPL-3.0-only; see LICENSE and NOTICE.md.
 
-**Incomplete:** the current engine lab is not a playable replacement. Track actual feature coverage and remaining work in `../docs/task-10/FEATURE-MATRIX.md` and `PLAN.md`. Original source runs only in the test oracle, never in the production bundle.
+**Incomplete:** the complete viewer and engine lab are not a playable main-game replacement. Track actual feature coverage and remaining work in `../docs/task-10/FEATURE-MATRIX.md` and `PLAN.md`. Original source runs only in the test oracle, never in the production bundle.
 
 ## Reproduce
 
@@ -23,4 +23,4 @@ Arena permits npm/GitHub hosts, not Playwright's browser-download host. `@sparti
 
 ## Consistency tests
 
-`test/oracle/source.ts` uses TypeScript AST ranges to execute exact original declarations in isolated Node VM contexts. Production `src/` cannot import this module. Hash/LCG/fusion tests check outputs **and** stream state; path tests preserve Infinity, JS truthiness, item constructor identity and the source's distance-100 boundary. Mutation tests compile the actual candidate with a deliberately wrong boundary and verify that the original oracle distinguishes it. These are primitive contracts, not full gameplay parity.
+`test/oracle/source.ts` uses TypeScript AST ranges to execute exact original declarations in isolated Node VM contexts. Production `src/` cannot import this module. Hash/LCG/fusion tests check outputs **and** stream state; path tests preserve Infinity, JS truthiness, item constructor identity and the source's distance-100 boundary. Mutation tests compile the actual candidate with a deliberately wrong boundary and verify that the original oracle distinguishes it. Viewer tests also compare complete graphs and every draw across four seeds × sixteen floors, and real-browser tests compare every PNG against the untouched original viewer. These are primitive/viewer contracts, not full main-game parity.

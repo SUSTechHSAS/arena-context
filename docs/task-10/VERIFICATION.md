@@ -53,3 +53,10 @@ Not run: domain parity, candidate types/build, original or candidate browser/gam
 - `npm run check`: passed eight hashes, five integrity tests, strict types, **39 domain tests** and production build. Tagged graph equality optimization retained all explicit identity/non-finite/descriptor data and reduced viewer test time from ~75s to ~22s.
 - First combined Chromium run: **2/3 passed** (engine lab, blank time seed/mobile/Enter); source/candidate PNG comparison timed out during page/context setup, before any comparison assertion. No PNG match claimed.
 - Removed @sparticuz/chromium’s Lambda-specific --single-process flag for normal multi-context browser testing; rerun pending. No test scope/count/timeout was weakened.
+
+## U02 complete browser verification — 2026-10-08
+
+- `npm run test:e2e` after normal multi-process launch: **3/3 real Chromium tests pass**. One original page and one React candidate page render all 16 floors; every canvas toDataURL PNG is exactly equal, with deterministic time, trimmed generation seed, preserved raw input and zero page errors.
+- Offline lab state replay passes; blank seed uses time and mobile/Enter flow generates 16 maps without horizontal overflow.
+- Untouched original viewer served only in ORACLE_TEST_MODE=1 dev mode. Production source boundary test passes; build contains no original HTML/script/oracle imports.
+- UI count correction/navigation/form/busy/error feedback proposals are recorded in DEVIATIONS.md; tests do not establish owner approval. The full main game remains pending.

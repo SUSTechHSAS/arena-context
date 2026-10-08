@@ -19,8 +19,8 @@ The owner selected a **fresh implementation** on 2026-10-08. No implementation, 
 |---|---|---|
 | U00 | Freeze all original application/reference files, preserve GPL, verify hashes, inventory complete feature surface | Complete; audit is lexical pending parser-backed inventory |
 | U01 | Modern scaffold, hermetic exact-source oracle, numeric/random/path primitives with mutation-sensitive differential tests | Complete: strict types, 30 domain + 5 integrity tests/build, 1 real Chromium test |
-| U02 | Complete viewer generation and rendering; seed/floor/small-map parity and real-browser interactions | Domain/renderer: 8 targeted tests pass; React UI and browser parity next |
-| U03 | Typed entities, effects, combat, equipment, inventory/pets and deterministic action engine; class/lifecycle parity | Pending |
+| U02 | Complete viewer generation and rendering; seed/floor/small-map parity and real-browser interactions | Complete: full graph/draw/render parity plus 16-PNG equality in real Chromium |
+| U03 | Typed entities, effects, combat, equipment, inventory/pets and deterministic action engine; class/lifecycle parity | Next |
 | U04 | Main dungeon/cave/tutorial/floor/boss/puzzle generation and seed search; maps and random-stream parity | Pending |
 | U05 | Cross-load save/export/import, signatures, settings, custom NPC scripting/data; preserved object graph and version handling | Pending |
 | U06 | Full React game UI/HUD/menus/canvas/touch/keyboard, map controls, editor and local custom-level workflows | Pending |
