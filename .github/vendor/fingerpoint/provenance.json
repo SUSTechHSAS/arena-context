@@ -1,0 +1,28 @@
+{
+  "source": "https://github.com/Ikaleio/lm-detector",
+  "website": "https://lm.ikale.io",
+  "commit": "97eb41f78722d32524265bb259fe6258856ca470",
+  "license": "MIT",
+  "upstream_code_sha256": {
+    "shared/fingerprint-core.js": "5a096c0e5638b9b7e266714725660549273b018e0b5eddbec3302ef96af21f16",
+    "shared/positional.ts": "a44799a179e8eb0b19b83449f0bdb6fa914a64a27c7dc2e5cd71fad31e93719a",
+    "shared/shared-detector.ts": "769be84fa2fe8e4b565fa6043c966785ba188b98cf26b1d4125e776ce9346026",
+    "data/enrollment-suite.json": "18ccae737392254cbe3bc274a01d5adc8f896a64e79d2bacac0d3ac1444f40c9"
+  },
+  "upstream_git_blob_sha1": {
+    "shared/fingerprint-core.js": "6ee5b983b94bf4c5196505f71d843171f89589d3",
+    "shared/positional.ts": "c044fc3b618050cd90970a6050b38931e9685f00",
+    "shared/shared-detector.ts": "869b6c3e413c947638aec5fc7d9e951d127a916f",
+    "data/enrollment-suite.json": "e9ba13056c22b2408b8e8a23f58884b3a43e3b4b"
+  },
+  "vendored_code_sha256": {
+    "fingerprint-core.mjs": "5a096c0e5638b9b7e266714725660549273b018e0b5eddbec3302ef96af21f16",
+    "positional.mjs": "34e203e0c4f3466728d888147696921f18b9e5183383053b3ea0f0075fb0aa72",
+    "shared-detector.mjs": "8de8f1b1f911736bcf2922de9ec8901be0202ed21269ed35fb512f3ed1aa2a4d"
+  },
+  "seed_sha256": "f0d274be028d1b1b3e6a211d1096ab643730e025df4c28044b6ab8e4de705100",
+  "seed_package_id": "f7e5afbad329e7afcab36cca62ee3375f8fbe3dd65ff8cf471e82fd556b3071c",
+  "seed_bank_sha256": "5b7e0cc1e29c07ed2f074cff9825caa73456a61318872381ac993dff297c556f",
+  "seed_detector_sha256": "1f4275364dcfeb1d72a3de5a27edd24076ef6beef6e8488dbf72fa8bd93f5d15",
+  "seed_bank_version": "2026-10-08T13:07:32.556925+00:00"
+}

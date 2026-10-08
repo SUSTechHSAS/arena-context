@@ -7,12 +7,23 @@ import { fileURLToPath } from 'node:url';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { decideWork, validatePolicy, loadLivePolicy, exitCode, STOP_EXIT_CODE } from './model-gate.mjs';
 import { prepare } from './fingerprint.mjs';
-import { scoreSample } from './fingerprint-lib.mjs';
+import { scoreSample, packageId } from './fingerprint-lib.mjs';
 
 const policy = { schema: 1, accepted_models: ['claude-opus-5-5', 'claude-sonnet-5-5', 'claude-fable-5-1', 'gpt-6-astra', 'gpt-6.1-sol', 'gpt-6-sol'] };
 const match = id => ({ status: 'match', identified_candidate: id, nearest_model: id });
 const seed = JSON.parse(fs.readFileSync(new URL('../vendor/modeltrace/seed.json', import.meta.url)));
 const ambiguityRaw = fs.readFileSync(new URL('./fixtures/allowed-ambiguity.json', import.meta.url), 'utf8');
+// Historical records are built as historical fixtures, never by asking the
+// current prepare command to downgrade to the retired provider.
+function legacyTurn(root, policy) {
+  const turn_id = '20261007T000000Z-aabbccdd', prefix = `.context/fingerprints/${turn_id}`;
+  fs.mkdirSync(path.join(root, prefix), { recursive: true });
+  fs.mkdirSync(path.join(root, '.context/fingerprints/banks'), { recursive: true });
+  fs.writeFileSync(path.join(root, `.context/fingerprints/banks/${packageId(seed)}.json`), JSON.stringify(seed));
+  fs.writeFileSync(path.join(root, prefix, 'manifest.json'), JSON.stringify({ schema: 1, turn_id, branch: 'arena/test',
+    package_id: packageId(seed), bank_sha256: seed.bank_sha256, bank_version: seed.bank_version, policy, freshness: 'cached-fallback' }));
+  return { turn_id, raw_path: `${prefix}/raw.json` };
+}
 test('Clear match still requires an exact accepted model; other statuses cannot use the nearest model alone', () => {
   for (const id of policy.accepted_models) assert.equal(decideWork(match(id), policy).action, 'CONTINUE');
   for (const id of ['claude-opus-5', 'gpt-6-luna', 'claude-opus-5-50', 'gpt-6-astra-mini']) {
@@ -79,8 +90,7 @@ test('CLI emits END_TURN/exit 20 immediately after a non-accepted Clear match, w
     const git = args => execFileSync('git', args, { cwd: root, stdio: 'pipe' });
     git(['init', '-b', 'arena/test']); fs.mkdirSync(path.join(root, '.context')); fs.writeFileSync(path.join(root, '.context/TASK.md'), 'Do not change task');
     git(['add', '.']); git(['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-m', 'fixture']);
-    const rejectFable = async () => ({ ok: true, text: async () => JSON.stringify({ schema: 1, accepted_models: ['gpt-6-astra'] }) });
-    const first = await prepare(root, { offline: true, policyFetcher: rejectFable });
+    const first = legacyTurn(root, { schema: 1, accepted_models: ['gpt-6-astra'] });
     const fixtures = JSON.parse(fs.readFileSync(new URL('./fixtures/fingerprint.json', import.meta.url))).fixtures;
     const example = fixtures.find(f => f.expected.status === 'match' && f.expected.nearest_model === 'claude-fable-5-1');
     assert.ok(example); fs.writeFileSync(path.join(root, first.raw_path), example.raw);
@@ -107,7 +117,7 @@ test('CLI freezes the original sample and emits CONTINUE or END_TURN for an allo
       fs.writeFileSync(path.join(root, '.context/TASK.md'), 'Do not change task');
       git(['add', '.']); git(['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-m', 'fixture']);
       const current = accepted ? policy : { schema: 1, accepted_models: ['gpt-6-astra'] };
-      const first = await prepare(root, { offline: true, policyFetcher: async () => ({ ok: true, text: async () => JSON.stringify(current) }) });
+      const first = legacyTurn(root, current);
       const rawPath = path.join(root, first.raw_path); fs.writeFileSync(rawPath, ambiguityRaw);
       const cli = fileURLToPath(new URL('./fingerprint.mjs', import.meta.url));
       const ran = spawnSync(process.execPath, [cli, 'score', first.turn_id], { cwd: root, encoding: 'utf8' });
