@@ -38,3 +38,12 @@ Not run: domain parity, candidate types/build, original or candidate browser/gam
 - Playwright config now explicitly inflates al2023.tar.br already inside the locked npm browser package and calls its library-path helper. No OS-package download or fabricated AWS environment.
 - `npm run typecheck && npm run test:e2e`: strict types pass; **1 real Chromium test passes** (offline network intercept, honest incomplete-scope label, Unicode seed state replay, zero page errors). This is engine-lab browser coverage, not original gameplay coverage.
 - Browser binary/dependencies are ephemeral and reproducible from package-lock; setup instructions recorded in app/README.md. Firefox/WebKit, other operating systems, live workshop/socket remain untested.
+
+## U02a viewer engine — 2026-10-08
+
+- Full original viewer algorithm independently ported to ViewerGenerator/ViewerCell/ViewerDoor and deterministic rendering modules. Main-game generation is still unported and is a distinct contract.
+- Strict TypeScript passed. Targeted `npm test -- --testNamePattern="viewer|graph diagnostics"`: **8 tests passed**, 30 unrelated tests explicitly skipped, ~77 seconds.
+- Four seeds × floors 0–15 compare outcomes (including any original exceptions), every random draw and identity-aware full state: cells, walls, rooms, room map, locks, door Map/Symbols/aliases, stairs and player start.
+- Six exact ordered canvas-command comparisons (floors 0/1/15 × square/non-square), session reuse alias, empty renderer, diagnostic sparse holes/non-finite/accessor handling. No whole-game parity claimed.
+- An earlier preparation command used an incorrect cwd and ran no viewer tests; corrected files to the intended paths, then actually ran the 8 tests above. That earlier empty/filtered run is not verification evidence.
+- React viewer UI, complete-suite rerun, final build and original-vs-candidate real browser pixels remain pending.
