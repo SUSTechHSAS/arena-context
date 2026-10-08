@@ -1,12 +1,12 @@
 # Current handoff
 
 - Task: #10
-- Unit: U03b — base item data/lifecycle and main doors
+- Unit: U03b verified / diagnostic getter-safety hardening
 - Work branch / PR: arena/db5ddb58-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/19
 - Accepted base at unit start: task/10/main@adccae2f9fbc13b9ffd7a5a97b9150d24409f166
 - Fingerprint: .context/fingerprints/20261008T080439Z-cbb0a01f/report.json
 - Updated: 2026-10-08
-- Candidate stage: U03a/U03b isolated contracts pass; combined rerun and main integration pending
+- Candidate stage: 71 domain tests/build + 3 browser tests pass; main game still incomplete
 
 This card does not establish approval; only Kibiandkimi decides acceptance.
 
@@ -26,12 +26,12 @@ U03b ports base-item DATA/lifecycle (constructor, equip/unequip, countdown, hint
 
 ## Verification
 
-- `npm run check` in app: eight original hashes, 5 integrity tests, strict types, 39 domain tests and production build passed.
+- Full `npm run check && npm run test:e2e` after U03b: eight original hashes, 5 integrity tests, strict types, 71 domain tests, production build and 3 real Chromium tests all passed.
 - `npm run test:e2e` after removing Lambda single-process mode: 3/3 actual Chromium tests passed, including untouched-original/candidate 16-PNG equality, offline lab replay and mobile/time-seed/keyboard flow.
 - Primitive evidence: 20×1000 draws plus states, 1024 exhaustive small-map/start combinations and actual wrong-boundary candidate-source mutation detection.
 - Viewer evidence: 4 seeds×16 floor trajectories, all random draws/full identity-aware graphs, six render-command comparisons, session aliases/empty rendering.
-- Last verified remote checkpoint before this checkpoint: ee175b89c6830f8399caaebecdb1bd723d50a8d7. Worktree and STATE are committed/pushed together at every checkpoint.
-- U03b strict typecheck and combined targeted item/door/status run passed 32 tests (39 unrelated tests explicitly skipped). 21 item/comparator tests, 1 door test, 10 status tests; independent copied input graphs expose shallow aliases and prevent source/candidate shared mutations. Full 71-test suite/build/browser rerun is pending.
+- Last verified remote checkpoint before this checkpoint: caafeadad41ca6f1e4fa3081d8cbe9faaff81ad4. Worktree and STATE are committed/pushed together at every checkpoint.
+- U03b strict typecheck and combined targeted item/door/status run passed 32 tests (39 unrelated tests explicitly skipped). 21 item/comparator tests, 1 door test, 10 status tests; independent copied input graphs expose shallow aliases and prevent source/candidate shared mutations. Full 71-test suite/build/browser rerun subsequently passed. Additional graph hardening now uses intrinsic brands/iterators and rejects Proxies/accessors, including Symbol.toStringTag/iterator getters; strict types and the focused diagnostic test passed. Full suite will rerun with the next unit.
 - No main-game trajectories, save cross-load, full entity/UI/editor or live service parity yet. Firefox/WebKit and other OS untested. Actions logs inaccessible; API status metadata accessible.
 
 ## Blockers and unresolved owner feedback
@@ -40,4 +40,4 @@ No routing/environment blocker remains. Main gameplay and the rest of the matrix
 
 ## Next action
 
-Run the full 71-domain-test check/build and real-browser regression; expose only the genuine rewritten viewer in preview. Then continue main-game derived entities, action/generation/save/service modules in independently audited units. Source constructor/tick quirks remain deliberately preserved; do not claim fake actor/UI doubles establish gameplay parity. Preserve source semantics and document gaps; update STATE, commit, push and verify actual remote head before long work/each checkpoint. No merge or auto-merge.
+Viewer preview is running on 0.0.0.0:5173 with .e2b.app host acceptance verified (not a full playable game). Next independently extract shared source codecs/signatures needed by save/workshop modules, then continue derived entities/action/generation and cross-load integration; no scope reduction. Source constructor/tick quirks remain deliberately preserved; do not claim fake actor/UI doubles establish gameplay parity. Preserve source semantics and document gaps; update STATE, commit, push and verify actual remote head before long work/each checkpoint. No merge or auto-merge.

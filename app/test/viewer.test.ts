@@ -108,5 +108,12 @@ it('graph diagnostics preserve refs/symbols/non-finite values/array holes withou
   let calls = 0;
   expect(() => graphSnapshot({ get value() { calls++; return 1; } })).toThrow(/accessors/);
   expect(calls).toBe(0);
+  expect(() => graphSnapshot({ get [Symbol.toStringTag]() { calls++; return 'Map'; } })).toThrow(/accessors/);
+  const map = new Map();
+  Object.defineProperty(map, Symbol.iterator, { get() { calls++; return () => [][Symbol.iterator](); } });
+  expect(() => graphSnapshot(map)).toThrow(/accessors/);
+  expect(calls).toBe(0);
+  expect(() => graphSnapshot(new Proxy({}, { ownKeys() { calls++; return []; } }))).toThrow(/Proxy/);
+  expect(calls).toBe(0);
   expect(() => graphSnapshot(new Date())).toThrow(/Unsupported diagnostic kind/);
 });

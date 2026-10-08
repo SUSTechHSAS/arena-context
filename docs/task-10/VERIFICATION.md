@@ -80,3 +80,9 @@ Moved label formatting to a pure helper so a pre-existing structural player-effe
 - Constructor fields/defaults/material draw/date/Symbol calls, independently cloned input graphs with shallow aliases, equipment presence/page/NaN fallback, consume underflow, drying/timer identity and weapon-classification branch, hints, stacks/global caps, removal/destruction and short-circuit unlock are compared against exact original declarations.
 - Preserved source behavior: x/y zero default to null; slot initializes from 已装备, not a slot field; item material is omitted from stack comparison; deep comparator ignores Map/prototype/symbol contents and calls the target hasOwnProperty directly. This comparator is not substituted with the richer graph diagnostic.
 - WeaponStub only tests base-class instanceof timer classification; it is not the source weapon implementation. Live actors, derived items, main-game integration, saves and item UI remain pending.
+
+## U03b combined verification / diagnostic safety — 2026-10-08
+
+- `npm run check && npm run test:e2e`: all eight source hashes, 5 integrity tests, strict types, **71 domain tests**, production build, **3 real Chromium tests passed**.
+- Viewer preview starts at 0.0.0.0:5173, permits .e2b.app, and returns app HTML with a simulated preview Host header. Preview is a viewer/lab, not the unported full game.
+- Subsequent test-only graph hardening avoids user toStringTag/iterator/name getters with Node intrinsic brands/iterators and descriptor inspection; rejects Proxies/unsupported types rather than executing code or discarding data. Strict types and the focused diagnostic test passed (70 other tests intentionally skipped); next full rerun will include it.

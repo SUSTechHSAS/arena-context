@@ -1,3 +1,5 @@
+import { types } from 'node:util';
+
 /** Explicit, identity-aware diagnostic graph; unsupported kinds fail, not normalize. */
 export function graphSnapshot(value: unknown, classNames: Record<string, string> = {}): unknown {
   const objects = new Map<object, number>();
@@ -30,18 +32,27 @@ export function graphSnapshot(value: unknown, classNames: Record<string, string>
       if (typeof item === 'function') throw new Error('Snapshot contract must explicitly exclude behavior, not silently erase functions');
       return item;
     }
+    if (types.isProxy(item)) throw new Error('Unsupported diagnostic kind: Proxy');
     const existing = objects.get(item);
     if (existing !== undefined) return { $ref: existing };
     const id = nextObject++; objects.set(item, id);
-    const tag = Object.prototype.toString.call(item);
-    if (tag === '[object Map]') return { $id: id, $map: Array.from(item as Map<unknown, unknown>, ([key, entry]) => [visit(key), visit(entry)]), $props: properties(item) };
-    if (tag === '[object Set]') return { $id: id, $set: Array.from(item as Set<unknown>, visit), $props: properties(item) };
+    // Intrinsic brands/iterators avoid user Symbol.toStringTag/iterator getters.
+    if (types.isMap(item)) return { $id: id, $map: Array.from(Map.prototype.entries.call(item), ([key, entry]) => [visit(key), visit(entry)]), $props: properties(item) };
+    if (types.isSet(item)) return { $id: id, $set: Array.from(Set.prototype.values.call(item), visit), $props: properties(item) };
     if (Array.isArray(item)) return { $id: id, $array: properties(item) };
-    if (tag !== '[object Object]') throw new Error(`Unsupported diagnostic kind: ${tag}`);
+    if (types.isDate(item) || types.isRegExp(item) || types.isNativeError(item) || types.isTypedArray(item) ||
+        types.isAnyArrayBuffer(item) || types.isBoxedPrimitive(item) || types.isPromise(item) ||
+        types.isWeakMap(item) || types.isWeakSet(item)) throw new Error('Unsupported diagnostic kind');
     const prototype = Object.getPrototypeOf(item) as object | null;
+    if (prototype && types.isProxy(prototype)) throw new Error('Unsupported diagnostic kind: proxy prototype');
     const constructor = prototype ? Object.getOwnPropertyDescriptor(prototype, 'constructor') : undefined;
     if (constructor && !('value' in constructor)) throw new Error('Snapshot must not execute constructor accessors');
-    const name = constructor?.value?.name as string | undefined;
+    const fn = constructor?.value as unknown;
+    if (fn && typeof fn !== 'function') throw new Error('Unsupported constructor descriptor');
+    if (fn && types.isProxy(fn)) throw new Error('Unsupported diagnostic kind: proxy constructor');
+    const nameDescriptor = fn ? Object.getOwnPropertyDescriptor(fn, 'name') : undefined;
+    if (nameDescriptor && !('value' in nameDescriptor)) throw new Error('Snapshot must not execute name accessors');
+    const name = nameDescriptor?.value as string | undefined;
     return { $id: id, $class: classNames[name ?? ''] ?? name ?? null, $props: properties(item) };
   }
   return visit(value);
