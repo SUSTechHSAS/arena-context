@@ -94,3 +94,7 @@ Moved label formatting to a pure helper so a pre-existing structural player-effe
 - Strict types and first **7 targeted codec tests passed**, 71 unrelated tests skipped. Targeted **1 real Chromium WebCrypto/Unicode/fallback test passed**, using the exact original function as expected signer.
 - Independently inspected original NPC fixture metadata: no signature field, game version 1532, ordinary v1-style state. Added exact-source signing comparison for its raw parsed payload; no execution of NPC scripts and no cross-load claim. Final combined test count pending.
 - Package engine range tightened to the installed dependency intersection (^22.17 / ^24 / >=26); actual tested Node remains 22.22.3.
+
+## U05a full verification — 2026-10-08
+
+`npm run check && npm run test:e2e` passed with **8 original hashes, 5 integrity tests, strict TypeScript, 79 domain tests, production build and 4 real Chromium tests**. Includes the new codec/nested-oracle/getter/proxy changes and actual unsigned-NPC payload signing comparison against both source functions. No cross-load, actor/script integration or authentication claim. Production UI remains the viewer/lab; next unit is defensive-equipment contracts.

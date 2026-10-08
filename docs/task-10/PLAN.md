@@ -22,7 +22,7 @@ The owner selected a **fresh implementation** on 2026-10-08. No implementation, 
 | U02 | Complete viewer generation and rendering; seed/floor/small-map parity and real-browser interactions | Complete: full graph/draw/render parity plus 16-PNG equality in real Chromium |
 | U03 | Typed entities, effects, combat, equipment, inventory/pets and deterministic action engine; class/lifecycle parity | Next |
 | U04 | Main dungeon/cave/tutorial/floor/boss/puzzle generation and seed search; maps and random-stream parity | Pending |
-| U05 | Cross-load save/export/import, signatures, settings, custom NPC scripting/data; preserved object graph and version handling | Independent shared codec/signature primitive ported ahead of integration; cross-load/schema/actors/UI pending |
+| U05 | Cross-load save/export/import, signatures, settings, custom NPC scripting/data; preserved object graph and version handling | Shared codec/signature primitive: 8 source-parity tests + real browser WebCrypto pass; cross-load/schema/actors/UI pending |
 | U06 | Full React game UI/HUD/menus/canvas/touch/keyboard, map controls, editor and local custom-level workflows | Pending |
 | U07 | Viewer/level manager/workshop/socket integration, offline fallback and deterministic request/event contract tests | Pending |
 | U08 | End-to-end differential action transcripts, randomized replay, mutation detection, save interoperability, browser/preview verification | Pending |
