@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import ts from 'typescript';
 
+export type DeclarationScope = 'top-level' | 'dom-ready';
 export type ReferencePage = 'ChineseDungeon.html' | 'ChineseDungeon-Viewer.html' | 'LevelManager.html';
 const referenceRoot = fileURLToPath(new URL('../../../reference/chinese-dungeon/', import.meta.url));
 const cache = new Map<ReferencePage, { text: string; ast: ts.SourceFile }>();
@@ -23,21 +24,36 @@ export function readSource(page: ReferencePage = 'ChineseDungeon.html') {
 }
 
 /** Exact AST ranges, not hand-maintained copies or candidate implementations. */
-export function declaration(name: string, page: ReferencePage = 'ChineseDungeon.html'): string {
+export function declaration(name: string, page: ReferencePage = 'ChineseDungeon.html',
+  scope: DeclarationScope = 'top-level'): string {
   const { text, ast } = readSource(page);
-  const found = ast.statements.filter(statement => {
+  let statements: readonly ts.Statement[] = ast.statements;
+  if (scope === 'dom-ready') {
+    const callbacks: ts.Block[] = [];
+    for (const statement of ast.statements) {
+      if (!ts.isExpressionStatement(statement) || !ts.isCallExpression(statement.expression)) continue;
+      const expression = statement.expression;
+      if (!ts.isPropertyAccessExpression(expression.expression) || expression.expression.name.text !== 'addEventListener') continue;
+      const event = expression.arguments[0]; const callback = expression.arguments[1];
+      if (event && ts.isStringLiteral(event) && event.text === 'DOMContentLoaded' && callback &&
+          (ts.isArrowFunction(callback) || ts.isFunctionExpression(callback)) && ts.isBlock(callback.body)) callbacks.push(callback.body);
+    }
+    if (callbacks.length !== 1) throw new Error(`Need one explicit DOM-ready scope in ${page}`);
+    statements = callbacks[0]!.statements;
+  }
+  const found = statements.filter(statement => {
     if (ts.isFunctionDeclaration(statement) || ts.isClassDeclaration(statement)) return statement.name?.text === name;
     return ts.isVariableStatement(statement) && statement.declarationList.declarations.some(item =>
       ts.isIdentifier(item.name) && item.name.text === name);
   });
-  if (found.length !== 1) throw new Error(`Need exactly one top-level ${name}; found ${found.length} in ${page}`);
+  if (found.length !== 1) throw new Error(`Need exactly one ${scope} ${name}; found ${found.length} in ${page}`);
   return text.slice(found[0]!.getStart(ast), found[0]!.getEnd());
 }
 
 export function createOracle(names: readonly string[], globals: Record<string, unknown> = {},
-  page: ReferencePage = 'ChineseDungeon.html') {
+  page: ReferencePage = 'ChineseDungeon.html', scope: DeclarationScope = 'top-level') {
   const context = vm.createContext({ ...globals });
-  new vm.Script(names.map(name => declaration(name, page)).join('\n'), { filename: `original:${page}` })
+  new vm.Script(names.map(name => declaration(name, page, scope)).join('\n'), { filename: `original:${page}` })
     .runInContext(context, { timeout: 5000 });
   return {
     context,

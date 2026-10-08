@@ -22,6 +22,12 @@ Move the entire status class’s global actor/item/UI/RNG dependencies behind ty
 
 Separate base-item data/lifecycle from its two unported legacy DOM-rendering methods. Preserve material draw order, Symbol.for identities, shallow Map copies, slot/falsy defaults and source stack/comparator quirks. A more correct diagnostic graph comparator must not silently replace the original item-stacking comparator. Main doors and viewer doors have different Symbol contracts and remain separate. Tests clone inputs independently while retaining each input graph’s internal aliases, avoiding shared-mutation false positives. Derived-item/actor factories and concrete UI integration are not established by a base-class marker double.
 
+## U05a independent codec extraction and integration boundary
+
+Extract dependency-free shared codecs/signatures before larger actor/save/service integration, without reducing scope or claiming complete U05. Keep main warning behavior separate from manager silence and sign exact input bytes/order, not canonical JSON or a stronger invented authentication format. The public client-side key is format data, not a user credential. The original NPC example has no signature and game version 1532; do not assert signed-file compatibility merely from its presence.
+
+Typed item/status constructors take explicit ports and have modern class names. Full v1/custom-script integration will need source-visible constructor/name/global API adapters and real hydration; current graph name mapping/tests do not establish that compatibility. No complete save/script integration is self-approved.
+
 ## Fingerprint ambiguity maintenance (historical proposal, merged in PR #18)
 
 The owner requested continuation when all statistically indistinguishable models are explicitly accepted. Use the existing fit/separation/family thresholds and the complete bank, not the three display candidates or a model-family wildcard. Preserve family_only and identified_candidate=null; any unaccepted candidate or missing evidence still denies work. CI independently recomputes the set. Previously denied turns remain denied. See docs/FINGERPRINT.md and shared PR #16 for the exact user regression sample and validation. This proposal needs owner review and does not change the domain task contract.

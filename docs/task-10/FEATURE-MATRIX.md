@@ -14,7 +14,7 @@ Original pin: `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`. Anchors refer to `refe
 | Inventory/equipment, stack/sort, coins, crafting, merchant/altar/reforge/well | Main inventory/shop/reforge/altar functions and classes | Not ported |
 | Pets, vehicles, summoned allies and NPCs | Main `宠物`, `马`, `熊猫`, `水母`, `火蜥蜴`, `自定义NPC`, `佣兵单位` | Not ported |
 | Chess, Sokoban, switches, conveyors, puzzles and level quality solver | Main chess classes, switch classes, `推箱子关卡生成器`, `_求解棋盘布局` | Not ported |
-| Save/load/import/export, signatures, versions and settings | Main save handlers, `存档版本`, `数据完整性密钥`; Manager `generateSignature` | Not ported |
+| Save/load/import/export, signatures, versions and settings | Main save handlers, `存档版本`, `数据完整性密钥`; Manager `generateSignature` | Shared codecs/signature format ported against both sources, Node/browser contracts tested; unsigned version-1532 fixture identified; schema/cross-load, actual saves/settings/UI still pending |
 | Custom NPC demo, custom UI and scripting | `自定义NPC演示.json`; Main custom-NPC/editor/UI element handlers | Not ported |
 | Map/camera/minimap, icons/local text and canvas effects | Main map handlers, icon tables, zoom/swipe, `绘制大地图` | Not ported |
 | Keyboard, touch, swipe, on-screen controls, wait/rest, hotkeys | Main input listeners, `玩家等待`, `开始休息` | Not ported |

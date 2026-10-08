@@ -86,3 +86,11 @@ Moved label formatting to a pure helper so a pre-existing structural player-effe
 - `npm run check && npm run test:e2e`: all eight source hashes, 5 integrity tests, strict types, **71 domain tests**, production build, **3 real Chromium tests passed**.
 - Viewer preview starts at 0.0.0.0:5173, permits .e2b.app, and returns app HTML with a simulated preview Host header. Preview is a viewer/lab, not the unported full game.
 - Subsequent test-only graph hardening avoids user toStringTag/iterator/name getters with Node intrinsic brands/iterators and descriptor inspection; rejects Proxies/unsupported types rather than executing code or discarding data. Strict types and the focused diagnostic test passed (70 other tests intentionally skipped); next full rerun will include it.
+
+## U05a shared codec/signature contracts — 2026-10-08
+
+- Independently ported original main/manager URI/Base64 codecs and SHA-256(dataString + public client integrity key). Native coercion, surrogate errors, invalid Base64/UTF-8 identity fallback, main warning vs manager silence, key/JSON order and UTF-8 replacement are preserved. Not HMAC/authentication or full save compatibility.
+- Original manager declarations selected by explicit AST DOM-ready scope without executing DOM/Supabase bootstrap.
+- Strict types and first **7 targeted codec tests passed**, 71 unrelated tests skipped. Targeted **1 real Chromium WebCrypto/Unicode/fallback test passed**, using the exact original function as expected signer.
+- Independently inspected original NPC fixture metadata: no signature field, game version 1532, ordinary v1-style state. Added exact-source signing comparison for its raw parsed payload; no execution of NPC scripts and no cross-load claim. Final combined test count pending.
+- Package engine range tightened to the installed dependency intersection (^22.17 / ^24 / >=26); actual tested Node remains 22.22.3.

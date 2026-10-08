@@ -6,7 +6,7 @@ Independent React 19 / TypeScript / Vite rewrite of the pinned Chinese Dungeon s
 
 ## Reproduce
 
-Tested in Linux x64 with Node 22.22.3 and npm 10.9.8; package engines require Node >=22.17.0. The lockfile pins dependencies.
+Tested in Linux x64 with Node 22.22.3 and npm 10.9.8; package engines allow Node ^22.17.0 / ^24.0.0 / >=26.0.0. The lockfile pins dependencies.
 
 ```sh
 npm ci --ignore-scripts
