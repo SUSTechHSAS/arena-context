@@ -1,6 +1,12 @@
 # Decisions and rationale
 
-No task-specific decisions yet. Record consequential choices, alternatives, evidence, and owner instructions. Candidate decisions remain unreviewed.
+Record consequential choices, alternatives, evidence, and owner instructions. Candidate implementation decisions remain unreviewed.
+
+## Task #10 routing — owner instruction, 2026-10-08
+
+After checking the current accepted task head and the two unassigned Draft candidates (#14 and #15), the owner explicitly selected “fresh from the accepted task head.” Continue only on `arena/db5ddb58-arena-context`, with successor Draft PR #19 targeting `task/10/main`. Do not inherit, combine or rely on the prior candidates' code, plans or claimed verification. This selection does not constitute approval of any new implementation or a change to TASK.md.
+
+Independently query the original `SUSTechHSAS/Chinese-Dungeon` repository, pin its current source commit, preserve its license and construct a new audit and consistency suite. The upstream HEAD independently observed at startup is `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`.
 
 ## Fingerprint ambiguity maintenance (proposed)
 
