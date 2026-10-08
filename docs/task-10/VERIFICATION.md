@@ -32,3 +32,9 @@ Not run: domain parity, candidate types/build, original or candidate browser/gam
 - 20 seeds × 1000 exact draws plus states; 1024 exhaustive two-by-two map/start combinations; asymmetric walls, instanceof/subclasses, JS truthiness, Infinity and distance-100 tested.
 - Actual TypeScript candidate text compiled with `> 99` changed to `>= 99` differs from the original oracle; unmodified implementation matches. This is primitive mutation coverage, not a gameplay trajectory.
 - `npm run test:e2e` failed before page assertions: npm-hosted Chromium executable extracted successfully but libnspr4.so, libnss3.so and libnssutil3.so missing. The package also contains al2023.tar.br; investigate local library extraction. No browser pass claimed.
+
+## U01 browser recovery — 2026-10-08
+
+- Playwright config now explicitly inflates al2023.tar.br already inside the locked npm browser package and calls its library-path helper. No OS-package download or fabricated AWS environment.
+- `npm run typecheck && npm run test:e2e`: strict types pass; **1 real Chromium test passes** (offline network intercept, honest incomplete-scope label, Unicode seed state replay, zero page errors). This is engine-lab browser coverage, not original gameplay coverage.
+- Browser binary/dependencies are ephemeral and reproducible from package-lock; setup instructions recorded in app/README.md. Firefox/WebKit, other operating systems, live workshop/socket remain untested.

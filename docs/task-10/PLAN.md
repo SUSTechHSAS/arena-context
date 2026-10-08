@@ -18,7 +18,7 @@ The owner selected a **fresh implementation** on 2026-10-08. No implementation, 
 | Unit | Work and exit evidence | Status |
 |---|---|---|
 | U00 | Freeze all original application/reference files, preserve GPL, verify hashes, inventory complete feature surface | Complete; audit is lexical pending parser-backed inventory |
-| U01 | Modern scaffold, hermetic exact-source oracle, numeric/random/path primitives with mutation-sensitive differential tests | Local types/30 domain tests/build pass; real browser launch repair pending |
+| U01 | Modern scaffold, hermetic exact-source oracle, numeric/random/path primitives with mutation-sensitive differential tests | Complete: strict types, 30 domain + 5 integrity tests/build, 1 real Chromium test |
 | U02 | Complete viewer generation and rendering; seed/floor/small-map parity and real-browser interactions | Next |
 | U03 | Typed entities, effects, combat, equipment, inventory/pets and deterministic action engine; class/lifecycle parity | Pending |
 | U04 | Main dungeon/cave/tutorial/floor/boss/puzzle generation and seed search; maps and random-stream parity | Pending |
