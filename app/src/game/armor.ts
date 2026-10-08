@@ -1,3 +1,4 @@
+import type { EffectSource } from './status-ports';
 import { ItemCore, type ItemConfig, type ItemPorts } from './item-core';
 import type { Enchantment, FusionBuff, FUSION_BUFF_TYPES } from './buffs';
 
@@ -10,8 +11,8 @@ export interface ArmorPorts extends ItemPorts {
   Monster: abstract new (...args: never[]) => ArmorAttacker;
   Cactus: abstract new (...args: never[]) => ArmorAttacker;
   player: { 当前能量值: number }; initialEnergy: number; poisonColor: unknown;
-  status(type: string, color: unknown, icon: string, duration: number, remaining: null, source: null,
-    target: ArmorAttacker, strength?: number): unknown;
+  status(type: string, color: unknown, icon: string, duration: number, remaining: null, source: EffectSource | null,
+    target: ArmorAttacker | null, strength?: number): unknown;
   destroy(identity: symbol | null, automatic: boolean): void; notify(message: string, type: string): void; hud(): void;
 }
 

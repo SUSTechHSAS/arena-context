@@ -105,3 +105,10 @@ Moved label formatting to a pure helper so a pre-existing structural player-effe
 - Strict types and **15 targeted tests passed**, 79 unrelated tests skipped; **438 isolated trajectories** (12 constructor profiles + 420 profile/damage/attacker cases + 1 repeated attack sequence + 5 ordered/energy cases). Exact source base + defense class execute with matched doubles; copied input graphs retain aliases.
 - Preserve first duplicate enchant selection after any-positive test; ordered fusion additions/multipliers/first synergy; post-dodge chip draw; poison draw gated on healthy source monster; repeated destroyed callbacks; unbreakable durability still becomes a decimal string; upper-only energy clamp including zero/NaN denominator. Compare every state/event/draw and hint/error result.
 - Initial TypeScript errors (structural ctor narrowing to never and deliberate explicit-undefined raw profile) were corrected without weakening strict options or bypassing logical tests.
+
+## U03d all defensive subclasses — 2026-10-08
+
+- Ported all 12 direct source defensive subclasses: 引雷针护符/守卫者盔甲/灌木丛/水鞋/秘银锁甲/防化服/钢制板甲/锅盖/冰盾/纵火狂/潜行靴子/灵能盾牌. Retain Chinese constructor names; source-visible no-port constructor facade remains pending.
+- Full class-specific constructors/getters/attack/collection/removal/effect-source callbacks are ported; movement/weather/immunity interactions implemented elsewhere in the original game are not claimed by constructor descriptions.
+- Strict types and **31 combined targeted tests passed** (15 defense + 16 subclasses), 79 unrelated tests skipped. Subclasses: **257 isolated trajectories** (12×6 constructors/hints/inherited actions + 12×5×3 attack/draw cases + charged identity sequence + 2 bush sequences + 2 destroyed post-super branches).
+- Preserve config spread vs deliberately ignored config distinctions, overridden Map-data spread, guardian/pyromaniac zero-defense falling back through base class, unconditional post-super ice/psychic draws, lightning source identity/effect lookup, bush clearing/paint without base timer cleanup. Actor/status factories and icon lookups remain explicit doubles.
