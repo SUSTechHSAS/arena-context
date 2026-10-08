@@ -18,7 +18,12 @@ export default defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:4173',
     headless: true,
-    launchOptions: { executablePath: await chromium.executablePath(), args: chromium.args },
+    launchOptions: {
+      executablePath: await chromium.executablePath(),
+      // Lambda's single-process flag hangs when Playwright closes one context and
+      // creates another. Real multi-page/context verification needs normal processes.
+      args: chromium.args.filter(argument => argument !== '--single-process'),
+    },
     trace: 'retain-on-failure',
   },
   webServer: {

@@ -47,3 +47,9 @@ Not run: domain parity, candidate types/build, original or candidate browser/gam
 - Six exact ordered canvas-command comparisons (floors 0/1/15 × square/non-square), session reuse alias, empty renderer, diagnostic sparse holes/non-finite/accessor handling. No whole-game parity claimed.
 - An earlier preparation command used an incorrect cwd and ran no viewer tests; corrected files to the intended paths, then actually ran the 8 tests above. That earlier empty/filtered run is not verification evidence.
 - React viewer UI, complete-suite rerun, final build and original-vs-candidate real browser pixels remain pending.
+
+## U02b first full checks — 2026-10-08
+
+- `npm run check`: passed eight hashes, five integrity tests, strict types, **39 domain tests** and production build. Tagged graph equality optimization retained all explicit identity/non-finite/descriptor data and reduced viewer test time from ~75s to ~22s.
+- First combined Chromium run: **2/3 passed** (engine lab, blank time seed/mobile/Enter); source/candidate PNG comparison timed out during page/context setup, before any comparison assertion. No PNG match claimed.
+- Removed @sparticuz/chromium’s Lambda-specific --single-process flag for normal multi-context browser testing; rerun pending. No test scope/count/timeout was weakened.
