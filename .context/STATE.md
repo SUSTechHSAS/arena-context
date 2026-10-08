@@ -1,39 +1,38 @@
 # Current handoff
 
 - Task: #10
-- Unit: fingerprint ambiguity maintenance
-- Work branch / PR: meta/10/fingerprint-ambiguity
-- Accepted base at unit start: task/10/main@4bfcad36bd762e206576387038836f8848fc40ee
-- Updated: 2026-10-07T13:48:42.915739+00:00
-- Latest session: owner-requested fingerprint gate maintenance
-- Candidate stage: maintenance proposal; awaiting owner review
+- Unit: verified startup and candidate routing
+- Work branch / PR: arena/db5ddb58-arena-context / pending automatic Draft PR
+- Accepted base at unit start: task/10/main@adccae2f9fbc13b9ffd7a5a97b9150d24409f166
+- Fingerprint: .context/fingerprints/20261008T080439Z-cbb0a01f/report.json
+- Updated: 2026-10-08
+- Candidate stage: startup checkpoint; no domain implementation selected
 
-This card does not establish approval; check the actual task branch and PR.
+This card does not establish approval; only Kibiandkimi decides acceptance.
 
 ## Current objective
 
-Propose the fingerprint gate update from [PR #16](https://github.com/SUSTechHSAS/arena-context/pull/16) so a Close call confined to explicitly accepted models can continue. The domain objective below remains pending.
-
-Read TASK.md and confirm actionable goals and acceptance criteria.
+Task #10 requires a modern-framework rewrite of Chinese Dungeon with source-behavior consistency tests. The accepted contract in TASK.md is unchanged.
 
 ## Candidate progress
 
-Backported the shared gate, complete ambiguity set, CI verification, regression fixture and operating instructions. This maintenance does not authorize past denied turns. No domain implementation or task contract change is included.
+Read the accepted AGENTS.md and TASK.md; the actual branch starts at the current accepted task head. PR #18's protocol maintenance is already merged, superseding the inherited maintenance handoff. This branch inherits no domain implementation.
 
-Workspace initialized. No domain work has been performed or accepted.
+This turn's offline fingerprint returned `family_only`, `identified_candidate=null`, and `gate.allowed=true` / `CONTINUE` (`accepted_ambiguity`). It is statistical evidence, not identity certification. The raw sample, manifest, report and cached bank snapshot accompany this checkpoint.
+
+Two earlier unmerged domain candidates exist: [PR #14](https://github.com/SUSTechHSAS/arena-context/pull/14) (distance-map rewrite/parity tests) and [PR #15](https://github.com/SUSTechHSAS/arena-context/pull/15) (phase-A oracle/scaffold). Neither is assigned by current owner instructions; neither is inherited or treated as accepted.
 
 ## Verification
 
-The shared implementation passed all 42 Node tests at d93322211512c62fd0fe6d405ce2f054d14cd1a6. The backported scripts, workflow, AGENTS.md and documentation are byte-identical to that tested commit. The owner-provided fixture is test data, not this agent's fingerprint.
-
-Initialization only; no task-specific validation has run.
+- Authenticated GitHub submission account: SUSTechHSAS.
+- Accepted remote `task/10/main` verified at `adccae2f9fbc13b9ffd7a5a97b9150d24409f166`; local AGENTS.md and TASK.md match that head.
+- Issue #10 is open with no subsequent comments. Both earlier PRs are Draft, have no reviews/comments or unresolved review threads, and their current protocol status is failing.
+- Fingerprint scoring parsed exactly 301 numbers and permitted this turn. No domain tests have run on this branch.
 
 ## Blockers and unresolved owner feedback
 
-Clarify any missing requirements before dependent work.
+AGENTS.md requires the owner to choose when several pending candidates exist and none is assigned. Confirm whether to inherit #14, inherit #15, or explicitly start a fresh implementation. Do not combine the two proposals automatically.
 
 ## Next action
 
-Kibiandkimi reviews the maintenance PR for this accepted task base. After merge, synchronize the active work branch with the accepted protocol and obtain a new per-turn fingerprint before domain work. The previously recorded task handoff follows.
-
-Read the Issue, then create work/10/<unit> from task/10/main. Record its actual accepted base SHA and work branch before saving the first candidate checkpoint.
+Request that routing decision, retaining arena/db5ddb58-arena-context throughout. Then verify any selected predecessor's claims, link it from the successor Draft PR, and advance reviewable units with STATE, commit, push and remote-head verification.
