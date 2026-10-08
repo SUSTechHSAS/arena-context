@@ -72,3 +72,11 @@ Not run: domain parity, candidate types/build, original or candidate browser/gam
 ### U03a structural-state correction
 
 Moved label formatting to a pure helper so a pre-existing structural player-effect object does not need a candidate-only method. New exact-source test covers this boundary. Strict types and **10 targeted status tests pass**, **340 isolated trajectories** total; 39 unrelated tests skipped. No original-source change or test weakening.
+
+## U03b item core and main doors — 2026-10-08
+
+- Base item DATA/lifecycle ported; the two legacy DOM-rendering methods are explicitly not implemented. Full source main-door registration and unlock predicate ported separately from viewer doors (main uses Symbol.for, viewer uses local Symbols).
+- Strict types and targeted item/door/status run: **32 tests passed**, 39 unrelated tests skipped. Includes 21 item/comparator tests, 1 main-door test and 10 status tests.
+- Constructor fields/defaults/material draw/date/Symbol calls, independently cloned input graphs with shallow aliases, equipment presence/page/NaN fallback, consume underflow, drying/timer identity and weapon-classification branch, hints, stacks/global caps, removal/destruction and short-circuit unlock are compared against exact original declarations.
+- Preserved source behavior: x/y zero default to null; slot initializes from 已装备, not a slot field; item material is omitted from stack comparison; deep comparator ignores Map/prototype/symbol contents and calls the target hasOwnProperty directly. This comparator is not substituted with the richer graph diagnostic.
+- WeaponStub only tests base-class instanceof timer classification; it is not the source weapon implementation. Live actors, derived items, main-game integration, saves and item UI remain pending.

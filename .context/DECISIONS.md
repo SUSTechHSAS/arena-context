@@ -18,6 +18,10 @@ Pin all eight upstream root application/reference files at the independently res
 
 Move the entire status class’s global actor/item/UI/RNG dependencies behind typed ports. Private port state is not an enumerable save field. Compare the exact original class with matching doubles; do not infer full actor/item/game integration from isolated contract tests. Preserve non-obvious source behavior (zero remaining defaults, newly allocated actor-stack tick, player-fire coupling, local expiry count) until explicitly reviewed. Pure label formatting must accept structural pre-existing state rather than requiring a new candidate-only method.
 
+## U03b item core and source comparison — candidate design
+
+Separate base-item data/lifecycle from its two unported legacy DOM-rendering methods. Preserve material draw order, Symbol.for identities, shallow Map copies, slot/falsy defaults and source stack/comparator quirks. A more correct diagnostic graph comparator must not silently replace the original item-stacking comparator. Main doors and viewer doors have different Symbol contracts and remain separate. Tests clone inputs independently while retaining each input graph’s internal aliases, avoiding shared-mutation false positives. Derived-item/actor factories and concrete UI integration are not established by a base-class marker double.
+
 ## Fingerprint ambiguity maintenance (historical proposal, merged in PR #18)
 
 The owner requested continuation when all statistically indistinguishable models are explicitly accepted. Use the existing fit/separation/family thresholds and the complete bank, not the three display candidates or a model-family wildcard. Preserve family_only and identified_candidate=null; any unaccepted candidate or missing evidence still denies work. CI independently recomputes the set. Previously denied turns remain denied. See docs/FINGERPRINT.md and shared PR #16 for the exact user regression sample and validation. This proposal needs owner review and does not change the domain task contract.

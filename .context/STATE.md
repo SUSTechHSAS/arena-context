@@ -1,12 +1,12 @@
 # Current handoff
 
 - Task: #10
-- Unit: U03a — typed main-game status lifecycle
+- Unit: U03b — base item data/lifecycle and main doors
 - Work branch / PR: arena/db5ddb58-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/19
 - Accepted base at unit start: task/10/main@adccae2f9fbc13b9ffd7a5a97b9150d24409f166
 - Fingerprint: .context/fingerprints/20261008T080439Z-cbb0a01f/report.json
 - Updated: 2026-10-08
-- Candidate stage: U03a isolated status contracts pass; main-game integration pending
+- Candidate stage: U03a/U03b isolated contracts pass; combined rerun and main integration pending
 
 This card does not establish approval; only Kibiandkimi decides acceptance.
 
@@ -22,14 +22,16 @@ Viewer preserves every field/alias/door Symbol and random draw. Source-style ord
 
 U03a ports the complete 状态效果 lifecycle into a typed domain class with explicit actor/item/RNG/UI ports, retaining constructor merges, fire immunity, damage/corrosion, progress/expiry and original quirks. Ten targeted differential tests cover 340 deterministic isolated trajectories against the exact original class with matched service doubles. Stacking also accepts pre-existing structural effect data, without requiring an extra candidate-only helper method. This is not a whole game/actor/item implementation.
 
+U03b ports base-item DATA/lifecycle (constructor, equip/unequip, countdown, hints, consume/stack/comparison/removal/destruction) and full main-door registration/unlock. Source Map/Symbol.for, shallow aliases, falsy coordinates/flags, slot behavior and original deep-comparator quirks are retained. Legacy item DOM rendering and concrete derived entities are NOT implemented. Item/status ports accommodate nullable destroyed identities and arbitrary Map keys.
+
 ## Verification
 
 - `npm run check` in app: eight original hashes, 5 integrity tests, strict types, 39 domain tests and production build passed.
 - `npm run test:e2e` after removing Lambda single-process mode: 3/3 actual Chromium tests passed, including untouched-original/candidate 16-PNG equality, offline lab replay and mobile/time-seed/keyboard flow.
 - Primitive evidence: 20×1000 draws plus states, 1024 exhaustive small-map/start combinations and actual wrong-boundary candidate-source mutation detection.
 - Viewer evidence: 4 seeds×16 floor trajectories, all random draws/full identity-aware graphs, six render-command comparisons, session aliases/empty rendering.
-- Last verified remote checkpoint before this checkpoint: 88cd3e85bdea995c31cb0955d1070f16cd2445a2. Worktree and STATE are committed/pushed together at every checkpoint.
-- U03a strict typecheck and 10 targeted status tests passed (39 other tests explicitly skipped). Combined suite/build has not yet rerun after status addition.
+- Last verified remote checkpoint before this checkpoint: ee175b89c6830f8399caaebecdb1bd723d50a8d7. Worktree and STATE are committed/pushed together at every checkpoint.
+- U03b strict typecheck and combined targeted item/door/status run passed 32 tests (39 unrelated tests explicitly skipped). 21 item/comparator tests, 1 door test, 10 status tests; independent copied input graphs expose shallow aliases and prevent source/candidate shared mutations. Full 71-test suite/build/browser rerun is pending.
 - No main-game trajectories, save cross-load, full entity/UI/editor or live service parity yet. Firefox/WebKit and other OS untested. Actions logs inaccessible; API status metadata accessible.
 
 ## Blockers and unresolved owner feedback
@@ -38,4 +40,4 @@ No routing/environment blocker remains. Main gameplay and the rest of the matrix
 
 ## Next action
 
-Continue audited base entity/item lifecycle modules and integrate the typed status ports, then run combined tests/build/browser checks. Source constructor/tick quirks remain deliberately preserved; do not claim fake actor/UI doubles establish gameplay parity. Preserve source semantics and document gaps; update STATE, commit, push and verify actual remote head before long work/each checkpoint. No merge or auto-merge.
+Run the full 71-domain-test check/build and real-browser regression; expose only the genuine rewritten viewer in preview. Then continue main-game derived entities, action/generation/save/service modules in independently audited units. Source constructor/tick quirks remain deliberately preserved; do not claim fake actor/UI doubles establish gameplay parity. Preserve source semantics and document gaps; update STATE, commit, push and verify actual remote head before long work/each checkpoint. No merge or auto-merge.

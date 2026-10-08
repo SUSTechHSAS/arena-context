@@ -14,7 +14,7 @@ export interface StatusPet extends StatusActor {
   更新宠物管理窗口(): void;
 }
 export interface StatusItem {
-  材质?: unknown; 唯一标识: symbol; 自定义数据: Map<string, unknown>;
+  材质?: unknown; 唯一标识: symbol | null; 自定义数据: Map<unknown, unknown>;
   获取名称(): string; 更新倒计时(): void;
 }
 export interface StatusPorts {
@@ -35,7 +35,7 @@ export interface StatusPorts {
   flame(config: { 强化: number | undefined }): unknown;
   placeItem(item: unknown, x: number, y: number): void;
   damagePlayer(amount: number, type: string): void;
-  destroyItem(identity: symbol, fromInventory: boolean): void;
+  destroyItem(identity: symbol | null, fromInventory: boolean): void;
   burnWoodenScrolls(): void;
   refreshEquipment(): void;
   log(message: string, type: string): void;

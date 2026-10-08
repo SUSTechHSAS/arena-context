@@ -5,12 +5,12 @@ Original pin: `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`. Anchors refer to `refe
 | Surface | Original evidence | Candidate implementation / actual verification |
 |---|---|---|
 | RNG, hashing, fusion random, seed searching | Main `哈希字符串`, `种子伪随机数`, `初始化随机数生成器`, `开始筛选种子`; Viewer L129–149 | Primitive hash/LCG/fusion ported; 24 tests pass, 20×1000 draws/states; full seed-search/game integration pending |
-| Cell types, walls, doors, locks/keys, pathfinding and visibility | Main classes `单元格`, `门`, `生成玩家距离图`, `计算距离图`; Viewer L105+ | Player-distance primitive ported; 6 tests including 1024 map/start cases and a detected boundary mutant; item/door lifecycle and game integration pending |
+| Cell types, walls, doors, locks/keys, pathfinding and visibility | Main classes `单元格`, `门`, `生成玩家距离图`, `计算距离图`; Viewer L105+ | Player-distance primitive ported; 6 tests including 1024 map/start cases and a detected boundary mutant; main-door constructor/unlock contract also ported (1 differential test); obstacle/obsidian lifecycle and game integration pending |
 | Rooms, corridors, caves, floors, stairs, transitions | Main `生成地牢`, `生成洞穴地牢`, `切换楼层`; Viewer `generateDungeonForLevel` | Not ported |
 | Tutorial, professions/custom mode, resume, death/victory | Main `应用职业效果`, `显示职业选择界面`, menus and game handlers | Not ported |
 | Combat/AI and all monster subclasses | Main classes from `怪物` through specialized monsters, minions and bosses | Not ported |
 | Status effects, environment, time, weather, terrain | Main `状态效果`, flame/water/lava/ice/poison/smoke classes and weather handlers | Complete status-class contract port, 10 tests / 340 isolated trajectories with explicit doubles; real actor/item/environment integration and other terrain/weather logic pending |
-| Items, weapon/armor, potion/scroll, traps/projectiles, durability and fusion | Main `物品`, `武器类`, `防御装备类`, subclasses and fusion handlers | Not ported |
+| Items, weapon/armor, potion/scroll, traps/projectiles, durability and fusion | Main `物品`, `武器类`, `防御装备类`, subclasses and fusion handlers | Base-item DATA/lifecycle/hints/stacking ported, 21 tests; derived classes, concrete weapon/armor/potion/trap/fusion integration and item DOM/React UI pending |
 | Inventory/equipment, stack/sort, coins, crafting, merchant/altar/reforge/well | Main inventory/shop/reforge/altar functions and classes | Not ported |
 | Pets, vehicles, summoned allies and NPCs | Main `宠物`, `马`, `熊猫`, `水母`, `火蜥蜴`, `自定义NPC`, `佣兵单位` | Not ported |
 | Chess, Sokoban, switches, conveyors, puzzles and level quality solver | Main chess classes, switch classes, `推箱子关卡生成器`, `_求解棋盘布局` | Not ported |
