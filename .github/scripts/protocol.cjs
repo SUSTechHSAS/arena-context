@@ -15,6 +15,17 @@ function protectedPath(path) {
   return path === 'AGENTS.md' || path.startsWith('.github/') || path.startsWith('.templates/');
 }
 
+// exp/sqrt implementations can differ in their last bits across Node runtimes.
+// Labels, membership, array lengths and metadata remain exact; only finite
+// numeric evidence gets the same 1e-12 tolerance as legacy fit/separation.
+function sameEvidence(actual, expected) {
+  if (typeof expected === 'number') return Number.isFinite(actual) && Math.abs(actual - expected) <= 1e-12;
+  if (actual === expected) return true;
+  if (!actual || !expected || typeof actual !== 'object' || typeof expected !== 'object' || Array.isArray(actual) !== Array.isArray(expected)) return false;
+  if (JSON.stringify(Object.keys(actual).sort()) !== JSON.stringify(Object.keys(expected).sort())) return false;
+  return Object.keys(expected).every(key => sameEvidence(actual[key], expected[key]));
+}
+
 function validate({ pr, files, trustedTask, candidate }) {
   const errors = [];
   const fail = message => errors.push(message);
@@ -92,7 +103,7 @@ async function inspectPullRequest({ github, repo, pr }) {
       if (await isLegacyCheckpoint({ github, repo, pr })) {
         report.warnings = ['Pre-gate checkpoint preserved for human review; no model identity is claimed. New task changes require an accepted fingerprint gate.'];
       } else {
-        report.errors.push('No current fingerprint: new task changes require an accepted Clear match or ambiguity confined to accepted models.');
+        report.errors.push('No current fingerprint: new task changes require a current accepted fingerprint gate.');
       }
     } else if (!/^\.context\/fingerprints\/\d{8}T\d{6}Z-[a-f0-9]{8}\/report\.json$/.test(fp)) {
       report.errors.push('Fingerprint must link to a per-turn report path.');
@@ -100,7 +111,8 @@ async function inspectPullRequest({ github, repo, pr }) {
       try {
         const result = JSON.parse(await readText(github, repo, fp, pr.head.sha));
         const raw = await readText(github, repo, fp.replace('report.json', 'raw.json'), pr.head.sha);
-        const { hash, packageId, scoreSample } = await import('./fingerprint-lib.mjs');
+        const { hash, packageId } = await import('./fingerprint-lib.mjs');
+        const { scoreBundle, MAX_PACKAGE_BYTES } = await import('./fingerpoint-lib.mjs');
         const { decideWork, validatePolicy } = await import('./model-gate.mjs');
         // The accepted list is centrally controlled on protected main. A
         // candidate's copy of policy.json or self-written gate cannot grant access.
@@ -110,10 +122,9 @@ async function inspectPullRequest({ github, repo, pr }) {
         let verified = { status: 'unscored' };
         if (result.status !== 'unscored') {
           if (!/^[a-f0-9]{64}$/.test(result.package_id)) throw new Error('Invalid fingerprint package ID.');
-          const bundle = JSON.parse(await readText(github, repo, `.context/fingerprints/banks/${result.package_id}.json`, pr.head.sha, 10000000));
+          const bundle = JSON.parse(await readText(github, repo, `.context/fingerprints/banks/${result.package_id}.json`, pr.head.sha, MAX_PACKAGE_BYTES));
           if (packageId(bundle) !== result.package_id) throw new Error('Fingerprint package changed.');
-          const trusted = require('../vendor/modeltrace/provenance.json').website_code_sha256;
-          verified = scoreSample(raw, bundle, trusted);
+          verified = scoreBundle(raw, bundle);
           if (result.bank_sha256 !== bundle.bank_sha256 || result.bank_version !== bundle.bank_version) throw new Error('Fingerprint bank metadata mismatch.');
           for (const key of ['status', 'nearest_model', 'identified_candidate', 'family']) {
             if (verified[key] !== result[key]) throw new Error(`Fingerprint score mismatch: ${key}`);
@@ -121,7 +132,15 @@ async function inspectPullRequest({ github, repo, pr }) {
           for (const key of ['fit', 'separation']) {
             if (verified[key] !== undefined && (!Number.isFinite(result[key]) || Math.abs(verified[key] - result[key]) > 1e-12)) throw new Error(`Fingerprint numeric mismatch: ${key}`);
           }
-          if (JSON.stringify(verified.candidates) !== JSON.stringify(result.candidates)) throw new Error('Fingerprint candidate list mismatch.');
+          if (bundle.schema !== 2 && JSON.stringify(verified.candidates) !== JSON.stringify(result.candidates)) throw new Error('Fingerprint candidate list mismatch.');
+          if (bundle.schema === 2) {
+            // Recompute the full reference set, aliases, input checks, and
+            // calibration binding; neither the display top three nor the PR's
+            // own claimed gate is evidence of acceptance.
+            for (const key of Object.keys(verified)) {
+              if (!sameEvidence(result[key], verified[key])) throw new Error(`Fingerprint score mismatch: ${key}`);
+            }
+          }
           // Older Clear match reports did not record this field. Close calls
           // must carry the complete set, independently recomputed from raw data.
           if (((verified.status === 'family_only' && result.gate) || result.ambiguous_models !== undefined) &&

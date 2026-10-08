@@ -8,7 +8,7 @@ Arena 使用 `SUSTechHSAS`；人工负责人/审核者是 `Kibiandkimi`，在仓
 
 这要求普通合并路径先获得人工批准；不移除仓库所有者修改规则的能力，也不单独阻止 agent 在已批准后点击合并。AGENTS.md 明确要求由你执行最终合并。PR 应由 `SUSTechHSAS` 创建，避免人工账户成为无法自批的 PR 作者。
 
-每轮工作还需通过模型门槛：main 的 `.github/fingerprint-policy.json` 指定接受的具体模型 ID；Clear match 的模型被接受，或 Close call 的完整 `ambiguous_models` 全部被接受，才继续。存在未获准的歧义候选或证据缺失仍拒绝。score 即时给出 END_TURN/退出码 20 时，agent 只输出原因并结束；不重测，也不再运行 checkpoint 工具。名单或门控逻辑修改采用单独维护 PR，合入 main 后自动重检开放任务 PR。
+每轮 Arena 任务使用 lm.ikale.io 的 Fingerpoint 检测器，要求同轮三条回答。覆盖至少 95% 库内校准分数的完整 `reference_models` 集合必须全部被 main 的 `.github/fingerprint-policy.json` 接受；95% 是仓库工作规则，不是身份准确率。上游合并的 Astra/6.1 Sol 类别必须同时检查两个 ID。存在未获准候选或证据缺失仍拒绝。score 即时给出 END_TURN/退出码 20 时，agent 只输出原因并结束；不重测，也不再运行 checkpoint 工具。名单或门控逻辑修改采用单独维护 PR，合入 main 后自动重检开放任务 PR。`meta/...` 上由用户要求的仓库维护不执行 Arena 任务采样门控；旧 WhatsMyLLM 记录保留原算法复算。详见 [指纹规则](FINGERPRINT.md)。
 
 ## 新任务
 

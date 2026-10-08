@@ -7,6 +7,8 @@ on:
       - '.github/fingerprint-legacy.json'
       - '.github/scripts/model-gate.mjs'
       - '.github/scripts/fingerprint-lib.mjs'
+      - '.github/scripts/fingerpoint-lib.mjs'
+      - '.github/vendor/fingerpoint/**'
       - '.github/scripts/protocol.cjs'
   workflow_dispatch:
 permissions:
