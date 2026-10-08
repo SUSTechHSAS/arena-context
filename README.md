@@ -41,11 +41,11 @@ Arena 自动创建分支不等于自动保存。agent 必须主动 commit、push
 
 ## 每轮模型指纹
 
-每个用户工作轮次先执行 `node .github/scripts/fingerprint.mjs prepare`，模型直接回答返回的约 300 数字探针，再保存原样数组并运行 `score <turn_id>`。评分后在同一轮继续任务，报告候选结果。按用户约定，同一轮内假定模型不变；跨轮不复用、不合并样本。
+每个 Arena 用户工作轮次先执行 `node .github/scripts/fingerprint.mjs prepare`，模型直接回答返回的三道约 300 数字探针，再将三个原样数组保存在一个 JSON 数组中并运行 `score <turn_id>`。评分允许后在同一轮继续任务。按用户约定，同一轮内假定模型不变；跨轮不复用、不合并样本。本仓库在 `meta/...` 分支上的维护不受 Arena 任务采样门控约束。
 
-每次 prepare 都检查 WhatsMyLLM 最新 bank 和阈值；数据兼容且校验通过便立即使用，无需等仓库升级。离线时明确标记缓存版本，评分算法变化时提示需要更新检查器，不下载执行新远程代码。原始样本、结果和所用 bank 快照随检查点保存。详细说明见 [docs/FINGERPRINT.md](docs/FINGERPRINT.md)。
+每次 prepare 通过 GitHub API 检查 [lm.ikale.io](https://lm.ikale.io/) 官方仓库的兼容 bank 和检测器；它已整合 ModelTrace 的部分样本及新增来源。离线时标记缓存版本，算法变化时提示维护更新，不执行下载的代码。原始样本、结果、bank 和 detector 快照随检查点保存；旧 WhatsMyLLM 记录保留原评分方式。详细说明见 [docs/FINGERPRINT.md](docs/FINGERPRINT.md)。
 
-**工作门槛：接受列表内模型的 Clear match，或歧义仅限于接受列表内模型的 Close call。** Close call 必须核对评分器从完整指纹库计算的 `ambiguous_models`，其中每个具体 ID 都被允许才继续；仍保留歧义结果，不宣称识别出唯一模型。当前接受 Opus 5.5、Sonnet 5.5、Fable 5.1、GPT-6 Astra、GPT-6.1 Sol、GPT-6 Sol。列表位于 main 的 [.github/fingerprint-policy.json](.github/fingerprint-policy.json)，逐个具体模型 ID 匹配。
+**工作门槛：覆盖至少 95% 库内校准分数的完整候选集合全部获准。** 核对 `reference_models` 中的每个具体 ID，包含边界并列项及合并类别的所有成员；95% 是本仓库的工作规则，不是身份识别准确率。上游合并的 Astra/6.1 Sol 类别必须同时获准。当前接受 Opus 5.5、Sonnet 5.5、Fable 5.1、GPT-6 Astra、GPT-6.1 Sol、GPT-6 Sol。列表位于 main 的 [.github/fingerprint-policy.json](.github/fingerprint-policy.json)，没有扩大接受范围。
 
 score 在本地即时输出 CONTINUE 或 END_TURN，不等待 CI。未获准模型、歧义集合含未获准模型或缺失、Weak match、无效样本、评分或政策读取失败，都返回退出码 20，要求 agent 输出原因后直接结束轮次，不重测、不继续任务。拒绝记录已写本地，不再额外 commit/push；通过后才继续原来的检查点流程。
 
