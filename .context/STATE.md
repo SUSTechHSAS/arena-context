@@ -27,7 +27,8 @@ Two earlier unmerged domain candidates exist: [PR #14](https://github.com/SUSTec
 - Authenticated GitHub submission account: SUSTechHSAS.
 - Accepted remote `task/10/main` verified at `adccae2f9fbc13b9ffd7a5a97b9150d24409f166`; local AGENTS.md and TASK.md match that head.
 - Issue #10 is open with no subsequent comments. Both earlier PRs are Draft, have no reviews/comments or unresolved review threads, and their current protocol status is failing.
-- Fingerprint scoring parsed exactly 301 numbers and permitted this turn. No domain tests have run on this branch.
+- Fingerprint scoring parsed exactly 301 numbers and permitted this turn. Cached bank snapshot: `.context/fingerprints/banks/072a76d2f51a70cf691f5f79532019eebe546b08a960e51bacf9f5ccc384086a.json`.
+- Startup checkpoint `9c2c1529a06dd0dad93c8c6169f0fdd567bb4ea6` was pushed and independently verified against the remote ref; the bank snapshot is included in the following checkpoint. No domain tests have run on this branch.
 
 ## Blockers and unresolved owner feedback
 
