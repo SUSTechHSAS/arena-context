@@ -5,6 +5,19 @@ import { httpFetch, errorDetail } from './http-client.mjs';
 // egress host in the reported sandbox. Never request or follow a raw download URL.
 export const POLICY_URL = 'https://api.github.com/repos/SUSTechHSAS/arena-context/contents/.github/fingerprint-policy.json?ref=main';
 export const STOP_EXIT_CODE = 20;
+// Local work policy, NOT an upstream acceptance threshold or identity accuracy.
+// Include the smallest complete set carrying at least 95% of the calibrated
+// reference-bank mass, then require every concrete member to be accepted.
+export const REFERENCE_MASS_MIN = 0.95;
+// Reviewed aliases only. A merged fingerprint class requires ALL of its
+// concrete members; do not turn a class label into a single-model identity.
+const MEMBERS = {
+  'claude-opus-5.5': ['claude-opus-5-5'],
+  'claude-sonnet-5.5': ['claude-sonnet-5-5'],
+  'claude-fable-5.1': ['claude-fable-5-1'],
+  'gpt-6-astra': ['gpt-6-astra', 'gpt-6.1-sol'],
+};
+export const modelMembers = id => [...(Object.hasOwn(MEMBERS, id) ? MEMBERS[id] : [id])];
 
 export function validatePolicy(value) {
   if (value?.schema !== 1 || !Array.isArray(value.accepted_models)) throw new Error('invalid_model_policy');
@@ -49,6 +62,27 @@ export function decideWork(result, policy) {
     return { allowed: false, action: 'END_TURN', reason: 'model_policy_unavailable', detail: error.message };
   }
   const common = { policy_sha256: policyHash(verified), accepted_model_count: verified.accepted_models.length };
+  if (['reference_match', 'reference_ambiguity'].includes(result?.status)) {
+    const models = result.reference_models, classes = result.reference_classes;
+    if (result.provider !== 'fingerpoint' || result.identified_candidate !== null ||
+        result.identity_verified !== false || result.arena_protocol_calibrated !== false ||
+        result.probability_scope !== 'reference-closed-set' || result.upstream_decision !== 'not_confirmed' ||
+        result.reference_mass_min !== REFERENCE_MASS_MIN || !Number.isFinite(result.reference_mass) ||
+        result.reference_mass < REFERENCE_MASS_MIN || result.reference_mass > 1 || result.sample_count !== 3 ||
+        !Array.isArray(models) || !models.length || models.some(id => typeof id !== 'string' || !/^[a-z0-9][a-z0-9._-]*$/.test(id)) ||
+        new Set(models).size !== models.length || !models.includes(result.nearest_model) ||
+        !Array.isArray(classes) || !classes.length || new Set(classes).size !== classes.length ||
+        classes.some(id => typeof id !== 'string' || !/^[a-z0-9][a-z0-9._-]*$/.test(id)) ||
+        !classes.includes(result.nearest_class) || modelMembers(result.nearest_class)[0] !== result.nearest_model ||
+        JSON.stringify(models) !== JSON.stringify([...new Set(classes.flatMap(modelMembers))]) ||
+        (result.status === 'reference_match') !== (models.length === 1)) {
+      return { ...common, allowed: false, action: 'END_TURN', reason: 'complete_reference_set_required' };
+    }
+    const rejected = models.filter(id => !verified.accepted_models.includes(id));
+    if (rejected.length) return { ...common, allowed: false, action: 'END_TURN', reason: 'reference_model_not_accepted', models, rejected_models: rejected };
+    return { ...common, allowed: true, action: 'CONTINUE', reason: 'accepted_reference_set', models };
+  }
+  if (result?.provider === 'fingerpoint') return { ...common, allowed: false, action: 'END_TURN', reason: 'calibrated_reference_set_required' };
   if (result?.status === 'family_only') {
     const models = result.ambiguous_models;
     if (result.identified_candidate !== null || !Array.isArray(models) || models.length < 2 ||
