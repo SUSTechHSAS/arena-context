@@ -24,6 +24,17 @@ test('configured proxy is respected: failing curl never falls back to a direct n
   await assert.rejects(request(POLICY_URL), error => error.code === 'PROXY_TRANSPORT_FAILED' && !error.message.includes('secret'));
   assert.equal(nativeCalls, 0);
 });
+test('large detector transfers opt into compression and a bounded longer timeout', async () => {
+  const request = makeHttpFetch({ env: {}, runner: async (command, args, options) => {
+    assert.equal(command, 'curl'); assert.ok(args.includes('--compressed'));
+    assert.equal(args[args.indexOf('--max-time') + 1], '60');
+    assert.equal(options.timeout, 62000);
+    assert.ok(!args.includes('--location')); assert.ok(!args.includes('--insecure'));
+    return { stdout: wire(payload) };
+  } });
+  assert.equal(await (await request(POLICY_URL, { timeoutMs: 60000, redirect: 'error' })).text(), payload);
+  for (const timeoutMs of [0, -1, Infinity, 60001]) await assert.rejects(request(POLICY_URL, { timeoutMs }), /invalid_request_timeout/);
+});
 test('without a configured proxy, missing curl can use native fetch and retain useful cause codes', async () => {
   const unavailable = async () => { const e = new Error('missing'); e.code = 'ENOENT'; throw e; };
   const request = makeHttpFetch({ env: {}, runner: unavailable, nativeFetch: async (_, options) => {

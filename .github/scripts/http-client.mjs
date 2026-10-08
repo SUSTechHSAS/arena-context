@@ -30,8 +30,10 @@ export function makeHttpFetch({ env = process.env, nativeFetch = globalThis.fetc
     const target = new URL(url);
     if (!['https:', 'http:'].includes(target.protocol) || target.username || target.password) throw new Error('unsupported_request_url');
     const limit = options.maxBytes || 8_000_000;
-    const args = ['-q', '--silent', '--show-error',
-      '--connect-timeout', '4', '--max-time', '9', '--max-filesize', String(limit),
+    const timeoutMs = options.timeoutMs ?? 9000;
+    if (!Number.isFinite(timeoutMs) || timeoutMs < 1 || timeoutMs > 60000) throw new Error('invalid_request_timeout');
+    const args = ['-q', '--silent', '--show-error', '--compressed',
+      '--connect-timeout', '4', '--max-time', String(timeoutMs / 1000), '--max-filesize', String(limit),
       '--proto', '=http,https', '--proto-redir', target.protocol === 'https:' ? '=https' : '=http,https'];
     // API policy reads must not follow redirects onto an unapproved host.
     if (options.redirect !== 'error') args.push('--location', '--max-redirs', '3');
@@ -43,7 +45,7 @@ export function makeHttpFetch({ env = process.env, nativeFetch = globalThis.fetc
     let curlError;
     try {
       const { stdout } = await runner('curl', args, { env, encoding: 'utf8', maxBuffer: limit + 65536,
-        timeout: 11000, signal: options.signal });
+        timeout: timeoutMs + 2000, signal: options.signal });
       const response = parseCurlResponse(stdout);
       if (Buffer.byteLength(await response.text()) > limit) throw new Error('response_too_large');
       return response;
