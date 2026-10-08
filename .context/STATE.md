@@ -1,39 +1,39 @@
 # Current handoff
 
 - Task: #10
-- Unit: U00 — independent source audit and consistency plan
+- Unit: U00 — frozen source and independent audit complete
 - Work branch / PR: arena/db5ddb58-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/19
 - Accepted base at unit start: task/10/main@adccae2f9fbc13b9ffd7a5a97b9150d24409f166
 - Fingerprint: .context/fingerprints/20261008T080439Z-cbb0a01f/report.json
 - Updated: 2026-10-08
-- Candidate stage: fresh implementation explicitly selected; source audit in progress
+- Candidate stage: source/plan foundation; full rewrite not implemented
 
 This card does not establish approval; only Kibiandkimi decides acceptance.
 
 ## Current objective
 
-Independently rewrite Chinese Dungeon using a modern framework and establish source-behavior consistency tests, without changing TASK.md or treating unreviewed candidates as accepted.
+Implement a fresh modern-framework rewrite with independent original-source consistency tests, retaining the accepted TASK.md behavior contract.
 
 ## Candidate progress
 
-The owner selected “fresh from the accepted task head” in the routing question. PR #14 and PR #15 are not inherited, combined or relied on for implementation/test claims. The task branch includes the already-merged protocol maintenance from PR #18.
+The owner chose a fresh implementation from the accepted task head; #14/#15 are not inherited. U00 froze all eight root application/reference files from independently resolved upstream `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`, including license, viewer, manager and NPC example. `reference/manifest.json` records exact SHA-256 and size. Verification code rejects changed bytes, identity, duplicate and escaping paths.
 
-Independently confirmed upstream `SUSTechHSAS/Chinese-Dungeon` HEAD at `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`, its GPL-3.0 license, and root entries (game, viewer, level manager, custom-NPC example and README). No source code has been ported yet.
+`docs/task-10/PLAN.md` stages a React/TypeScript/Vite rewrite; `FEATURE-MATRIX.md` tracks the entire source surface and `SOURCE-INVENTORY.md` provides a lexical declaration audit. Every domain category remains unported. Proposed source defects/deviations are not approved. Recovery inputs and environment limits are recorded in RESOURCES.md and ENVIRONMENT.md.
 
-The per-turn offline fingerprint permits CONTINUE with accepted complete ambiguity; `identified_candidate=null`. The exact raw sample, manifest, report and bank snapshot are preserved. This is statistical review evidence, not identity certification.
+The exact current-turn fingerprint and cached bank are preserved; CONTINUE is accepted complete ambiguity, not unique identity certification.
 
 ## Verification
 
-- Authenticated submission account: SUSTechHSAS. Actual branch is arena/db5ddb58-arena-context; PR #19 is Draft with base task/10/main.
-- Accepted AGENTS.md and TASK.md match task/10/main at the recorded SHA. Issue #10 has no subsequent instructions/comments; older candidates have no reviews or unresolved review threads.
-- Complete startup checkpoint `3b3ad8837f4ad1be023a5ad8a38830d076535994` was pushed and verified against the remote ref. Its `arena/protocol` status and Protocol check are successful.
-- Node 22.22.3, npm 10.9.8 and Python 3.11.2 are available; no system browser found. No domain tests have run.
-- GitHub Actions log download is inaccessible under the host whitelist; status/check metadata remains available through api.github.com. No logs or domain verification results are inferred from it.
+- `node scripts/verify-reference.mjs`: all eight original files unchanged.
+- `node --test tests/reference.test.mjs`: 5/5 passed, including deliberate one-byte source mutation detection; not gameplay parity.
+- `git diff --check`: passed. Detailed evidence: `docs/task-10/VERIFICATION.md`.
+- Last verified remote checkpoint before this unit: `e896484fbfd383cb9b206dbe8bbcf22c9b498c79`. Startup checkpoint 3b3ad88 passed arena/protocol; later domain CI/results are not inferred.
+- No rewritten gameplay or real-browser tests yet. Node/npm available; no system browser. Actions logs inaccessible, API check metadata accessible.
 
 ## Blockers and unresolved owner feedback
 
-No routing blocker remains. Full implementation scope, source invariants, external-service boundaries and feasible browser verification must be audited before dependent work. Proposed behavior deviations require owner review.
+No routing blocker. Full implementation and parity coverage remain pending. Record suspected defects and behavioral differences for Kibiandkimi review instead of silently changing behavior.
 
 ## Next action
 
-Freeze the independently pinned upstream sources with license and checksums, audit their complete feature surface, and record a staged implementation/parity plan. Continue reviewable units, updating STATE and commit/push/remote-head verification each time. Do not merge or enable auto-merge.
+U01: build the modern scaffold and an AST-backed exact-source test oracle; independently port random/hash and path primitives with differential/mutation tests. Commit/push/verify each useful unit and automatically continue. Keep PR #19 Draft and do not merge.

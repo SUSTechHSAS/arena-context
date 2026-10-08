@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创意工坊 - 关卡管理器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --font-family-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --background-color: #f6f7f9;
+            --card-background-color: #ffffff;
+            --text-color-primary: #1d1d1f;
+            --text-color-secondary: #6e6e73;
+            --accent-color: #007aff;
+            --border-color: #e1e2e4;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --danger-color: #ff3b30;
+            --border-radius-medium: 12px;
+            --border-radius-large: 16px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; overflow: hidden; font-family: var(--font-family-sans); background-color: var(--background-color); color: var(--text-color-primary); }
+        .container { display: flex; height: 100vh; width: 100vw; }
+        header { position: fixed; top: 0; left: 0; width: 100%; height: 60px; background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; z-index: 100; }
+        .header-title { font-size: 1.25rem; font-weight: 600; }
+        .sidebar { width: 340px; flex-shrink: 0; padding: 80px 16px 20px; border-right: 1px solid var(--border-color); background-color: var(--card-background-color); display: flex; flex-direction: column; }
+        .search-bar { position: relative; margin-bottom: 16px; }
+        .search-bar i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-color-secondary); font-size: 0.9rem; }
+        .search-input { width: 100%; padding: 10px 12px 10px 36px; border: none; background-color: var(--background-color); border-radius: 8px; font-size: 1rem; outline: none; transition: box-shadow 0.2s ease; }
+        .search-input:focus { box-shadow: 0 0 0 2px var(--accent-color); }
+        .level-list { list-style: none; overflow-y: auto; flex-grow: 1; }
+        .level-item { padding: 12px; border-radius: var(--border-radius-medium); margin-bottom: 8px; cursor: pointer; transition: background-color 0.2s ease; }
+        .level-item:hover { background-color: #f0f0f5; }
+        .level-item.active { background-color: var(--accent-color); color: white; }
+        .level-item.active .level-author, .level-item.active .level-stats, .level-item.active .level-stats i { color: rgba(255, 255, 255, 0.8); }
+        .level-title { font-weight: 600; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .level-author { font-size: 0.9rem; color: var(--text-color-secondary); margin-bottom: 8px; }
+        .level-stats { display: flex; gap: 12px; font-size: 0.8rem; color: var(--text-color-secondary); }
+        .level-stats span { display: flex; align-items: center; }
+        .level-stats i { margin-right: 4px; width: 16px; text-align: center; }
+        .main-content { flex-grow: 1; padding: 84px 32px 32px; overflow-y: auto; }
+        .placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; color: var(--text-color-secondary); }
+        .placeholder i { font-size: 4rem; margin-bottom: 16px; color: var(--border-color); }
+        .placeholder p { font-size: 1.1rem; }
+        .level-detail { display: none; max-width: 800px; margin: 0 auto; }
+        .detail-header h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 8px; word-break: break-word; }
+        .detail-header .meta { color: var(--text-color-secondary); margin-bottom: 24px; }
+        .detail-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 16px; padding: 20px; background-color: var(--card-background-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-large); margin-bottom: 24px; }
+        .stat-item { text-align: center; }
+        .stat-item i { font-size: 1.5rem; color: var(--accent-color); margin-bottom: 8px; }
+        .stat-item .value { font-size: 1.75rem; font-weight: 600; }
+        .stat-item .label { font-size: 0.9rem; color: var(--text-color-secondary); }
+        .detail-preview { display: flex; gap: 24px; align-items: flex-start; }
+        .preview-canvas-wrapper { flex-shrink: 0; width: 280px; height: 280px; }
+        .preview-canvas { width: 100%; height: 100%; border-radius: var(--border-radius-large); background-color: #000; border: 1px solid var(--border-color); }
+        .detail-actions { flex-grow: 1; display: flex; flex-direction: column; gap: 12px; }
+        .btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: var(--border-radius-medium); border: none; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; }
+        .btn i { font-size: 1.1rem; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+        .btn-primary { background-color: var(--accent-color); color: white; box-shadow: 0 4px 12px rgba(0, 122, 255, 0.2); }
+        .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0, 122, 255, 0.3); }
+        .btn-secondary { background-color: var(--card-background-color); color: var(--text-color-primary); border: 1px solid var(--border-color); }
+        .btn-secondary:hover:not(:disabled) { background-color: #f0f0f5; }
+        .btn-danger { background-color: transparent; color: var(--danger-color); }
+        .btn-danger:hover:not(:disabled) { background-color: rgba(255, 59, 48, 0.1); }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 1000; display: none; align-items: center; justify-content: center; animation: fadeIn 0.3s ease; }
+        .modal-content { background-color: var(--card-background-color); padding: 24px; border-radius: var(--border-radius-large); width: 90%; max-width: 500px; box-shadow: 0 10px 40px var(--shadow-color); animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .modal-title { font-size: 1.5rem; font-weight: 600; }
+        .close-btn { background: var(--background-color); border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 1.2rem; color: var(--text-color-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-weight: 500; margin-bottom: 8px; }
+        .form-input, .file-input-wrapper { width: 100%; padding: 12px; border: 1px solid var(--border-color); background-color: var(--background-color); border-radius: var(--border-radius-medium); font-size: 1rem; }
+        .file-input-wrapper { cursor: pointer; text-align: center; color: var(--text-color-secondary); }
+        .file-input-wrapper input[type="file"] { display: none; }
+        .delete-confirm-modal .modal-content { text-align: center; }
+        .delete-confirm-modal .modal-icon { font-size: 3rem; color: var(--danger-color); margin-bottom: 16px; }
+        .delete-confirm-modal .modal-body p { margin-bottom: 24px; color: var(--text-color-secondary); }
+        .delete-confirm-modal .btn-group { display: flex; gap: 12px; }
+        .delete-confirm-modal .btn-group .btn { flex: 1; }
+        .btn-danger-solid { background-color: var(--danger-color); color: white; }
+        .notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #333; color: white; padding: 12px 20px; border-radius: var(--border-radius-medium); box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 2000; opacity: 0; transition: opacity 0.3s, transform 0.3s; animation: slideUpIn 0.3s forwards; }
+        .notification.error { background-color: var(--danger-color); }
+        .notification.success { background-color: #34c759; }
+        @keyframes slideUpIn { from { transform: translate(-50%, 20px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: translateY(30px) scale(0.98); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+        @media (max-width: 768px) { .container { flex-direction: column; } .sidebar { width: 100%; height: 45vh; border-right: none; border-bottom: 1px solid var(--border-color); padding-top: 70px; } .main-content { padding-top: 24px; } .detail-preview { flex-direction: column; } .preview-canvas-wrapper { width: 100%; height: auto; aspect-ratio: 1 / 1; } }
+       
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    height: 100%;
+}
+
+.loading-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.loading-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    animation: pulse 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+.loading-container p {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: var(--text-color-secondary);
+}
+
+@keyframes pulse {
+    0%, 80%, 100% {
+        transform: scale(0.6);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1.0);
+        opacity: 1;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="header-title">创意工坊</div>
+            <button class="btn btn-primary" id="upload-btn"><i class="fas fa-upload"></i> 上传新关卡</button>
+        </header>
+
+        <aside class="sidebar">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" class="search-input" id="search-input" placeholder="搜索关卡...">
+            </div>
+            <ul class="level-list" id="level-list"></ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="placeholder" id="placeholder">
+                <i class="far fa-hand-pointer"></i>
+                <p>从左侧选择一个关卡以查看详情</p>
+            </div>
+
+            <div class="level-detail" id="level-detail">
+                <div class="detail-header">
+                    <h2 id="detail-title"></h2>
+                    <p class="meta">
+                        <span id="detail-author"></span> | <span id="detail-version"></span>
+                    </p>
+                </div>
+                
+                <div class="detail-stats">
+                    <div class="stat-item"><i class="fas fa-play"></i><div class="value" id="detail-plays"></div><div class="label">游玩</div></div>
+                    <div class="stat-item"><i class="fas fa-trophy"></i><div class="value" id="detail-clears"></div><div class="label">通关</div></div>
+                    <div class="stat-item"><i class="fas fa-thumbs-up"></i><div class="value" id="detail-likes"></div><div class="label">赞</div></div>
+                    <div class="stat-item"><i class="fas fa-thumbs-down"></i><div class="value" id="detail-dislikes"></div><div class="label">踩</div></div>
+                </div>
+
+                <div class="detail-preview">
+                    <div class="preview-canvas-wrapper">
+                        <canvas id="detail-canvas" class="preview-canvas"></canvas>
+                    </div>
+                    <div class="detail-actions">
+                        <button class="btn btn-primary" id="play-btn"><i class="fas fa-gamepad"></i> 在新标签页中游玩</button>
+                        <button class="btn btn-secondary" id="download-btn"><i class="fas fa-download"></i> 下载关卡文件</button>
+                        <button class="btn btn-danger" id="delete-btn"><i class="fas fa-trash-alt"></i> 删除我的关卡</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 上传弹窗 -->
+    <div class="modal-overlay" id="upload-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">上传你的关卡</h3>
+                <button class="close-btn" id="close-upload-modal-btn">×</button>
+            </div>
+            <form id="upload-form">
+                <div class="form-group">
+                    <label for="file-upload">关卡文件 (.json)</label>
+                    <label for="file-upload" class="file-input-wrapper" id="file-label"><i class="fas fa-cloud-upload-alt"></i> 点击选择文件</label>
+                    <input type="file" id="file-upload" accept=".json" required>
+                </div>
+                <div class="form-group">
+                    <label for="title-input">关卡标题</label>
+                    <input type="text" id="title-input" class="form-input" placeholder="例如：迷雾森林的挑战" required>
+                </div>
+                <div class="form-group">
+                    <label for="author-input">作者 (可选)</label>
+                    <input type="text" id="author-input" class="form-input" placeholder="你的昵称">
+                </div>
+                <div class="form-group">
+                    <label for="password-input">删除密码</label>
+                    <input type="password" id="password-input" class="form-input" placeholder="用于日后删除你的关卡" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">确认上传</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 删除确认弹窗 -->
+    <div class="modal-overlay delete-confirm-modal" id="delete-modal">
+        <div class="modal-content">
+            <div class="modal-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="modal-header" style="justify-content: center;">
+                <h3 class="modal-title">确认删除</h3>
+            </div>
+            <div class="modal-body">
+                <p>此操作不可逆，你确定要永久删除这个关卡吗？</p>
+                <div class="form-group">
+                    <input type="password" id="delete-password-input" class="form-input" placeholder="请输入删除密码" required>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" id="cancel-delete-btn">取消</button>
+                <button class="btn btn-danger-solid" id="confirm-delete-btn">确认删除</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 从游戏源码中提取的核心逻辑 ---
+            let supabase = null;
+            const DATA_INTEGRITY_KEY = "f_SECRET_KEY_FOR_CHINESE_DUNGEON";
+
+            function initializeSupabase() {
+                try {
+                    if (!window.supabase) throw new Error("Supabase 客户端库未加载。");
+                    const supabaseUrl = 'https://xazugujttgmudrtfvwrg.supabase.co';
+                    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhhenVndWp0dGdtdWRydGZ2d3JnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI2NzIyNjksImV4cCI6MjA2ODI0ODI2OX0.ycWl0bdX0heyFTm4BJCL-1YpSYZI9uIiDzYwE5rivi4';
+                    supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+                    console.log("Supabase 客户端初始化成功。");
+                    return true;
+                } catch (error) {
+                    console.error("创意工坊初始化失败:", error.message);
+                    showNotification("无法连接到创意工坊，请检查网络并刷新。", "error");
+                    return false;
+                }
+            }
+
+            function safeEncode(str) { return btoa(unescape(encodeURIComponent(str))); }
+            function safeDecode(str) { try { return decodeURIComponent(escape(atob(str))); } catch (e) { return str; }}
+            
+            async function generateSignature(dataString) {
+                const textToEncode = dataString + DATA_INTEGRITY_KEY;
+                const encoder = new TextEncoder();
+                const data = encoder.encode(textToEncode);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            }
+            
+            async function getLevelList() {
+              let { data, error } = await supabase.from('levels').select('*, clearances').order('uploaded_at',{ascending:false}).limit(50);
+              if (error) throw error;
+              return data;
+            }
+
+
+async function searchLevels(keyword) {
+    if (!supabase) {
+        throw new Error("Supabase 客户端未初始化。");
+    }
+    if (!keyword) {
+        return getLevelList();
+    }
+    let { data, error } = await supabase.rpc('search_levels_decoded', {
+        search_keyword: keyword
+    });
+
+    if (error) {
+        console.error("搜索关卡时出错 (RPC):", error);
+        throw error;
+    }
+    return data;
+}
+            
+            async function uploadLevel(file, { title, author, tags, version, password }) {
+              const storagePath = Date.now() + '_' + file.name;
+              const { error } = await supabase.storage.from('levels').upload(storagePath, file);
+              if (error) throw error;
+              const { data: { publicUrl } } = supabase.storage.from('levels').getPublicUrl(storagePath);
+              const { error: err2 } = await supabase.from('levels').insert([{
+                  filename: file.name, 
+                  title: safeEncode(title),
+                  author: safeEncode(author),
+                  file_url: publicUrl,
+                  tags: tags.map(tag => safeEncode(tag)),
+                  version: safeEncode(String(version)),
+                  upload_password: password
+              }]);
+              if (err2) throw err2;
+            }
+
+            async function deleteLevelProcess(levelId, fileUrl, password) {
+                showNotification("正在验证密码...", "info", 0);
+                const { data: rpcData, error: rpcError } = await supabase.rpc('verify_level_password_and_get_url', {
+                    level_id_to_check: levelId,
+                    password_to_check: password
+                });
+                if (rpcError) throw rpcError;
+
+                if (rpcData !== fileUrl) {
+                    throw new Error("密码错误或关卡信息不匹配。");
+                }
+                
+                showNotification("正在从存储中删除文件...", "info", 0);
+                const filePath = fileUrl.split('/levels/')[1];
+                const { error: storageError } = await supabase.storage.from('levels').remove([filePath]);
+                if (storageError) throw new Error("存储文件删除失败: " + storageError.message);
+
+                showNotification("正在删除数据库记录...", "info", 0);
+                const { error: dbError } = await supabase.from('levels').delete().match({ id: levelId });
+                if (dbError) throw dbError;
+            }
+
+            // --- DOM 元素获取 ---
+            const levelListEl = document.getElementById('level-list');
+            const searchInput = document.getElementById('search-input');
+            const placeholderEl = document.getElementById('placeholder');
+            const levelDetailEl = document.getElementById('level-detail');
+            const uploadBtnEl = document.getElementById('upload-btn');
+            const uploadModalEl = document.getElementById('upload-modal');
+            const closeUploadModalBtn = document.getElementById('close-upload-modal-btn');
+            const uploadForm = document.getElementById('upload-form');
+            const fileInputEl = document.getElementById('file-upload');
+            const fileLabelEl = document.getElementById('file-label');
+            const deleteModalEl = document.getElementById('delete-modal');
+            const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+            const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+            
+            let currentSelectedLevel = null;
+            let currentNotification = null;
+
+            
+            function showNotification(message, type = 'info', duration = 3000) {
+                if (currentNotification) {
+                    removeNotification(currentNotification);
+                }
+
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                currentNotification = notification;
+
+                if (duration > 0) {
+                    const timer = setTimeout(() => {
+                       removeNotification(notification);
+                    }, duration);
+                    notification._timer = timer;
+                }
+                return notification;
+            }
+
+            function removeNotification(notificationElement) {
+                if (notificationElement && notificationElement.parentElement) {
+                    if (notificationElement._timer) clearTimeout(notificationElement._timer);
+                    notificationElement.style.display = 'none';
+                    notificationElement.addEventListener('transitionend', () => {
+                        notificationElement.remove();
+                        if (currentNotification === notificationElement) {
+                            currentNotification = null;
+                        }
+                    });
+                }
+            }
+
+            async function playLevel(fileUrl) {
+                let loadingNotification = null;
+                try {
+                    // 显示一个不会自动消失的通知 (duration = 0)
+                    loadingNotification = showNotification("正在准备关卡...", "info", 0); 
+                    
+                    const response = await fetch(fileUrl);
+                    if (!response.ok) throw new Error("无法下载关卡数据");
+                    const levelData = await response.json();
+                    const levelDataString = JSON.stringify(levelData);
+                    
+                    const encodedData = btoa(unescape(encodeURIComponent(levelDataString)));
+                    
+                    const gameUrl = `Chinese Dungeon v1516.html#levelData=${encodedData}`;
+                    
+                    // 在打开新标签页之前，移除加载通知
+                    removeNotification(loadingNotification);
+                    
+                    window.open(gameUrl, '_blank');
+                } catch (error) {
+                    // 如果发生错误，也要确保移除加载通知
+                    if (loadingNotification) {
+                        removeNotification(loadingNotification);
+                    }
+                    // 然后显示一个会自动消失的错误通知
+                    showNotification("启动关卡失败：" + error.message, "error"); 
+                }
+            }
+            
+            
+            async function refreshLevelList() {
+    const keyword = searchInput.value.trim();
+    levelListEl.innerHTML = `
+        <li class="loading-container">
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <p>正在加载关卡...</p>
+        </li>
+    `;
+                try {
+                    const levels = keyword ? await searchLevels(keyword) : await getLevelList();
+                    renderLevelList(levels);
+                } catch (error) {
+                    console.error("获取关卡列表失败:", error);
+                    levelListEl.innerHTML = '<li style="text-align: center; color: #888; padding: 20px;">加载失败，请刷新。</li>';
+                    showNotification("加载关卡列表失败", "error");
+                }
+            }
+
+            function renderLevelList(levels) {
+                levelListEl.innerHTML = '';
+                if (!levels || levels.length === 0) {
+                    levelListEl.innerHTML = '<li style="text-align: center; color: #888; padding: 20px;">没有找到关卡。</li>';
+                    return;
+                }
+                levels.forEach(level => {
+                    const item = document.createElement('li');
+                    item.className = 'level-item';
+                    item.dataset.id = level.id;
+                    const clearanceCount = (level.clearances) ? level.clearances : 0;
+                    item.innerHTML = `
+                        <div class="level-title">${safeDecode(level.title)}</div>
+                        <div class="level-author">由 ${safeDecode(level.author) || '匿名'}</div>
+                        <div class="level-stats">
+                            <span><i class="fas fa-play"></i>${level.play_count || 0}</span>
+                            <span><i class="fas fa-thumbs-up"></i>${level.likes || 0}</span>
+                            <span><i class="fas fa-trophy"></i>${clearanceCount}</span>
+                        </div>
+                    `;
+                    item.addEventListener('click', () => {
+                        currentSelectedLevel = level;
+                        displayLevelDetails(level);
+                        setActive(item);
+                    });
+                    levelListEl.appendChild(item);
+                });
+            }
+            
+            async function displayLevelDetails(level) {
+                placeholderEl.style.display = 'none';
+                levelDetailEl.style.display = 'block';
+
+                document.getElementById('detail-title').textContent = safeDecode(level.title);
+                document.getElementById('detail-author').textContent = `作者: ${safeDecode(level.author) || '匿名'}`;
+                document.getElementById('detail-version').textContent = `游戏版本: v${safeDecode(level.version)}`;
+                document.getElementById('detail-plays').textContent = level.play_count || 0;
+                const clearanceCount = (level.clearances) ? level.clearances : 0;
+                document.getElementById('detail-clears').textContent = clearanceCount;
+                document.getElementById('detail-likes').textContent = level.likes || 0;
+                document.getElementById('detail-dislikes').textContent = level.dislikes || 0;
+
+                const canvas = document.getElementById('detail-canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#000';
+                ctx.fillRect(0,0, canvas.width, canvas.height);
+                ctx.fillStyle = '#555';
+                ctx.font = '20px var(--font-family-sans)';
+                ctx.textAlign = 'center';
+                ctx.fillText('加载预览中...', canvas.width/2, canvas.height/2);
+
+                try {
+                    const response = await fetch(level.file_url);
+                    if (!response.ok) throw new Error('无法获取关卡文件');
+                    const levelData = await response.json();
+                    绘制详情小地图(levelData, 'detail-canvas');
+                } catch (e) {
+                    ctx.fillStyle = '#800';
+                    ctx.fillText('预览加载失败', canvas.width/2, canvas.height/2);
+                }
+                document.getElementById('play-btn').onclick = () => playLevel(level.file_url);
+                document.getElementById('download-btn').onclick = () => window.open(level.file_url, '_blank');
+                document.getElementById('delete-btn').onclick = () => showDeleteModal();
+            }
+
+            function setActive(selectedItem) {
+                document.querySelectorAll('.level-item').forEach(item => item.classList.remove('active'));
+                selectedItem.classList.add('active');
+            }
+            
+            searchInput.addEventListener('input', () => {
+                if (searchInput.debounce) clearTimeout(searchInput.debounce);
+                searchInput.debounce = setTimeout(refreshLevelList, 300);
+            });
+
+            uploadBtnEl.addEventListener('click', () => uploadModalEl.style.display = 'flex');
+            closeUploadModalBtn.addEventListener('click', () => uploadModalEl.style.display = 'none');
+            uploadModalEl.addEventListener('click', (e) => { if (e.target === uploadModalEl) uploadModalEl.style.display = 'none'; });
+            
+            fileInputEl.addEventListener('change', () => {
+                if(fileInputEl.files.length > 0) {
+                    fileLabelEl.textContent = fileInputEl.files[0].name;
+                    fileLabelEl.style.color = 'var(--text-color-primary)';
+                } else {
+                    fileLabelEl.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> 点击选择文件';
+                    fileLabelEl.style.color = 'var(--text-color-secondary)';
+                }
+            });
+
+            uploadForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const file = fileInputEl.files[0];
+                const title = document.getElementById('title-input').value;
+                const author = document.getElementById('author-input').value;
+                const password = document.getElementById('password-input').value;
+
+                if (!file || !title || !password) {
+                    showNotification("请填写所有必填项！", "error");
+                    return;
+                }
+                const submitButton = uploadForm.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+                submitButton.textContent = "上传中...";
+
+                const reader = new FileReader();
+                reader.onload = async (event) => {
+                    try {
+                        const fileContent = event.target.result;
+                        const levelData = JSON.parse(fileContent);
+
+                        if (!levelData.isPublished) throw new Error("请上传一个“已发布”的关卡文件。");
+                        if (!levelData.游戏版本) throw new Error("关卡文件缺少版本信息。");
+                        
+                        const receivedSignature = levelData.signature;
+                        if (!receivedSignature) throw new Error("关卡文件缺少签名。");
+                        delete levelData.signature;
+                        const expectedSignature = await generateSignature(JSON.stringify(levelData));
+                        if (receivedSignature !== expectedSignature) throw new Error("关卡文件签名无效，可能已被篡改。");
+
+                        const encodedFileName = safeEncode(file.name);
+                        const newSafeFile = new File([fileContent], encodedFileName, { type: file.type });
+
+                        await uploadLevel(newSafeFile, {
+                            title, author, tags: [], version: levelData.游戏版本, password
+                        });
+
+                        showNotification("上传成功！", "success");
+                        uploadModalEl.style.display = 'none';
+                        uploadForm.reset();
+                        fileLabelEl.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> 点击选择文件';
+                        refreshLevelList();
+                    } catch (error) {
+                        showNotification(`上传失败: ${error.message}`, "error");
+                    } finally {
+                        submitButton.disabled = false;
+                        submitButton.textContent = "确认上传";
+                    }
+                };
+                reader.readAsText(file);
+            });
+            
+            function showDeleteModal() {
+                if (!currentSelectedLevel) return;
+                document.getElementById('delete-password-input').value = '';
+                deleteModalEl.style.display = 'flex';
+            }
+            cancelDeleteBtn.addEventListener('click', () => deleteModalEl.style.display = 'none');
+            deleteModalEl.addEventListener('click', (e) => { if(e.target === deleteModalEl) deleteModalEl.style.display = 'none'; });
+
+            confirmDeleteBtn.addEventListener('click', async () => {
+                const password = document.getElementById('delete-password-input').value;
+                if (!password) {
+                    showNotification("请输入删除密码！", "error");
+                    return;
+                }
+                confirmDeleteBtn.disabled = true;
+                cancelDeleteBtn.disabled = true;
+                try {
+                    await deleteLevelProcess(currentSelectedLevel.id, currentSelectedLevel.file_url, password);
+                    showNotification("关卡已成功删除！", "success");
+                    deleteModalEl.style.display = 'none';
+                    levelDetailEl.style.display = 'none';
+                    placeholderEl.style.display = 'flex';
+                    currentSelectedLevel = null;
+                    refreshLevelList();
+                } catch (error) {
+                    showNotification(`删除失败: ${error.message}`, "error");
+                } finally {
+                    confirmDeleteBtn.disabled = false;
+                    cancelDeleteBtn.disabled = false;
+                }
+            });
+            const 单元格类型 = {
+                墙壁: 0,
+                房间: 1,
+                走廊: 2,
+                门: 3,
+                上锁的门: 4,
+                物品: 5,
+                楼梯下楼: 6,
+                楼梯上楼: 7,
+                怪物: 8,
+            };
+            function 绘制详情小地图(关卡数据, 画布ID) {
+                const 楼层数据 = 关卡数据.所有地牢层数据[关卡数据.当前层数];
+                if (!楼层数据) return;
+            
+                const 小地图 = document.getElementById(画布ID);
+                const 小地图Ctx = 小地图.getContext("2d");
+                小地图.width = 300;
+                小地图.height = 300;
+            
+                let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            
+                const 更新边界 = (x, y) => {
+                    minX = Math.min(minX, x);
+                    minY = Math.min(minY, y);
+                    maxX = Math.max(maxX, x);
+                    maxY = Math.max(maxY, y);
+                };
+            
+                if (楼层数据.房间列表) {
+                    楼层数据.房间列表.forEach(房间 => {
+                        if (房间) {
+                            更新边界(房间.x, 房间.y);
+                            更新边界(房间.x + 房间.w - 1, 房间.y + 房间.h - 1);
+                        }
+                    });
+                }
+            
+                if (楼层数据.序列化地牢格子) {
+                    楼层数据.序列化地牢格子.forEach((row, y) => {
+                        row.forEach((cellData, x) => {
+                            if (cellData && cellData.背景类型 === 2) { 
+                                更新边界(x, y);
+                            }
+                        });
+                    });
+                }
+            
+                if (minX === Infinity) {
+                    小地图Ctx.fillStyle = "#000";
+                    小地图Ctx.fillRect(0, 0, 小地图.width, 小地图.height);
+                    小地图Ctx.fillStyle = "#555";
+                    小地图Ctx.font = "20px Arial";
+                    小地图Ctx.textAlign = "center";
+                    小地图Ctx.textBaseline = "middle";
+                    小地图Ctx.fillText("无地图数据", 小地图.width / 2, 小地图.height / 2);
+                    return;
+                }
+            
+                const mapWidth = maxX - minX + 1;
+                const mapHeight = maxY - minY + 1;
+                const padding = 10;
+            
+                const 缩放比例 = Math.min(
+                    (小地图.width - padding * 2) / mapWidth,
+                    (小地图.height - padding * 2) / mapHeight
+                );
+            
+                const offsetX = (小地图.width - mapWidth * 缩放比例) / 2;
+                const offsetY = (小地图.height - mapHeight * 缩放比例) / 2;
+            
+                小地图Ctx.fillStyle = "#1a1a1a";
+                小地图Ctx.fillRect(0, 0, 小地图.width, 小地图.height);
+                
+                小地图Ctx.strokeStyle = "#666666";
+                小地图Ctx.lineWidth = 0.5;
+                if (楼层数据.序列化地牢格子) {
+                    楼层数据.序列化地牢格子.forEach((row, y) => {
+                        row.forEach((cellData, x) => {
+                            if (cellData && cellData.背景类型 === 单元格类型.走廊) { 
+                                const drawX = (x - minX) * 缩放比例 + offsetX;
+                                const drawY = (y - minY) * 缩放比例 + offsetY;
+                                小地图Ctx.strokeRect(drawX, drawY, 缩放比例, 缩放比例);
+                            }
+                        });
+                    });
+                }
+            
+                if (楼层数据.房间列表) {
+                    楼层数据.房间列表.forEach(房间 => {
+                        if (!房间) return;
+                        const 是上锁房间 = 楼层数据.上锁房间列表?.some(r => r.id === 房间.id);
+                        
+                        小地图Ctx.strokeStyle = 是上锁房间 ? "#FFD700" : "#4caf50";
+                        小地图Ctx.lineWidth = 1;
+            
+                        const drawX = (房间.x - minX) * 缩放比例 + offsetX;
+                        const drawY = (房间.y - minY) * 缩放比例 + offsetY;
+                        const drawW = 房间.w * 缩放比例;
+                        const drawH = 房间.h * 缩放比例;
+            
+                        小地图Ctx.strokeRect(drawX, drawY, drawW, drawH);
+                        小地图Ctx.fillStyle = "#4caf5022";
+                        小地图Ctx.fillRect(drawX, drawY, drawW, drawH);
+                    });
+                }
+                
+                if (楼层数据.序列化地上物品) {
+                    楼层数据.序列化地上物品.forEach(itemData => {
+                        if (itemData && itemData.类名 === '旗帜') {
+                            const 物品配置 = itemData.配置;
+                            小地图Ctx.fillStyle = "#FFD700";
+                            小地图Ctx.font = `${缩放比例 * 2}px color-emoji`;
+                            小地图Ctx.textAlign = "center";
+                            小地图Ctx.textBaseline = "middle";
+                            小地图Ctx.fillText(物品配置.图标, (物品配置.x - minX) * 缩放比例 + offsetX + (缩放比例 / 2), (物品配置.y - minY) * 缩放比例 + offsetY + (缩放比例 / 2));
+                        }
+                    });
+                }
+
+                const 玩家起始点 = 楼层数据.玩家初始位置 || {x: 50, y: 50};
+                if (玩家起始点) {
+                    小地图Ctx.fillStyle = "#ff0000";
+                    小地图Ctx.beginPath();
+                    小地图Ctx.arc(
+                        (玩家起始点.x - minX) * 缩放比例 + offsetX,
+                        (玩家起始点.y - minY) * 缩放比例 + offsetY,
+                        Math.max(2, 缩放比例 * 0.75),
+                        0,
+                        Math.PI * 2
+                    );
+                    小地图Ctx.fill();
+                    小地图Ctx.strokeStyle = "#ffffff";
+                    小地图Ctx.lineWidth = 0.5;
+                    小地图Ctx.stroke();
+                }
+            }
+            
+            // --- 初始化 ---
+            if (initializeSupabase()) {
+                refreshLevelList();
+            }
+        });
+    </script>
+</body>
+</html>

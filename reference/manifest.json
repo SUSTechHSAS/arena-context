@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "repository": "https://github.com/SUSTechHSAS/Chinese-Dungeon",
+  "commit": "8d80b5a4dd3d737ed6d3060f05611eaa3de611ab",
+  "license": "GPL-3.0",
+  "retrieved": "2026-10-08",
+  "excluded": [
+    ".github/workflows (upstream CI, not application behavior)"
+  ],
+  "files": [
+    {
+      "path": "ChineseDungeon-Viewer.html",
+      "bytes": 26359,
+      "sha256": "28b53c1c83a0c005390a6cddddfbad64081895d250e15f1cc177fea2aa7abfdc"
+    },
+    {
+      "path": "ChineseDungeon.html",
+      "bytes": 2796381,
+      "sha256": "7125146155c481a6dce4a405d0b3d41cecefe88179597e130776b40dd79c2e58"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "LevelManager.html",
+      "bytes": 41357,
+      "sha256": "c4b4dc348140891b8fb6fb5545832d9df75307823bbc327283677a9e5b371de5"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1856,
+      "sha256": "72f6c48e42bc6f614ab253d015bd1fdeb974801a8414c7ba15c27059489bf6d6"
+    },
+    {
+      "path": "index.html",
+      "bytes": 977,
+      "sha256": "b115c1afd15a76376776f56cf87deb1c6ebeae751281189bf519b8b1dac0be80"
+    },
+    {
+      "path": "screenshot.png",
+      "bytes": 203213,
+      "sha256": "5446b5804b7b77a4fdc7bfec56df730af0800f55d3d055eb337684efa79d2a5a"
+    },
+    {
+      "path": "自定义NPC演示.json",
+      "bytes": 302208,
+      "sha256": "e6cd92b38c64869c0bf32b047e8dc6fc44f91e0cb0eaf841266fa71d62347bdd"
+    }
+  ]
+}

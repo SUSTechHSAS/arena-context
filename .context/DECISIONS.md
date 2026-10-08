@@ -8,6 +8,12 @@ After checking the current accepted task head and the two unassigned Draft candi
 
 Independently query the original `SUSTechHSAS/Chinese-Dungeon` repository, pin its current source commit, preserve its license and construct a new audit and consistency suite. The upstream HEAD independently observed at startup is `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`.
 
-## Fingerprint ambiguity maintenance (proposed)
+## U00 architecture proposal — 2026-10-08
+
+Use React/TypeScript/Vite for the new client, keeping domain modules independent of UI and comparing them against the immutable original in test-only oracles. Preserve the source's numeric, RNG, identity, save and action-order semantics; do not claim a complete rewrite from an iframe/eval wrapper or a single map demo. Inventory the game, viewer, editor, level manager, NPC and service boundaries separately. The plan and coverage ledger are in `docs/task-10/`; these are candidate implementation choices, not owner approval or a reduced acceptance scope.
+
+Pin all eight upstream root application/reference files at the independently resolved commit. Retain the original GPL-3.0 license in the snapshot; derivative app code will use the same license and attribution without relicensing the repository's separate Arena protocol. Source workflows are excluded because their behavior is not application functionality. SHA-256 and byte lengths are reviewable in `reference/manifest.json`.
+
+## Fingerprint ambiguity maintenance (historical proposal, merged in PR #18)
 
 The owner requested continuation when all statistically indistinguishable models are explicitly accepted. Use the existing fit/separation/family thresholds and the complete bank, not the three display candidates or a model-family wildcard. Preserve family_only and identified_candidate=null; any unaccepted candidate or missing evidence still denies work. CI independently recomputes the set. Previously denied turns remain denied. See docs/FINGERPRINT.md and shared PR #16 for the exact user regression sample and validation. This proposal needs owner review and does not change the domain task contract.
