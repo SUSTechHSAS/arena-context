@@ -60,3 +60,11 @@ Not run: domain parity, candidate types/build, original or candidate browser/gam
 - Offline lab state replay passes; blank seed uses time and mobile/Enter flow generates 16 maps without horizontal overflow.
 - Untouched original viewer served only in ORACLE_TEST_MODE=1 dev mode. Production source boundary test passes; build contains no original HTML/script/oracle imports.
 - UI count correction/navigation/form/busy/error feedback proposals are recorded in DEVIATIONS.md; tests do not establish owner approval. The full main game remains pending.
+
+## U03a isolated main-game status lifecycle — 2026-10-08
+
+- Complete source 状态效果 class ported with explicit typed actor/item/UI/random/state ports, no DOM/global dependency. Prototype/class name mapping is explicit in diagnostics; source/private port data is not silently normalized.
+- Strict types and **9 targeted tests passed**, 39 unrelated tests explicitly skipped. 324 effect-type/duration/remaining/actor trajectories + 12 stack/resistance sequences + 3 specific frozen/fire, permanent immunity and pet-corrosion sequences = **339 isolated trajectories**.
+- Source class runs directly from its exact AST range; both implementations receive matching deterministic actor/item/UI doubles. Compare every event/state/alias/graph, non-finite/falsy durations, repeated expiry, constructor stacking, strength cap, destruction/drying duplicates and random draw order.
+- Preserved source quirks: remaining zero defaults to duration; actor-stack constructor ticks the new unregistered instance; frozen effects reference player fire even for pets; expiry/progress use the pre-extra-decrement local count. No unreviewed correction.
+- This is NOT gameplay integration: real monster/pet/item factories, their side effects, HUD and the main engine remain pending.

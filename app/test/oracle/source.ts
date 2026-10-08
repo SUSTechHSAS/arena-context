@@ -44,6 +44,12 @@ export function createOracle(names: readonly string[], globals: Record<string, u
     evaluate<T = unknown>(code: string): T {
       return new vm.Script(code).runInContext(context, { timeout: 5000 }) as T;
     },
+    construct<T = unknown>(name: string, ...args: unknown[]): T {
+      if (!names.includes(name)) throw new Error(`Not an exposed original declaration: ${name}`);
+      context.__oracleArgs = args;
+      try { return new vm.Script(`new ${name}(...__oracleArgs)`).runInContext(context, { timeout: 5000 }) as T; }
+      finally { delete context.__oracleArgs; }
+    },
     invoke<T = unknown>(name: string, ...args: unknown[]): T {
       if (!names.includes(name)) throw new Error(`Not an exposed original declaration: ${name}`);
       context.__oracleArgs = args;
