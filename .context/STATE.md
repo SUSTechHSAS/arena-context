@@ -22,7 +22,9 @@ The owner says four packets are too few because primary-model turns are scarce. 
 
 ## Candidate progress
 
-This expansion adds ItemUseResult/ItemHookResult and action arguments to ItemCore so source subclasses can return numeric/empty results and accept targets without every packet editing the shared base. Existing runtime returns and state updates are preserved. The first check exposed a narrow inherited bush collection return annotation; that annotation now uses the same hook result type. Strict typecheck passes; full regression is pending.
+Prepared and validated 110 additional packet definitions, for 114 total: 73 independent and 41 dependent. Exact AST anchors, subclass ownership, disjoint paths and the dependency DAG passed checks. Recoverable definitions and selection guide: `docs/task-10/packet-pool/` (formal creation/publication pending).
+
+This expansion adds ItemUseResult/ItemHookResult and action arguments to ItemCore so source subclasses can return numeric/empty results and accept targets without every packet editing the shared base. Existing runtime returns and state updates are preserved. The first check exposed a narrow inherited bush collection return annotation; that annotation now uses the same hook result type. Strict types, all 110 domain tests, 5 integrity tests, 8 source hashes and the build now pass.
 
 Accepted task protocol is integrated; original application, reference, tests and historical fingerprint evidence are preserved. The inherited viewer, isolated status/item/door/armor contracts and codecs remain candidate foundations. Full game/actors/generation/UI/editor/save/script and service integration remain pending.
 
@@ -42,4 +44,4 @@ No owner comments or unresolved review threads were present on #19 at startup. F
 
 ## Next action
 
-Audit the remaining original declarations and feature surfaces, define bounded independent and dependent assignments, validate their source anchors/scope/dependency graph, then publish them on this existing PR with the current primary fingerprint. No secondary work has been performed; the new application regression is pending.
+Create the validated definitions through the accepted collaboration CLI, publish them with this primary fingerprint, then verify actual availability and dependency blockers on the committed pool. The existing four definitions remain unchanged. No secondary output is claimed.

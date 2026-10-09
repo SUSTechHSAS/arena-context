@@ -1,0 +1,22 @@
+npm notice run reforged-chinese-dungeon@0.1.0 check
+npm notice run npm run check:reference && npm run typecheck && npm test && npm run build
+npm notice run reforged-chinese-dungeon@0.1.0 check:reference
+npm notice run node ../scripts/verify-reference.mjs && node --test ../tests/reference.test.mjs
+Reference 8d80b5a4dd3d737ed6d3060f05611eaa3de611ab: 8 unchanged files verified.
+✔ all eight pinned upstream files retain exact bytes (25.183464ms)
+✔ one-byte source mutation is rejected (36.66718ms)
+✔ different source commit cannot silently replace the contract (15.435894ms)
+✔ duplicate fixture names are rejected (15.169794ms)
+✔ manifest cannot read outside the reference directory (18.592846ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 236.765492
+npm notice run reforged-chinese-dungeon@0.1.0 typecheck
+npm notice run tsc --noEmit
+src/game/armor-items.ts(88,20): error TS2322: Type 'ItemHookResult' is not assignable to type 'boolean'.
+  Type 'void' is not assignable to type 'boolean'.
