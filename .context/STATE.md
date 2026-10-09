@@ -22,6 +22,8 @@ The owner says four packets are too few because primary-model turns are scarce. 
 
 ## Candidate progress
 
+This expansion adds ItemUseResult/ItemHookResult and action arguments to ItemCore so source subclasses can return numeric/empty results and accept targets without every packet editing the shared base. Existing runtime returns and state updates are preserved. The current application regression is running; results are pending.
+
 Accepted task protocol is integrated; original application, reference, tests and historical fingerprint evidence are preserved. The inherited viewer, isolated status/item/door/armor contracts and codecs remain candidate foundations. Full game/actors/generation/UI/editor/save/script and service integration remain pending.
 
 Published four disjoint, dependency-free packets at `04c2f6d`: `t10-source-ast-inventory`, `t10-accessory-contracts`, `t10-potion-base-contracts`, `t10-weapon-contract-audit`. All four are verified `available`. Exact paths, acceptance and verification are in `.context/collaboration/packets/`. [Migration and session guide](../docs/task-10/MIGRATION.md) describes branch selection, per-turn roles, one packet per secondary PR and later primary review. No secondary output is claimed.
@@ -40,4 +42,4 @@ No owner comments or unresolved review threads were present on #19 at startup. F
 
 ## Next action
 
-Audit the remaining original declarations and feature surfaces, define bounded independent and dependent assignments, validate their source anchors/scope/dependency graph, then publish them on this existing PR with the current primary fingerprint. No secondary work or new application verification has been performed in this turn yet.
+Audit the remaining original declarations and feature surfaces, define bounded independent and dependent assignments, validate their source anchors/scope/dependency graph, then publish them on this existing PR with the current primary fingerprint. No secondary work has been performed; the new application regression is pending.

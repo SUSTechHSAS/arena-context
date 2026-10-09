@@ -1,6 +1,10 @@
 import { sourceDeepEqual } from '../domain/source-deep-equal';
 
 export const MATERIALS = { 木质: '木质', 铁质: '铁质', 玻璃: '玻璃', 铜质: '铜质', 金质: '金质', 普通: '普通' } as const;
+// Source subclasses use numeric/empty results and accept action-specific arguments.
+// Keep the polymorphic contract broad while preserving each implementation's values.
+export type ItemUseResult = boolean | number | void;
+export type ItemHookResult = boolean | void;
 export interface ItemConfig {
   类型?: string; 名称?: string; 图标?: string; 品质?: number; 堆叠数量?: number; 材质?: string | null;
   最大堆叠数量?: number; 颜色索引?: number | null; 数据?: Map<unknown, unknown> | Record<string, unknown>;
@@ -70,12 +74,12 @@ export class ItemCore {
     return true;
   }
   获取名称(): string { return `${this.显示名称} [${this.品质} 级]` + (this.强化 ? ' [强化]' : ''); }
-  使用(): boolean { this.堆叠数量 -= 1; return true; }
-  当被收集(_actor: unknown): boolean { return true; }
+  使用(..._args: unknown[]): ItemUseResult { this.堆叠数量 -= 1; return true; }
+  当被收集(_actor: unknown): ItemHookResult { return true; }
   当被丢弃(_x: number, _y: number): boolean { return true; }
   可交互目标(_target: unknown): boolean { return false; }
 
-  更新倒计时(): boolean {
+  更新倒计时(): ItemHookResult {
     if (this.自定义数据.has('静默回合')) {
       const remaining = this.自定义数据.get('静默回合') as number;
       if (remaining > 0) this.自定义数据.set('静默回合', remaining - 1);
