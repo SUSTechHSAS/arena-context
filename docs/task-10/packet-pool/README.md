@@ -1,8 +1,8 @@
 # Task #10 工作包池
 
-本轮按所有者要求扩充主模型预先分配的任务。共 **114 个正式定义**：原有 4 个保持原样，新增 110 个；73 个没有前置包依赖，41 个在依赖通过主模型复核后领取。110 个新包均已通过正式 collaboration CLI 创建；提交后的来源及可用状态随发布检查点核对。
+本轮按所有者要求扩充主模型预先分配的任务。共 **114 个正式定义**：原有 4 个保持原样，新增 110 个；73 个没有前置包依赖，41 个在依赖通过主模型复核后领取。新增包在 `4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596` 正式发布并核对远程；CLI 实际返回 **73 个 available、41 个等待前置复核的 blocked**，没有其他阻塞。原始状态快照见 [status.json](status.json)，其 [远程协议检查](https://github.com/SUSTechHSAS/arena-context/actions/runs/37916813252)已通过。
 
-新增任务包含 68 个类实现包、16 个算法/数据接口实现包和 26 个可执行源码审计包。每个原版主程序类都能对应到现有成果、原有包或本次实现/审计包；这表示分配覆盖，尚不表示实现或验收完成。
+新增任务包含 68 个类实现包、16 个算法/数据接口实现包和 26 个可执行源码审计包。静态 AST 中每个具名主程序类声明都能对应到现有成果、原有包或本次实现/审计包；这表示分配覆盖，尚不表示实现或验收完成。
 
 源码与公共类型边界：原始快照 `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`，当前基础包含 `0ec3698` 的 ItemCore 多态接口兼容声明。新的类保留源类/成员名，按已有 armor 模式将 ports 作为首个构造参数并私有保存；函数包使用定义中指定的 create... 工厂。这里仍未建立旧脚本/存档所需的全局无 ports 构造接口。
 
@@ -24,6 +24,13 @@
 
 主模型回来时优先复核这些入口的真实成果，可以同时解锁多个后续包。每个包仍须独立检查产物和运行证据；模型复核不代替 Kibiandkimi 的人工审核合并。
 
+## 原有四包
+
+- [源码 AST 清单](../../../.context/collaboration/packets/t10-source-ast-inventory.json)
+- [饰品契约](../../../.context/collaboration/packets/t10-accessory-contracts.json)
+- [药水基类](../../../.context/collaboration/packets/t10-potion-base-contracts.json)
+- [武器契约审计](../../../.context/collaboration/packets/t10-weapon-contract-audit.json)
+
 ## 新增包分布
 
 | 模块 | 新增 | 无前置依赖 | 有依赖 |
@@ -40,7 +47,7 @@
 
 ## 包目录
 
-定义在 `.context/collaboration/packets/`。下表列出本轮新增的 110 个包；原有 `t10-source-ast-inventory`、`t10-accessory-contracts`、`t10-potion-base-contracts`、`t10-weapon-contract-audit` 四个包继续保留。定义正式提交后保持不可改写，需要改变范围时使用新 ID。
+定义在 `.context/collaboration/packets/`。下表列出本轮新增的 110 个包；原有 `t10-source-ast-inventory`、`t10-accessory-contracts`、`t10-potion-base-contracts`、`t10-weapon-contract-audit` 四个包继续保留。已提交定义保持不可改写，需要改变范围时使用新 ID。
 
 | ID | 交付 | 类型 | 前置包 |
 | --- | --- | --- | --- |

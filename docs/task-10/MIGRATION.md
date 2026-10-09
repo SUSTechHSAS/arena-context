@@ -2,6 +2,8 @@
 
 2026-10-09，按任务所有者要求迁移 [PR #19](https://github.com/SUSTechHSAS/arena-context/pull/19) 的部分成果。正式任务仍是 [#10](https://github.com/SUSTechHSAS/arena-context/issues/10) 的完整现代框架重写与行为一致性验证。
 
+后续同日扩充已将包池从 4 个增加到 **114 个**，实际核验为 73 个可领取、41 个等待前置复核；当前接续入口与完整目录见 [packet-pool/README.md](packet-pool/README.md)。下文保留初次迁移和原有四包的历史证据。扩充轮另补了 ItemCore 继承接口的类型兼容声明，当前验证以包池记录为准。
+
 ## 迁移来源和边界
 
 | 项目 | 已核对版本 |

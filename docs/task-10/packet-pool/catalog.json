@@ -80,7 +80,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-keys-coins.json",
-      "packet_sha256": "f4b51c231838e79a6bca599a4a419763918e5dd1d1935e00e7047efef6d1d3aa"
+      "packet_sha256": "f4b51c231838e79a6bca599a4a419763918e5dd1d1935e00e7047efef6d1d3aa",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-scroll-core",
@@ -131,7 +133,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-scroll-core.json",
-      "packet_sha256": "87a70b8450404130fa4f46fff9948df7ffbb2997195a9495109eb8b4a36f9f31"
+      "packet_sha256": "87a70b8450404130fa4f46fff9948df7ffbb2997195a9495109eb8b4a36f9f31",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-chess-pieces",
@@ -229,7 +233,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-chess-pieces.json",
-      "packet_sha256": "8d670991ccc28669467140ba9302289941aa40ae40f01410b44a116adcf6424d"
+      "packet_sha256": "8d670991ccc28669467140ba9302289941aa40ae40f01410b44a116adcf6424d",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-trap-core",
@@ -314,7 +320,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-trap-core.json",
-      "packet_sha256": "b4908fa44e64f2f3060d08a0ce8e6e2538d6cb76b7249e1b6b4f0f08fbbbba78"
+      "packet_sha256": "b4908fa44e64f2f3060d08a0ce8e6e2538d6cb76b7249e1b6b4f0f08fbbbba78",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-conveyor-items",
@@ -370,7 +378,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-conveyor-items.json",
-      "packet_sha256": "91e3c37079f201c759dcd18b6b5fad30d7454b952515dc638e5abd012c79d896"
+      "packet_sha256": "91e3c37079f201c759dcd18b6b5fad30d7454b952515dc638e5abd012c79d896",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-bandages-flares",
@@ -439,7 +449,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-bandages-flares.json",
-      "packet_sha256": "cc34f5b45ec893dc563adbbb029c9433f34557b43f6a54414df241ab7c8b20f3"
+      "packet_sha256": "cc34f5b45ec893dc563adbbb029c9433f34557b43f6a54414df241ab7c8b20f3",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-pulse-pressure-switches",
@@ -492,7 +504,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-pulse-pressure-switches.json",
-      "packet_sha256": "5bd6e708925d27bcf53406d7875ad30adcd2d89637a3a0b9d19745722a845b42"
+      "packet_sha256": "5bd6e708925d27bcf53406d7875ad30adcd2d89637a3a0b9d19745722a845b42",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-color-switches",
@@ -630,7 +644,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-color-switches.json",
-      "packet_sha256": "8ebb8348a9092aa92642ed9f9589f288c75bf80203a8c3934645cee5b3955c45"
+      "packet_sha256": "8ebb8348a9092aa92642ed9f9589f288c75bf80203a8c3934645cee5b3955c45",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-challenge-stone",
@@ -670,7 +686,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-challenge-stone.json",
-      "packet_sha256": "53307abffeb8c9a3cc158a8d6a6538b994540e3301a74b377308c9442b625eac"
+      "packet_sha256": "53307abffeb8c9a3cc158a8d6a6538b994540e3301a74b377308c9442b625eac",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-obstacles-obsidian",
@@ -740,7 +758,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-obstacles-obsidian.json",
-      "packet_sha256": "8b637236d0dcaa51c6c97d9aed69b35b5efbe978ddb67d61ad38862f22708682"
+      "packet_sha256": "8b637236d0dcaa51c6c97d9aed69b35b5efbe978ddb67d61ad38862f22708682",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-liquid-buckets",
@@ -852,7 +872,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-liquid-buckets.json",
-      "packet_sha256": "b250ee9334851728ac0a3d3c5a82a9f81f5d386121bb16fb4e3ee9683b426b91"
+      "packet_sha256": "b250ee9334851728ac0a3d3c5a82a9f81f5d386121bb16fb4e3ee9683b426b91",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-poison-smoke-items",
@@ -977,7 +999,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-poison-smoke-items.json",
-      "packet_sha256": "e8ca1ff6fa159922f2c6153656e888bd3389878d0409b5fca6a16d4c60cee851"
+      "packet_sha256": "e8ca1ff6fa159922f2c6153656e888bd3389878d0409b5fca6a16d4c60cee851",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-basin-compass",
@@ -1032,7 +1056,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-basin-compass.json",
-      "packet_sha256": "7537f79b1bb84a557265b927935bff6548d2a092be5c807c073f07df2d75e656"
+      "packet_sha256": "7537f79b1bb84a557265b927935bff6548d2a092be5c807c073f07df2d75e656",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-camp-services",
@@ -1103,7 +1129,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-camp-services.json",
-      "packet_sha256": "e85516e6afe62c23c354788ba09ddb1adbbdcefac7f23b7a45bb81e197e472d8"
+      "packet_sha256": "e85516e6afe62c23c354788ba09ddb1adbbdcefac7f23b7a45bb81e197e472d8",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-merchants-well",
@@ -1191,7 +1219,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-merchants-well.json",
-      "packet_sha256": "95af15a6136e833993938de4ad309587afa4edd6647e0166a2f434327ad7c003"
+      "packet_sha256": "95af15a6136e833993938de4ad309587afa4edd6647e0166a2f434327ad7c003",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-altar-core",
@@ -1232,7 +1262,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-altar-core.json",
-      "packet_sha256": "a4dad3be2f05810986027f08246c8dbc4203ce72ddc729fd4a6facbfdb04102b"
+      "packet_sha256": "a4dad3be2f05810986027f08246c8dbc4203ce72ddc729fd4a6facbfdb04102b",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-torch-fire",
@@ -1298,7 +1330,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-torch-fire.json",
-      "packet_sha256": "204a4005d60a297815bb92f41028186b3c34e6958744f10d98f9963f34708ade"
+      "packet_sha256": "204a4005d60a297815bb92f41028186b3c34e6958744f10d98f9963f34708ade",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-webs-nets",
@@ -1369,7 +1403,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-webs-nets.json",
-      "packet_sha256": "4c2bbc751bf5db3c1c5ce826abd841aefdd20b645d9f638b77596f05e97db717"
+      "packet_sha256": "4c2bbc751bf5db3c1c5ce826abd841aefdd20b645d9f638b77596f05e97db717",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-thorn-plants",
@@ -1427,7 +1463,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-thorn-plants.json",
-      "packet_sha256": "ad0fe56904a22897eaeca3501985c32daf78a5e6dfc0cf88959f25613a14253e"
+      "packet_sha256": "ad0fe56904a22897eaeca3501985c32daf78a5e6dfc0cf88959f25613a14253e",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-guard-ranged-plants",
@@ -1531,7 +1569,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-guard-ranged-plants.json",
-      "packet_sha256": "69abc3f2387358aa9d9e0da843a24947eebd6e69b3116fa63278126994c2b675"
+      "packet_sha256": "69abc3f2387358aa9d9e0da843a24947eebd6e69b3116fa63278126994c2b675",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-energy-plants-furnace",
@@ -1599,7 +1639,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-energy-plants-furnace.json",
-      "packet_sha256": "a12911ae02eff93353d9cab7a9552fdb7bf893cef3f7353b95860a85b93165d5"
+      "packet_sha256": "a12911ae02eff93353d9cab7a9552fdb7bf893cef3f7353b95860a85b93165d5",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-spawners-whirlwinds",
@@ -1672,7 +1714,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-spawners-whirlwinds.json",
-      "packet_sha256": "127f760f7f019f5a6f067867d3a5598a0842a3ffc6bea7ee1dfe7540abffcd73"
+      "packet_sha256": "127f760f7f019f5a6f067867d3a5598a0842a3ffc6bea7ee1dfe7540abffcd73",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-portal-items",
@@ -1743,7 +1787,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-portal-items.json",
-      "packet_sha256": "f0342e8eefbcfc4b22f4036d5f16227f3b359253e3f6523e852a9b50d2f3f161"
+      "packet_sha256": "f0342e8eefbcfc4b22f4036d5f16227f3b359253e3f6523e852a9b50d2f3f161",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-map-quest-items",
@@ -1830,7 +1876,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-map-quest-items.json",
-      "packet_sha256": "57a59c668fc55a172ce408c9b062e2e5a2db62ceada00d2b9bb36ac8ec672fd8"
+      "packet_sha256": "57a59c668fc55a172ce408c9b062e2e5a2db62ceada00d2b9bb36ac8ec672fd8",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-crystal-runes",
@@ -1885,7 +1933,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-crystal-runes.json",
-      "packet_sha256": "2b372f2287035cfff97c99ab883bf1ba216dd0d2b6b9d98ba0d3878080ad9713"
+      "packet_sha256": "2b372f2287035cfff97c99ab883bf1ba216dd0d2b6b9d98ba0d3878080ad9713",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-containers",
@@ -1941,7 +1991,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-containers.json",
-      "packet_sha256": "da5077bd9d9f722f8a17034f375e9b55b5d998765fd3b616f91001bebdce0200"
+      "packet_sha256": "da5077bd9d9f722f8a17034f375e9b55b5d998765fd3b616f91001bebdce0200",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-fences",
@@ -2022,7 +2074,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-fences.json",
-      "packet_sha256": "5ddfb771e9887e6f689f8b4a9d17ccfa3ccbccc9863cde89b6c58090be1908e7"
+      "packet_sha256": "5ddfb771e9887e6f689f8b4a9d17ccfa3ccbccc9863cde89b6c58090be1908e7",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-bomb-core",
@@ -2072,7 +2126,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-bomb-core.json",
-      "packet_sha256": "5490536be91e53185cb7b63d2910418461f4c17cbe6add311e260340360b1217"
+      "packet_sha256": "5490536be91e53185cb7b63d2910418461f4c17cbe6add311e260340360b1217",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-display-logic-items",
@@ -2237,7 +2293,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-display-logic-items.json",
-      "packet_sha256": "d58e90127d8ef3b1610721b9c78f4ee5a6334ce96d3bfe13e49ef58f94b18063"
+      "packet_sha256": "d58e90127d8ef3b1610721b9c78f4ee5a6334ce96d3bfe13e49ef58f94b18063",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-books-formulas",
@@ -2307,7 +2365,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-books-formulas.json",
-      "packet_sha256": "8ca4b45862101f3a1db4d5a5f27b3a7501af590bacd0027a985a014f95fbbcf5"
+      "packet_sha256": "8ca4b45862101f3a1db4d5a5f27b3a7501af590bacd0027a985a014f95fbbcf5",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-npc-contract-item",
@@ -2361,7 +2421,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-npc-contract-item.json",
-      "packet_sha256": "b84ffcd32e5388712b85e179a2a80a26b1e84d0de32fd838db58a63c25f57f2f"
+      "packet_sha256": "b84ffcd32e5388712b85e179a2a80a26b1e84d0de32fd838db58a63c25f57f2f",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-path-primitives",
@@ -2443,7 +2505,9 @@
       ],
       "factory_export": "createPathPrimitives",
       "packet_path": ".context/collaboration/packets/t10-path-primitives.json",
-      "packet_sha256": "9ff306334005d3272fb3226e899dcf8c374365e5f34cc815f6494c3e17270ec3"
+      "packet_sha256": "9ff306334005d3272fb3226e899dcf8c374365e5f34cc815f6494c3e17270ec3",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-portal-geometry",
@@ -2525,7 +2589,9 @@
       ],
       "factory_export": "createPortalGeometry",
       "packet_path": ".context/collaboration/packets/t10-portal-geometry.json",
-      "packet_sha256": "9ddbb1ccca539c2facfc4b7b215a56ca391ccf76ca70739718398b627c7d0556"
+      "packet_sha256": "9ddbb1ccca539c2facfc4b7b215a56ca391ccf76ca70739718398b627c7d0556",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-color-math",
@@ -2577,7 +2643,9 @@
       ],
       "factory_export": "createColorMath",
       "packet_path": ".context/collaboration/packets/t10-color-math.json",
-      "packet_sha256": "2224d3c15f3ab15e2464b948675e8b853fd4b34cbf5fcea2fcdf3158cb8583ec"
+      "packet_sha256": "2224d3c15f3ab15e2464b948675e8b853fd4b34cbf5fcea2fcdf3158cb8583ec",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-fusion-list-helpers",
@@ -2639,7 +2707,9 @@
       ],
       "factory_export": "createFusionListHelpers",
       "packet_path": ".context/collaboration/packets/t10-fusion-list-helpers.json",
-      "packet_sha256": "83149a02d957c2c7b96883bd6e34d43bdd86b1f6f0876b2ea4c9c70ef6a21293"
+      "packet_sha256": "83149a02d957c2c7b96883bd6e34d43bdd86b1f6f0876b2ea4c9c70ef6a21293",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-spawn-selection",
@@ -2681,7 +2751,9 @@
       ],
       "factory_export": "createSpawnSelection",
       "packet_path": ".context/collaboration/packets/t10-spawn-selection.json",
-      "packet_sha256": "b8013f588b5d836524a864a5ce28d0774f6194440e75d599e1c3b83e0d608331"
+      "packet_sha256": "b8013f588b5d836524a864a5ce28d0774f6194440e75d599e1c3b83e0d608331",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-ending-certificates",
@@ -2733,7 +2805,9 @@
       ],
       "factory_export": "createEndingCertificates",
       "packet_path": ".context/collaboration/packets/t10-ending-certificates.json",
-      "packet_sha256": "a34b977a7131cdaf2bc58e72733ff1b99593c81b4b506094717d6b11877d8d5c"
+      "packet_sha256": "a34b977a7131cdaf2bc58e72733ff1b99593c81b4b506094717d6b11877d8d5c",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-editor-history",
@@ -2815,7 +2889,9 @@
       ],
       "factory_export": "createEditorHistory",
       "packet_path": ".context/collaboration/packets/t10-editor-history.json",
-      "packet_sha256": "586989abbe04427147b4e59ce08c652cac8e76e2547191c7f3148e0afb7f8e0a"
+      "packet_sha256": "586989abbe04427147b4e59ce08c652cac8e76e2547191c7f3148e0afb7f8e0a",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-cave-kernel",
@@ -2897,7 +2973,9 @@
       ],
       "factory_export": "createCaveKernel",
       "packet_path": ".context/collaboration/packets/t10-cave-kernel.json",
-      "packet_sha256": "ee124e37e73d7f5a1729ae5f27ff4876ffa73f29fe0c7214f66ac187208eeafc"
+      "packet_sha256": "ee124e37e73d7f5a1729ae5f27ff4876ffa73f29fe0c7214f66ac187208eeafc",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-sokoban-solver",
@@ -3030,7 +3108,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-sokoban-solver.json",
-      "packet_sha256": "616ab91806ba9fe6365fc71f0087211813fb3a469843ce2ecb3d709e1f50b856"
+      "packet_sha256": "616ab91806ba9fe6365fc71f0087211813fb3a469843ce2ecb3d709e1f50b856",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-seed-search",
@@ -3082,7 +3162,9 @@
       ],
       "factory_export": "createSeedSearch",
       "packet_path": ".context/collaboration/packets/t10-seed-search.json",
-      "packet_sha256": "4e91843a20a10e2ea25037d0285f25221256a69836fb1ee3385bbc499af329c7"
+      "packet_sha256": "4e91843a20a10e2ea25037d0285f25221256a69836fb1ee3385bbc499af329c7",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-manager-data",
@@ -3154,7 +3236,9 @@
       ],
       "factory_export": "createManagerData",
       "packet_path": ".context/collaboration/packets/t10-manager-data.json",
-      "packet_sha256": "4e11724e9d381e409001ae1989f203c8c3137a768ffef3f6f08e81d410b14c04"
+      "packet_sha256": "4e11724e9d381e409001ae1989f203c8c3137a768ffef3f6f08e81d410b14c04",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-workshop-data",
@@ -3236,7 +3320,9 @@
       ],
       "factory_export": "createWorkshopData",
       "packet_path": ".context/collaboration/packets/t10-workshop-data.json",
-      "packet_sha256": "8bee08706ef2b75fa9a1963ae99d890b9c827634ebc2b5971fcc4dd534d90c9c"
+      "packet_sha256": "8bee08706ef2b75fa9a1963ae99d890b9c827634ebc2b5971fcc4dd534d90c9c",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-monster-contract-audit",
@@ -3303,7 +3389,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-monster-contract-audit.json",
-      "packet_sha256": "2645424b4b9beb890f5a19635700af51e3a7d3ca128b4d7c0bf4c6bcd8655dda"
+      "packet_sha256": "2645424b4b9beb890f5a19635700af51e3a7d3ca128b4d7c0bf4c6bcd8655dda",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-pet-contract-audit",
@@ -3372,7 +3460,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-pet-contract-audit.json",
-      "packet_sha256": "b041e13f13248ec5096836930c64a5a661cbd61ddf24c34dc56101859ddb02de"
+      "packet_sha256": "b041e13f13248ec5096836930c64a5a661cbd61ddf24c34dc56101859ddb02de",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-turn-movement-audit",
@@ -3513,7 +3603,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-turn-movement-audit.json",
-      "packet_sha256": "40d1b96d7feda01658ce49e01c539b60829e804875ba642d6ecee7c8d9e1f1df"
+      "packet_sha256": "40d1b96d7feda01658ce49e01c539b60829e804875ba642d6ecee7c8d9e1f1df",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-inventory-actions-audit",
@@ -3654,7 +3746,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-inventory-actions-audit.json",
-      "packet_sha256": "6448bdbe0801181329406b90d6822d98a7fb8930dde0ef37c6faaf50e56a0df6"
+      "packet_sha256": "6448bdbe0801181329406b90d6822d98a7fb8930dde0ef37c6faaf50e56a0df6",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-main-generation-audit",
@@ -3775,7 +3869,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-main-generation-audit.json",
-      "packet_sha256": "eac3dd6c712d47b755f830dbedeebaecc3dc6e10693f35a7136a2dfb2c21ece1"
+      "packet_sha256": "eac3dd6c712d47b755f830dbedeebaecc3dc6e10693f35a7136a2dfb2c21ece1",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-special-floors-audit",
@@ -3916,7 +4012,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-special-floors-audit.json",
-      "packet_sha256": "62a5b3b1e496271d93390d4e33abc2c9a4a0e599eae92d54b7e3f69d0fb48181"
+      "packet_sha256": "62a5b3b1e496271d93390d4e33abc2c9a4a0e599eae92d54b7e3f69d0fb48181",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-tutorial-professions-audit",
@@ -4037,7 +4135,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-tutorial-professions-audit.json",
-      "packet_sha256": "b08295a920115da4e30f76405e9945c1b2497d22e08990cf9f7880810bd30f13"
+      "packet_sha256": "b08295a920115da4e30f76405e9945c1b2497d22e08990cf9f7880810bd30f13",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-weather-terrain-audit",
@@ -4178,7 +4278,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-weather-terrain-audit.json",
-      "packet_sha256": "5484d17db8f036b0dc2d7f97bdcdd2209b29da8a8ef1e486105eb0d79faf628b"
+      "packet_sha256": "5484d17db8f036b0dc2d7f97bdcdd2209b29da8a8ef1e486105eb0d79faf628b",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-fusion-engine-audit",
@@ -4259,7 +4361,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-fusion-engine-audit.json",
-      "packet_sha256": "fca3f77a7bbf076ebec6fab12fe3f6512ea8d25ec639927fafaeb34d408cf1b4"
+      "packet_sha256": "fca3f77a7bbf076ebec6fab12fe3f6512ea8d25ec639927fafaeb34d408cf1b4",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-save-items-cells-audit",
@@ -4320,7 +4424,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-save-items-cells-audit.json",
-      "packet_sha256": "13fc5a18c27ebcb37e0b3402e6b40bd94dffd8aa3132598d0d495b65474df158"
+      "packet_sha256": "13fc5a18c27ebcb37e0b3402e6b40bd94dffd8aa3132598d0d495b65474df158",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-save-monsters-audit",
@@ -4361,7 +4467,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-save-monsters-audit.json",
-      "packet_sha256": "266909575094464e135ad82a6a5fa495109b7f0dccee43206a5cad376c4bc224"
+      "packet_sha256": "266909575094464e135ad82a6a5fa495109b7f0dccee43206a5cad376c4bc224",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-save-floors-audit",
@@ -4402,7 +4510,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-save-floors-audit.json",
-      "packet_sha256": "772f3d6ef5a54bd8d44b08da88e2c73df43037f13720c6d2ec6b9e95d8fc2952"
+      "packet_sha256": "772f3d6ef5a54bd8d44b08da88e2c73df43037f13720c6d2ec6b9e95d8fc2952",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-save-envelope-audit",
@@ -4503,7 +4613,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-save-envelope-audit.json",
-      "packet_sha256": "0d5babdd8cbe7e4a671450d13e58c473023a0539ca845fd1918152be2e668dae"
+      "packet_sha256": "0d5babdd8cbe7e4a671450d13e58c473023a0539ca845fd1918152be2e668dae",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-script-facade-audit",
@@ -4626,7 +4738,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-script-facade-audit.json",
-      "packet_sha256": "43b8a10f24abf242333998da74dc2f95c9a1f3f9eed157029f276222b3da27d8"
+      "packet_sha256": "43b8a10f24abf242333998da74dc2f95c9a1f3f9eed157029f276222b3da27d8",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-editor-tools-audit",
@@ -4777,7 +4891,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-editor-tools-audit.json",
-      "packet_sha256": "672fd92a05f06b9f80a03d795d0e97cfe7548fac7a25bb10d313caf2e1111234"
+      "packet_sha256": "672fd92a05f06b9f80a03d795d0e97cfe7548fac7a25bb10d313caf2e1111234",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-editor-ui-import-audit",
@@ -4888,7 +5004,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-editor-ui-import-audit.json",
-      "packet_sha256": "92804bcd47392f80c98b3aa56b6f36149b0c447f21dd6bfaf54fc9bce897895c"
+      "packet_sha256": "92804bcd47392f80c98b3aa56b6f36149b0c447f21dd6bfaf54fc9bce897895c",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-main-canvas-audit",
@@ -4996,7 +5114,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-main-canvas-audit.json",
-      "packet_sha256": "afab13a268f06380acfac7daa3d49889698dcc2255f167a6a9a6829cbfbf2513"
+      "packet_sha256": "afab13a268f06380acfac7daa3d49889698dcc2255f167a6a9a6829cbfbf2513",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-minimap-camera-audit",
@@ -5157,7 +5277,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-minimap-camera-audit.json",
-      "packet_sha256": "a71849b1a0d2d7730a59718c32b304423e40025a129bd3b00bc58ffeddd4fe6b"
+      "packet_sha256": "a71849b1a0d2d7730a59718c32b304423e40025a129bd3b00bc58ffeddd4fe6b",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-input-hud-audit",
@@ -5308,7 +5430,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-input-hud-audit.json",
-      "packet_sha256": "eac5200e2ae19b280e4dd25ffba11f10850ad62c976b4b91eaf91ca6a65b87a9"
+      "packet_sha256": "eac5200e2ae19b280e4dd25ffba11f10850ad62c976b4b91eaf91ca6a65b87a9",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-menus-inventory-ui-audit",
@@ -5429,7 +5553,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-menus-inventory-ui-audit.json",
-      "packet_sha256": "60ea3e3845559f9b278cb70373ff3caa04d0905f705316e56f8b38b9ee680487"
+      "packet_sha256": "60ea3e3845559f9b278cb70373ff3caa04d0905f705316e56f8b38b9ee680487",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-manager-ui-launch-audit",
@@ -5540,7 +5666,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-manager-ui-launch-audit.json",
-      "packet_sha256": "93db0de1a2503160895572523650e901eb810cca6ca78be70017b1010cb83728"
+      "packet_sha256": "93db0de1a2503160895572523650e901eb810cca6ca78be70017b1010cb83728",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-socket-contract-audit",
@@ -5591,7 +5719,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-socket-contract-audit.json",
-      "packet_sha256": "af60b1bf1448647664690cf6fb113abcfd95679f8b690ee67101e309451f339d"
+      "packet_sha256": "af60b1bf1448647664690cf6fb113abcfd95679f8b690ee67101e309451f339d",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-cdn-bootstrap-audit",
@@ -5672,7 +5802,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-cdn-bootstrap-audit.json",
-      "packet_sha256": "a9f380ccad9d4343625e7e400aa73a8e421f108b887db20169afd512fb7ec984"
+      "packet_sha256": "a9f380ccad9d4343625e7e400aa73a8e421f108b887db20169afd512fb7ec984",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-challenge-runtime-audit",
@@ -5753,7 +5885,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-challenge-runtime-audit.json",
-      "packet_sha256": "a2fce1f23119d49ec4a27ef6537701b581fd7cad2e34b33264bcdc28ca79801b"
+      "packet_sha256": "a2fce1f23119d49ec4a27ef6537701b581fd7cad2e34b33264bcdc28ca79801b",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-portal-runtime-audit",
@@ -5854,7 +5988,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-portal-runtime-audit.json",
-      "packet_sha256": "bdcf021420db37b2fccd46ceed3fcce67f59c64db71af011c54a8b073106c077"
+      "packet_sha256": "bdcf021420db37b2fccd46ceed3fcce67f59c64db71af011c54a8b073106c077",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-potion-restoration",
@@ -5944,7 +6080,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-potion-restoration.json",
-      "packet_sha256": "6ba566e65b2294e20c2c6bde4f394c70046c13ac5f9eff8f4e8e422c949a7eeb"
+      "packet_sha256": "6ba566e65b2294e20c2c6bde4f394c70046c13ac5f9eff8f4e8e422c949a7eeb",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-potion-base-contracts needs primary review first."
     },
     {
       "id": "t10-potion-stealth-mystery",
@@ -6017,7 +6156,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-potion-stealth-mystery.json",
-      "packet_sha256": "8cb40ff27aae4947e52a53026fbb00633325ca2ad7fe741e3e583d520b821bcb"
+      "packet_sha256": "8cb40ff27aae4947e52a53026fbb00633325ca2ad7fe741e3e583d520b821bcb",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-potion-base-contracts needs primary review first."
     },
     {
       "id": "t10-potion-harmful-elements",
@@ -6126,7 +6268,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-potion-harmful-elements.json",
-      "packet_sha256": "03e491418f8543b4ac52077caaa5eab8118d9bd5864be46f154923a3eacb47ed"
+      "packet_sha256": "03e491418f8543b4ac52077caaa5eab8118d9bd5864be46f154923a3eacb47ed",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-potion-base-contracts needs primary review first."
     },
     {
       "id": "t10-potion-terrain",
@@ -6180,7 +6325,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-potion-terrain.json",
-      "packet_sha256": "1c38c99074a2d0d6e86f71d7a0b5e1f422f08b1416e67176c9c2a4ba4267366b"
+      "packet_sha256": "1c38c99074a2d0d6e86f71d7a0b5e1f422f08b1416e67176c9c2a4ba4267366b",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-potion-base-contracts needs primary review first."
     },
     {
       "id": "t10-trap-advanced",
@@ -6251,7 +6399,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-trap-advanced.json",
-      "packet_sha256": "090f254968b545614e536511cfcbf4004de210acff79177a3c949e79d1b03158"
+      "packet_sha256": "090f254968b545614e536511cfcbf4004de210acff79177a3c949e79d1b03158",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-trap-core needs primary review first."
     },
     {
       "id": "t10-scroll-buffs",
@@ -6356,7 +6507,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-scroll-buffs.json",
-      "packet_sha256": "32050545f17e6ed0e7c3d77484ec3849efb9245a63c2722d1739cc8f2739c3fe"
+      "packet_sha256": "32050545f17e6ed0e7c3d77484ec3849efb9245a63c2722d1739cc8f2739c3fe",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-scroll-core needs primary review first."
     },
     {
       "id": "t10-scroll-spatial",
@@ -6410,7 +6564,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-scroll-spatial.json",
-      "packet_sha256": "2fb84aece03ee8ca0b66352501d10c3924db9eed227b9d77db2507fed80bf6b6"
+      "packet_sha256": "2fb84aece03ee8ca0b66352501d10c3924db9eed227b9d77db2507fed80bf6b6",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-scroll-core needs primary review first."
     },
     {
       "id": "t10-scroll-solar-verbal",
@@ -6480,7 +6637,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-scroll-solar-verbal.json",
-      "packet_sha256": "de47091fe49078b101bfaae9adfc6a96ed5e8a553a140d5d187a7c19f0140251"
+      "packet_sha256": "de47091fe49078b101bfaae9adfc6a96ed5e8a553a140d5d187a7c19f0140251",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-scroll-core needs primary review first."
     },
     {
       "id": "t10-scroll-enchantment-audit",
@@ -6547,7 +6707,9 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-scroll-enchantment-audit.json",
-      "packet_sha256": "b62e2f4509a484e3590d8eb28afbec0d1ef5c71428e9460dd39f83d2adc44063"
+      "packet_sha256": "b62e2f4509a484e3590d8eb28afbec0d1ef5c71428e9460dd39f83d2adc44063",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "available"
     },
     {
       "id": "t10-altar-rewards",
@@ -6617,7 +6779,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-altar-rewards.json",
-      "packet_sha256": "440acd2c640bf1c2bc0c7c43c255493e65bcf246ccdb6ded8a793265dc4480a1"
+      "packet_sha256": "440acd2c640bf1c2bc0c7c43c255493e65bcf246ccdb6ded8a793265dc4480a1",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-altar-core needs primary review first."
     },
     {
       "id": "t10-potion-bomb",
@@ -6658,7 +6823,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-potion-bomb.json",
-      "packet_sha256": "fd4579e7b84a4bcc94064dd6c52cb51385f0bedbaa73dd3020edb04d4d68d7ff"
+      "packet_sha256": "fd4579e7b84a4bcc94064dd6c52cb51385f0bedbaa73dd3020edb04d4d68d7ff",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-bomb-core needs primary review first."
     },
     {
       "id": "t10-weapon-core",
@@ -6706,7 +6874,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-weapon-core.json",
-      "packet_sha256": "8efb512b264fca1d63e5ca924ec73063567b29bbe2f2925a08d841a5e493d5da"
+      "packet_sha256": "8efb512b264fca1d63e5ca924ec73063567b29bbe2f2925a08d841a5e493d5da",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-weapon-contract-audit needs primary review first."
     },
     {
       "id": "t10-weapons-melee",
@@ -6791,7 +6962,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-weapons-melee.json",
-      "packet_sha256": "e1cca4305ea2b8d019f9220f0354b76958862f4a9539377d48d8e3a01a1f3886"
+      "packet_sha256": "e1cca4305ea2b8d019f9220f0354b76958862f4a9539377d48d8e3a01a1f3886",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-weapon-contract-audit needs primary review first."
     },
     {
       "id": "t10-weapons-sweep-whip",
@@ -6864,7 +7038,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-weapons-sweep-whip.json",
-      "packet_sha256": "403ab7a20bc6e7f1b864f0041aab251303fe607aab46970a5ab2d124bc51f2c3"
+      "packet_sha256": "403ab7a20bc6e7f1b864f0041aab251303fe607aab46970a5ab2d124bc51f2c3",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-weapon-contract-audit needs primary review first."
     },
     {
       "id": "t10-weapons-projectiles",
@@ -6941,7 +7118,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-weapons-projectiles.json",
-      "packet_sha256": "c8ec38d70a93fb525573cb588bf0534ab9faec56f0556825d075226c72ced955"
+      "packet_sha256": "c8ec38d70a93fb525573cb588bf0534ab9faec56f0556825d075226c72ced955",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-weapon-contract-audit needs primary review first."
     },
     {
       "id": "t10-weapons-frost-fire",
@@ -6998,7 +7178,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-weapons-frost-fire.json",
-      "packet_sha256": "31040dec8753173edf24dbfae32670f783807f43c9356e8f6e3833679045e313"
+      "packet_sha256": "31040dec8753173edf24dbfae32670f783807f43c9356e8f6e3833679045e313",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-weapon-contract-audit needs primary review first."
     },
     {
       "id": "t10-weapons-lightning",
@@ -7056,7 +7239,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-weapons-lightning.json",
-      "packet_sha256": "15deec0d7ba91adcc483957ad1703871e666c9060450d8d4fbe33124df3b4352"
+      "packet_sha256": "15deec0d7ba91adcc483957ad1703871e666c9060450d8d4fbe33124df3b4352",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-weapon-contract-audit needs primary review first."
     },
     {
       "id": "t10-weapons-force",
@@ -7129,7 +7315,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-weapons-force.json",
-      "packet_sha256": "9f90aa5432d04165f9b92e0fad0fbf088949d9d332c37bdf67ac8c78bbc9a04f"
+      "packet_sha256": "9f90aa5432d04165f9b92e0fad0fbf088949d9d332c37bdf67ac8c78bbc9a04f",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-weapon-contract-audit needs primary review first."
     },
     {
       "id": "t10-weapons-summon-wind",
@@ -7198,7 +7387,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-weapons-summon-wind.json",
-      "packet_sha256": "380455a62cc16d34f0f18e108cbb26b59a7930da1967c9386c811e3c0056f4f0"
+      "packet_sha256": "380455a62cc16d34f0f18e108cbb26b59a7930da1967c9386c811e3c0056f4f0",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-weapon-contract-audit needs primary review first."
     },
     {
       "id": "t10-weapons-economy-tools",
@@ -7309,7 +7501,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-weapons-economy-tools.json",
-      "packet_sha256": "5fa7eef1cc23377ea4ea7d14987bb90bdb9008b29859a4eea0c56f267d71ed64"
+      "packet_sha256": "5fa7eef1cc23377ea4ea7d14987bb90bdb9008b29859a4eea0c56f267d71ed64",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-weapon-contract-audit needs primary review first."
     },
     {
       "id": "t10-weapons-special-magic",
@@ -7399,7 +7594,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-weapons-special-magic.json",
-      "packet_sha256": "ee49839b9bfa057cc66edd842d359d99a58cb7e45ade0d2c6727cf17f069853a"
+      "packet_sha256": "ee49839b9bfa057cc66edd842d359d99a58cb7e45ade0d2c6727cf17f069853a",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-weapon-contract-audit needs primary review first."
     },
     {
       "id": "t10-monster-core",
@@ -7475,7 +7673,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-monster-core.json",
-      "packet_sha256": "d5f13cde298e8bb9b87608e5796caec6c3d6ebea2dbff2740ae87d969713e603"
+      "packet_sha256": "d5f13cde298e8bb9b87608e5796caec6c3d6ebea2dbff2740ae87d969713e603",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-monster-contract-audit needs primary review first."
     },
     {
       "id": "t10-monsters-basic",
@@ -7602,7 +7803,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-monsters-basic.json",
-      "packet_sha256": "002f55bd59dab4825d42a7bfeab6a14463d63f001092ea6f9bc0d4b33a7ce189"
+      "packet_sha256": "002f55bd59dab4825d42a7bfeab6a14463d63f001092ea6f9bc0d4b33a7ce189",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-monster-contract-audit needs primary review first."
     },
     {
       "id": "t10-monsters-ghost-water",
@@ -7701,7 +7905,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-monsters-ghost-water.json",
-      "packet_sha256": "b0c78caa8b4187be363833b3c9fb43c2e487b119f0fb213ea16a23f8b679c6a6"
+      "packet_sha256": "b0c78caa8b4187be363833b3c9fb43c2e487b119f0fb213ea16a23f8b679c6a6",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-monster-contract-audit needs primary review first."
     },
     {
       "id": "t10-monsters-centipede",
@@ -7772,7 +7979,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-monsters-centipede.json",
-      "packet_sha256": "09030f3f90108738d7270d76003e62f1376a7c6f2149d1ac1cafd230b92f2e76"
+      "packet_sha256": "09030f3f90108738d7270d76003e62f1376a7c6f2149d1ac1cafd230b92f2e76",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-monster-contract-audit needs primary review first."
     },
     {
       "id": "t10-monsters-giant",
@@ -7839,7 +8049,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-monsters-giant.json",
-      "packet_sha256": "30cc9a4e1f5a53b8aa2a518a9d9369b1e6145d1278da3a79a37e0be666132cb2"
+      "packet_sha256": "30cc9a4e1f5a53b8aa2a518a9d9369b1e6145d1278da3a79a37e0be666132cb2",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-monster-contract-audit needs primary review first."
     },
     {
       "id": "t10-monsters-guard-projectiles",
@@ -7937,7 +8150,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-monsters-guard-projectiles.json",
-      "packet_sha256": "4228a47d2ce85f290712ce19864a268f6ff8993e9dff1fa718b93fa163002bd2"
+      "packet_sha256": "4228a47d2ce85f290712ce19864a268f6ff8993e9dff1fa718b93fa163002bd2",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-monster-contract-audit needs primary review first."
     },
     {
       "id": "t10-boss-throne",
@@ -8002,7 +8218,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-boss-throne.json",
-      "packet_sha256": "789c33bf0ed9a5de09627cd11216f8f5d1a24ad549adfb055d5169b0ba02d881"
+      "packet_sha256": "789c33bf0ed9a5de09627cd11216f8f5d1a24ad549adfb055d5169b0ba02d881",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-monster-contract-audit needs primary review first."
     },
     {
       "id": "t10-boss-wizards",
@@ -8069,7 +8288,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-boss-wizards.json",
-      "packet_sha256": "56b5c675e864bf01512a88acfa2307b8d6383c5687ee2d1949cdd38390e57872"
+      "packet_sha256": "56b5c675e864bf01512a88acfa2307b8d6383c5687ee2d1949cdd38390e57872",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-monster-contract-audit needs primary review first."
     },
     {
       "id": "t10-monsters-status-thieves",
@@ -8208,7 +8430,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-monsters-status-thieves.json",
-      "packet_sha256": "90753786c7d284aaede1001eadeb0de698da9472448fc72f6914d28b6a6a92e6"
+      "packet_sha256": "90753786c7d284aaede1001eadeb0de698da9472448fc72f6914d28b6a6a92e6",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-monster-contract-audit needs primary review first."
     },
     {
       "id": "t10-monsters-summoners",
@@ -8320,7 +8545,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-monsters-summoners.json",
-      "packet_sha256": "e46875a21a9a418410bccd3fae39ebcd7e91e09635739ca3251c3bbebbaea769"
+      "packet_sha256": "e46875a21a9a418410bccd3fae39ebcd7e91e09635739ca3251c3bbebbaea769",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-monster-contract-audit needs primary review first."
     },
     {
       "id": "t10-monsters-slimes-teleport",
@@ -8430,7 +8658,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-monsters-slimes-teleport.json",
-      "packet_sha256": "20e1843391abd6ac239759c5bb450215edb4c173cb9686569e776d2377413f67"
+      "packet_sha256": "20e1843391abd6ac239759c5bb450215edb4c173cb9686569e776d2377413f67",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-monster-contract-audit needs primary review first."
     },
     {
       "id": "t10-monsters-hazards-patrol",
@@ -8557,7 +8788,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-monsters-hazards-patrol.json",
-      "packet_sha256": "5fdbe16c6ce283ca75f5b30957b5c7c5f5507a12ae4c041ff17e54b260ea6e45"
+      "packet_sha256": "5fdbe16c6ce283ca75f5b30957b5c7c5f5507a12ae4c041ff17e54b260ea6e45",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-monster-contract-audit needs primary review first."
     },
     {
       "id": "t10-boss-minotaur",
@@ -8609,7 +8843,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-boss-minotaur.json",
-      "packet_sha256": "cf79fc85f56a874ecca2734dafe6aa398bf1d761a32fe49e971d9a319c51a8c3"
+      "packet_sha256": "cf79fc85f56a874ecca2734dafe6aa398bf1d761a32fe49e971d9a319c51a8c3",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-monster-contract-audit needs primary review first."
     },
     {
       "id": "t10-pet-core",
@@ -8696,7 +8933,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-pet-core.json",
-      "packet_sha256": "f72873724b37b390da1c6aa74bfb62a275bdee5ec7fa3e0ce9867e6e3b316a6e"
+      "packet_sha256": "f72873724b37b390da1c6aa74bfb62a275bdee5ec7fa3e0ce9867e6e3b316a6e",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-pet-contract-audit needs primary review first."
     },
     {
       "id": "t10-pets-mount-panda",
@@ -8752,7 +8992,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-pets-mount-panda.json",
-      "packet_sha256": "8b65223fc66b9ea8cf3ae1a2e23daa3ff46167c526edc3646f67154faff18cb2"
+      "packet_sha256": "8b65223fc66b9ea8cf3ae1a2e23daa3ff46167c526edc3646f67154faff18cb2",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-pet-contract-audit needs primary review first."
     },
     {
       "id": "t10-pets-elemental",
@@ -8821,7 +9064,10 @@
       ],
       "factory_export": null,
       "packet_path": ".context/collaboration/packets/t10-pets-elemental.json",
-      "packet_sha256": "6258bdd6fa8682feb0780550cda2a228cd1c34633e4990f8fb549994a4dbbf83"
+      "packet_sha256": "6258bdd6fa8682feb0780550cda2a228cd1c34633e4990f8fb549994a4dbbf83",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-pet-contract-audit needs primary review first."
     },
     {
       "id": "t10-path-search",
@@ -8905,7 +9151,10 @@
       ],
       "factory_export": "createPathSearch",
       "packet_path": ".context/collaboration/packets/t10-path-search.json",
-      "packet_sha256": "d023748891691c3922108ebcedd1515e0c3a1300d5ad8bc0218dbf2d489300fe"
+      "packet_sha256": "d023748891691c3922108ebcedd1515e0c3a1300d5ad8bc0218dbf2d489300fe",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-path-primitives needs primary review first."
     },
     {
       "id": "t10-main-room-geometry",
@@ -9039,7 +9288,10 @@
       ],
       "factory_export": "createMainRoomGeometry",
       "packet_path": ".context/collaboration/packets/t10-main-room-geometry.json",
-      "packet_sha256": "06b4bf762eaea220258c867e004bd2c2a5092868c14ce99ae858a1b0dd8048ab"
+      "packet_sha256": "06b4bf762eaea220258c867e004bd2c2a5092868c14ce99ae858a1b0dd8048ab",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-main-generation-audit needs primary review first."
     },
     {
       "id": "t10-maze-kernel",
@@ -9143,7 +9395,10 @@
       ],
       "factory_export": "createMazeKernel",
       "packet_path": ".context/collaboration/packets/t10-maze-kernel.json",
-      "packet_sha256": "6f3ca0742cd616adeab880912f8560b2d2883e230244d6311975c7b3e115d877"
+      "packet_sha256": "6f3ca0742cd616adeab880912f8560b2d2883e230244d6311975c7b3e115d877",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-main-generation-audit needs primary review first."
     },
     {
       "id": "t10-chess-solver",
@@ -9217,7 +9472,10 @@
       ],
       "factory_export": "createChessSolver",
       "packet_path": ".context/collaboration/packets/t10-chess-solver.json",
-      "packet_sha256": "9b088cf081eeb3069db9d604558c75068ad21740f2c3b9e902899847d0522782"
+      "packet_sha256": "9b088cf081eeb3069db9d604558c75068ad21740f2c3b9e902899847d0522782",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-chess-pieces needs primary review first."
     },
     {
       "id": "t10-fusion-buff-engine",
@@ -9273,7 +9531,10 @@
       ],
       "factory_export": "createFusionBuffEngine",
       "packet_path": ".context/collaboration/packets/t10-fusion-buff-engine.json",
-      "packet_sha256": "8bec6b4f36be65e0de2d07ec6f78c6a667cd20f202451f8c1994483ac57cb0a6"
+      "packet_sha256": "8bec6b4f36be65e0de2d07ec6f78c6a667cd20f202451f8c1994483ac57cb0a6",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status_at_publication": "blocked",
+      "dependency_wait": "Dependency t10-fusion-engine-audit needs primary review first."
     }
   ],
   "totals": {
@@ -9285,7 +9546,7 @@
   },
   "remaining_unmapped_main_classes": [],
   "note": "This index is planning/navigation data. The committed .context/collaboration/packets definitions and live CLI status govern scope and availability. Source-only audits do not establish rewrite parity.",
-  "stage": "official definitions created; committed source/availability verification pending",
+  "stage": "published; CLI verified 73 available and 41 dependency-review waits",
   "validation": {
     "schema_validated": 110,
     "exact_ast_anchor_checks": 503,
@@ -9293,5 +9554,7 @@
     "missing_dependencies": 0,
     "overlapping_allowed_paths": 0,
     "subclass_type_compatibility": "passed"
-  }
+  },
+  "status_checked_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+  "initial_packet_source": "04c2f6dcfd2e4b7436f3bfdd82e5df1ae8938377"
 }

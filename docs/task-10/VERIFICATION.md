@@ -2,6 +2,14 @@
 
 This records actual local commands, not owner acceptance. Reference pin: `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`. The original 2026-10-08 fingerprint is preserved at `.context/fingerprints/20261008T080439Z-cbb0a01f/report.json`. The migration turn uses `.context/fingerprints/20261009T045933Z-88646267/report.json` (`reference_ambiguity`, `CONTINUE / primary`).
 
+## Work-pool expansion — later primary turn, 2026-10-09
+
+Current expansion fingerprint: `.context/fingerprints/20261009T091343Z-0e4cf368/report.json`, `reference_ambiguity / primary / CONTINUE`. Introduced 110 new definitions at `4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596`, retaining the original four unchanged. All 110 official CLI create commands succeeded; 503 source anchors matched exact AST declarations, the dependency graph had no missing IDs/cycles, and all new/old packet task scopes were disjoint.
+
+After commit/push and remote-head verification, `collaboration.mjs status` returned **114 packets: 73 available, 41 waiting for required primary dependency review, zero other blockers**. That checkpoint's [arena/protocol](https://github.com/SUSTechHSAS/arena-context/actions/runs/37916813252) passed. Status output, catalog, creation results and checksums are saved in [packet-pool/verification.json](packet-pool/verification.json).
+
+The shared ItemCore action/timer/collection signatures now allow source numeric/empty results and action arguments; the existing bush collection annotation uses the same hook result. Runtime return values/state updates remain unchanged. At `0ec3698`, **8 source hashes, 5 integrity tests, strict types, 110 domain tests and the build passed**, and a separate compiler fixture accepted representative polymorphic subclasses. The initial check exposed the narrow bush annotation; it was corrected before the successful run. No extra browser run was needed for this type/interface change; the browser results below remain historical. New packets are assignments, not executed implementations or secondary approvals.
+
 ## Collaboration migration regression — 2026-10-09
 
 At integration commit `a66127756132e0e9852bc6021519a0bbd828e075`, reran the inherited suites on Linux x64, Node v24.16.0 and npm 12.0.2: **72 protocol tests, 8 reference hashes, 5 integrity tests, strict types, 110 domain tests, production build and 4 real Chromium tests passed**. This includes equality of all 16 viewer canvas PNGs. `npm ci --ignore-scripts` used the unchanged dependency lock. No application, test, reference, or shared protocol changes were needed for this run.

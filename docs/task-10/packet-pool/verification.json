@@ -41,5 +41,21 @@
     "file": "create-results.json",
     "bytes": 39447,
     "sha256": "e1e5660c698f1dd2cae62514f83a053959019af71be266f809b7627a6ec2e8a1"
-  }
+  },
+  "publication": {
+    "commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+    "remote_head_verified": true,
+    "command": "node .github/scripts/collaboration.mjs status",
+    "exit_code": 0,
+    "total": 114,
+    "available": 73,
+    "dependency_review_waits": 41,
+    "unexpected_blockers": 0,
+    "file": "status.json",
+    "bytes": 23134,
+    "sha256": "51d4027ae9887814c16b5f50cc0f06b64537873508d64055d413a02e7d0c8dd4",
+    "protocol_ci": "https://github.com/SUSTechHSAS/arena-context/actions/runs/37916813252"
+  },
+  "candidate_diff_files_at_handoff": 207,
+  "protocol_comparison_limit": 300
 }

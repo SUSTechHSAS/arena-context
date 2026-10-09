@@ -16,3 +16,9 @@ Temporary archive and extracted scratch scripts under `.cache/` are not recovery
 - Immutable primary-issued definitions: `.context/collaboration/packets/` (one packet per later secondary PR).
 - Fresh regression outputs, exact commands and SHA-256 manifest: `docs/task-10/migration-2026-10-09/verification.json`.
 - Current primary evidence: `.context/fingerprints/20261009T045933Z-88646267/` and its referenced bank snapshot.
+
+## Expanded pool — later primary turn, 2026-10-09
+
+- Current 114-packet directory, exact definitions, dependency chains and review priorities: `docs/task-10/packet-pool/README.md` and `catalog.json`.
+- Publication checkpoint: `4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596`; status snapshot, current regression and creation evidence: `docs/task-10/packet-pool/verification.json`.
+- Current primary evidence: `.context/fingerprints/20261009T091343Z-0e4cf368/`. Start from the latest primary checkpoint so the common ItemCore subclass-type prerequisites are included.
