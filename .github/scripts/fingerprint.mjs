@@ -77,12 +77,17 @@ export function score(root, turn) {
     if (packageId(bundle) !== manifest.package_id) throw new Error('package_hash_mismatch');
     result = scoreBundle(raw, bundle);
   } catch (e) { result = { status: 'unscored', reason: e.message, candidates: [] }; }
+  const gate = decideWork(result, manifest.policy);
   const report = { schema: manifest.schema, turn_id: turn, branch: manifest.branch, scope: 'user-turn', same_model_within_turn: 'assumed_by_user',
     identity_verified: false, arena_protocol_calibrated: false, sample_count: raw === null ? 0 : 1,
     raw_sha256: raw === null ? null : hash(raw), package_id: manifest.package_id,
     bank_version: manifest.bank_version, bank_sha256: manifest.bank_sha256, freshness: manifest.freshness,
     refresh_error: manifest.refresh_error, scored_at: new Date().toISOString(), ...result,
-    policy_source: manifest.policy?.source, gate: decideWork(result, manifest.policy) };
+    policy_source: manifest.policy?.source, gate,
+    next: gate.role === 'secondary'
+      ? 'Record this fingerprint and Model role: secondary in STATE. Run collaboration.mjs status, then claim one primary-issued packet before any task edits. If none is available, save only the fingerprint and a blocked handoff.'
+      : gate.allowed ? 'Record this fingerprint and Model role: primary in STATE. Continue task work, issue bounded packets, or review secondary work.'
+        : 'Report the verdict and refusal reason, then end this user turn without more tools.' };
   writeNew(reportPath, report); return report;
 }
 

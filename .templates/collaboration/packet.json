@@ -1,0 +1,9 @@
+{
+  "id": "unit-name",
+  "title": "<One bounded work unit>",
+  "objective": "<Tie this output to a TASK acceptance item>",
+  "allowed_paths": ["src/example.mjs", "tests/example.test.mjs"],
+  "acceptance": ["<Observable completion criterion>"],
+  "verification": ["<Appropriate verification and expected result>"],
+  "depends_on": []
+}
