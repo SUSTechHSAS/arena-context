@@ -25,25 +25,26 @@ node .github/scripts/fingerprint.mjs score <turn_id>
 
 1. 三条回答都通过输入检查，且校准参数与 detector、模型顺序及参考库哈希绑定。
 2. 按库内校准分数从高到低，取累计分数至少达到 **95%** 的最小完整类别集合，并包含边界上所有并列类别。遍历整个库，不截断为展示用的前三名。
-3. 将类别展开为具体模型 ID，得到 `reference_models`；所有 ID 都必须在 protected main 的 `.github/fingerprint-policy.json` 中。
+3. 将类别展开为具体模型 ID，得到 `reference_models`；所有 ID 都必须在 protected main 的 `.github/fingerprint-policy.json` 的 `primary_models` 或 `secondary_models` 中；任何名单外成员都拒绝。
 
 95% 是本仓库的工作规则，不是网站的认证门槛，也不是身份识别准确率。它只描述库内分数的累计份额。库外模型也可能得到很高的库内分数；同一会话三次回答的相关性也未被上游独立对话评估覆盖。因此始终保留 `identity_verified=false`、`arena_protocol_calibrated=false`、`identified_candidate=null` 和上游的 `upstream_decision=not_confirmed`。
 
-`status=reference_match` 表示集合展开后只有一个具体 ID；`reference_ambiguity` 表示多个 ID。仅当全部获准时返回 `gate.allowed=true`、`gate.action=CONTINUE`、`gate.reason=accepted_reference_set`。展示候选中的 `reference_probability` 明确是库内分数，不称为真实后端身份概率。集合中的任何未获准 ID、校准缺失、无效/不足输入或政策缺失均拒绝。
+`status=reference_match` 表示集合展开后只有一个具体 ID；`reference_ambiguity` 表示多个 ID。仅当全部获准时返回 `gate.allowed=true` 和 `gate.reason=accepted_reference_set`。全部为主模型时为 `gate.role=primary`、`gate.action=CONTINUE`；包含任何子模型时为 `gate.role=secondary`、`gate.action=CONTINUE_SUBTASK`，只允许领取和执行已发布的有限工作包。展示候选中的 `reference_probability` 明确是库内分数，不称为真实后端身份概率。集合中的任何未获准 ID、校准缺失、无效/不足输入或政策缺失均拒绝。
 
-名单仍保留原来的六个具体模型 ID。仅对已核对的上游名称作以下显式映射，不做通用替换、系列或前缀匹配：
+策略 schema 2 将原来的六个具体 ID 保留在主模型列表，并只新增五个子模型：`claude-haiku-5-5`、`claude-opus-5`、`claude-fable-5`、`gpt-5.6-sol`、`gpt-6-luna`。其他模型继续拒绝。schema 1 的历史 `accepted_models` 仍解释为主模型；两张新名单不能重叠、重复或包含通配符。仅对已核对的上游名称作以下显式映射，不做通用替换、系列或前缀匹配：
 
 | 上游类别 ID | 必须获准的中央政策 ID |
 | --- | --- |
 | `claude-opus-5.5` | `claude-opus-5-5` |
 | `claude-sonnet-5.5` | `claude-sonnet-5-5` |
 | `claude-fable-5.1` | `claude-fable-5-1` |
+| `claude-haiku-5.5` | `claude-haiku-5-5` |
 | `gpt-6-astra`，上游显示 `gpt-6-astra/6.1-sol` | `gpt-6-astra` **和** `gpt-6.1-sol` |
 | 其他 ID | 原样逐字匹配 |
 
 上游明确将 Astra 与 6.1 Sol 的样本合为一个不可区分的指纹类别；不能因为它的内部 ID 是 `gpt-6-astra` 就只检查这一个名字。撤销两个 ID 中任意一个，含该类别的结果就会被拒绝。
 
-`END_TURN` 和退出码 20 是预期的拒绝。Arena agent 输出实际结果与理由后立即结束，不重试、补样、继续任务或运行提交工具。通过时才把报告路径写入 STATE 并继续任务，随下一检查点推送原始记录和所用数据。拒绝记录只在本地保存，不能声称已上传。
+`END_TURN` 和退出码 20 是预期的拒绝。Arena agent 输出实际结果与理由后立即结束，不重试、补样、继续任务或运行提交工具。通过时才把报告路径与角色写入 STATE，并按主模型或子模型权限继续任务（见 [协作规则](COLLABORATION.md)），随下一检查点推送原始记录和所用数据。拒绝记录只在本地保存，不能声称已上传。
 
 ## 数据来源与更新
 
@@ -77,7 +78,7 @@ HTTP 请求遵循标准代理和系统 CA；有代理时不回退到绕过代理
 
 schema 1 的 WhatsMyLLM 记录继续使用原来的一个数组、ModelTrace core 和 Clear match / Close call 规则复算。原有 `match`、`family_only` 和 `ambiguous_models` 不改写，不拿新算法追溯授予旧轮次权限。新 `prepare` 只产生 schema 2 的 Fingerpoint 记录。
 
-协议 CI 从受信任的 base 执行评分器，将候选 PR 的记录作为数据读取；核对样本和完整快照哈希，独立重算新报告的完整候选集合、别名、输入检查、校准和分数，再按受保护 main 的当前名单判定。原报告必须已经允许工作；以后放宽名单不能把原拒绝记录变成通行证。历史豁免仍仅限 `.github/fingerprint-legacy.json` 固定的检查点。
+协议 CI 从受信任的 base 执行评分器，将候选 PR 的记录作为数据读取；核对样本和完整快照哈希，独立重算新报告的完整候选集合、别名、输入检查、校准和分数，再按受保护 main 的当前名单判定。原报告必须已经允许工作；带角色的新报告还须用 manifest 中的原始政策重算并核对角色。以后放宽名单不能把原拒绝记录变成通行证，也不能把过去的子模型轮次升级为主模型来发布或复核工作包。当前政策撤销的模型仍拒绝。历史豁免仍仅限 `.github/fingerprint-legacy.json` 固定的检查点。
 
 main 的维护 PR 更新新任务模板；已有任务须通过各自的 `meta/<任务号>/...` PR 更新脚本、规则与文档，不能将不同任务历史合并。main 的名单、评分逻辑或 Fingerpoint vendor 数据变化会重检开放任务 PR。最终合并与任务内容接受仍由人工决定。
 
