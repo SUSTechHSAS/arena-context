@@ -1,53 +1,85 @@
 # 同轮数字指纹
 
-用户明确要求每个工作轮次独立采样，并假定同轮的多个模型请求来自相同模型。实施顺序：prepare → 当前模型直接生成数字 → 原样写 raw.json → score → 输出摘要 → 同轮继续任务。
-
-最后一步受接受名单控制：Clear match 的具体模型 ID，或 Close call 的完整歧义集合中的所有模型 ID，都在 main 的 `.github/fingerprint-policy.json` 中时才继续。其他结果直接结束轮次。接受名单不按系列或名称前缀扩展，上游新增模型也不会自动获得工作权限。
+Arena 任务每个用户轮次独立采样，默认使用 [LM Fingerpoint Detector](https://lm.ikale.io/) 的参考库和 `shared-detector-v2` 评分器。按用户约定，同一轮假定模型不变；跨轮不复用样本。维护者在 `meta/...` 分支更新本仓库时不执行 Arena 任务门控。
 
 ## 命令与记录
 
-在真实的 work/... 或 arena/... 分支运行：
+在有 `.context/TASK.md` 的实际 `work/...` 或 `arena/...` 分支运行：
 
 ```sh
 node .github/scripts/fingerprint.mjs prepare
-# 模型自己回答输出的英文 JSON 探针；把原样数组写入返回的 raw_path。
+# 当前模型直接回答三道探针，输出 FINGERPRINT_RAW。
+# 将三条回答按顺序放在一个 JSON 数组中，原样保存到返回的 raw_path。
 node .github/scripts/fingerprint.mjs score <turn_id>
 ```
 
-prepare 不调用模型，也不生成探针数字。它先读取受保护 main 上的中央名单，冻结本轮政策快照，再同步上游数据并输出提示词；工作分支中的名单副本不能自行授予权限。政策读取失败就直接 END_TURN。score 只运行本地确定性统计程序，立即给出结果和 gate，不等待 GitHub Actions。每个目录保存 manifest.json、raw.json、report.json；banks/ 按内容哈希保存本轮实际数据。
+`prepare` 不调用模型，不生成探针答案。它先在线读取受保护 main 的中央接受名单，再冻结本轮 bank、检测器、校准参数和三道英文 JSON 探针。探针来自上游固定采样集 `environment-06`，分别要求 301、319、327 个 1–355 的整数。原始文件形状为 `[[第一条回答的整数], [第二条回答的整数], [第三条回答的整数]]`，实际文件中不能有说明文字或占位符。
 
-名单使用 `api.github.com/repos/SUSTechHSAS/arena-context/contents/.github/fingerprint-policy.json?ref=main` 的文件接口，不访问 `raw.githubusercontent.com`，也不跟随 API 返回的 download_url。HTTP 请求优先使用 curl，遵循标准代理和系统 CA 设置；只有未配置代理时才允许回退到 Node fetch，不关闭 TLS 校验。名单读取失败会显示实际 HTTP/连接错误，不再错误地附加 invalid_model_policy。
+三条回答都由当前模型在本用户轮次生成，不使用其他模型、API、工具或随机数生成器选数；不能复制一条回答、把单条回答切成三份、补数、修复或重复采样挑选结果。每条至少有 `max(80, ceil(请求数量 × 0.55))` 个有效整数。保留原有的常数、单调、等差、低多样性检查，并拒绝相同的重复回答。数量不完全相等会记录 `exact_count=false`，不偷偷截断或补齐。
 
-`status=match` 对应网站的 Clear match；确切模型 ID 在接受列表内时，返回 `gate.reason=accepted_clear_match`。`status=family_only` 对应 Close call；完整 `ambiguous_models` 至少包含两个不同模型、包含最近候选且全部在接受列表内时，返回 `gate.reason=accepted_ambiguity`。两者均有 `gate.allowed=true`、`gate.action=CONTINUE`。Close call 保留 `identified_candidate=null`，通过名单门槛不等于确认唯一身份。
+每轮目录保存 `manifest.json`、`raw.json`、`report.json`；`banks/<package_id>.json` 保存按内容哈希寻址的完整 bank 和 detector，使用 gzip/base64 封装。重复 `score` 返回已冻结结果；原始文件有任何改动会报错。评分在本地完成，不向检测网站或模型接口上传回答。
 
-歧义集合使用原有 `margin_min` 阈值，遍历完整指纹库：保留满足 `nearest.fit - candidate.fit < margin_min` 的每个具体模型，不按系列过滤，也不截断为展示用的前三名。恰好达到阈值的模型已被区分；拟合比最近候选更高的模型也保留。Close call 本身仍须通过原有输入、`fit_min` 和 `family_min` 门槛。集合内只要有一个未获准 ID 就拒绝，即使最近候选已获准。
+## 统计结果与工作门槛
 
-不满足上述条件时返回 END_TURN、退出码 20。它是预期的拒绝，不是让 agent 修复或重试的普通错误。拒绝后只输出原因并结束，不继续分析任务、修改文件、执行工具、提交或推送。记录已由命令保存到本地；若会话随后丢失，不保证该拒绝记录已同步到 GitHub。通过后才更新 STATE 并按原流程远程保存。
+网站提供的是参考库内的校准分数，没有“允许工作”的阈值。仓库采用独立且明确的规则：
 
-记录包含原始样本哈希、提示词、实际长度、候选/拟合/差距、bank 版本与哈希、数据是否新鲜，以及 `same_model_within_turn=assumed_by_user`。重复 score 返回已冻结结果；样本被改动会报错，不能通过补数或重复采样筛选模型。
+1. 三条回答都通过输入检查，且校准参数与 detector、模型顺序及参考库哈希绑定。
+2. 按库内校准分数从高到低，取累计分数至少达到 **95%** 的最小完整类别集合，并包含边界上所有并列类别。遍历整个库，不截断为展示用的前三名。
+3. 将类别展开为具体模型 ID，得到 `reference_models`；所有 ID 都必须在 protected main 的 `.github/fingerprint-policy.json` 的 `primary_models` 或 `secondary_models` 中；任何名单外成员都拒绝。
 
-历史工作不能补测过去的模型；此前的检查点标注 not recorded。指纹不是性能测试或身份认证，不能替代 Kibiandkimi 审核，也不允许提前解码被延后的任务。
+95% 是本仓库的工作规则，不是网站的认证门槛，也不是身份识别准确率。它只描述库内分数的累计份额。库外模型也可能得到很高的库内分数；同一会话三次回答的相关性也未被上游独立对话评估覆盖。因此始终保留 `identity_verified=false`、`arena_protocol_calibrated=false`、`identified_candidate=null` 和上游的 `upstream_decision=not_confirmed`。
 
-## 与网站同步
+`status=reference_match` 表示集合展开后只有一个具体 ID；`reference_ambiguity` 表示多个 ID。仅当全部获准时返回 `gate.allowed=true` 和 `gate.reason=accepted_reference_set`。全部为主模型时为 `gate.role=primary`、`gate.action=CONTINUE`；包含任何子模型时为 `gate.role=secondary`、`gate.action=CONTINUE_SUBTASK`，只允许领取和执行已发布的有限工作包。展示候选中的 `reference_probability` 明确是库内分数，不称为真实后端身份概率。集合中的任何未获准 ID、校准缺失、无效/不足输入或政策缺失均拒绝。
 
-每轮 prepare 读取 https://whatsmyllm.com/ 的版本、bank URL、发布的 SHA-256 和当前英文 JSON 探针，并获取 `/data/gates.json`、`/data/verdict.json` 的数值规则。新的兼容模型指纹数据会在下一次 prepare 立即采用，冻结为本轮快照；score 不在生成样本后更换参考库。
+策略 schema 2 将原来的六个具体 ID 保留在主模型列表，并只新增五个子模型：`claude-haiku-5-5`、`claude-opus-5`、`claude-fable-5`、`gpt-5.6-sol`、`gpt-6-luna`。其他模型继续拒绝。schema 1 的历史 `accepted_models` 仍解释为主模型；两张新名单不能重叠、重复或包含通配符。仅对已核对的上游名称作以下显式映射，不做通用替换、系列或前缀匹配：
 
-联网失败时优先使用已保存的最近兼容快照，再退回随仓库提供的 seed，并明确输出 cached-fallback 与失败原因。可单独运行 `node .github/scripts/fingerprint.mjs refresh` 检查上游版本，不调用任何模型、不生成样本。
+| 上游类别 ID | 必须获准的中央政策 ID |
+| --- | --- |
+| `claude-opus-5.5` | `claude-opus-5-5` |
+| `claude-sonnet-5.5` | `claude-sonnet-5-5` |
+| `claude-fable-5.1` | `claude-fable-5-1` |
+| `claude-haiku-5.5` | `claude-haiku-5-5` |
+| `gpt-6-astra`，上游显示 `gpt-6-astra/6.1-sol` | `gpt-6-astra` **和** `gpt-6.1-sol` |
+| 其他 ID | 原样逐字匹配 |
 
-如果 Arena 允许访问 GitHub API，但不允许访问 whatsmyllm.com，使用 `node .github/scripts/fingerprint.mjs prepare --offline`。这个选项只跳过指纹站更新，名单仍须从允许的 GitHub API 在线读取；评分使用有版本和校验和的缓存/内置指纹库，门槛不变。不要为了测试连通性请求环境明确禁止的主机。
+上游明确将 Astra 与 6.1 Sol 的样本合为一个不可区分的指纹类别；不能因为它的内部 ID 是 `gpt-6-astra` 就只检查这一个名字。撤销两个 ID 中任意一个，含该类别的结果就会被拒绝。
 
-只自动更新数据，不自动执行外站的新代码。检查了网站 core、gates、verdict 脚本的已审阅哈希：若评分逻辑变化，记录 engine_update_required 并保留旧兼容快照，需维护 PR 更新后才使用新的算法。这避免把新数据与不兼容的旧算法混用。实时同步以成功联网及上游仍兼容为前提。
+`END_TURN` 和退出码 20 是预期的拒绝。Arena agent 输出实际结果与理由后立即结束，不重试、补样、继续任务或运行提交工具。通过时才把报告路径与角色写入 STATE，并按主模型或子模型权限继续任务（见 [协作规则](COLLABORATION.md)），随下一检查点推送原始记录和所用数据。拒绝记录只在本地保存，不能声称已上传。
 
-## 评分与来源
+## 数据来源与更新
 
-核心来自 MIT 许可的 [ModelTrace](https://github.com/xqy2006/ModelTrace)，原样保存及附带 LICENSE；来源提交、网站代码哈希在 `.github/vendor/modeltrace/provenance.json`。输入门槛和拟合判定按网站公开的数值规则独立实现，并用网站示例校验一致性。输入通道限定为一个 JSON 整数数组，避免把说明文字混进样本。
+数据和评分代码来自 MIT 许可的 [Ikaleio/lm-detector](https://github.com/Ikaleio/lm-detector)，随仓库保存许可证、来源提交及 SHA-256。内置快照为提交 `97eb41f78722d32524265bb259fe6258856ca470`，bank 构建时间为 `2026-10-08T13:07:32.556925+00:00`，包含 **57 个指纹类别、2,128 条回答、707,442 个有效整数**。精确来源和本地转换后的代码哈希见 `.github/vendor/fingerpoint/provenance.json`。
 
-结果为 match、family_only、insufficient、invalid 或 unscored，均保留 `identity_verified=false`、`arena_protocol_calibrated=false`。接受列表中的 match，以及歧义仅限于接受列表的 family_only，允许工作；其余结束轮次。展示候选与拟合值，不把候选库内 softmax 份额称作真实身份概率。单轮单样本不沿用网站三份独立样本的准确率。
+每次 `prepare` 通过 `api.github.com` 读取上游 main 的提交，再从该固定提交获取数据。对上游评分代码和固定探针集核对已审阅哈希，只同步兼容数据，不执行下载的代码；算法或探针集改变时记录 `engine_update_required`，使用最近兼容的 Fingerpoint 快照。bank、模型顺序、样本数、特征维数、校准绑定和数据哈希都须通过验证，不能把新库与旧检测器混用。
 
-协议 CI 核对原始样本哈希、重新评分及完整歧义集合，并用受保护 main 上的当前名单再次检查门槛。历史记录不能冒充本轮通行证，已拒绝的报告不能因本次放宽门槛而追溯授权工作；下一用户轮次须重新采样。修改 main 上的名单或门控逻辑会自动重检开放任务 PR；不必为每个任务复制一份新名单。旧任务仍须通过独立 `meta/<任务号>/<名称>` PR 更新评分脚本、协议校验和 AGENTS.md，才能在本地及后续常规 CI 中使用新规则。
+同步先读取固定提交下的 `shared/` 和 `data/` 文件元数据，核对 Git blob ID。两个数据文件均未变化时复用原始快照和 package ID，不重复下载约 33 MB 的未压缩数据。仅当数据改变时下载并核对 blob ID；HTTP 支持传输压缩，大文件下载单次最多 60 秒，失败仍使用明确标记的兼容缓存。
 
-回归样本 `.github/scripts/fixtures/allowed-ambiguity.json` 原样来自用户报告，作为测试数据，不是当前 agent 的指纹。内置 bank `2026.10.2` 将其评为 family_only：最近候选 GPT-6 Astra，拟合约 0.329177；GPT-6.1 Sol 约 0.262969，差距约 0.066208，小于 `margin_min=0.08`。歧义集合只有这两个已获准模型，因此允许继续；展示第三名 GPT-5.6 Terra 的差距超过门槛，不属于歧义集合。
+联网失败时优先用最近兼容的 Fingerpoint 缓存，再用内置快照，并输出 `cached-fallback` 和实际失败原因。不会因网络失败切换回 WhatsMyLLM。更新和中央政策读取都只使用允许的 GitHub API，不访问 `raw.githubusercontent.com` 或 API 的 `download_url`，不跟随跨主机重定向，不绕过代理或 TLS 校验。
 
-引入门槛前已经保存的检查点在 `.github/fingerprint-legacy.json` 中固定，仍可由用户审核，不追溯伪造指纹。无新指纹时只允许这些既有文件及其协议/交接元数据迁移；新增业务文件、修改计划/代码等需要本轮通过的报告。
+```sh
+# 检查当前兼容版本，不调用模型或产生样本。
+node .github/scripts/fingerprint.mjs refresh
 
-本地退出码和明确指令控制合规 agent 的工作流程，CI 额外阻止不满足条件的成果合入。当前 GitHub 连接方式无法强制终止 Arena 服务端模型进程或拦截所有工具调用，不能把它描述为进程级终止开关。
+# 跳过 detector 更新；中央名单仍须在线读取。
+node .github/scripts/fingerprint.mjs prepare --offline
+```
+
+HTTP 请求遵循标准代理和系统 CA；有代理时不回退到绕过代理的直连。名单读取失败直接拒绝，不能用工作分支上的副本授权。
+
+## 为什么不把两站分数或样本直接相加
+
+旧的 WhatsMyLLM 快照有 23 个型号、828 条参考回答。Fingerpoint 已导入 ModelTrace 的部分原始数据，并追加、重采、退役和重命名了多批样本；它不是对当前 WhatsMyLLM 全量库的简单超集。将两个站的输出视为独立证据相乘、投票或加权，会重复计算共享样本。直接拼接派生 bank 也不成立：中心、位置判别、近邻参考和校准参数必须一起重训。
+
+因此这次采用已经整合多来源并重训的 Fingerpoint 库。若以后继续导入 WhatsMyLLM 的新增原始回答，需要先核对许可、采样提示、型号别名、渠道和推理参数，按原始样本去重，并使用独立留出集重新训练、校准和评估。较大的模型数量或总样本量本身不证明准确率更高，两个站不同评估集上的数字不能直接比较。
+
+依据：[上游数据与变更记录](https://lm.ikale.io/docs/reference/data)、[排名与校准](https://lm.ikale.io/docs/principles/ranking)。尤其注意上游对 Astra/Sol 标签合并、旧 OpenAI 渠道样本替换的说明；恢复已退役的旧样本会抵消这些处理。
+
+## 历史记录与 CI
+
+schema 1 的 WhatsMyLLM 记录继续使用原来的一个数组、ModelTrace core 和 Clear match / Close call 规则复算。原有 `match`、`family_only` 和 `ambiguous_models` 不改写，不拿新算法追溯授予旧轮次权限。新 `prepare` 只产生 schema 2 的 Fingerpoint 记录。
+
+协议 CI 从受信任的 base 执行评分器，将候选 PR 的记录作为数据读取；核对样本和完整快照哈希，独立重算新报告的完整候选集合、别名、输入检查、校准和分数，再按受保护 main 的当前名单判定。原报告必须已经允许工作；带角色的新报告还须用 manifest 中的原始政策重算并核对角色。以后放宽名单不能把原拒绝记录变成通行证，也不能把过去的子模型轮次升级为主模型来发布或复核工作包。当前政策撤销的模型仍拒绝。历史豁免仍仅限 `.github/fingerprint-legacy.json` 固定的检查点。
+
+main 的维护 PR 更新新任务模板；已有任务须通过各自的 `meta/<任务号>/...` PR 更新脚本、规则与文档，不能将不同任务历史合并。main 的名单、评分逻辑或 Fingerpoint vendor 数据变化会重检开放任务 PR。最终合并与任务内容接受仍由人工决定。
+
+这种门控是统计审核证据，不是进程级权限隔离，不能强制停止 Arena 服务端进程，也不能替代人工审核。

@@ -9,7 +9,7 @@ import { prepare, score } from './fingerprint.mjs';
 import { decideWork } from './model-gate.mjs';
 const seed = JSON.parse(fs.readFileSync(new URL('../vendor/modeltrace/seed.json', import.meta.url)));
 const fixtures = JSON.parse(fs.readFileSync(new URL('./fixtures/fingerprint.json', import.meta.url))).fixtures;
-const policyFetcher = async () => ({ ok: true, text: async () => JSON.stringify({ schema: 1, accepted_models: ['claude-fable-5-1'] }) });
+const policyFetcher = async () => ({ ok: true, text: async () => JSON.stringify({ schema: 1, accepted_models: ['claude-opus-5-5'] }) });
 const ambiguityRaw = fs.readFileSync(new URL('./fixtures/allowed-ambiguity.json', import.meta.url), 'utf8');
 
 test('matches website ranking/verdict/fit/separation for nine recorded examples', () => {
@@ -91,14 +91,18 @@ test('sync accepts an added model and new numeric thresholds without hardcoded m
   assert.throws(() => websiteManifest('<body data-bank="https://elsewhere/bank.json">'), /manifest/);
 });
 test('offline turn records are frozen, independently scored, and never reused for the next turn', async () => {
+  const raw = JSON.parse(fs.readFileSync(new URL('./fixtures/fingerpoint.json', import.meta.url))).cases[0].raw;
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'arena-fingerprint-test-'));
   try {
     const git = args => execFileSync('git', args, { cwd: root, stdio: 'pipe' });
     git(['init', '-b', 'arena/test']); fs.mkdirSync(path.join(root, '.context')); fs.writeFileSync(path.join(root, '.context/TASK.md'), 'Test fixture');
     git(['add', '.']); git(['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-m', 'fixture']);
     const first = await prepare(root, { offline: true, policyFetcher }); assert.equal(first.freshness, 'cached-fallback');
-    const rawPath = path.join(root, first.raw_path); fs.writeFileSync(rawPath, fixtures[0].raw);
-    const report = score(root, first.turn_id); assert.equal(report.raw_sha256, hash(fixtures[0].raw));
+    assert.equal(first.provider, 'fingerpoint'); assert.equal(first.challenges.length, 3);
+    const rawPath = path.join(root, first.raw_path); fs.writeFileSync(rawPath, raw);
+    const report = score(root, first.turn_id); assert.equal(report.raw_sha256, hash(raw));
+    assert.equal(report.status, 'reference_match'); assert.equal(report.gate.allowed, true);
+    assert.equal(report.sample_count, 3);
     assert.deepEqual(score(root, first.turn_id), report);
     fs.appendFileSync(rawPath, '\n'); assert.throws(() => score(root, first.turn_id), /sample changed/);
     const next = await prepare(root, { offline: true, policyFetcher }); assert.notEqual(next.turn_id, first.turn_id);

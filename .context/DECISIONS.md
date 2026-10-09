@@ -31,3 +31,19 @@ Typed item/status constructors take explicit ports and have modern class names. 
 ## Fingerprint ambiguity maintenance (historical proposal, merged in PR #18)
 
 The owner requested continuation when all statistically indistinguishable models are explicitly accepted. Use the existing fit/separation/family thresholds and the complete bank, not the three display candidates or a model-family wildcard. Preserve family_only and identified_candidate=null; any unaccepted candidate or missing evidence still denies work. CI independently recomputes the set. Previously denied turns remain denied. See docs/FINGERPRINT.md and shared PR #16 for the exact user regression sample and validation. This proposal needs owner review and does not change the domain task contract.
+
+## 2026-10-09: Primary and secondary model collaboration (proposed)
+
+- Owner-directed scope: retain the current six-model list as primary; add only Haiku 5.5, Opus 5, Fable 5, GPT-5.6 Sol and GPT-6 Luna as secondary. All other models remain rejected.
+- Choice: route a fully listed mixed reference set to secondary permissions. Primary turns issue bounded candidate work packets and review the exact current outputs; secondary turns execute one packet per PR and record each turn separately.
+- Reason: reuse sessions assigned to the additional five models while reserving task decisions, delegation and output review for primary turns. Human acceptance and merge remain with Kibiandkimi.
+- Evidence: shared PR #23, docs/COLLABORATION.md, and the role, scope, handoff and fingerprint regression tests. This maintenance does not decide the domain task's plan or acceptance criteria.
+- Migration: update existing task code before enabling schema 2 on main; schema 1 remains compatible during the transition. Do not reuse a previous turn's role or retroactively promote a denied/secondary fingerprint.
+
+## 2026-10-09: Migrate the owner-assigned PR #19
+
+- The owner confirmed that collaboration PRs #23, #24 and #25 were merged and explicitly assigned migration of the partial work in #19. The current accepted task head is `45f8811ce9c7ec910ff6346d7c6b489fb1cf8f5e`; the inherited candidate is `ee84f0e05f38df931f769511cc99c54d9dbde6c0`.
+- Continue `arena/db5ddb58-arena-context` and its existing Draft PR #19. Merge only the accepted task base, preserving candidate implementation and historical evidence. Do not import the independent candidates #14/#15 or the waiting-only secondary history in #26.
+- Before new task work, bring in the already accepted fingerprint/collaboration scripts and obtain a fresh current-turn role. The current fingerprint permits primary work; it does not retroactively change earlier reports or certify model identity.
+- Issue new bounded packets in ordinary commits after the base integration, so the collaboration verifier can trace each original primary introduction. Different secondary packets must fork this published primary checkpoint into separate work branches/PRs; #19 remains the migration and foundation candidate, not a mixed secondary-work branch.
+- This is a workflow migration and preparation for continued implementation, not completion of the rewrite or approval of inherited architecture, UI deviations, or test claims. Rerun the existing verification before relying on it in the new handoff. Human review and merge remain with Kibiandkimi.

@@ -92,49 +92,34 @@ async function inspectPullRequest({ github, repo, pr }) {
       if (await isLegacyCheckpoint({ github, repo, pr })) {
         report.warnings = ['Pre-gate checkpoint preserved for human review; no model identity is claimed. New task changes require an accepted fingerprint gate.'];
       } else {
-        report.errors.push('No current fingerprint: new task changes require an accepted Clear match or ambiguity confined to accepted models.');
+        report.errors.push('No current fingerprint: new task changes require a current accepted fingerprint gate.');
       }
     } else if (!/^\.context\/fingerprints\/\d{8}T\d{6}Z-[a-f0-9]{8}\/report\.json$/.test(fp)) {
       report.errors.push('Fingerprint must link to a per-turn report path.');
     } else {
       try {
-        const result = JSON.parse(await readText(github, repo, fp, pr.head.sha));
-        const raw = await readText(github, repo, fp.replace('report.json', 'raw.json'), pr.head.sha);
-        const { hash, packageId, scoreSample } = await import('./fingerprint-lib.mjs');
-        const { decideWork, validatePolicy } = await import('./model-gate.mjs');
-        // The accepted list is centrally controlled on protected main. A
-        // candidate's copy of policy.json or self-written gate cannot grant access.
+        const { validatePolicy } = await import('./model-gate.mjs');
+        const { fingerprintVerifier } = await import('./fingerprint-record.mjs');
         const currentPolicy = validatePolicy(JSON.parse(await readText(github, repo, '.github/fingerprint-policy.json', 'main')));
-        if (result.identity_verified !== false || result.same_model_within_turn !== 'assumed_by_user') throw new Error('Invalid fingerprint evidence labels.');
-        if (result.raw_sha256 !== (raw === undefined ? null : hash(raw))) throw new Error('Fingerprint raw hash mismatch.');
-        let verified = { status: 'unscored' };
-        if (result.status !== 'unscored') {
-          if (!/^[a-f0-9]{64}$/.test(result.package_id)) throw new Error('Invalid fingerprint package ID.');
-          const bundle = JSON.parse(await readText(github, repo, `.context/fingerprints/banks/${result.package_id}.json`, pr.head.sha, 10000000));
-          if (packageId(bundle) !== result.package_id) throw new Error('Fingerprint package changed.');
-          const trusted = require('../vendor/modeltrace/provenance.json').website_code_sha256;
-          verified = scoreSample(raw, bundle, trusted);
-          if (result.bank_sha256 !== bundle.bank_sha256 || result.bank_version !== bundle.bank_version) throw new Error('Fingerprint bank metadata mismatch.');
-          for (const key of ['status', 'nearest_model', 'identified_candidate', 'family']) {
-            if (verified[key] !== result[key]) throw new Error(`Fingerprint score mismatch: ${key}`);
-          }
-          for (const key of ['fit', 'separation']) {
-            if (verified[key] !== undefined && (!Number.isFinite(result[key]) || Math.abs(verified[key] - result[key]) > 1e-12)) throw new Error(`Fingerprint numeric mismatch: ${key}`);
-          }
-          if (JSON.stringify(verified.candidates) !== JSON.stringify(result.candidates)) throw new Error('Fingerprint candidate list mismatch.');
-          // Older Clear match reports did not record this field. Close calls
-          // must carry the complete set, independently recomputed from raw data.
-          if (((verified.status === 'family_only' && result.gate) || result.ambiguous_models !== undefined) &&
-              JSON.stringify(verified.ambiguous_models) !== JSON.stringify(result.ambiguous_models)) {
-            throw new Error('Fingerprint ambiguity set mismatch.');
-          }
-        }
-        if (!result.gate && await isLegacyCheckpoint({ github, repo, pr })) {
+        const reads = new Map();
+        const read = (path, ref, maxBytes) => {
+          const key = `${ref}:${path}:${maxBytes || 65536}`;
+          if (!reads.has(key)) reads.set(key, readText(github, repo, path, ref, maxBytes));
+          return reads.get(key);
+        };
+        const allowLegacy = await isLegacyCheckpoint({ github, repo, pr });
+        const verify = fingerprintVerifier({ read, policy: currentPolicy, allowLegacy });
+        const evidence = await verify(fp, pr.head.sha);
+        if (evidence.legacy) {
           report.warnings = ['Historical fingerprint predates the model gate; it does not authorize a new turn.'];
         } else {
-          const decision = decideWork(verified, currentPolicy);
-          if (!decision.allowed) throw new Error(`Model gate denied: ${decision.reason}. End the user turn; do not perform task work.`);
-          if (result.gate?.allowed !== true || result.gate?.action !== 'CONTINUE') throw new Error('This report did not authorize work in its original turn. Obtain a new accepted fingerprint gate in a new user turn.');
+          if (evidence.report.gate.role && field(candidate['.context/STATE.md'], 'Model role') !== evidence.role) {
+            throw new Error('STATE Model role must match the effective fingerprint role.');
+          }
+          const { inspectCollaboration } = await import('./collaboration-lib.mjs');
+          const collaboration = await inspectCollaboration({ github, repo, pr, files, trustedTask, read, verify, evidence, fingerprint: fp });
+          report.errors.push(...collaboration.errors);
+          if (collaboration.warnings.length) report.warnings = collaboration.warnings;
         }
       } catch (error) { report.errors.push(`Fingerprint record invalid: ${error.message}`); }
     }

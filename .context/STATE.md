@@ -1,41 +1,37 @@
 # Current handoff
 
 - Task: #10
-- Unit: U03d — all twelve defensive subclasses
+- Unit: PR #19 collaboration migration
 - Work branch / PR: arena/db5ddb58-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/19
-- Accepted base at unit start: task/10/main@adccae2f9fbc13b9ffd7a5a97b9150d24409f166
-- Fingerprint: .context/fingerprints/20261008T080439Z-cbb0a01f/report.json
-- Updated: 2026-10-08
-- Candidate stage: verified foundations/viewer; full Task #10 incomplete
+- Accepted base at unit start: task/10/main@45f8811ce9c7ec910ff6346d7c6b489fb1cf8f5e
+- Inherited candidate: ee84f0e05f38df931f769511cc99c54d9dbde6c0
+- Updated: 2026-10-09
+- Fingerprint: .context/fingerprints/20261009T045933Z-88646267/report.json
+- Model role: primary
+- Work packet: none; primary migration and packet preparation
+- Primary review: not applicable; no secondary run is inherited by PR #19
+- Candidate stage: migration checkpoint; regression and packet publication pending
 
 Only Kibiandkimi decides acceptance; this card is not approval.
 
 ## Current objective
 
-Fresh modern-framework rewrite with original-source consistency tests and the unchanged full TASK.md scope. User explicitly chose fresh work; #14/#15 are not inherited.
+Migrate the owner-assigned PR #19 to the accepted primary/secondary collaboration mechanism. The full modern rewrite and source-consistency contract in TASK.md remain the task objective. Preserve this PR's candidate work; #14, #15 and the waiting-only #26 are separate histories.
 
 ## Candidate progress
 
-Frozen all eight upstream root files at independent pin 8d80b5a with GPL and checksums. React/strict TypeScript/Vite implements the complete viewer and a seed lab. Hash/LCG/fusion/player-distance, full isolated status lifecycle, base-item data/lifecycle, main doors and shared save/workshop codecs/signature format and complete defensive-equipment logic plus all twelve direct defensive subclasses are ported. Original code only runs in explicit test oracles/fixture mode, never production.
+Inherited the viewer, typed domain foundations, isolated status/item/door/armor contracts, shared codecs and all eight frozen source files from `ee84f0e`. Detailed coverage, limitations and earlier evidence remain in `docs/task-10/`. Full game/actions/generation/UI/editor/save/script and service integration are still pending.
 
-Viewer comparisons preserve fields/aliases/Symbols/every draw and all 16 browser PNGs. Item/status ports and explicit graph diagnostics preserve non-finite/truthiness/identity semantics. Codec contracts distinguish main warnings from quiet manager fallback and sign exact strings/order, not canonical JSON or authentication. Original unsigned NPC fixture is version 1532; no save cross-load claimed.
-
-Full evidence/coverage/plan/proposed UI differences: docs/task-10/. Main-game actors/actions/generation/UI/editor/save/script and full manager/service integration remain pending. Typed constructor names/signatures need source-visible facade/hydration adapters before v1/script compatibility is established.
+Integrated the accepted task protocol at `45f8811` (including #22 and #25) into the existing PR branch. Resolved the handoff conflict by retaining candidate progress and replacing stale maintenance routing. Existing source, tests, artifacts and fingerprint records are preserved. This turn's three-array fingerprint returned `reference_ambiguity`, reference models `gpt-6-astra` and `gpt-6.1-sol`, `CONTINUE / primary`; it is statistical evidence, not identity certification.
 
 ## Verification
 
-- Latest `npm run check && npm run test:e2e` passed: 8 source hashes, 5 integrity tests, strict types, 110 domain tests, production build, 4 actual Chromium tests.
-- 20×1000 draws/states; 1024 small-map/start cases; actual boundary mutant rejected; 4×16 viewer graphs/draw trajectories, six renderer traces and 16 real PNGs match.
-- 340 isolated status trajectories with explicit doubles, 21 item/comparator tests, main-door contract, 8 codecs tests against both source pages, real browser WebCrypto; not whole-game parity.
-- Armor additions: strict types and 15 targeted differential tests passed (79 unrelated tests explicitly skipped), 438 isolated trajectories against original defense + base item. Subclasses: 16 additional tests / 257 isolated trajectories; 31 combined targeted armor tests passed with 79 others explicitly skipped. The complete 110-test suite/build/4-browser rerun subsequently passed. Two initial strict-type errors were corrected before tests, not bypassed.
-- Armor covers ordered defense/buffs/enchantments, dodge/chip/random order, fire/poison callbacks, thorns/cactus, durability strings/repeated destruction, energy/HUD, inherited equipment and hints; concrete actors/status integration and rendering are still pending.
-- Last verified remote before this checkpoint: f9ba1af21dd1653dd8e330be4892dd74089b3635. Base still adccae2; PR #19 remains Draft; no current reviews/unresolved threads at last API check. At f9ba1af, API reported successful latest protocol + arena/protocol and checkpoint notify; one earlier protocol run was cancelled. No action-log inference.
-- Viewer preview: 0.0.0.0:5173; .e2b.app Host accepted. npm-bundled Chromium/libs reproducible; Firefox/WebKit/live services untested. Actions logs inaccessible; API metadata accessible.
+The predecessor reports 8 source hashes, 5 integrity tests, strict types, 110 domain tests, a production build and 4 Chromium tests passing on 2026-10-08. Those are historical results; this migration's full regression is pending. This turn verified all 8 frozen source files, byte-for-byte identity of the accepted protocol, and preservation of inherited application/test/reference files and old fingerprint records. The working diff has no whitespace errors. The submission credential resolves to SUSTechHSAS.
 
 ## Blockers and unresolved owner feedback
 
-No routing/environment blocker. Full game and matrix are unfinished; UI proposals are not owner-approved. Do not claim complete acceptance or merge.
+No owner review comments or unresolved review threads were present on #19 at startup. #23, #24 and #25 are merged. Full Task #10 and the proposed UI deviations still require implementation and human review; this migration does not establish gameplay parity or acceptance.
 
 ## Next action
 
-U03e: port weapon class (original constructor/getters at JS 13615–13681 and 14158–14259 inspected; full 使用 13683–14025, enchant/chain/target selection 14027–14156 still pending audit/port), then real actors/actions. All current 110-domain-test checks/build/4 browser flows pass. Preserve and review source API facade requirements before v1/scripts integration. Then integrate concrete entities/action flows and v1 facade/save hydration; keep advancing saved reviewable units.
+After this checkpoint, rerun protocol and application checks. Publish several bounded independent work packets in a subsequent ordinary commit with this primary fingerprint, and document how separate secondary branches claim them. Keep PR #19 Draft.

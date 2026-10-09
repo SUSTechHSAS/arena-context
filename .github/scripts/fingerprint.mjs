@@ -4,12 +4,10 @@ import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { downloadBundle, hash, packageId, scoreSample, validateBundle } from './fingerprint-lib.mjs';
+import { hash, packageId } from './fingerprint-lib.mjs';
+import { downloadFingerpointBundle, readFingerpointSeed, scoreBundle, validateFingerpointBundle } from './fingerpoint-lib.mjs';
 import { loadLivePolicy, decideWork, exitCode, STOP_EXIT_CODE } from './model-gate.mjs';
 
-const here = path.dirname(fileURLToPath(import.meta.url));
-const vendor = path.resolve(here, '../vendor/modeltrace');
-const acceptedCode = JSON.parse(fs.readFileSync(path.join(vendor, 'provenance.json'), 'utf8')).website_code_sha256;
 const readJSON = p => JSON.parse(fs.readFileSync(p, 'utf8'));
 const writeNew = (p, value) => fs.writeFileSync(p, JSON.stringify(value, null, 2) + '\n', { flag: 'wx' });
 const turnPattern = /^\d{8}T\d{6}Z-[a-f0-9]{8}$/;
@@ -33,26 +31,30 @@ export async function prepare(root, { offline = false, fetcher, policyFetcher } 
     writeNew(path.join(turnDir, 'report.json'), report);
     return { action: 'END_TURN', ...report, next: 'Report the policy error and end this user turn. Do not retry or perform task work.' };
   }
+  let cached;
+  for (const name of fs.readdirSync(dir).filter(x => turnPattern.test(x)).sort().reverse()) {
+    try { const old = readJSON(path.join(dir, name, 'manifest.json')); if (!/^[a-f0-9]{64}$/.test(old.package_id)) continue; const candidate = readJSON(path.join(dir, 'banks', old.package_id + '.json')); if (packageId(candidate) !== old.package_id) continue; validateFingerpointBundle(candidate); cached = candidate; break; } catch {}
+  }
+  cached ||= readFingerpointSeed();
   let bundle, freshness = 'fresh', error = null;
-  try { if (offline) throw new Error('offline_requested'); bundle = await downloadBundle(acceptedCode, fetcher); }
+  try { if (offline) throw new Error('offline_requested'); bundle = await downloadFingerpointBundle(fetcher, cached); }
   catch (e) {
     freshness = 'cached-fallback'; error = e.message;
-    for (const name of fs.readdirSync(dir).filter(x => turnPattern.test(x)).sort().reverse()) {
-      try { const old = readJSON(path.join(dir, name, 'manifest.json')); if (!/^[a-f0-9]{64}$/.test(old.package_id)) continue; const candidate = readJSON(path.join(dir, 'banks', old.package_id + '.json')); if (packageId(candidate) !== old.package_id) continue; validateBundle(candidate, acceptedCode); bundle = candidate; break; } catch {}
-    }
-    bundle ||= readJSON(path.join(vendor, 'seed.json')); validateBundle(bundle, acceptedCode);
+    bundle = cached;
   }
   const id = packageId(bundle), bankPath = path.join(dir, 'banks', id + '.json');
   if (!fs.existsSync(bankPath)) writeNew(bankPath, bundle);
-  const manifest = { schema: 1, turn_id: turn, branch, created_at: new Date().toISOString(),
+  const manifest = { schema: 2, turn_id: turn, branch, created_at: new Date().toISOString(),
     work_head_before_probe: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(),
     scope: 'user-turn', same_model_within_turn: 'assumed_by_user', package_id: id,
     bank_version: bundle.bank_version, bank_sha256: bundle.bank_sha256, freshness, refresh_error: error,
-    challenge: bundle.challenge, policy, identity_verified: false, arena_protocol_calibrated: false };
+    provider: bundle.provider, source_commit: bundle.source_commit, detector_sha256: bundle.detector_sha256,
+    challenges: bundle.challenges, policy, identity_verified: false, arena_protocol_calibrated: false };
   writeNew(path.join(turnDir, 'manifest.json'), manifest);
-  return { action: 'GENERATE_SAMPLE', turn_id: turn, bank_version: bundle.bank_version, freshness, refresh_error: error,
-    prompt: bundle.challenge.prompt, raw_path: `.context/fingerprints/${turn}/raw.json`,
-    next: `Generate the array yourself, save it unchanged, then run: node .github/scripts/fingerprint.mjs score ${turn}` };
+  return { action: 'GENERATE_SAMPLE', turn_id: turn, provider: bundle.provider, bank_version: bundle.bank_version, freshness, refresh_error: error,
+    challenges: bundle.challenges, sample_count: 3, raw_format: 'One JSON array containing the three answer arrays, in challenge order.',
+    raw_path: `.context/fingerprints/${turn}/raw.json`,
+    next: `Answer all three challenges yourself in this user turn, label the three-array JSON FINGERPRINT_RAW, save it unchanged, then run: node .github/scripts/fingerprint.mjs score ${turn}` };
 }
 
 export function score(root, turn) {
@@ -73,23 +75,31 @@ export function score(root, turn) {
     if (!/^[a-f0-9]{64}$/.test(manifest.package_id)) throw new Error('invalid_package_id');
     const bundle = readJSON(path.join(root, '.context/fingerprints/banks', manifest.package_id + '.json'));
     if (packageId(bundle) !== manifest.package_id) throw new Error('package_hash_mismatch');
-    result = scoreSample(raw, bundle, acceptedCode);
+    result = scoreBundle(raw, bundle);
   } catch (e) { result = { status: 'unscored', reason: e.message, candidates: [] }; }
-  const report = { schema: 1, turn_id: turn, branch: manifest.branch, scope: 'user-turn', same_model_within_turn: 'assumed_by_user',
+  const gate = decideWork(result, manifest.policy);
+  const report = { schema: manifest.schema, turn_id: turn, branch: manifest.branch, scope: 'user-turn', same_model_within_turn: 'assumed_by_user',
     identity_verified: false, arena_protocol_calibrated: false, sample_count: raw === null ? 0 : 1,
     raw_sha256: raw === null ? null : hash(raw), package_id: manifest.package_id,
     bank_version: manifest.bank_version, bank_sha256: manifest.bank_sha256, freshness: manifest.freshness,
     refresh_error: manifest.refresh_error, scored_at: new Date().toISOString(), ...result,
-    policy_source: manifest.policy?.source, gate: decideWork(result, manifest.policy) };
+    policy_source: manifest.policy?.source, gate,
+    next: gate.role === 'secondary'
+      ? 'Record this fingerprint and Model role: secondary in STATE. Run collaboration.mjs status, then claim one primary-issued packet before any task edits. If none is available, save only the fingerprint and a blocked handoff.'
+      : gate.allowed ? 'Record this fingerprint and Model role: primary in STATE. Continue task work, issue bounded packets, or review secondary work.'
+        : 'Report the verdict and refusal reason, then end this user turn without more tools.' };
   writeNew(reportPath, report); return report;
 }
 
 async function main() {
   const [command, argument] = process.argv.slice(2);
   if (command === 'refresh') {
-    const bundle = await downloadBundle(acceptedCode);
+    const bundle = await downloadFingerpointBundle();
+    const { bank } = validateFingerpointBundle(bundle);
     console.log(JSON.stringify({ bank_version: bundle.bank_version, bank_sha256: bundle.bank_sha256,
-      model_count: JSON.parse(bundle.bank_text).models.length, package_id: packageId(bundle), engine: 'compatible', sample_generated: false })); return;
+      provider: bundle.provider, source_commit: bundle.source_commit, detector_sha256: bundle.detector_sha256,
+      model_count: bank.models.length, reference_response_count: bank.models.reduce((sum, m) => sum + m.response_count, 0),
+      package_id: packageId(bundle), engine: 'compatible', sample_generated: false })); return;
   }
   const root = execFileSync('git', ['rev-parse', '--show-toplevel'], { encoding: 'utf8' }).trim();
   const result = command === 'prepare' ? await prepare(root, { offline: argument === '--offline' }) : command === 'score' ? score(root, argument) : null;
