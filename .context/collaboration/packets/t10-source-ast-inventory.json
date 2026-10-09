@@ -1,0 +1,28 @@
+{
+  "id": "t10-source-ast-inventory",
+  "title": "Build a reproducible AST inventory of the three original pages",
+  "objective": "Close U00's explicitly recorded lexical-inventory gap so Task #10 coverage can be traced to exact original declarations, without claiming any additional rewrite parity.",
+  "allowed_paths": [
+    "scripts/task10-source-inventory.mjs",
+    "tests/task10-source-inventory.test.mjs",
+    "docs/task-10/audits/source-ast-inventory.json",
+    "docs/task-10/audits/source-ast-inventory.md"
+  ],
+  "acceptance": [
+    "Read the unchanged ChineseDungeon.html, ChineseDungeon-Viewer.html and LevelManager.html at reference pin 8d80b5a4dd3d737ed6d3060f05611eaa3de611ab. Parse with the already locked TypeScript dependency from app; do not add dependencies or execute any source script.",
+    "Emit deterministic JSON containing source paths, pin and SHA-256 values, inline-script ranges, declaration kinds/names/scopes and original HTML plus inline-JS line ranges. Include classes, their bases and members/getters/setters, named functions and binding declarations; distinguish nested and DOMContentLoaded callback scopes rather than conflating same-named declarations.",
+    "Provide a short Markdown comparison with the existing lexical SOURCE-INVENTORY.md, explaining computed-property, anonymous-callback and dynamic/eval coverage limits. Preserve the old inventory as historical evidence and do not update global plan/feature claims.",
+    "The script supports an explicit --check mode that checks tracked output without rewriting it. Exercise deterministic output, exact source ranges, nested/name-collision handling and rejection/reporting of parser diagnostics on isolated synthetic fixtures; never mutate the pinned reference.",
+    "Reuse only the published PR #19 foundation and read shared helpers without editing them. Report out-of-scope parser or architecture needs in this turn's result instead of broadening the packet."
+  ],
+  "verification": [
+    "From app: npm ci --ignore-scripts if dependencies are absent. From the repository root: node scripts/verify-reference.mjs.",
+    "From the repository root: node scripts/task10-source-inventory.mjs --check and node --test tests/task10-source-inventory.test.mjs; report real exit codes and test counts.",
+    "Independently inspect representative inventory entries for 武器类, 饰品, 药水类 and LevelManager's DOMContentLoaded callback against the frozen source; record actual ranges and any limits in the packet document and run result."
+  ],
+  "depends_on": [],
+  "schema": 1,
+  "task_issue": 10,
+  "accepted_branch": "task/10/main",
+  "issued_by": ".context/fingerprints/20261009T045933Z-88646267/report.json"
+}

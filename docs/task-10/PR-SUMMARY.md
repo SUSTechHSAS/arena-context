@@ -1,33 +1,42 @@
+## Purpose
+
 Refs #10
 
-## Purpose and routing
+The partial modern rewrite in this PR now inherits the accepted primary/secondary collaboration mechanism. Existing viewer and domain foundations are preserved, and four bounded work packets provide a concrete starting point for later secondary sessions.
 
-- Base: `task/10/main`; head: `arena/db5ddb58-arena-context`.
-- The user explicitly chose a fresh implementation from accepted task head `adccae2f9fbc13b9ffd7a5a97b9150d24409f166`. No code/plan/test claims from #14 or #15 are inherited.
-- Full Task #10 is **incomplete**. This Draft contains independently reviewable source, viewer and domain-foundation units; it is not a full playable rewrite.
+- Base: `task/10/main`, migration baseline `45f8811ce9c7ec910ff6346d7c6b489fb1cf8f5e`.
+- Head: `arena/db5ddb58-arena-context`; keep this existing PR Draft.
+- Inherited unreviewed work: this PR at `ee84f0e05f38df931f769511cc99c54d9dbde6c0`. Other independent candidates are not dependencies.
+- Model role: primary. Current fingerprint: `.context/fingerprints/20261009T045933Z-88646267/report.json`, `reference_ambiguity`, `CONTINUE`; the complete reference set is `gpt-6-astra` / `gpt-6.1-sol`. Statistical evidence, not identity certification.
+- Primary review of secondary work: not applicable; this migration issues packets and does not claim any completed secondary run.
 
-## Candidate changes
+## Changes
 
-- Freeze all eight original root files at independently resolved upstream `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`, with GPL license, SHA-256 manifest and integrity/mutation checks.
-- Strict TypeScript/React/Vite client, complete rewritten viewer, offline seed lab, responsive/keyboard controls; source HTML/script never executes in production.
-- Test-only exact-AST original oracles and identity/non-finite/descriptor-aware diagnostics.
-- Hash/LCG/fusion/player-distance primitives, full isolated status lifecycle, base-item data/lifecycle and distinct main-door contracts. Shared main/manager codecs/signature-format contracts also pass Node/browser checks. Real actors/derived items/whole-game/save integration remain pending.
+- Preserve the eight-file GPL source snapshot at `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`, the React/TypeScript/Vite viewer, and original-source differential foundations for random/path, status, items, doors, armor and codecs.
+- Merge the already accepted task protocol, resolve the stale handoff, and retain historical fingerprint evidence. Shared rules/workflows/TASK match the accepted task base exactly; application, source and existing tests are unchanged by migration.
+- Publish four independent packets with disjoint task paths: AST source inventory, accessory contracts, potion base contracts, and the full weapon source-contract audit. Each includes bounded outputs, acceptance, verification and the current primary issuing fingerprint.
+- Document how new sessions start from this primary checkpoint, obtain their own role and claim one packet per separate branch/PR. [Migration and handoff](docs/task-10/MIGRATION.md); exact definitions: `.context/collaboration/packets/`.
 
-## Actual verification
+## Evidence and validation
 
-`npm ci --ignore-scripts`, then `npm run check && npm run test:e2e` in app.
+Fresh local regression at integration commit `a66127756132e0e9852bc6021519a0bbd828e075`:
 
-- 8 unchanged reference files; 5 integrity tests; strict types; 110 domain tests; production build; 4 actual Chromium tests passed after U03d.
-- 20 seeds × 1000 draws/states; 1024 exhaustive small-map/start cases; real wrong-boundary candidate-source mutation rejected.
-- 4 seeds × 16 viewer floor trajectories compare full state/identity graphs and every draw; six ordered renderer traces; every one of 16 real canvas PNGs exactly equals untouched source viewer.
-- Status has 340 isolated trajectories with explicitly matched actor/item/UI doubles, not gameplay parity. Item constructors/equipment/slots/maps/timers/stacking/destruction and door short-circuit behavior match exact source contracts. Defense base + all 12 direct defensive subclasses pass 31 tests / 695 isolated trajectories with explicit doubles; concrete game interactions are pending.
-- Reproducible npm-hosted Chromium/libs, no forbidden CDN/apt download; preview binds 0.0.0.0 and accepts .e2b.app.
-- Getter/proxy-safe graph diagnostics and shared-codec/nested-oracle changes are included in the full 110-test/4-browser run. The original NPC example is unsigned version 1532; signing it is not save cross-load or authentication proof.
+- `node --test .github/scripts/*.test.*`: 72 passed.
+- In app, `npm ci --ignore-scripts`, then `npm run check`: 8 reference hashes, 5 integrity tests, strict types, 110 domain tests and production build passed.
+- `npm run test:e2e`: 4 actual Chromium tests passed, including equality of all 16 viewer canvas PNGs against the untouched original.
+- Source/protocol preservation and all four primary packet-creation commands passed. Logs and checksums: [verification.json](docs/task-10/migration-2026-10-09/verification.json).
+- The integration checkpoint's [arena/protocol](https://github.com/SUSTechHSAS/arena-context/actions/runs/37887020986) passed; committed packet availability and the final published head are checked separately at handoff.
 
-## Protocol and review boundaries
+## Gaps and review focus
 
-Current-turn offline fingerprint: `.context/fingerprints/20261008T080439Z-cbb0a01f/report.json`, `family_only`, `identified_candidate=null`, complete ambiguity accepted, `CONTINUE`; exact raw/manifest/report/bank preserved. Statistical evidence, not identity certification or owner approval. Shared rules/workflows/policy and TASK.md unchanged.
+Full Task #10 remains incomplete. Existing domain tests use explicit doubles and do not prove full gameplay, concrete actor integration, save cross-load, custom NPC scripting, editor/workshop/socket compatibility, or Firefox/WebKit behavior. The four packets are future assignments, not completed features. UI deviations remain review proposals in `docs/task-10/DEVIATIONS.md`.
 
-Main-game generation/combat/derived entities/inventory/UI/editor, save cross-load/custom NPC, full level manager/workshop/socket, Firefox/WebKit and live integrations are not complete/verified. UI proposals in `docs/task-10/DEVIATIONS.md` require review; no self-approved scope reduction. Source quirks are preserved, not quietly fixed.
+Review the preserved foundations and the packet boundaries. Later primary turns review actual secondary outputs; Kibiandkimi retains human approval and final merge.
 
-Evidence/coverage: `docs/task-10/VERIFICATION.md`, `FEATURE-MATRIX.md`, `PLAN.md`. Handoff: `.context/STATE.md`; environment/recovery: `.context/ENVIRONMENT.md`, `.context/RESOURCES.md`, `app/README.md`. Keep Draft. No merge or auto-merge requested.
+## Handoff
+
+- [x] Work files and `.context/STATE.md` describe the same migration and packet checkpoint.
+- [ ] Packet publication checkpoint was pushed and its remote head verified.
+- [x] Supporting decisions, reproducibility evidence and recovery/session instructions were updated.
+
+These checkboxes are author reports, not owner acceptance. PR #19 remains Draft while the full rewrite continues.

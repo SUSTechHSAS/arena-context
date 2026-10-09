@@ -1,6 +1,12 @@
 # Task #10 verification ledger
 
-This records actual local commands, not owner acceptance. Reference pin: `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`. Current per-turn fingerprint report: `.context/fingerprints/20261008T080439Z-cbb0a01f/report.json`.
+This records actual local commands, not owner acceptance. Reference pin: `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`. The original 2026-10-08 fingerprint is preserved at `.context/fingerprints/20261008T080439Z-cbb0a01f/report.json`. The migration turn uses `.context/fingerprints/20261009T045933Z-88646267/report.json` (`reference_ambiguity`, `CONTINUE / primary`).
+
+## Collaboration migration regression — 2026-10-09
+
+At integration commit `a66127756132e0e9852bc6021519a0bbd828e075`, reran the inherited suites on Linux x64, Node v24.16.0 and npm 12.0.2: **72 protocol tests, 8 reference hashes, 5 integrity tests, strict types, 110 domain tests, production build and 4 real Chromium tests passed**. This includes equality of all 16 viewer canvas PNGs. `npm ci --ignore-scripts` used the unchanged dependency lock. No application, test, reference, or shared protocol changes were needed for this run.
+
+Original outputs, exact commands, tested commit and SHA-256 values are saved in [migration-2026-10-09/verification.json](migration-2026-10-09/verification.json). See [MIGRATION.md](MIGRATION.md) for the accepted base, preservation checks and bounded packet handoff. No secondary packet has been executed or primary-reviewed by this migration; the full game remains incomplete.
 
 ## U00 — 2026-10-08
 

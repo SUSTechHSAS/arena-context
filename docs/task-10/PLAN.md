@@ -30,6 +30,12 @@ The owner selected a **fresh implementation** on 2026-10-08. No implementation, 
 
 Sequence may be refined as dependencies are audited, without removing original features or weakening the acceptance criterion. Every useful unit updates STATE and is committed, pushed and checked against the remote head before continuing.
 
+## Collaboration handoff — 2026-10-09
+
+PR #19 now inherits the accepted task protocol at `45f8811ce9c7ec910ff6346d7c6b489fb1cf8f5e`. The current primary turn has created four independent, bounded packets: `t10-source-ast-inventory`, `t10-accessory-contracts`, `t10-potion-base-contracts`, and `t10-weapon-contract-audit`. These are assignments for future candidate work, not completed units or changes to the full acceptance criteria.
+
+Use the latest published primary checkpoint on `arena/db5ddb58-arena-context` as the source for separate secondary branches. Each new turn fingerprints; each secondary PR claims one packet and records its own run/result. Later primary turns verify the concrete outputs and decide follow-up implementation, including weapon integration. See [MIGRATION.md](MIGRATION.md) for exact routing, packet definitions and this migration's verification. Broader actors, generation, UI, saves and services still require additional primary decomposition.
+
 ## Acceptance evidence required (not yet met)
 
 1. An actually playable rewritten game, viewer and level manager covering the source feature matrix, not a map-only demonstration.

@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-09T05:20:56.105014+00:00",
+  "task_issue": 10,
+  "pr": 19,
+  "tested_commit": "a66127756132e0e9852bc6021519a0bbd828e075",
+  "accepted_base": "45f8811ce9c7ec910ff6346d7c6b489fb1cf8f5e",
+  "inherited_candidate": "ee84f0e05f38df931f769511cc99c54d9dbde6c0",
+  "fingerprint": ".context/fingerprints/20261009T045933Z-88646267/report.json",
+  "environment": {
+    "platform": "linux",
+    "architecture": "x64",
+    "node": "v24.16.0",
+    "npm": "12.0.2",
+    "browser_setup": "Existing locked @sparticuz/chromium and app/playwright.config.ts"
+  },
+  "commands": [
+    {
+      "command": "node --test .github/scripts/*.test.*",
+      "cwd": ".",
+      "exit_code": 0,
+      "result": {
+        "tests": 72,
+        "passed": 72,
+        "failed": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "output": "protocol-tests.txt",
+      "bytes": 7678,
+      "sha256": "ad9c9070e3c2f241ab441fb6c975a366059cd58ce8bd4ce3c42ce958cc976843"
+    },
+    {
+      "command": "npm ci --ignore-scripts",
+      "cwd": "app",
+      "exit_code": 0,
+      "result": {},
+      "output": "npm-ci.txt",
+      "bytes": 141,
+      "sha256": "f2a1033c82417fd75c84e89e54309539d570bec63068c634e3b868ab3d9caa9b"
+    },
+    {
+      "command": "npm run check",
+      "cwd": "app",
+      "exit_code": 0,
+      "result": {
+        "reference_files": 8,
+        "integrity_tests_passed": 5,
+        "domain_tests_passed": 110,
+        "typecheck": "passed",
+        "production_build": "passed"
+      },
+      "output": "app-check.txt",
+      "bytes": 1617,
+      "sha256": "25ce01fdac102c2922a78d8369766953ac2ed5457ab4c09d9c046fae82434565"
+    },
+    {
+      "command": "npm run test:e2e",
+      "cwd": "app",
+      "exit_code": 0,
+      "result": {
+        "chromium_tests_passed": 4,
+        "viewer_png_comparisons": 16
+      },
+      "output": "chromium-e2e.txt",
+      "bytes": 1078,
+      "sha256": "3d2078aff08a9b1bb19b7b4598464aedfe83a76a6d0c9247524133111b3f7abb"
+    }
+  ],
+  "preservation": {
+    "accepted_protocol_and_task": "byte-identical to accepted_base",
+    "inherited_application_reference_scripts_and_tests": "byte-identical to inherited_candidate",
+    "historical_fingerprints": "unchanged"
+  },
+  "limits": [
+    "No additional gameplay modules were implemented during migration.",
+    "The four new packets have not been executed by secondary turns.",
+    "Full game, concrete actor/status integration, save cross-load, Firefox/WebKit and live services remain unverified."
+  ]
+}

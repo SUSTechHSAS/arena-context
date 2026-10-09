@@ -1,0 +1,28 @@
+{
+  "id": "t10-potion-base-contracts",
+  "title": "Port the isolated potion base-class lifecycle",
+  "objective": "Advance U03 by preserving the complete 药水类 base contract against the frozen original, using explicit ports for actor/status/UI boundaries rather than claiming whole-game integration.",
+  "allowed_paths": [
+    "app/src/game/potion.ts",
+    "app/test/potion.test.ts",
+    "app/test/oracle/potion-fixture.ts",
+    "docs/task-10/packets/potion-base-contracts.md"
+  ],
+  "acceptance": [
+    "Port only 药水类 at ChineseDungeon.html HTML lines 21039-21182, confirming its AST range. Include constructor, name/hints/color/strength/duration, 使用, 应用效果 hook, 移除效果, 当被收集 and 对实体生效; derived potion classes are outside this packet.",
+    "Extend existing ItemCore following the ArmorItem explicit-port pattern. Define additional structural actor/status-factory, mapping, draw/log/notification ports in the new module; do not edit ItemCore, StatusEffect, shared helpers or actual actors. A source-visible no-port facade and concrete status/actor wiring remain pending.",
+    "Preserve the constructor's deliberate omission of a general config spread, its data-spread precedence, falsy defaults, frozen/active early returns, effect creation and callback order, one consumption per successful use, removal without extra consumption, and existing source behavior for empty/negative stacks rather than silently adding checks.",
+    "Use createOracle on exact original 物品 and 药水类 declarations with matched explicit doubles. Compare fields, alias/identity relationships, return/error results and ordered events/draws for default/edge configs, repeated activation/removal, callback failure, collection by player/monster/pet/non-actor, and nullish versus explicit strength/duration overrides.",
+    "Keep default application hooks and actor/status boundaries honest: matching isolated traces does not demonstrate live statuses, derived potions, rendering or save compatibility. Record quirks and gaps in the packet document and run result; request primary review without widening scope."
+  ],
+  "verification": [
+    "From app: npm ci --ignore-scripts if needed; npm run typecheck; npm test -- test/potion.test.ts. Record executed case counts and exact original/candidate state/event/draw comparisons.",
+    "Before handing off the completed packet, run npm run check from app. Preserve the reference hashes, strict compiler settings, existing tests and production/oracle import boundary.",
+    "Inspect the actual changed paths and document any source exceptions or untested actor integration explicitly. Keep the packet PR Draft until a later primary fingerprint reviews the committed outputs."
+  ],
+  "depends_on": [],
+  "schema": 1,
+  "task_issue": 10,
+  "accepted_branch": "task/10/main",
+  "issued_by": ".context/fingerprints/20261009T045933Z-88646267/report.json"
+}
