@@ -22,8 +22,9 @@ function fixture({ recorded = true, legacy = false, advanced = false, domainChan
   let report;
   if (recorded) {
     const graded = scoreSample(raw, seed, seed.code_sha256);
-    report = { identity_verified: false, same_model_within_turn: 'assumed_by_user', raw_sha256: hash(raw),
+    report = { turn_id: prefix.split('/').at(-1), branch, identity_verified: false, same_model_within_turn: 'assumed_by_user', raw_sha256: hash(raw),
       package_id: packageId(seed), bank_sha256: seed.bank_sha256, bank_version: seed.bank_version, ...graded, gate: decideWork(graded, central) };
+    files[`${prefix}/manifest.json`] = JSON.stringify({ schema: 1, turn_id: report.turn_id, branch, work_head_before_probe: old, package_id: packageId(seed), policy: structuredClone(central) });
     files[`${prefix}/raw.json`] = raw; files[`${prefix}/report.json`] = JSON.stringify(report);
     files[`.context/fingerprints/banks/${packageId(seed)}.json`] = JSON.stringify(seed);
     files['.context/STATE.md'] = files['.context/STATE.md'].replace('## Current objective', `- Fingerprint: ${prefix}/report.json\n\n## Current objective`);

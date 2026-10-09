@@ -15,17 +15,6 @@ function protectedPath(path) {
   return path === 'AGENTS.md' || path.startsWith('.github/') || path.startsWith('.templates/');
 }
 
-// exp/sqrt implementations can differ in their last bits across Node runtimes.
-// Labels, membership, array lengths and metadata remain exact; only finite
-// numeric evidence gets the same 1e-12 tolerance as legacy fit/separation.
-function sameEvidence(actual, expected) {
-  if (typeof expected === 'number') return Number.isFinite(actual) && Math.abs(actual - expected) <= 1e-12;
-  if (actual === expected) return true;
-  if (!actual || !expected || typeof actual !== 'object' || typeof expected !== 'object' || Array.isArray(actual) !== Array.isArray(expected)) return false;
-  if (JSON.stringify(Object.keys(actual).sort()) !== JSON.stringify(Object.keys(expected).sort())) return false;
-  return Object.keys(expected).every(key => sameEvidence(actual[key], expected[key]));
-}
-
 function validate({ pr, files, trustedTask, candidate }) {
   const errors = [];
   const fail = message => errors.push(message);
@@ -109,51 +98,25 @@ async function inspectPullRequest({ github, repo, pr }) {
       report.errors.push('Fingerprint must link to a per-turn report path.');
     } else {
       try {
-        const result = JSON.parse(await readText(github, repo, fp, pr.head.sha));
-        const raw = await readText(github, repo, fp.replace('report.json', 'raw.json'), pr.head.sha);
-        const { hash, packageId } = await import('./fingerprint-lib.mjs');
-        const { scoreBundle, MAX_PACKAGE_BYTES } = await import('./fingerpoint-lib.mjs');
-        const { decideWork, validatePolicy } = await import('./model-gate.mjs');
-        // The accepted list is centrally controlled on protected main. A
-        // candidate's copy of policy.json or self-written gate cannot grant access.
+        const { validatePolicy } = await import('./model-gate.mjs');
+        const { fingerprintVerifier } = await import('./fingerprint-record.mjs');
         const currentPolicy = validatePolicy(JSON.parse(await readText(github, repo, '.github/fingerprint-policy.json', 'main')));
-        if (result.identity_verified !== false || result.same_model_within_turn !== 'assumed_by_user') throw new Error('Invalid fingerprint evidence labels.');
-        if (result.raw_sha256 !== (raw === undefined ? null : hash(raw))) throw new Error('Fingerprint raw hash mismatch.');
-        let verified = { status: 'unscored' };
-        if (result.status !== 'unscored') {
-          if (!/^[a-f0-9]{64}$/.test(result.package_id)) throw new Error('Invalid fingerprint package ID.');
-          const bundle = JSON.parse(await readText(github, repo, `.context/fingerprints/banks/${result.package_id}.json`, pr.head.sha, MAX_PACKAGE_BYTES));
-          if (packageId(bundle) !== result.package_id) throw new Error('Fingerprint package changed.');
-          verified = scoreBundle(raw, bundle);
-          if (result.bank_sha256 !== bundle.bank_sha256 || result.bank_version !== bundle.bank_version) throw new Error('Fingerprint bank metadata mismatch.');
-          for (const key of ['status', 'nearest_model', 'identified_candidate', 'family']) {
-            if (verified[key] !== result[key]) throw new Error(`Fingerprint score mismatch: ${key}`);
-          }
-          for (const key of ['fit', 'separation']) {
-            if (verified[key] !== undefined && (!Number.isFinite(result[key]) || Math.abs(verified[key] - result[key]) > 1e-12)) throw new Error(`Fingerprint numeric mismatch: ${key}`);
-          }
-          if (bundle.schema !== 2 && JSON.stringify(verified.candidates) !== JSON.stringify(result.candidates)) throw new Error('Fingerprint candidate list mismatch.');
-          if (bundle.schema === 2) {
-            // Recompute the full reference set, aliases, input checks, and
-            // calibration binding; neither the display top three nor the PR's
-            // own claimed gate is evidence of acceptance.
-            for (const key of Object.keys(verified)) {
-              if (!sameEvidence(result[key], verified[key])) throw new Error(`Fingerprint score mismatch: ${key}`);
-            }
-          }
-          // Older Clear match reports did not record this field. Close calls
-          // must carry the complete set, independently recomputed from raw data.
-          if (((verified.status === 'family_only' && result.gate) || result.ambiguous_models !== undefined) &&
-              JSON.stringify(verified.ambiguous_models) !== JSON.stringify(result.ambiguous_models)) {
-            throw new Error('Fingerprint ambiguity set mismatch.');
-          }
-        }
-        if (!result.gate && await isLegacyCheckpoint({ github, repo, pr })) {
+        const reads = new Map();
+        const read = (path, ref, maxBytes) => {
+          const key = `${ref}:${path}:${maxBytes || 65536}`;
+          if (!reads.has(key)) reads.set(key, readText(github, repo, path, ref, maxBytes));
+          return reads.get(key);
+        };
+        const allowLegacy = await isLegacyCheckpoint({ github, repo, pr });
+        const verify = fingerprintVerifier({ read, policy: currentPolicy, allowLegacy });
+        const evidence = await verify(fp, pr.head.sha);
+        if (evidence.legacy) {
           report.warnings = ['Historical fingerprint predates the model gate; it does not authorize a new turn.'];
         } else {
-          const decision = decideWork(verified, currentPolicy);
-          if (!decision.allowed) throw new Error(`Model gate denied: ${decision.reason}. End the user turn; do not perform task work.`);
-          if (result.gate?.allowed !== true || result.gate?.action !== 'CONTINUE') throw new Error('This report did not authorize work in its original turn. Obtain a new accepted fingerprint gate in a new user turn.');
+          const { inspectCollaboration } = await import('./collaboration-lib.mjs');
+          const collaboration = await inspectCollaboration({ github, repo, pr, files, trustedTask, read, verify, evidence, fingerprint: fp });
+          report.errors.push(...collaboration.errors);
+          if (collaboration.warnings.length) report.warnings = collaboration.warnings;
         }
       } catch (error) { report.errors.push(`Fingerprint record invalid: ${error.message}`); }
     }
