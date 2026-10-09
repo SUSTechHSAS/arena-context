@@ -1,46 +1,46 @@
 # Current handoff
 
 - Task: #10
-- Unit: Primary and secondary model collaboration maintenance
-- Work branch / PR: meta/10/model-collaboration
-- Accepted base at unit start: task/10/main@afa4a5645633e26432c46edfd6f65b732b479c04
-- Updated: 2026-10-09T03:52:38.771378+00:00
-- Latest session: owner-requested protocol maintenance
-- Candidate stage: maintenance proposal; awaiting owner review
-- Fingerprint: not recorded
-- Model role: not applicable to owner-requested meta maintenance
+- Unit: Take over PR #19 (domain rewrite) — successor-branch inheritance and secondary-turn gate
+- Work branch / PR: arena/298b90a8-arena-context (no PR yet; predecessor PR #19 is on arena/db5ddb58-arena-context @ ee84f0e05f38df931f769511cc99c54d9dbde6c0)
+- Accepted base at unit start: task/10/main@45f8811ce9c7ec910ff6346d7c6b489fb1cf8f5e
+- Updated: 2026-10-09T05:00:00Z
+- Latest session: user-requested continuation of Task #10 / PR #19
+- Fingerprint: .context/fingerprints/20261009T044824Z-0569cbb1/report.json
+- Model role: secondary
+- Candidate stage: blocked — awaiting-primary-assignment
 - Work packet: none
-- Primary review: not applicable to protocol maintenance
+- Primary review: not applicable (no packet issued)
 
 This card does not establish approval; check the actual task branch and PR.
 
 ## Current objective
 
-Apply the primary/secondary collaboration protocol from [PR #23](https://github.com/SUSTechHSAS/arena-context/pull/23) to this existing task.
-
-The domain task remains the modern rewrite of chinese-dungeon with behavior-consistency tests against its source. Continue only the assigned candidate PR and read its current owner feedback.
+Continue Task #10 by taking over PR #19 ("Fresh rewrite: complete viewer and typed consistency foundation", Draft, base `task/10/main`).
 
 ## Candidate progress
 
-The original six accepted models remain primary. Only Haiku 5.5, Opus 5, Fable 5, GPT-5.6 Sol, and GPT-6 Luna are added as secondary; any unlisted reference-set member still denies the turn. Added bounded primary-issued work packets, per-turn secondary run evidence, primary review of current outputs, role/scope/dependency checks, templates, and operating instructions.
-
-Shared protocol files match 3739acbce2322a25df922ca162c6c1d8f2509fe0. Task contract and domain artifacts are preserved. Earlier handoff evidence remains available at [the accepted base](https://github.com/SUSTechHSAS/arena-context/blob/afa4a5645633e26432c46edfd6f65b732b479c04/.context/STATE.md).
+- This turn's fingerprint: `CONTINUE_SUBTASK` / `secondary` (reference set: claude-haiku-5-5; all members accepted). Scope limited to an assigned packet.
+- `node .github/scripts/collaboration.mjs status` finds no primary-issued work packet on this branch (no `.context/collaboration/packets/`), so no packet can be claimed.
+- PR #19 content is NOT inherited into this branch in this turn: it is 110 files / ~98k lines of unreviewed domain work, and inheriting it is domain task work that a secondary turn may not perform without a packet.
 
 ## Verification
 
-The shared implementation passed all 72 tests with `node --test .github/scripts/*.test.*`, including final CLI denial and dependency handoff checks. [Protocol tests run 37881163889](https://github.com/SUSTechHSAS/arena-context/actions/runs/37881163889) passed on shared commit `3739acbce2322a25df922ca162c6c1d8f2509fe0`; its protocol CI passed as well. All 23 copied files are byte-identical to that commit. The actual task maintenance route passed, and the task contract and domain files were verified unchanged. CI for this published head will independently rerun the suite. Regression samples are test fixtures, not this maintenance session's model fingerprint.
-
-No domain-task verification was performed by this protocol maintenance.
+- `prepare` → GENERATE_SAMPLE; three probes answered in-turn; raw saved (sha256 64bfc629686e31863365ab18f37c0ab8b432c9938a1d3eca5ccbc21813062e9b); `score` → allowed, CONTINUE_SUBTASK, secondary.
+- No domain tests were run in this turn; PR #19's own verification claims are not re-verified here.
 
 ## Blockers and unresolved owner feedback
 
-Human review and merge are pending. Merge the existing-task compatibility updates before PR #23 enables the schema-2 policy on main. This code also supports the old primary-only schema-1 policy during that transition. Domain feedback belongs to the assigned task PR and must be read before resuming that work.
+- No primary-issued work packet is available on this branch.
+- Decision needed (primary turn or owner): whether this successor branch should inherit PR #19 head `ee84f0e` (merge or fresh checkout of that content, then a new PR from this branch to `task/10/main` linking #19), or whether work should continue on `arena/db5ddb58-arena-context` by its own writer.
+- Per AGENTS.md, only one active writer per work branch; PR #19 remains on its original branch and is not modified here.
 
 ## Next action
 
-Kibiandkimi reviews this maintenance PR and PR #23. After acceptance, bring the assigned work branch up to the accepted task protocol and obtain a fresh per-turn fingerprint. A primary turn can then issue bounded packets; secondary turns claim one available packet and keep their PR Draft until primary review. Final merge remains the human reviewer's action.
+A primary-model turn should decide the successor inheritance and then issue bounded packets (`collaboration.mjs create`) for the remaining PR #19 units (main-game generation/combat, inventory/UI, save cross-load, level manager). Secondary turns then `status` → `claim <packet-id>`.
 
 ## Read next, only if needed
 
 - [Collaboration commands and migration order](../docs/COLLABORATION.md)
 - [Accepted task contract](TASK.md)
+- [PR #19](https://github.com/SUSTechHSAS/arena-context/pull/19)

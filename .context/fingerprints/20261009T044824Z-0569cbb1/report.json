@@ -1,0 +1,118 @@
+{
+  "schema": 2,
+  "turn_id": "20261009T044824Z-0569cbb1",
+  "branch": "arena/298b90a8-arena-context",
+  "scope": "user-turn",
+  "same_model_within_turn": "assumed_by_user",
+  "identity_verified": false,
+  "arena_protocol_calibrated": false,
+  "sample_count": 3,
+  "raw_sha256": "64bfc629686e31863365ab18f37c0ab8b432c9938a1d3eca5ccbc21813062e9b",
+  "package_id": "f7e5afbad329e7afcab36cca62ee3375f8fbe3dd65ff8cf471e82fd556b3071c",
+  "bank_version": "2026-10-08T13:07:32.556925+00:00",
+  "bank_sha256": "5b7e0cc1e29c07ed2f074cff9825caa73456a61318872381ac993dff297c556f",
+  "freshness": "fresh",
+  "refresh_error": null,
+  "scored_at": "2026-10-09T04:48:58.959Z",
+  "provider": "fingerpoint",
+  "detector_sha256": "1f4275364dcfeb1d72a3de5a27edd24076ef6beef6e8488dbf72fa8bd93f5d15",
+  "source_commit": "97eb41f78722d32524265bb259fe6258856ca470",
+  "identified_candidate": null,
+  "probability_scope": "reference-closed-set",
+  "reference_mass_min": 0.95,
+  "upstream_decision": "not_confirmed",
+  "parsed_numbers": [
+    301,
+    319,
+    327
+  ],
+  "input_checks": [
+    {
+      "parsed_numbers": 301,
+      "expected_count": 301,
+      "minimum_numbers": 166,
+      "exact_count": true,
+      "level": "ok",
+      "reason": null
+    },
+    {
+      "parsed_numbers": 319,
+      "expected_count": 319,
+      "minimum_numbers": 176,
+      "exact_count": true,
+      "level": "ok",
+      "reason": null
+    },
+    {
+      "parsed_numbers": 327,
+      "expected_count": 327,
+      "minimum_numbers": 180,
+      "exact_count": true,
+      "level": "ok",
+      "reason": null
+    }
+  ],
+  "reference_classes": [
+    "claude-haiku-5.5"
+  ],
+  "reference_models": [
+    "claude-haiku-5-5"
+  ],
+  "reference_mass": 0.9999994020699177,
+  "status": "reference_match",
+  "nearest_model": "claude-haiku-5-5",
+  "nearest_class": "claude-haiku-5.5",
+  "family": "claude",
+  "calibration": {
+    "method": "ranking-temperature",
+    "run": ".training/20261008T130734200400Z/calibration",
+    "tau": 4.781249958634198,
+    "sha256": "5c9637930e6da3322882a163b22c71e2cbb3c1f25e5d040ed70c2c824afcc11a"
+  },
+  "candidates": [
+    {
+      "model": "claude-haiku-5.5",
+      "models": [
+        "claude-haiku-5-5"
+      ],
+      "display_name": "claude-haiku-5.5",
+      "family": "claude",
+      "score": 4.675405940783928,
+      "reference_probability": 0.9999994020699177
+    },
+    {
+      "model": "glm-5.3",
+      "models": [
+        "glm-5.3"
+      ],
+      "display_name": "glm-5.3",
+      "family": "glm",
+      "score": 1.5515451639695992,
+      "reference_probability": 3.2613324638254426e-7
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "models": [
+        "deepseek-v4-flash"
+      ],
+      "display_name": "deepseek-v4-flash",
+      "family": "deepseek",
+      "score": 1.3821117230048028,
+      "reference_probability": 1.450679707661334e-7
+    }
+  ],
+  "policy_source": "https://api.github.com/repos/SUSTechHSAS/arena-context/contents/.github/fingerprint-policy.json?ref=main",
+  "gate": {
+    "policy_sha256": "7b2bc6888ac13670f69cfc03cd44309de2917ee977f646f5c0783cbb19474331",
+    "accepted_model_count": 11,
+    "allowed": true,
+    "action": "CONTINUE_SUBTASK",
+    "role": "secondary",
+    "scope": "assigned_subtask",
+    "reason": "accepted_reference_set",
+    "models": [
+      "claude-haiku-5-5"
+    ]
+  },
+  "next": "Record this fingerprint and Model role: secondary in STATE. Run collaboration.mjs status, then claim one primary-issued packet before any task edits. If none is available, save only the fingerprint and a blocked handoff."
+}
