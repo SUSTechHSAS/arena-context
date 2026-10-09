@@ -45,9 +45,38 @@ Arena 自动创建分支不等于自动保存。agent 必须主动 commit、push
 
 每次 prepare 通过 GitHub API 检查 [lm.ikale.io](https://lm.ikale.io/) 官方仓库的兼容 bank 和检测器；它已整合 ModelTrace 的部分样本及新增来源。离线时标记缓存版本，算法变化时提示维护更新，不执行下载的代码。原始样本、结果、bank 和 detector 快照随检查点保存；旧 WhatsMyLLM 记录保留原评分方式。详细说明见 [docs/FINGERPRINT.md](docs/FINGERPRINT.md)。
 
-**工作门槛：覆盖至少 95% 库内校准分数的完整候选集合全部获准。** 核对 `reference_models` 中的每个具体 ID，包含边界并列项及合并类别的所有成员；95% 是本仓库的工作规则，不是身份识别准确率。上游合并的 Astra/6.1 Sol 类别必须同时获准。当前接受 Opus 5.5、Sonnet 5.5、Fable 5.1、GPT-6 Astra、GPT-6.1 Sol、GPT-6 Sol。列表位于 main 的 [.github/fingerprint-policy.json](.github/fingerprint-policy.json)，没有扩大接受范围。
+**工作门槛：覆盖至少 95% 库内校准分数的完整候选集合全部在主、子模型名单内。** 核对 `reference_models` 中的每个具体 ID，包含边界并列项及合并类别的所有成员；95% 是本仓库的工作规则，不是身份识别准确率。上游合并的 Astra/6.1 Sol 类别必须同时获准。
 
-score 在本地即时输出 CONTINUE 或 END_TURN，不等待 CI。未获准模型、歧义集合含未获准模型或缺失、Weak match、无效样本、评分或政策读取失败，都返回退出码 20，要求 agent 输出原因后直接结束轮次，不重测、不继续任务。拒绝记录已写本地，不再额外 commit/push；通过后才继续原来的检查点流程。
+| 角色 | 模型 | 工作权限 |
+| --- | --- | --- |
+| 主模型 | Opus 5.5、Sonnet 5.5、Fable 5.1、GPT-6 Astra、GPT-6.1 Sol、GPT-6 Sol | 拆分、决策、实现、整合、复核 |
+| 子模型 | Haiku 5.5、Opus 5、Fable 5、GPT-5.6 Sol、GPT-6 Luna | 执行主模型已发布的有限工作包 |
+| 其他模型 | 两张名单之外的全部模型 | 拒绝，立即结束本轮 |
+
+候选集合全为主模型时返回 `CONTINUE`；只要含有子模型且其余候选也都在两张名单内，就返回 `CONTINUE_SUBTASK`。**任何名单外候选仍直接拒绝**，不按模型家族或相似名称放行。中央策略位于 main 的 [.github/fingerprint-policy.json](.github/fingerprint-policy.json)。
+
+score 在本地即时输出 CONTINUE、CONTINUE_SUBTASK 或 END_TURN，不等待 CI。未获准模型、歧义集合含未获准模型或缺失、Weak match、无效样本、评分或政策读取失败，都返回退出码 20，要求 agent 输出原因后直接结束轮次，不重测、不继续任务。拒绝记录已写本地，不再额外 commit/push；通过后才继续原来的检查点流程。
+
+## 主模型与子模型接力
+
+主模型较少时，先让一个通过主模型门控的轮次发布几个清晰、尽量独立的工作包，并推送检查点。之后随机到子模型的 session 可以领取其中一个包，完成指定文件中的实现、测试、资料整理或局部文档工作。后续主模型轮次集中复核。协作依靠 Git 中的记录跨 session 接力，不要求 Arena 支持指定模型或自动创建子 session。
+
+```sh
+# 主模型：填写模板后发布工作包，再更新 STATE、commit、push。
+node .github/scripts/collaboration.mjs create /tmp/packet.json
+
+# 子模型：每轮重新 fingerprint，通过后检查队列、领取一个工作包。
+node .github/scripts/collaboration.mjs status
+node .github/scripts/collaboration.mjs claim <packet-id>
+# 完成有边界的工作，更新本轮 result.md 和 STATE，commit、push。
+
+# 后续主模型：检查产物和证据，完成验证并提交产物，再记录复核。
+node .github/scripts/collaboration.mjs review <packet-id> /tmp/review.json
+```
+
+子模型不得修改工作包、任务约定或协议，也不能自行复核。没有包时只保存本轮指纹和等待交接，不自行扩展工作。子模型 PR 在主模型复核前保持 Draft；输出或运行证据发生变化会使原复核失效。最终仍由 `Kibiandkimi` 审核合并。
+
+详见 [协作流程、模板和迁移说明](docs/COLLABORATION.md)。
 
 三个交接文件：`TASK.md` 写目标/约束/验收，`STATE.md` 写候选进度/验证/下一步，`DECISIONS.md` 写关键理由和证据。工作分支中的结论仍未经人工审核。
 

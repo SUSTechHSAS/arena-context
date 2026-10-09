@@ -14,7 +14,8 @@ import { prepare, score } from './fingerprint.mjs';
 
 const seed = readFingerpointSeed();
 const cases = JSON.parse(fs.readFileSync(new URL('./fixtures/fingerpoint.json', import.meta.url))).cases;
-const policy = JSON.parse(fs.readFileSync(new URL('../fingerprint-policy.json', import.meta.url)));
+// Preserve the original single-tier fixture expectations as a regression.
+const policy = { schema: 1, accepted_models: ['claude-opus-5-5', 'claude-sonnet-5-5', 'claude-fable-5-1', 'gpt-6-astra', 'gpt-6.1-sol', 'gpt-6-sol'] };
 const policyFetcher = async () => ({ ok: true, text: async () => JSON.stringify(policy) });
 const require = createRequire(import.meta.url);
 const { inspectPullRequest } = require('./protocol.cjs');
@@ -210,8 +211,10 @@ test('CI recomputes the full Fingerpoint evidence and rejects forged membership,
     const repo = { owner: 'SUSTechHSAS', repo: 'arena-context' }, full_name = 'SUSTechHSAS/arena-context', head = 'a'.repeat(40);
     const files = createTaskFiles({ issue: { number: 1, title: 'Test', html_url: `https://github.com/${full_name}/issues/1`, body: 'Goal' }, branch: 'AerraGen-main', protocolSha: head });
     files['.context/STATE.md'] = files['.context/STATE.md'].replace('Work branch / PR: not created', 'Work branch / PR: arena/test')
+      .replace('Model role: not recorded', 'Model role: primary')
       .replace('## Current objective', `- Fingerprint: ${prefix}/report.json\n\n## Current objective`);
     files[first.raw_path] = fs.readFileSync(path.join(root, first.raw_path), 'utf8');
+    files[prefix + '/manifest.json'] = fs.readFileSync(path.join(root, prefix, 'manifest.json'), 'utf8');
     const bankPath = `.context/fingerprints/banks/${result.package_id}.json`;
     files[bankPath] = fs.readFileSync(path.join(root, bankPath), 'utf8');
     assert.ok(Buffer.byteLength(files[bankPath]) > 10_000_000 && Buffer.byteLength(files[bankPath]) < MAX_PACKAGE_BYTES);
