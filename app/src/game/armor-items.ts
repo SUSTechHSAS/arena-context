@@ -1,5 +1,5 @@
 import { ArmorItem, type ArmorConfig, type ArmorPorts, type ArmorAttacker } from './armor';
-import type { ItemCore } from './item-core';
+import type { ItemCore, ItemHookResult } from './item-core';
 import type { EffectSource } from './status-ports';
 
 export type DefensiveKind = '引雷针护符' | '守卫者盔甲' | '灌木丛' | '水鞋' | '秘银锁甲' | '防化服' | '钢制板甲' | '锅盖' | '冰盾' | '纵火狂' | '潜行靴子' | '灵能盾牌';
@@ -84,7 +84,7 @@ export class 灌木丛 extends ArmorItem {
       ...config, 数据: { 伤害: 2, 反伤: 3 + (config.强化 ? 2 : 0), ...config.数据 } });
     this.#world = world; this.类型 = !this.能否拾起 ? '地形' : '防御装备';
   }
-  override 当被收集(actor: unknown): boolean {
+  override 当被收集(actor: unknown): ItemHookResult {
     if (this.能否拾起) return super.当被收集(actor);
     if (actor === '玩家') { this.#world.damagePlayer(this.自定义数据.get('伤害') as number, this.名称); this.#world.log('你被灌木丛划伤了！', '错误'); }
     return false;

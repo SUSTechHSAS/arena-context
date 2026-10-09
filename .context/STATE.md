@@ -22,7 +22,7 @@ The owner says four packets are too few because primary-model turns are scarce. 
 
 ## Candidate progress
 
-This expansion adds ItemUseResult/ItemHookResult and action arguments to ItemCore so source subclasses can return numeric/empty results and accept targets without every packet editing the shared base. Existing runtime returns and state updates are preserved. The current application regression is running; results are pending.
+This expansion adds ItemUseResult/ItemHookResult and action arguments to ItemCore so source subclasses can return numeric/empty results and accept targets without every packet editing the shared base. Existing runtime returns and state updates are preserved. The first check exposed a narrow inherited bush collection return annotation; that annotation now uses the same hook result type. Strict typecheck passes; full regression is pending.
 
 Accepted task protocol is integrated; original application, reference, tests and historical fingerprint evidence are preserved. The inherited viewer, isolated status/item/door/armor contracts and codecs remain candidate foundations. Full game/actors/generation/UI/editor/save/script and service integration remain pending.
 
