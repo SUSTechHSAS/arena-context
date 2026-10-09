@@ -5,6 +5,8 @@ Refs #<task-issue>
 - Base: `task/<issue>/main`
 - Work unit: <small, reviewable objective and acceptance item>
 - Inherited unreviewed dependencies: <none, or predecessor PR/commit and exact dependency>
+- Model role / work packet: <primary, or secondary with packet path and source commit>
+- Primary review of secondary work: <not applicable, pending, or review record path and inspected commit>
 
 ## Changes
 
@@ -25,3 +27,5 @@ Refs #<task-issue>
 - [ ] Supporting decisions and recovery instructions were updated where needed.
 
 These checkboxes are author reports, not proof of verification or owner approval. Keep this PR as Draft while it is a saved work in progress. Only the owner decides acceptance.
+
+Secondary checkpoints stay Draft until a primary model reviews the current outputs and run evidence. A primary model's recorded review does not replace Kibiandkimi's required approval.
