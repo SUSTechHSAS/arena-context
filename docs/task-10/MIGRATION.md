@@ -9,6 +9,7 @@
 | 本次正式基线 | `task/10/main@45f8811ce9c7ec910ff6346d7c6b489fb1cf8f5e` |
 | 继承的 PR #19 候选成果 | `ee84f0e05f38df931f769511cc99c54d9dbde6c0` |
 | 协议接入检查点 | `a66127756132e0e9852bc6021519a0bbd828e075` |
+| 工作包发布检查点 | `04c2f6dcfd2e4b7436f3bfdd82e5df1ae8938377`，已推送并核对远程 |
 | 实际工作分支 | `arena/db5ddb58-arena-context` |
 | PR 目标分支 | `task/10/main` |
 | 原始程序快照 | `8d80b5a4dd3d737ed6d3060f05611eaa3de611ab`，8 个根目录文件 |
@@ -31,12 +32,14 @@
 | app 内 `npm run test:e2e` | 4 项真实 Chromium 测试通过，包括 16 张画布图像与原 viewer 完全一致 |
 | 共享协议 / 原成果内容比较 | 通过；应用、原始源码和已有测试无改动 |
 | 接入提交的远程 `arena/protocol` | [通过](https://github.com/SUSTechHSAS/arena-context/actions/runs/37887020986) |
+| 工作包来源与可用状态 | `collaboration.mjs status` 核验 4 个包均来自普通提交 `04c2f6d`，全部 `available` |
+| 工作包发布提交的远程 `arena/protocol` | [通过](https://github.com/SUSTechHSAS/arena-context/actions/runs/37888625642) |
 
 环境为 Linux x64、Node `v24.16.0`、npm `12.0.2`，浏览器由现有 npm 依赖及 Playwright 配置提供。命令原始输出和 SHA-256 清单位于 [migration-2026-10-09/verification.json](migration-2026-10-09/verification.json)。这些结果支持已继承的 viewer 和隔离领域契约；完整游戏、真实实体集成、存档互载及服务集成仍未完成。
 
 ## 四个独立工作包
 
-以下包均通过 `collaboration.mjs create` 生成，绑定本轮主模型指纹，`depends_on` 均为 `[]`。它们共享已验证的 PR #19 基础，允许写入的任务路径两两不重叠；STATE 和每轮证据按协议处理。发布提交后的实际可用状态由 `collaboration.mjs status` 核对。
+以下包均通过 `collaboration.mjs create` 生成，绑定本轮主模型指纹，`depends_on` 均为 `[]`。它们共享已验证的 PR #19 基础，允许写入的任务路径两两不重叠；STATE 和每轮证据按协议处理。在发布提交 `04c2f6d` 上，`collaboration.mjs status` 已核对来源及依赖，四个包均为 `available`；[原始输出](migration-2026-10-09/packet-status.json)与校验值一并保存。后续 session 领取前仍需检查当时的状态。
 
 | 包 | 有界交付 | 定义 |
 | --- | --- | --- |
@@ -59,7 +62,7 @@
 
 ## 主模型与人工接续
 
-后续主模型重新指纹，检查具体子包的实际输出、每轮 result 和 owner 意见，重跑有意义的验证。先提交产物，再使用 `collaboration.mjs review <packet-id> <review.json>` 记录绑定当前产物的复核；当前 PR 没有子模型运行结果，因而没有为旧成果伪造该类复核。
+后续主模型重新指纹，检查具体子包的实际输出、每轮 result 和 owner 意见，重跑有意义的验证。先提交产物，再使用 `collaboration.mjs review <packet-id> <review.json>` 记录绑定当前产物的复核。当前 PR 没有子模型运行结果，故无此类复核记录。
 
 通过主模型复核且协议检查成功的子包，才可交付人工审核。Kibiandkimi 决定最终合并。新的输出或运行证据使旧复核失效，后续包从合适的正式版本或主模型检查点接续。命令格式及约束以 [COLLABORATION.md](../COLLABORATION.md) 为准。
 

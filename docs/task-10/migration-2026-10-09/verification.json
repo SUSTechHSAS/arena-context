@@ -76,5 +76,23 @@
     "No additional gameplay modules were implemented during migration.",
     "The four new packets have not been executed by secondary turns.",
     "Full game, concrete actor/status integration, save cross-load, Firefox/WebKit and live services remain unverified."
-  ]
+  ],
+  "collaboration_status": {
+    "command": "node .github/scripts/collaboration.mjs status",
+    "cwd": ".",
+    "exit_code": 0,
+    "checked_commit": "04c2f6dcfd2e4b7436f3bfdd82e5df1ae8938377",
+    "role": "primary",
+    "available_packets": [
+      "t10-accessory-contracts",
+      "t10-potion-base-contracts",
+      "t10-source-ast-inventory",
+      "t10-weapon-contract-audit"
+    ],
+    "output": "packet-status.json",
+    "bytes": 1041,
+    "sha256": "7f3b787127f19528b25436cda7481f1fdb76ed672428506061df56850f96e23e",
+    "remote_head_verified": true,
+    "protocol_ci": "https://github.com/SUSTechHSAS/arena-context/actions/runs/37888625642"
+  }
 }

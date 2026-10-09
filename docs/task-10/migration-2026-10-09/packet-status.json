@@ -1,0 +1,30 @@
+{
+  "role": "primary",
+  "packets": [
+    {
+      "id": "t10-accessory-contracts",
+      "title": "Port the accessory base and seven direct accessory subclasses",
+      "source_commit": "04c2f6dcfd2e4b7436f3bfdd82e5df1ae8938377",
+      "status": "available"
+    },
+    {
+      "id": "t10-potion-base-contracts",
+      "title": "Port the isolated potion base-class lifecycle",
+      "source_commit": "04c2f6dcfd2e4b7436f3bfdd82e5df1ae8938377",
+      "status": "available"
+    },
+    {
+      "id": "t10-source-ast-inventory",
+      "title": "Build a reproducible AST inventory of the three original pages",
+      "source_commit": "04c2f6dcfd2e4b7436f3bfdd82e5df1ae8938377",
+      "status": "available"
+    },
+    {
+      "id": "t10-weapon-contract-audit",
+      "title": "Audit and exercise the original weapon class before implementation",
+      "source_commit": "04c2f6dcfd2e4b7436f3bfdd82e5df1ae8938377",
+      "status": "available"
+    }
+  ],
+  "next": "Claim one assigned, unblocked packet; one writer and one packet per secondary PR."
+}
