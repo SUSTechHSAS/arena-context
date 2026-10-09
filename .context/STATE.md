@@ -1,24 +1,24 @@
 # Current handoff
 
 - Task: #10
-- Unit: PR #19 migration and bounded packet publication
+- Unit: Expand the Task #10 collaboration work pool
 - Work branch / PR: arena/db5ddb58-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/19
 - Accepted base at unit start: task/10/main@45f8811ce9c7ec910ff6346d7c6b489fb1cf8f5e
-- Inherited candidate: ee84f0e05f38df931f769511cc99c54d9dbde6c0
+- Inherited candidate at this unit start: 133f40042356f49e3f5e98dc4f3abf28ecf09197
 - Packet source checkpoint: 04c2f6dcfd2e4b7436f3bfdd82e5df1ae8938377
 - Updated: 2026-10-09
-- Fingerprint: .context/fingerprints/20261009T045933Z-88646267/report.json
+- Fingerprint: .context/fingerprints/20261009T091343Z-0e4cf368/report.json
 - Model role: primary
-- Work packet: none; primary issued four independent packet definitions
+- Work packet: none; primary expanding the assignment pool
 - Primary review: not applicable; no secondary run is inherited or produced here
-- Candidate stage: migration complete; four packets available; full Task #10 incomplete
-- Last verified remote before this checkpoint: 04c2f6dcfd2e4b7436f3bfdd82e5df1ae8938377
+- Candidate stage: expanding the packet pool; original four packets preserved
+- Last verified remote before this checkpoint: 133f40042356f49e3f5e98dc4f3abf28ecf09197
 
 Only Kibiandkimi decides acceptance; this card is not approval.
 
 ## Current objective
 
-Migrate owner-assigned PR #19 to the accepted primary/secondary mechanism and make its partial rewrite usable by bounded secondary sessions. TASK.md still requires the full modern rewrite with source-consistency tests.
+The owner says four packets are too few because primary-model turns are scarce. Prepare a substantially larger, source-grounded assignment pool with independent work and explicit dependencies, retaining the immutable original four definitions. TASK.md still requires the full modern rewrite with source-consistency tests.
 
 ## Candidate progress
 
@@ -30,7 +30,7 @@ This turn's fresh fingerprint is `reference_ambiguity`, reference models `gpt-6-
 
 ## Verification
 
-At `a661277`: 72 protocol tests; 8 frozen-file hashes; 5 integrity tests; strict types; 110 domain tests; production build; and 4 real Chromium tests passed, including all 16 viewer PNG comparisons. Application and protocol code are unchanged by packet publication. Raw outputs and SHA-256 manifest: `docs/task-10/migration-2026-10-09/verification.json`.
+Prior migration verification at `a661277`: 72 protocol tests; 8 frozen-file hashes; 5 integrity tests; strict types; 110 domain tests; production build; and 4 real Chromium tests passed, including all 16 viewer PNG comparisons. Application and protocol code are unchanged by packet publication. Raw outputs and SHA-256 manifest: `docs/task-10/migration-2026-10-09/verification.json`.
 
 Accepted-protocol identity, original-artifact preservation and saved-output checksums passed. After the ordinary introduction commit, `collaboration.mjs status` verified all four packet sources as `04c2f6d` and returned `available` for each; output is saved as `docs/task-10/migration-2026-10-09/packet-status.json`. That checkpoint was pushed and the PR's remote head verified; its `arena/protocol` passed.
 
@@ -40,4 +40,4 @@ No owner comments or unresolved review threads were present on #19 at startup. F
 
 ## Next action
 
-Start separate Arena branches from the latest published `arena/db5ddb58-arena-context` primary checkpoint containing `04c2f6d`; secondary turns fingerprint and claim one packet before edits. #26 is an older waiting checkpoint without these foundations/packets. Later primary turns inspect and review actual secondary outputs; Kibiandkimi retains final review and merge.
+Audit the remaining original declarations and feature surfaces, define bounded independent and dependent assignments, validate their source anchors/scope/dependency graph, then publish them on this existing PR with the current primary fingerprint. No secondary work or new application verification has been performed in this turn yet.
