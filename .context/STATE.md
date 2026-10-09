@@ -11,7 +11,7 @@
 - Model role: primary
 - Work packet: none; primary expanding the assignment pool
 - Primary review: not applicable; no secondary run is inherited or produced here
-- Candidate stage: expanding the packet pool; original four packets preserved
+- Candidate stage: 114 packet definitions ready; source/availability verification pending
 - Last verified remote before this checkpoint: 133f40042356f49e3f5e98dc4f3abf28ecf09197
 
 Only Kibiandkimi decides acceptance; this card is not approval.
@@ -22,7 +22,7 @@ The owner says four packets are too few because primary-model turns are scarce. 
 
 ## Candidate progress
 
-Prepared and validated 110 additional packet definitions, for 114 total: 73 independent and 41 dependent. Exact AST anchors, subclass ownership, disjoint paths and the dependency DAG passed checks. Recoverable definitions and selection guide: `docs/task-10/packet-pool/` (formal creation/publication pending).
+Created and validated 110 additional definitions through the accepted collaboration CLI, for 114 total: 73 independent and 41 dependent. Exact AST anchors, subclass ownership, disjoint paths and the dependency DAG passed checks. Selection guide, immutable packet links and saved evidence: `docs/task-10/packet-pool/`.
 
 This expansion adds ItemUseResult/ItemHookResult and action arguments to ItemCore so source subclasses can return numeric/empty results and accept targets without every packet editing the shared base. Existing runtime returns and state updates are preserved. The first check exposed a narrow inherited bush collection return annotation; that annotation now uses the same hook result type. Strict types, all 110 domain tests, 5 integrity tests, 8 source hashes and the build now pass.
 
@@ -44,4 +44,4 @@ No owner comments or unresolved review threads were present on #19 at startup. F
 
 ## Next action
 
-Create the validated definitions through the accepted collaboration CLI, publish them with this primary fingerprint, then verify actual availability and dependency blockers on the committed pool. The existing four definitions remain unchanged. No secondary output is claimed.
+Commit/push this complete pool and verify its ordinary introduction sources with collaboration.mjs status. Confirm 73 available packets and 41 explicit dependency-review waits, then finalize the handoff. No secondary output is claimed.

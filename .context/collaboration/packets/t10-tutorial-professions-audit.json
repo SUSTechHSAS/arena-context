@@ -1,0 +1,29 @@
+{
+  "id": "t10-tutorial-professions-audit",
+  "title": "教程、职业与新游戏启动契约审计",
+  "objective": "Advance Task #10's full modern rewrite and source-consistency acceptance in the integration surface through source-only audit and executable characterization; no app/src output. This is one bounded candidate unit, not a change to the complete task scope.",
+  "allowed_paths": [
+    "app/test/tutorial-professions-audit.test.ts",
+    "app/test/oracle/tutorial-professions-audit-fixture.ts",
+    "docs/task-10/audits/tutorial-professions-audit.md"
+  ],
+  "acceptance": [
+    "Reference is the unchanged eight-file snapshot at upstream 8d80b5a4dd3d737ed6d3060f05611eaa3de611ab. The following ranges are original HTML lines and must be rechecked against the exact AST before edits: ChineseDungeon.html:52153-52167 进入教程层; ChineseDungeon.html:52169-52183 跳过教程; ChineseDungeon.html:52185-52211 重置玩家状态; ChineseDungeon.html:52213-52328 生成教程地牢; ChineseDungeon.html:52436-52578 获取教程文本; ChineseDungeon.html:54826-54917 启动游戏; ChineseDungeon.html:55057-55225 重置所有游戏状态; ChineseDungeon.html:66561-66606 应用职业效果; ChineseDungeon.html:66608-66754 显示职业选择界面; ChineseDungeon.html:66755-66870 显示自定义游戏界面.",
+    "Map tutorial stages, profession initialization, resets/defaults, menu choices and source text. Characterize initial-state and transition ordering using explicit UI/game doubles.",
+    "For every named declaration, map relevant members/branches, read/written state, globals, argument/return/error behavior, aliases and side-effect/RNG order. Distinguish observed source facts, bounded-double assumptions and questions requiring a primary decision.",
+    "Exercise representative normal, boundary, refusal and repeated-action paths using exact declarations through createOracle and explicit deterministic doubles. Preserve ordered event/draw/state evidence and list unexercised branches; static reading alone is not executable verification.",
+    "Do not create a candidate implementation or claim original-only tests establish rewrite parity, whole-game behavior, UI equivalence or save interoperability. Produce an actionable primary integration handoff with source anchors and actual evidence.",
+    "Use only the exact allowed task paths, this turn's protocol-permitted fingerprint/run/result files and STATE. Read shared code, the reference and dependencies without modifying them. Do not edit TASK/DECISIONS/shared rules, weaken compiler/tests, repair source quirks silently, change packet definitions, or introduce live service calls. Report an unforeseen interface or scope need in result.md for primary review.",
+    "Record exact coverage, original-vs-candidate or source-only limits, commands/results, detected source quirks and the next action in the packet document and this turn's result.md. Keep the PR Draft for later primary review."
+  ],
+  "verification": [
+    "From app, use npm ci --ignore-scripts if dependencies are absent, then npm run typecheck and npm test -- test/tutorial-professions-audit.test.ts. Report actual counts and commands; do not infer results from earlier packets.",
+    "Before the completed handoff, run npm run check from app: immutable-reference hashes/integrity tests, strict types, all domain tests and production build. Run only relevant local/offline fixtures; no live service write or unlisted dependency installation.",
+    "Inspect the real diff for allowed paths, source-anchor accuracy, concrete superclass/dependency use and production/oracle separation. Preserve meaningful counterexample/trace evidence; document untested UI/browser/whole-game boundaries explicitly."
+  ],
+  "depends_on": [],
+  "schema": 1,
+  "task_issue": 10,
+  "accepted_branch": "task/10/main",
+  "issued_by": ".context/fingerprints/20261009T091343Z-0e4cf368/report.json"
+}

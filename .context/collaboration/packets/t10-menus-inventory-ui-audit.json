@@ -1,0 +1,29 @@
+{
+  "id": "t10-menus-inventory-ui-audit",
+  "title": "菜单、背包、装备与通知界面审计",
+  "objective": "Advance Task #10's full modern rewrite and source-consistency acceptance in the ui surface through source-only audit and executable characterization; no app/src output. This is one bounded candidate unit, not a change to the complete task scope.",
+  "allowed_paths": [
+    "app/test/menus-inventory-ui-audit.test.ts",
+    "app/test/oracle/menus-inventory-ui-audit-fixture.ts",
+    "docs/task-10/audits/menus-inventory-ui-audit.md"
+  ],
+  "acceptance": [
+    "Reference is the unchanged eight-file snapshot at upstream 8d80b5a4dd3d737ed6d3060f05611eaa3de611ab. The following ranges are original HTML lines and must be rechecked against the exact AST before edits: ChineseDungeon.html:54711-54756 显示主菜单; ChineseDungeon.html:54779-54809 显示游戏模式选择; ChineseDungeon.html:40928-41179 显示死亡界面; ChineseDungeon.html:35005-35092 显示结算界面; ChineseDungeon.html:56503-56561 显示胜利界面; ChineseDungeon.html:50064-50183 更新背包显示; ChineseDungeon.html:50185-50288 初始化装备系统; ChineseDungeon.html:50318-50421 更新装备显示; ChineseDungeon.html:51059-51117 显示通知; ChineseDungeon.html:51249-51259 添加日志.",
+    "Inventory visible states, action payloads, ordering, keyboard/touch affordances and source DOM dependencies. Keep proposed React/layout changes separate from observed behavior.",
+    "For every named declaration, map relevant members/branches, read/written state, globals, argument/return/error behavior, aliases and side-effect/RNG order. Distinguish observed source facts, bounded-double assumptions and questions requiring a primary decision.",
+    "Exercise representative normal, boundary, refusal and repeated-action paths using exact declarations through createOracle and explicit deterministic doubles. Preserve ordered event/draw/state evidence and list unexercised branches; static reading alone is not executable verification.",
+    "Do not create a candidate implementation or claim original-only tests establish rewrite parity, whole-game behavior, UI equivalence or save interoperability. Produce an actionable primary integration handoff with source anchors and actual evidence.",
+    "Use only the exact allowed task paths, this turn's protocol-permitted fingerprint/run/result files and STATE. Read shared code, the reference and dependencies without modifying them. Do not edit TASK/DECISIONS/shared rules, weaken compiler/tests, repair source quirks silently, change packet definitions, or introduce live service calls. Report an unforeseen interface or scope need in result.md for primary review.",
+    "Record exact coverage, original-vs-candidate or source-only limits, commands/results, detected source quirks and the next action in the packet document and this turn's result.md. Keep the PR Draft for later primary review."
+  ],
+  "verification": [
+    "From app, use npm ci --ignore-scripts if dependencies are absent, then npm run typecheck and npm test -- test/menus-inventory-ui-audit.test.ts. Report actual counts and commands; do not infer results from earlier packets.",
+    "Before the completed handoff, run npm run check from app: immutable-reference hashes/integrity tests, strict types, all domain tests and production build. Run only relevant local/offline fixtures; no live service write or unlisted dependency installation.",
+    "Inspect the real diff for allowed paths, source-anchor accuracy, concrete superclass/dependency use and production/oracle separation. Preserve meaningful counterexample/trace evidence; document untested UI/browser/whole-game boundaries explicitly."
+  ],
+  "depends_on": [],
+  "schema": 1,
+  "task_issue": 10,
+  "accepted_branch": "task/10/main",
+  "issued_by": ".context/fingerprints/20261009T091343Z-0e4cf368/report.json"
+}

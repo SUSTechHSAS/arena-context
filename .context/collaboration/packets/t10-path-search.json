@@ -1,0 +1,33 @@
+{
+  "id": "t10-path-search",
+  "title": "BFS、A 星与视线搜索契约",
+  "objective": "Advance Task #10's full modern rewrite and source-consistency acceptance in the algorithms surface through isolated implementation with exact-source differential tests. This is one bounded candidate unit, not a change to the complete task scope.",
+  "allowed_paths": [
+    "app/src/domain/path-search.ts",
+    "app/test/path-search.test.ts",
+    "app/test/oracle/path-search-fixture.ts",
+    "docs/task-10/packets/path-search.md"
+  ],
+  "acceptance": [
+    "Reference is the unchanged eight-file snapshot at upstream 8d80b5a4dd3d737ed6d3060f05611eaa3de611ab. The following ranges are original HTML lines and must be rechecked against the exact AST before edits: ChineseDungeon.html:43885-43913 获取可达格子; ChineseDungeon.html:43915-43994 广度优先搜索路径; ChineseDungeon.html:43996-44069 A星寻路; ChineseDungeon.html:44084-44099 检查视线; ChineseDungeon.html:44100-44147 快速直线检查; ChineseDungeon.html:53310-53333 快速检查相邻移动.",
+    "Reuse reviewed path primitives; preserve neighbor/tie order, one-way/hidden-room/stair flags, source A-star non-incrementing g and 1500-node cap, and null/empty/boolean return distinctions.",
+    "Expose createPathSearch(ports) in the new module, returning an object whose callable names and argument order match the selected source functions. Keep mutable world state, factories, time/RNG and UI/service effects explicit in a typed ports interface; preserve aliasing and write-through semantics. Reuse declared reviewed dependencies rather than silently duplicating their candidate algorithms.",
+    "Compare the candidate with exact AST-selected original declarations in separate environments. Match input graph aliases while separating candidate/oracle objects; compare fields, relevant identity/prototypes/Map/Symbols, non-finite values, returns/errors, every RNG draw and ordered callbacks. Include source-specific edge cases and demonstrate a meaningful boundary/ordering mutant is detected without changing the tracked reference.",
+    "External actors, factories, scheduling, canvas/DOM and network remain explicit typed ports with matching test doubles; production modules never execute original source. Preserve the conditions/arguments/order of UI requests without designing a new interface. This unit proves isolated contracts only; full actor/world/UI/script/save integration stays explicitly pending.",
+    "Claim only after these packets have current primary-approved results: t10-path-primitives. Start from an accepted task checkpoint containing those outputs/reviews and this unchanged packet (or a valid published primary checkpoint satisfying the same checks). Do not combine independent pending PR histories or substitute missing dependency outputs with candidate stubs.",
+    "Use only the exact allowed task paths, this turn's protocol-permitted fingerprint/run/result files and STATE. Read shared code, the reference and dependencies without modifying them. Do not edit TASK/DECISIONS/shared rules, weaken compiler/tests, repair source quirks silently, change packet definitions, or introduce live service calls. Report an unforeseen interface or scope need in result.md for primary review.",
+    "Record exact coverage, original-vs-candidate or source-only limits, commands/results, detected source quirks and the next action in the packet document and this turn's result.md. Keep the PR Draft for later primary review."
+  ],
+  "verification": [
+    "From app, use npm ci --ignore-scripts if dependencies are absent, then npm run typecheck and npm test -- test/path-search.test.ts. Report actual counts and commands; do not infer results from earlier packets.",
+    "Before the completed handoff, run npm run check from app: immutable-reference hashes/integrity tests, strict types, all domain tests and production build. Run only relevant local/offline fixtures; no live service write or unlisted dependency installation.",
+    "Inspect the real diff for allowed paths, source-anchor accuracy, concrete superclass/dependency use and production/oracle separation. Preserve meaningful counterexample/trace evidence; document untested UI/browser/whole-game boundaries explicitly."
+  ],
+  "depends_on": [
+    "t10-path-primitives"
+  ],
+  "schema": 1,
+  "task_issue": 10,
+  "accepted_branch": "task/10/main",
+  "issued_by": ".context/fingerprints/20261009T091343Z-0e4cf368/report.json"
+}

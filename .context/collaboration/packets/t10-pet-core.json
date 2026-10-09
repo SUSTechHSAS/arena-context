@@ -1,0 +1,34 @@
+{
+  "id": "t10-pet-core",
+  "title": "宠物非界面状态机与装备核心",
+  "objective": "Advance Task #10's full modern rewrite and source-consistency acceptance in the actors surface through isolated implementation with exact-source differential tests. This is one bounded candidate unit, not a change to the complete task scope.",
+  "allowed_paths": [
+    "app/src/game/pet-core.ts",
+    "app/test/pet-core.test.ts",
+    "app/test/oracle/pet-core-fixture.ts",
+    "docs/task-10/packets/pet-core.md"
+  ],
+  "acceptance": [
+    "Reference is the unchanged eight-file snapshot at upstream 8d80b5a4dd3d737ed6d3060f05611eaa3de611ab. The following ranges are original HTML lines and must be rechecked against the exact AST before edits: ChineseDungeon.html:33101-34110 宠物.",
+    "After the reviewed pet audit, implement AI/movement/teleport, damage/dormancy/experience, equipment/accessory identity and core hints. Menu construction is a declared UI port boundary; no live management UI is claimed.",
+    "Implement the selected source-named classes/members. Map the source 物品 superclass to existing ItemCore and 防御装备类 to ArmorItem. Import actual reviewed superclass implementations from declared dependencies; all in-packet classes are concrete. Roots use a ports-first constructor and private/non-enumerable port storage as in armor-items.ts. Preserve subclass-compatible virtual hook types with ItemUseResult/ItemHookResult instead of narrowing a base hook to one observed return type.",
+    "Compare the candidate with exact AST-selected original declarations in separate environments. Match input graph aliases while separating candidate/oracle objects; compare fields, relevant identity/prototypes/Map/Symbols, non-finite values, returns/errors, every RNG draw and ordered callbacks. Include source-specific edge cases and demonstrate a meaningful boundary/ordering mutant is detected without changing the tracked reference.",
+    "External actors, factories, scheduling, canvas/DOM and network remain explicit typed ports with matching test doubles; production modules never execute original source. Preserve the conditions/arguments/order of UI requests without designing a new interface. This unit proves isolated contracts only; full actor/world/UI/script/save integration stays explicitly pending.",
+    "Declared rendering/DOM exclusions: 宠物: 打开宠物管理窗口, 更新宠物管理窗口, 创建基本信息面板, 更新基本信息面板, 创建装备面板, 创建饰品面板, 创建装备槽, 创建装备物品元素, 显示饰品选择, 显示装备选择, 创建可选装备元素, 创建技能面板. Preserve when core behavior requests these effects through a named port; do not fake completion of their source renderer/UI bodies or legacy facade.",
+    "Claim only after these packets have current primary-approved results: t10-pet-contract-audit. Start from an accepted task checkpoint containing those outputs/reviews and this unchanged packet (or a valid published primary checkpoint satisfying the same checks). Do not combine independent pending PR histories or substitute missing dependency outputs with candidate stubs.",
+    "Use only the exact allowed task paths, this turn's protocol-permitted fingerprint/run/result files and STATE. Read shared code, the reference and dependencies without modifying them. Do not edit TASK/DECISIONS/shared rules, weaken compiler/tests, repair source quirks silently, change packet definitions, or introduce live service calls. Report an unforeseen interface or scope need in result.md for primary review.",
+    "Record exact coverage, original-vs-candidate or source-only limits, commands/results, detected source quirks and the next action in the packet document and this turn's result.md. Keep the PR Draft for later primary review."
+  ],
+  "verification": [
+    "From app, use npm ci --ignore-scripts if dependencies are absent, then npm run typecheck and npm test -- test/pet-core.test.ts. Report actual counts and commands; do not infer results from earlier packets.",
+    "Before the completed handoff, run npm run check from app: immutable-reference hashes/integrity tests, strict types, all domain tests and production build. Run only relevant local/offline fixtures; no live service write or unlisted dependency installation.",
+    "Inspect the real diff for allowed paths, source-anchor accuracy, concrete superclass/dependency use and production/oracle separation. Preserve meaningful counterexample/trace evidence; document untested UI/browser/whole-game boundaries explicitly."
+  ],
+  "depends_on": [
+    "t10-pet-contract-audit"
+  ],
+  "schema": 1,
+  "task_issue": 10,
+  "accepted_branch": "task/10/main",
+  "issued_by": ".context/fingerprints/20261009T091343Z-0e4cf368/report.json"
+}

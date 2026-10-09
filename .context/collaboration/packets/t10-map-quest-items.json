@@ -1,0 +1,30 @@
+{
+  "id": "t10-map-quest-items",
+  "title": "定位地图、旗帜、奖杯与寻宝戒指",
+  "objective": "Advance Task #10's full modern rewrite and source-consistency acceptance in the items surface through isolated implementation with exact-source differential tests. This is one bounded candidate unit, not a change to the complete task scope.",
+  "allowed_paths": [
+    "app/src/game/map-quest-items.ts",
+    "app/test/map-quest-items.test.ts",
+    "app/test/oracle/map-quest-items-fixture.ts",
+    "docs/task-10/packets/map-quest-items.md"
+  ],
+  "acceptance": [
+    "Reference is the unchanged eight-file snapshot at upstream 8d80b5a4dd3d737ed6d3060f05611eaa3de611ab. The following ranges are original HTML lines and must be rechecked against the exact AST before edits: ChineseDungeon.html:34415-34430 定位器地图; ChineseDungeon.html:34759-34802 旗帜; ChineseDungeon.html:34898-34918 奖杯物品; ChineseDungeon.html:36178-36275 寻宝戒指.",
+    "Preserve discovery/quest fields, map reveal requests, ownership, pickup/use semantics and source strings with exact random/callback traces.",
+    "Implement the selected source-named classes/members. Map the source 物品 superclass to existing ItemCore and 防御装备类 to ArmorItem. Import actual reviewed superclass implementations from declared dependencies; all in-packet classes are concrete. Roots use a ports-first constructor and private/non-enumerable port storage as in armor-items.ts. Preserve subclass-compatible virtual hook types with ItemUseResult/ItemHookResult instead of narrowing a base hook to one observed return type.",
+    "Compare the candidate with exact AST-selected original declarations in separate environments. Match input graph aliases while separating candidate/oracle objects; compare fields, relevant identity/prototypes/Map/Symbols, non-finite values, returns/errors, every RNG draw and ordered callbacks. Include source-specific edge cases and demonstrate a meaningful boundary/ordering mutant is detected without changing the tracked reference.",
+    "External actors, factories, scheduling, canvas/DOM and network remain explicit typed ports with matching test doubles; production modules never execute original source. Preserve the conditions/arguments/order of UI requests without designing a new interface. This unit proves isolated contracts only; full actor/world/UI/script/save integration stays explicitly pending.",
+    "Use only the exact allowed task paths, this turn's protocol-permitted fingerprint/run/result files and STATE. Read shared code, the reference and dependencies without modifying them. Do not edit TASK/DECISIONS/shared rules, weaken compiler/tests, repair source quirks silently, change packet definitions, or introduce live service calls. Report an unforeseen interface or scope need in result.md for primary review.",
+    "Record exact coverage, original-vs-candidate or source-only limits, commands/results, detected source quirks and the next action in the packet document and this turn's result.md. Keep the PR Draft for later primary review."
+  ],
+  "verification": [
+    "From app, use npm ci --ignore-scripts if dependencies are absent, then npm run typecheck and npm test -- test/map-quest-items.test.ts. Report actual counts and commands; do not infer results from earlier packets.",
+    "Before the completed handoff, run npm run check from app: immutable-reference hashes/integrity tests, strict types, all domain tests and production build. Run only relevant local/offline fixtures; no live service write or unlisted dependency installation.",
+    "Inspect the real diff for allowed paths, source-anchor accuracy, concrete superclass/dependency use and production/oracle separation. Preserve meaningful counterexample/trace evidence; document untested UI/browser/whole-game boundaries explicitly."
+  ],
+  "depends_on": [],
+  "schema": 1,
+  "task_issue": 10,
+  "accepted_branch": "task/10/main",
+  "issued_by": ".context/fingerprints/20261009T091343Z-0e4cf368/report.json"
+}

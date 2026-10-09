@@ -1,0 +1,29 @@
+{
+  "id": "t10-minimap-camera-audit",
+  "title": "大地图、小地图与相机交互审计",
+  "objective": "Advance Task #10's full modern rewrite and source-consistency acceptance in the ui surface through source-only audit and executable characterization; no app/src output. This is one bounded candidate unit, not a change to the complete task scope.",
+  "allowed_paths": [
+    "app/test/minimap-camera-audit.test.ts",
+    "app/test/oracle/minimap-camera-audit-fixture.ts",
+    "docs/task-10/audits/minimap-camera-audit.md"
+  ],
+  "acceptance": [
+    "Reference is the unchanged eight-file snapshot at upstream 8d80b5a4dd3d737ed6d3060f05611eaa3de611ab. The following ranges are original HTML lines and must be rechecked against the exact AST before edits: ChineseDungeon.html:54223-54477 绘制小地图; ChineseDungeon.html:7941-8338 绘制大地图; ChineseDungeon.html:53151-53203 更新视口; ChineseDungeon.html:7836-7872 打开大地图; ChineseDungeon.html:8414-8437 关闭大地图; ChineseDungeon.html:8471-8490 调整大地图缩放; ChineseDungeon.html:8446-8469 居中大地图; ChineseDungeon.html:7807-7835 大地图点击信息; ChineseDungeon.html:8340-8411 大地图拖拽开始; ChineseDungeon.html:8493-8513 大地图拖拽移动; ChineseDungeon.html:8515-8525 大地图拖拽结束; ChineseDungeon.html:8537-8547 大地图触摸开始; ChineseDungeon.html:8549-8567 大地图触摸移动; ChineseDungeon.html:8569-8576 大地图触摸结束.",
+    "Compare transforms, floor selection, reveal/marker state, clipping, drag/touch/zoom and ordered canvas calls with deterministic input. Record unresolved UI layout choices for primary review.",
+    "For every named declaration, map relevant members/branches, read/written state, globals, argument/return/error behavior, aliases and side-effect/RNG order. Distinguish observed source facts, bounded-double assumptions and questions requiring a primary decision.",
+    "Exercise representative normal, boundary, refusal and repeated-action paths using exact declarations through createOracle and explicit deterministic doubles. Preserve ordered event/draw/state evidence and list unexercised branches; static reading alone is not executable verification.",
+    "Do not create a candidate implementation or claim original-only tests establish rewrite parity, whole-game behavior, UI equivalence or save interoperability. Produce an actionable primary integration handoff with source anchors and actual evidence.",
+    "Use only the exact allowed task paths, this turn's protocol-permitted fingerprint/run/result files and STATE. Read shared code, the reference and dependencies without modifying them. Do not edit TASK/DECISIONS/shared rules, weaken compiler/tests, repair source quirks silently, change packet definitions, or introduce live service calls. Report an unforeseen interface or scope need in result.md for primary review.",
+    "Record exact coverage, original-vs-candidate or source-only limits, commands/results, detected source quirks and the next action in the packet document and this turn's result.md. Keep the PR Draft for later primary review."
+  ],
+  "verification": [
+    "From app, use npm ci --ignore-scripts if dependencies are absent, then npm run typecheck and npm test -- test/minimap-camera-audit.test.ts. Report actual counts and commands; do not infer results from earlier packets.",
+    "Before the completed handoff, run npm run check from app: immutable-reference hashes/integrity tests, strict types, all domain tests and production build. Run only relevant local/offline fixtures; no live service write or unlisted dependency installation.",
+    "Inspect the real diff for allowed paths, source-anchor accuracy, concrete superclass/dependency use and production/oracle separation. Preserve meaningful counterexample/trace evidence; document untested UI/browser/whole-game boundaries explicitly."
+  ],
+  "depends_on": [],
+  "schema": 1,
+  "task_issue": 10,
+  "accepted_branch": "task/10/main",
+  "issued_by": ".context/fingerprints/20261009T091343Z-0e4cf368/report.json"
+}
