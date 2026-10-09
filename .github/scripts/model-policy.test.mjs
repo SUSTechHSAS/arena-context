@@ -28,6 +28,7 @@ function fixture({ recorded = true, legacy = false, advanced = false, domainChan
     files[`${prefix}/raw.json`] = raw; files[`${prefix}/report.json`] = JSON.stringify(report);
     files[`.context/fingerprints/banks/${packageId(seed)}.json`] = JSON.stringify(seed);
     files['.context/STATE.md'] = files['.context/STATE.md'].replace('## Current objective', `- Fingerprint: ${prefix}/report.json\n\n## Current objective`);
+    files['.context/STATE.md'] = files['.context/STATE.md'].replace('Model role: not recorded', `Model role: ${report.gate.role || 'not recorded'}`);
   }
   const github = { rest: { pulls: { listFiles() {} }, repos: {
     getContent: async ({ path, ref }) => {

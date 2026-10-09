@@ -103,8 +103,26 @@ async function dependenciesReady(ctx, issued, trail = []) {
   }
 }
 
+function dirtyTaskPaths(ctx) {
+  const dirty = [...ctx.git(['diff', '--name-only', '-z', 'HEAD', '--']).split('\0'), ...ctx.git(['ls-files', '--others', '--exclude-standard', '-z']).split('\0')].filter(Boolean);
+  const probePrefix = ctx.fingerprint.replace('report.json', '');
+  return dirty.filter(p => p !== '.context/STATE.md' && !p.startsWith(probePrefix) && !/^\.context\/fingerprints\/banks\/[a-f0-9]{64}\.json$/.test(p));
+}
+
+function candidateChanges(ctx, start) {
+  const changes = ctx.compare(start, ctx.head);
+  for (const ref of [`refs/remotes/origin/${ctx.accepted}`, `refs/heads/${ctx.accepted}`]) {
+    let mergeBase;
+    try { mergeBase = ctx.git(['merge-base', ref, ctx.head]).trim(); } catch { continue; }
+    const paths = new Set(ctx.compare(mergeBase, ctx.head).flatMap(f => [f.filename, f.previous_filename].filter(Boolean)));
+    return changes.filter(f => paths.has(f.filename) || paths.has(f.previous_filename));
+  }
+  return changes;
+}
+
 export async function collaborate(root, command, argument, input) {
-  const ctx = await session(root);
+  let ctx;
+  try { ctx = await session(root); } catch (error) { error.action = 'END_TURN'; throw error; }
   if (command === 'create') {
     requirePrimary(ctx.evidence);
     const definition = JSON.parse(fs.readFileSync(argument, 'utf8'));
@@ -131,6 +149,7 @@ export async function collaborate(root, command, argument, input) {
   const issued = await issuedPacket(ctx, file), runs = await packetRuns(ctx, issued);
   if (command === 'claim') {
     if (ctx.evidence.role !== 'secondary' || ctx.evidence.originalRole !== 'secondary') throw new Error('claim is for a current secondary turn; primary sessions can work directly or review.');
+    if (dirtyTaskPaths(ctx).length) throw new Error('Claim before task edits; resolve uncommitted task files without expanding secondary scope.');
     await dependenciesReady(ctx, issued);
     if (await latestReview(ctx, issued, runs)) throw new Error('This packet is already primary-reviewed; choose another or have a primary issue a new packet.');
     const start = runs[0]?.run.start_head || ctx.evidence.manifest.work_head_before_probe;
@@ -142,7 +161,7 @@ export async function collaborate(root, command, argument, input) {
       }
       if (!acceptedStart) requirePrimary(await ctx.verify(metadata(await ctx.read('.context/STATE.md', start), 'Fingerprint'), start));
     }
-    const errors = scopeErrors(ctx.compare(start, ctx.head), issued.packet);
+    const errors = scopeErrors(candidateChanges(ctx, start), issued.packet);
     if (errors.length) throw new Error(errors.join('\n'));
     const runPath = `.context/collaboration/runs/${ctx.turn}/run.json`;
     const run = validateRun({ schema: 1, turn_id: ctx.turn, packet: file, source_commit: issued.source, start_head: start,
@@ -157,16 +176,14 @@ export async function collaborate(root, command, argument, input) {
     requirePrimary(ctx.evidence);
     if (!runs.length) throw new Error('There are no committed secondary runs to review.');
     if (runs.some(({ run }) => run.start_head !== runs[0].run.start_head)) throw new Error('The packet has conflicting starting checkpoints.');
-    const errors = scopeErrors(ctx.compare(runs[0].run.start_head, ctx.head), issued.packet);
+    const errors = scopeErrors(candidateChanges(ctx, runs[0].run.start_head), issued.packet);
     if (errors.length) throw new Error(errors.join('\n'));
     for (const { file: runFile, run } of runs) {
       const proof = await ctx.verify(run.fingerprint, ctx.head);
       if (proof.originalRole !== 'secondary' || proof.role !== 'secondary' || proof.report.branch !== run.branch) throw new Error('Secondary run evidence does not match its role/branch.');
       if (!(await ctx.read(runFile.replace('run.json', 'result.md'), ctx.head))?.trim()) throw new Error(`Missing result for ${runFile}`);
     }
-    const dirty = [...ctx.git(['diff', '--name-only', '-z', 'HEAD', '--']).split('\0'), ...ctx.git(['ls-files', '--others', '--exclude-standard', '-z']).split('\0')].filter(Boolean);
-    const probePrefix = ctx.fingerprint.replace('report.json', '');
-    if (dirty.some(p => p !== '.context/STATE.md' && !p.startsWith(probePrefix) && !/^\.context\/fingerprints\/banks\/[a-f0-9]{64}\.json$/.test(p))) {
+    if (dirtyTaskPaths(ctx).length) {
       throw new Error('Commit the outputs and run evidence before review; only current fingerprint files and STATE may be uncommitted. Keep the review input outside the repository.');
     }
     const details = JSON.parse(fs.readFileSync(input, 'utf8'));
@@ -186,6 +203,9 @@ async function main() {
   console.log(JSON.stringify(await collaborate(root, command, argument, input), null, 2));
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch(error => {
-  console.log(JSON.stringify({ action: 'STOP_TASK', reason: error.message, next: 'Do not widen scope or change policy. Record the blocker in the permitted handoff and return to a primary session.' }));
-  process.exitCode = 1;
+  const denied = error.action === 'END_TURN';
+  console.log(JSON.stringify({ action: denied ? 'END_TURN' : 'STOP_TASK', reason: error.message,
+    next: denied ? 'Report the refusal and end this user turn without more tools or checkpointing.'
+      : 'Do not widen scope or change policy. Record the blocker in the permitted handoff and return to a primary session.' }));
+  process.exitCode = denied ? 20 : 1;
 });

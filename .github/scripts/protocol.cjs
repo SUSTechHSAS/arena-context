@@ -113,6 +113,9 @@ async function inspectPullRequest({ github, repo, pr }) {
         if (evidence.legacy) {
           report.warnings = ['Historical fingerprint predates the model gate; it does not authorize a new turn.'];
         } else {
+          if (evidence.report.gate.role && field(candidate['.context/STATE.md'], 'Model role') !== evidence.role) {
+            throw new Error('STATE Model role must match the effective fingerprint role.');
+          }
           const { inspectCollaboration } = await import('./collaboration-lib.mjs');
           const collaboration = await inspectCollaboration({ github, repo, pr, files, trustedTask, read, verify, evidence, fingerprint: fp });
           report.errors.push(...collaboration.errors);

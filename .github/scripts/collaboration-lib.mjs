@@ -177,11 +177,14 @@ export async function inspectCollaboration({ github, repo, pr, files, trustedTas
   }
   const runFiles = relevant.filter(f => RUN.test(f.filename)).map(f => f.filename);
   const reviews = relevant.filter(f => REVIEW.test(f.filename)).map(f => f.filename);
+  for (const f of relevant.filter(f => RESULT.test(f.filename))) {
+    if (!runFiles.includes(f.filename.replace('result.md', 'run.json'))) errors.push(`Secondary result needs its own new run record: ${f.filename}`);
+  }
   const runs = new Map(), packets = new Map();
   try {
     // Also inspect earlier turns in this PR. A primary final STATE cannot hide
     // secondary contributions or overwrite their immutable assignment.
-    const reportPaths = new Set([fingerprint, ...relevant.filter(f => FINGERPRINT.test(f.filename)).map(f => f.filename)]);
+    const reportPaths = new Set([fingerprint, ...relevant.filter(f => SAMPLE.test(f.filename)).map(f => f.filename.replace(/(raw|manifest)\.json$/, 'report.json'))]);
     for (const file of runFiles) {
       const run = validateRun(JSON.parse(await read(file, head)), file);
       const proof = await verify(run.fingerprint, head);
@@ -220,6 +223,10 @@ export async function inspectCollaboration({ github, repo, pr, files, trustedTas
       await compare(run.start_head, proof.manifest.work_head_before_probe);
     }
     if (packets.size > 1) errors.push('Use one work packet per secondary PR; keep separate units on separate work branches.');
+    const currentRun = [...runs.values()].find(run => run.fingerprint === fingerprint);
+    if (evidence.role === 'secondary' && currentRun && metadata(await read('.context/STATE.md', head), 'Work packet') !== currentRun.packet) {
+      errors.push('STATE Work packet must name this secondary turn\'s assigned packet.');
+    }
     const turns = [];
     for (const file of reportPaths) turns.push({ file, proof: file === fingerprint ? evidence : await verify(file, head) });
     for (const { file, proof } of turns) {

@@ -211,6 +211,7 @@ test('CI recomputes the full Fingerpoint evidence and rejects forged membership,
     const repo = { owner: 'SUSTechHSAS', repo: 'arena-context' }, full_name = 'SUSTechHSAS/arena-context', head = 'a'.repeat(40);
     const files = createTaskFiles({ issue: { number: 1, title: 'Test', html_url: `https://github.com/${full_name}/issues/1`, body: 'Goal' }, branch: 'AerraGen-main', protocolSha: head });
     files['.context/STATE.md'] = files['.context/STATE.md'].replace('Work branch / PR: not created', 'Work branch / PR: arena/test')
+      .replace('Model role: not recorded', 'Model role: primary')
       .replace('## Current objective', `- Fingerprint: ${prefix}/report.json\n\n## Current objective`);
     files[first.raw_path] = fs.readFileSync(path.join(root, first.raw_path), 'utf8');
     files[prefix + '/manifest.json'] = fs.readFileSync(path.join(root, prefix, 'manifest.json'), 'utf8');
