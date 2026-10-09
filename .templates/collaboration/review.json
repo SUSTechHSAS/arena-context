@@ -1,0 +1,5 @@
+{
+  "verdict": "<approved or changes_requested>",
+  "summary": "<What the primary model inspected and concluded>",
+  "verification": ["<Actual command or source check, result, and remaining limitations>"]
+}
