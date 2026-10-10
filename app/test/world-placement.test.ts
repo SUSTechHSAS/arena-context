@@ -11,7 +11,7 @@ const GLOBALS = ['单元格类型', '环境类型', '材质', 'prng', '地牢大
 /** Seeded world plus a random operation script, shared verbatim by both realms. */
 const scenario = (seed: number) => `
   let s = ${seed}; const r = () => (s = (s * 1103515245 + 12345) % 2147483648) / 2147483648;
-  let p = ${seed * 7 + 3}; const rand = () => { calls.push(['prng']); return (p = (p * 69069 + 1) % 4294967296) / 4294967296; };
+  let p = Number((BigInt(${seed * 7 + 3}) * 2654435761n) % 4294967296n); for (let w = 0; w < 3; w++) p = (p * 69069 + 1) % 4294967296; const rand = () => { calls.push(['prng']); return (p = (p * 69069 + 1) % 4294967296) / 4294967296; };
   const pick = list => list[Math.floor(r() * list.length)];
   class Item { constructor(id) { this.唯一标识 = id; this.颜色索引 = pick([null, null, 0, 2]); this.颜色表 = ['#111111', '#22AA33', '#ABCDEF'];
     this.x = null; this.y = null; this.材质 = pick(['铁质', '铁质', '木质', undefined]); this.自定义数据 = new Map();

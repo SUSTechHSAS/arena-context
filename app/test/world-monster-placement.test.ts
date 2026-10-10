@@ -11,7 +11,7 @@ const GLOBALS = ['单元格类型', 'prng', '地牢大小', '地牢', '玩家', 
 /** Seeded world plus a random operation script, shared verbatim by both realms. */
 const scenario = (seed: number) => `
   let s = ${seed}; const r = () => (s = (s * 1103515245 + 12345) % 2147483648) / 2147483648;
-  let p = ${seed * 13 + 5}; const rand = () => { calls.push(['prng']); return (p = (p * 69069 + 1) % 4294967296) / 4294967296; };
+  let p = Number((BigInt(${seed * 13 + 5}) * 2654435761n) % 4294967296n); for (let w = 0; w < 3; w++) p = (p * 69069 + 1) % 4294967296; const rand = () => { calls.push(['prng']); return (p = (p * 69069 + 1) % 4294967296) / 4294967296; };
   const pick = list => list[Math.floor(r() * list.length)];
   class Monster { constructor(i) { this.名 = 'm' + i; this.类型 = pick(['史莱姆', undefined]); this.x = -1; this.y = -1; this.房间ID = null; } }
   class 巨人怪物 extends Monster { constructor(i) { super(i); this.部位列表 = [new Monster(i + 'a'), new Monster(i + 'b'), new Monster(i + 'c')];

@@ -31,6 +31,7 @@ This session:
 7. World kernel unit 6: `world/placement.ts` — `位置是否可用`, `寻找可放置位置`, `放置物品到单元格`, `放置物品到房间`, with ports for prng, draw, cell effect, log and item-class checks. Tests: `app/test/world-placement.test.ts`. DEVIATIONS SRC-04 (room/cell placement asymmetry, preserved).
 8. World kernel unit 7: `world/targeting.ts` — `获取周围怪物` and `检查直线移动可行性`, with path-search/movement collaborators as ports. Tests: `app/test/world-targeting.test.ts`.
 9. World kernel unit 8: `world/placement.ts` also ports `放置怪物到单元格`, `放置巨人`, `放置怪物到房间` and `清空房间内容`. Tests: `app/test/world-monster-placement.test.ts`. DEVIATIONS SRC-05.
+10. World kernel unit 9: `world/generation.ts` — `生成钥匙` (key class and room placement as ports) and the cave helper `放置地牢出入口`. Tests: `app/test/world-generation.test.ts`.
 
 ## Verification
 
@@ -40,6 +41,7 @@ This session:
 - Unit 1: 23 new tests pass; each of 20 declarations is graph-equal to the exact source AST declaration; the cell is graph-equal for 5 coordinate cases and colour lookup over 460 cases. Manual mutants (`||`→`??` fallback, swapped property order) both failed the suite; originals restored. `tsc --noEmit` clean.
 - Unit 2: 101 new tests pass; each of 98 keys is graph-equal to the value from evaluating its exact source declaration (WeakMaps checked by brand); `createRoomMap` matches the source initializer for 8 sizes, including RangeError cases; containers are unshared. Mutants (`剔除死胡同` drift, Set→Map) were detected; originals restored. `tsc --noEmit` clean.
 - Unit 4: across 120 seeded worlds, results match the four source functions with stubbed collaborators: sight range, room-ID Set order, light-map insertion order, about 10k lit checks, and the exact sequence of line-of-sight and canvas calls. A non-vacuity guard checks for >40 nights, >500 lit cells and >8000 checks. Three mutants (the x = 0 quirk, canvas-query order, the range boundary) were detected; originals restored.
+- Unit 9: 300 seeded room lists and 400 score maps match the source (calls, graphs, aliasing, throws). Five mutants detected; `best = 0` for the exit search is equivalent (the entry always ends at score 0). Test prng seeds are now scrambled and warmed up in the placement and generation tests, because a near-zero first draw had hidden the clearing-window mutant.
 - Unit 8: 200 seeded worlds × 40 ops (giants, invalid rooms, out-of-bounds throws, duplicate timers) match the source in returns, prng/draw/console order, final grid, `所有怪物` (including replacement identity) and timers. Eight mutants detected; originals restored.
 - Unit 7: 250 seeded worlds (sparse and dense, ranges up to 7, counts up to 40) match the source in results, path arrays (shifted) and collaborator call order. Nine mutants were detected (scan order, charm, weather threshold `> 3`, shift, diagonal, skeleton, stack, count, the `-1` tie branch). Two survivors are equivalent under V8: `> 1` (identical for range ≤ 2), and `return 1`→`0` for a later low-priority element, because V8 always calls the comparator as (later, earlier). The comparator is kept verbatim.
 - Unit 6: 200 seeded worlds × 60 random calls; returns, prng/draw/fx/log order and the final grid/timer/portal/item graphs match the source, with tallies over 5 for every branch (including thrown errors). Seven mutants (pets, direction order, rust threshold, lava, glow rule, room-timer, blocker) were detected; originals restored.
@@ -52,4 +54,4 @@ No owner comments on PR #19 or #27 at takeover. Full game, UI, saves and service
 
 ## Next action
 
-Continue the lane with the next uncovered world logic (next: survey the remaining uncovered world/turn helpers and choose the next orchestration slice), checking packet anchors first. RNG wiring belongs to the `t10-seed-search` packet (`初始化随机数生成器`) and is left there.
+Continue the lane with the next uncovered world logic (next: cave cluster `使用评分图放置物品`, `生成路障`, `生成并放置洞穴配方卷轴`, then the `生成洞穴地牢` orchestrator over `t10-cave-kernel` ports), checking packet anchors first. RNG wiring belongs to the `t10-seed-search` packet (`初始化随机数生成器`) and is left there.
