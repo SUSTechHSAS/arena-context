@@ -18,7 +18,9 @@ Only Kibiandkimi decides acceptance; this card is not approval.
 
 Modern rewrite of chinese-dungeon with source-consistency tests (TASK.md). The 114-packet pool from PR #19 remains for secondaries (73 available, 41 dependency-blocked). This primary session builds the non-packet main-game world kernel under `app/src/game/world/` that integration will need.
 
-## Candidate progress (this session)
+## Candidate progress
+
+This session:
 
 1. Took over PR #19 on successor branch `arena/e4cc53a2-arena-context`; fast-forward only, all inherited files preserved.
 2. World kernel unit 1: `world/constants.ts` (cell/env/colour/effect tables, weather list, versions, DEFAULT_* tunables) and `world/cell.ts` (`单元格` data contract + `获取物品颜色`). Tests: `app/test/world-kernel.test.ts`.
@@ -27,6 +29,8 @@ Modern rewrite of chinese-dungeon with source-consistency tests (TASK.md). The 1
 5. World kernel unit 4: `world/lighting.ts` — sight range, `是否在光源范围内`, `更新光源地图` (filled in place) and `获取视野内房间ID`. Line of sight, the torch type and the canvas size come in through `LightingPorts`, since those belong to the path-search and torch packets and the render layer. SRC-03 is preserved. Tests: `app/test/world-lighting.test.ts`.
 
 ## Verification
+
+- Full `npm run check` at 8a88707: 8 reference hashes, 5 integrity tests, strict types, 14 files / 243 tests, build all passed. Remote `arena/protocol` had failed because the STATE heading lacked the exact `## Candidate progress`; fixed in this checkpoint.
 
 - Inherited baseline rerun at 9539c29: `npm run check` passed (8 reference hashes, 5 integrity tests, strict types, 110 tests, build).
 - Unit 1: 23 new tests pass; each of 20 declarations is graph-equal to the exact source AST declaration; the cell is graph-equal for 5 coordinate cases and colour lookup over 460 cases. Manual mutants (`||`→`??` fallback, swapped property order) both failed the suite; originals restored. `tsc --noEmit` clean.
@@ -40,4 +44,4 @@ No owner comments on PR #19 or #27 at takeover. Full game, UI, saves and service
 
 ## Next action
 
-Run the full `npm run check` and update FEATURE-MATRIX/PLAN with the world-kernel lane. Then continue the lane with uncovered world helpers (`获取墙壁字符`, the grid-creation helpers). RNG wiring belongs to the `t10-seed-search` packet (`初始化随机数生成器`) and is left there.
+Continue the lane with uncovered world helpers (`获取墙壁字符`, the grid-creation helpers). RNG wiring belongs to the `t10-seed-search` packet (`初始化随机数生成器`) and is left there.
