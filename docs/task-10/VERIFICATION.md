@@ -4,7 +4,7 @@ This records actual local commands, not owner acceptance. Reference pin: `8d80b5
 
 ## World kernel (primary lane, PR #27) — 2026-10-10
 
-Each unit ports unassigned main-page functions into `app/src/game/world/` and compares them with the exact source declarations, evaluated in a VM. Both realms run the same seeded world script, and packet-owned collaborators are injected as logged ports. Mutants were applied by hand and the originals restored. Preserved source quirks are DEVIATIONS SRC-01…SRC-09.
+Each unit ports unassigned main-page functions into `app/src/game/world/` and compares them with the exact source declarations, evaluated in a VM. Both realms run the same seeded world script, and packet-owned collaborators are injected as logged ports. Mutants were applied by hand and the originals restored. Preserved source quirks are DEVIATIONS SRC-01…SRC-10.
 
 - **Unit 1** — `world/constants.ts` (cell/env/colour/effect tables, weather list, versions, DEFAULT_* tunables) and `world/cell.ts` (`单元格` data contract + `获取物品颜色`). Tests: `app/test/world-kernel.test.ts`.
   - Evidence: 23 new tests pass; each of 20 declarations is graph-equal to the exact source AST declaration; the cell is graph-equal for 5 coordinate cases and colour lookup over 460 cases. Manual mutants (`||`→`??` fallback, swapped property order) both failed the suite; originals restored. `tsc --noEmit` clean.
@@ -40,6 +40,14 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
   - Evidence: 300 seeded worlds match the source (locked multi-roll, clamp, depth weight, early room return, half-weight endpoints, empty room arrays, placement-failure diagnostics, suit durability, unbreakable suits, page slots, pet slot break). Thirteen mutants detected. DEVIATIONS SRC-09.
 - **Unit 17** — `world/special-rooms.ts`: `生成特殊房间` (async orchestrator). Geometry, weighted pick and theme generators are ports. Tests: `app/test/world-special-room-generation.test.ts`.
   - Evidence: 400 seeded worlds match the source (theme drawn once, square 7–9 sizes, negative ranges on small maps, exhausted 100 attempts, id-then-sort with duplicate ids, unknown themes, sokoban push, rejection when a generator throws, thenable return). Nine mutants detected, including making the function synchronous.
+- **Unit 18** — `world/monster-generation.ts`: `生成怪物`, plus the constant `最大怪物数` (declaration-checked in `world-kernel.test.ts`). The patrol class and icon table come from a catalog port. Tests: `app/test/world-monster-generation.test.ts`.
+  - Evidence: 250 seeded worlds match the source, covering:
+    - schedule dedupe by class name, with string keys skipped
+    - room 0 skip, dark-room minimum, `<=` weight pick, NaN weights reaching a null-pick TypeError, out-of-bounds rooms
+    - level/elite roll order, potions, maze patrol density
+    - crowded corridors, splice
+    - the implicit `生成成功` flag
+  - Mutation: 16 mutants run, 15 detected; the 16th was an intentional no-op control and passed as expected. DEVIATIONS SRC-10.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 

@@ -12,7 +12,7 @@ describe('main-game world constants', () => {
     ['单元格类型', constants.单元格类型], ['怪物状态', constants.怪物状态], ['颜色表', constants.颜色表],
     ['颜色名表', constants.颜色名表], ['效果颜色编号映射', constants.效果颜色编号映射],
     ['效果名称编号映射', constants.效果名称编号映射], ['环境类型', constants.环境类型],
-    ['房间尺寸范围', constants.房间尺寸范围], ['最大堆叠数', constants.最大堆叠数], ['存档版本', constants.存档版本],
+    ['房间尺寸范围', constants.房间尺寸范围], ['最大堆叠数', constants.最大堆叠数], ['最大怪物数', constants.最大怪物数], ['存档版本', constants.存档版本],
     ['游戏版本', constants.游戏版本], ['所有天气列表', constants.所有天气列表], ['大风吹动概率', constants.大风吹动概率],
     ['怪物移动动画时长', constants.怪物移动动画时长], ['调试序列', constants.调试序列], ['材质', MATERIALS],
     ['单元格大小', constants.DEFAULT_单元格大小], ['最大房间数', constants.DEFAULT_最大房间数],

@@ -34,6 +34,7 @@ export type EnvironmentKind = (typeof 环境类型)[keyof typeof 环境类型];
 
 export const 房间尺寸范围: readonly [number, number] = [7, 10];
 export const 最大堆叠数 = 64;
+export const 最大怪物数 = 5;
 export const 存档版本 = 'v1';
 export const 游戏版本 = 1534;
 export const 所有天气列表: readonly string[] = (['雷暴', '诡魅', '大风', '严寒', '深夜', '深夜']);
