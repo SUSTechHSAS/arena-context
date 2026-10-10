@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import ts from 'typescript';
+import { applySourcePatches } from './source-patches';
 
 export type DeclarationScope = 'top-level' | 'dom-ready';
 export type ReferencePage = 'ChineseDungeon.html' | 'ChineseDungeon-Viewer.html' | 'LevelManager.html';
@@ -23,8 +24,15 @@ export function readSource(page: ReferencePage = 'ChineseDungeon.html') {
   return { text, ast };
 }
 
-/** Exact AST ranges, not hand-maintained copies or candidate implementations. */
+/** Exact AST range plus any recorded upstream fix (oracle/source-patches.ts, owner rule 2026-10-10). */
 export function declaration(name: string, page: ReferencePage = 'ChineseDungeon.html',
+  scope: DeclarationScope = 'top-level'): string {
+  const original = originalDeclaration(name, page, scope);
+  return page === 'ChineseDungeon.html' && scope === 'top-level' ? applySourcePatches(name, original) : original;
+}
+
+/** Exact AST ranges, not hand-maintained copies or candidate implementations. */
+export function originalDeclaration(name: string, page: ReferencePage = 'ChineseDungeon.html',
   scope: DeclarationScope = 'top-level'): string {
   const { text, ast } = readSource(page);
   let statements: readonly ts.Statement[] = ast.statements;

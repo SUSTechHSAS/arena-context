@@ -36,6 +36,10 @@ PR #19 inherits the accepted task protocol at `45f8811ce9c7ec910ff6346d7c6b489fb
 
 Use the latest published primary checkpoint on `arena/db5ddb58-arena-context` for separate secondary branches. Each turn fingerprints and each secondary PR claims one packet. The [pool directory and review priorities](packet-pool/README.md) map source anchors, exact files, acceptance, verification and dependencies. Prioritize audits and core implementations that unlock weapon, monster, pet, item and algorithm descendants; dependent work continues from an appropriate checkpoint containing reviewed predecessors. These assignments do not complete the full task. Concrete world integration, React UI, save interoperability and final end-to-end acceptance still require implementation and primary review informed by the collected evidence.
 
+## Primary world-kernel lane — 2026-10-10
+
+Successor branch `arena/e4cc53a2-arena-context` (Draft PR #27, fast-forwarded from PR #19). Primary turns implement integration code that no packet assigns, under `app/src/game/world/` (see DECISIONS 2026-10-10). Done so far: constants and the `单元格` data contract, the session world state, the global reset, and lighting/visibility. Collaborators owned by packets (path search, torches, RNG seeding) are injected as ports and replaced by reviewed packet outputs during integration.
+
 ## Acceptance evidence required (not yet met)
 
 1. An actually playable rewritten game, viewer and level manager covering the source feature matrix, not a map-only demonstration.
