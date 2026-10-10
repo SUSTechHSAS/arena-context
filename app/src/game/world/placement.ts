@@ -105,3 +105,94 @@ export function placeItemInRoom(state: WorldState, ports: PlacementPorts, item: 
   }
   return placed;
 }
+
+/** Collaborators for monster placement. */
+export interface MonsterPlacementPorts {
+  random(): number;
+  requestDraw(): void;
+  /** Source `instanceof 巨人怪物`. */
+  isGiant(monster: unknown): boolean;
+  /** Source `console.error` / `console.warn` diagnostics (not game state). */
+  diagnostic(level: 'error' | 'warn', message: string): void;
+}
+type PlacedMonster = Loose;
+export interface MonsterRoom extends RoomBounds { id: Loose; 类型?: Loose }
+
+/** Source `放置怪物到单元格`: a free cell, or an item cell whose item does not block monsters. */
+export function placeMonsterAt(state: WorldState, ports: Pick<MonsterPlacementPorts, 'requestDraw'>, monster: PlacedMonster, x: number, y: number): boolean {
+  // eslint-disable-next-line eqeqeq
+  if (isPositionFree(state, x, y, false) || (cellAt(state, x, y).类型 == 单元格类型.物品 && !cellAt(state, x, y).关联物品?.阻碍怪物)) {
+    const cell = cellAt(state, x, y);
+    cell.类型 = 单元格类型.怪物; cell.关联怪物 = monster;
+    monster.x = x; monster.y = y; monster.房间ID = state.房间地图[y]![x];
+    (state.所有怪物 as unknown[]).push(monster);
+    ports.requestDraw();
+    return true;
+  }
+  return false;
+}
+
+/** Source `放置巨人`: all four cells of the 2×2 footprint must be free; then body and parts are placed. */
+export function placeGiant(state: WorldState, ports: Pick<MonsterPlacementPorts, 'requestDraw'>, giant: PlacedMonster, x: number, y: number): boolean {
+  for (const spot of [{ x, y }, { x: x + 1, y }, { x, y: y + 1 }, { x: x + 1, y: y + 1 }]) {
+    if (!isPositionFree(state, spot.x, spot.y, false)) return false;
+  }
+  giant.保存新位置类型(x, y);
+  placeMonsterAt(state, ports, giant, x, y);
+  giant.部位列表.forEach((part: PlacedMonster, index: number) => {
+    const offset = giant.部位偏移[index];
+    placeMonsterAt(state, ports, part, x + offset.dx, y + offset.dy);
+  });
+  return true;
+}
+
+/** Source `放置怪物到房间`: giants get 50 tries in the (w-2)×(h-2) corner area, others w·h·2 tries. */
+export function placeMonsterInRoom(state: WorldState, ports: MonsterPlacementPorts, monster: PlacedMonster, room: MonsterRoom | null | undefined): boolean {
+  if (!monster || !room) { ports.diagnostic('error', '放置怪物到房间：无效的怪物实例或目标房间。'); return false; }
+  if (ports.isGiant(monster)) {
+    for (let attempt = 0; attempt < 50; attempt++) {
+      const x = room.x + Math.floor(ports.random() * (room.w - 2));
+      const y = room.y + Math.floor(ports.random() * (room.h - 2));
+      if (placeGiant(state, ports, monster, x, y)) { monster.房间ID = room.id; return true; }
+    }
+    ports.diagnostic('warn', `在房间 ${room.id} 多次尝试后未能放置巨人怪物。`);
+    return false;
+  }
+  let placed = false;
+  const maxAttempts = room.w * room.h * 2;
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    const x = room.x + Math.floor(ports.random() * room.w);
+    const y = room.y + Math.floor(ports.random() * room.h);
+    if (isPositionFree(state, x, y, false)) {
+      if (placeMonsterAt(state, ports, monster, x, y)) { monster.房间ID = room.id; ports.requestDraw(); placed = true; break; }
+    }
+  }
+  if (!placed) ports.diagnostic('warn', `在房间 ${room.id} (${room.类型 || '未知类型'}) 中多次尝试后未能放置怪物 ${monster.类型}。房间可能已满或无合适位置。`);
+  return placed;
+}
+
+/** Source `清空房间内容`: drops items (and their first timer entry), monsters (new 所有怪物 array), kinds and environments. */
+export function clearRoomContents(state: WorldState, ports: Pick<MonsterPlacementPorts, 'requestDraw'>, room: RoomBounds | null | undefined): void {
+  if (!room) return;
+  const grid = state.地牢 as unknown as (Cell | undefined)[][];
+  for (let y = room.y; y < room.y + room.h; y++) {
+    for (let x = room.x; x < room.x + room.w; x++) {
+      const cell = grid[y]?.[x];
+      if (cell) {
+        if (cell.关联物品) {
+          const timers = state.所有计时器 as Loose[];
+          const index = timers.findIndex(timer => timer.唯一标识 === cell.关联物品.唯一标识);
+          if (index !== -1) timers.splice(index, 1);
+          cell.关联物品 = null;
+        }
+        if (cell.关联怪物) {
+          state.所有怪物 = (state.所有怪物 as unknown[]).filter(monster => monster !== cell.关联怪物) as typeof state.所有怪物;
+          cell.关联怪物 = null;
+        }
+        if (cell.类型 !== null) cell.类型 = null;
+        cell.环境 = null;
+      }
+    }
+  }
+  ports.requestDraw();
+}
