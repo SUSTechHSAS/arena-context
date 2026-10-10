@@ -134,6 +134,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 34** — `world/environment.ts`: `全局生成环境` and `生成环境簇`. Shrub/fire construction and cell placement are ports. Tests: `app/test/world-environment.test.ts`.
   - Evidence: 600 seeded sessions × 3 worlds × 3 calls match the source, including the injected `prng` sequence: floors 0–4 (lava at ≥3), corridor/room/wall backgrounds, every environment plus `undefined`/`false`/`0`, room maps with -1/0/ids/`'0'`/`null`, numeric and string room ids, room types, sparse grids, items/monsters, direct cluster calls off the map, placement failures.
   - Mutation: 26 mutants run, all detected (the `!环境` vs `== null` and `!= 0` vs `!== 0` mutants needed falsy environments and string room ids). DEVIATIONS SRC-23.
+- **Unit 35** — `world/hazards.ts`: `引燃烟雾网络`, `引爆烟雾网络` and `触发药水水域效果`. Fire/bomb/status construction, placement, damage, notifications, sounds, cell effects, item destruction, logs, equipment refresh and potion-class lookups are ports; class checks are injected. Tests: `app/test/world-hazards.test.ts`.
+  - Evidence: 800 seeded sessions × 3 worlds × 6 operations match the source: smoke/smoke-bomb networks with shared ids, missing rows/cells (throws), map sizes smaller than the grid, monsters and the player on smoke, placement failures, null starts; pools hit by the player (equipment pages), pets with/without gear, other entities, fragile/indestructible/breaking suits, named/missing potion classes with all eight effect fallbacks and unknown effects, missing colours and non-pool cells.
+  - Mutation: 41 mutants run, all detected (the pet check needed a non-pet entity with gear). DEVIATIONS SRC-24.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
