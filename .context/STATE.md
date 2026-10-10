@@ -22,11 +22,13 @@ Modern rewrite of chinese-dungeon with source-consistency tests (TASK.md). The 1
 
 1. Took over PR #19 on successor branch `arena/e4cc53a2-arena-context`; fast-forward only, all inherited files preserved.
 2. World kernel unit 1: `world/constants.ts` (cell/env/colour/effect tables, weather list, versions, DEFAULT_* tunables) and `world/cell.ts` (`单元格` data contract + `获取物品颜色`). Tests: `app/test/world-kernel.test.ts`.
+3. World kernel unit 2: `world/state.ts` — `createWorldState()` holds 98 source-named gameplay/persisted globals with fresh containers per session, plus default settings, player-attribute, custom-setting and room-map factories. DOM/input/timer/sound/camera globals are excluded by design (listed in the file header). Tests: `app/test/world-state.test.ts`.
 
 ## Verification
 
 - Inherited baseline rerun at 9539c29: `npm run check` passed (8 reference hashes, 5 integrity tests, strict types, 110 tests, build).
 - Unit 1: 23 new tests pass; each of 20 declarations is graph-equal to the exact source AST declaration; the cell is graph-equal for 5 coordinate cases and colour lookup over 460 cases. Manual mutants (`||`→`??` fallback, swapped property order) both failed the suite; originals restored. `tsc --noEmit` clean.
+- Unit 2: 101 new tests pass; each of 98 keys is graph-equal to the value from evaluating its exact source declaration (WeakMaps checked by brand); `createRoomMap` matches the source initializer for 8 sizes, including RangeError cases; containers are unshared. Mutants (`剔除死胡同` drift, Set→Map) were detected; originals restored. `tsc --noEmit` clean.
 
 ## Blockers and unresolved owner feedback
 
@@ -34,4 +36,4 @@ No owner comments on PR #19 or #27 at takeover. Full game, UI, saves and service
 
 ## Next action
 
-World kernel unit 2: session-owned world state (`world/state.ts`), mirroring source global initial values, with an oracle comparison; then grid/room-map initialisation used by generation.
+World kernel unit 3: port the source's global reset (`重置所有游戏状态`, the non-DOM part) onto the session state, with a differential test, then grid initialisation for generation.
