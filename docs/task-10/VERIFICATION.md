@@ -92,6 +92,13 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
     - cave/maze random respawn (checkpoint, revealed cells, visited rooms), floor-5 corridor search, floor-15 room search incl. the 50-rejection fallback, weapon cooldown reset
     - full reset path (`切换楼层(0, true, …)` with callback, tutorial entry), off-grid throws
   - Mutation: 33 mutants run, 31 detected (removing the floor-15 `i++` hangs the worker); the 2 survivors are equivalent (the editor `return` is repeated by the next guard; `房间列表[-1]` is undefined). DEVIATIONS SRC-14.
+- **Unit 26** — `world/move.ts`: `移动玩家(dx, dy, 冷却, 剩余步数)` (async). Camera/animation/hook/auto-move globals live in a `MoveSession`; movement checks, landing, digging energy, Sokoban completion, sound, events, distance map, special-room entry, turn processing, item placement/drop and rendering are ports; class checks (`栅栏`, `推箱子箱子`, `压感开关`, `推箱子目标`, `折跃门`, `寻宝戒指`) and the debug item class list are injected. Tests: `app/test/world-move.test.ts`.
+  - Evidence: 500 seeded sessions (2 setups × 4 moves, fake clock) match the source:
+    - editor camera moves, state/cooldown gating, online emit, fences, stun random direction, ice/blood-ice slides, bounds
+    - hook cancel, wall digging (energy ok/short, survival challenge), one-way doors, Sokoban pushes onto plates/targets/floor with covered items
+    - landing interrupts, scroll energy, animation state, distance map, warp gates, move history and the debug sequence reward, treasure rings on the current equipment page
+    - phantom weather refresh, auto-move cancel, cursed random drop, rejected moves, history array identity
+  - Mutation: 64 mutants run, 61 detected; the 3 survivors are equivalent (both `缓慢` sign normalisations, see SRC-15; `targetX - 玩家.x` equals `Math.sign(dx)`).
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
