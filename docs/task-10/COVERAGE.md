@@ -10,9 +10,9 @@ Scope: the 757 top-level statements of the main page that declare a function, cl
 
 | Status | Declarations | Source lines | Share of lines |
 | --- | ---: | ---: | ---: |
-| Ported in `app/src` (foundation + primary world kernel) | 154 | 10934 | 18.2% |
+| Ported in `app/src` (foundation + primary world kernel) | 156 | 11591 | 19.2% |
 | Assigned to a secondary implementation packet, not yet ported | 304 | 29786 | 49.4% |
-| Covered only by an audit packet: implementation is primary/integration work | 152 | 15056 | 25.0% |
+| Covered only by an audit packet: implementation is primary/integration work | 150 | 14399 | 23.9% |
 | No packet: primary/integration work (mostly DOM UI) | 133 | 4069 | 6.8% |
 | Top-level DOM event listeners (input/UI wiring) | 14 | 397 | 0.7% |
 | **Total** | 757 | 60242 | 100% |
@@ -43,7 +43,6 @@ Every declaration below is neither ported nor owned by an implementation packet.
 | t10-tutorial-professions-audit | 9 | 717 | `显示职业选择界面` (147), `获取教程文本` (143), `生成教程地牢` (116), `显示自定义游戏界面` (116), `启动游戏` (92), `应用职业效果` (46), `重置玩家状态` (27), `进入教程层` (15), … |
 | t10-inventory-actions-audit | 12 | 701 | `使用装备槽物品` (95), `使用背包物品` (84), `尝试出售` (78), `处理丢弃物品` (76), `执行重铸` (74), `处理销毁物品` (63), `尝试收集物品` (58), `整理背包` (48), … |
 | t10-script-facade-audit | 6 | 678 | `调试工具` (438), `获取所有可用的定义` (100), `进度条元素` (65), `文本元素` (35), `自定义NPC` (20), `界面元素基类` (20) |
-| t10-save-floors-audit | 2 | 657 | `恢复楼层` (467), `序列化楼层` (190) |
 | editor | 22 | 604 | `填充编辑器背包` (236), `更新扳手规则窗口` (69), `更新编辑器快速访问栏` (45), `初始化编辑器工具栏` (44), `设置编辑器选中项` (41), `打开扳手规则窗口` (38), `应用编辑器工具栏模式` (35), `显示编辑器教程` (28), … |
 | t10-socket-contract-audit | 3 | 522 | `初始化Socket连接` (461), `构建联机设置窗口` (41), `执行联机连接` (20) |
 | core-unassigned | 17 | 507 | `绘制详情小地图` (126), `创建物品池` (118), `创建怪物池` (60), `填充筛选器物品列表` (37), `触发游戏事件` (23), `扣除能量` (23), `应用永久Buffs` (20), `执行连发攻击` (19), … |
@@ -61,7 +60,7 @@ Every declaration below is neither ported nor owned by an implementation packet.
 | t10-cdn-bootstrap-audit | 6 | 157 | `初始化创意工坊` (57), `初始化canvas` (30), `checkCdnAvailability` (26), `getIconHTML` (20), `fetchAndCacheEmoji` (19), `getIconChar` (5) |
 | big-map | 9 | 122 | `大地图悬停信息` (22), `切换大地图标记模式` (21), `切换大地图传送模式` (21), `切换大地图楼层` (15), `添加大地图事件监听` (11), `移除大地图事件监听` (11), `更新大地图楼层显示` (8), `大地图滚轮缩放` (8), … |
 
-Backlog total: 299 declarations, 19522 source lines.
+Backlog total: 297 declarations, 18865 source lines.
 
 ## Implementation packets still open
 

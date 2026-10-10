@@ -17,6 +17,15 @@ Phases P1–P8 of PLAN.md "Integration plan after PR #27". Modules live under `a
 - **I4 — monster save records** — `runtime/save-monsters.ts` (`createMonsterCodec`: `序列化怪物`, `恢复怪物`), composed with the I3 item codec; the registry gains `className` for `召唤物类.name`. Test: `app/test/runtime-save-monsters.test.ts`.
   - Evidence: 300 seeded sessions × 3 floors of 3–6 monsters drawn from all 21 special-cased classes, the base class and an unregistered class. Inputs include aggro on player/floor/stray/item targets, status-table entries, skill pools with unknown names, drops (registered/unregistered/bad), every class-specific field with `undefined`/`null`/`0` variants, centipede save IDs (seeded draws), tampered class names/configs, throwing constructors and missing indices. Records, restored graphs, item/monster maps, status-effect constructions, seeded draws and warnings/errors all match the source. Every class is serialized more than 5 times.
   - Mutation probe: 12/12 killed. The `加速范围` `??`→`||` mutant survived at first; the scenario was strengthened with `0` and now kills it. SRC-46 (cooldown key mismatch, attack fallback) is preserved; both "fixes" are among the killed mutants.
+- **I5 — floor save records** — `runtime/save-floors.ts` (`createFloorCodec`: `序列化楼层`, `恢复楼层`), composed with the I3 item/cell codec and the I4 monster codec. Doors are built through the registry's `门` (`GameDoor` bound to the session ports), as the source does with `new 门`. Test: `app/test/runtime-save-floors.test.ts`.
+  - Evidence: 200 seeded sessions × 2 rounds. Each round serializes 3 generated floors (plus an occasional invalid one) into a shared identity map, then restores the JSON round-tripped and tampered records into shared instance/identity maps. Floors include real source `单元格` vs `GameCell` grids, doors registered in the global `门实例列表`, all linked monster kinds, challenge rooms, custom rewards with Map/object data, pets/warp gates/merchants/altars/spawners and player minions. Tampering covers missing grids, extra/duplicate doors, pre-seeded identities, bogus challenge entries and minion indices, and missing TDZ keys. Records, restored graphs, the global `地牢大小`, the current door map, `玩家仆从列表`, the shared maps, seeded draws, status effects and every log/warn/error (including all three TDZ ReferenceErrors and TypeError paths) match the source.
+  - Mutation probe: 41 probes. 39 are killed. #15 (`if (门实例) 单元格.标识 = …` after `恢复单元格`) is an equivalent mutant: `临时门标识符串` is only set when the same door map lookup already failed, so the source branch is dead. #39 was a no-op probe. Seven probes survived the first pass; the scenario was strengthened to kill them:
+    - stub monsters now carry `x`/`y`;
+    - pooled items are reachable as pet equipment, stock and spawns;
+    - an unregistered item class was added;
+    - the minion index list has duplicates;
+    - `null` revealed cells are generated;
+    - the identity map is pre-seeded.
 
 ## World kernel (primary lane, PR #27) — 2026-10-10
 
