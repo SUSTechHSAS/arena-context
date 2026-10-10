@@ -41,6 +41,7 @@ export const 所有天气列表: readonly string[] = (['雷暴', '诡魅', '大�
 export const 大风吹动概率 = 0.3;
 export const 怪物移动动画时长 = 300;
 export const 调试序列: readonly string[] = (['上', '上', '下', '下', '左', '右', '左', '右']);
+export const 数据完整性密钥 = 'f_SECRET_KEY_FOR_CHINESE_DUNGEON';
 export const Q字形图案: readonly string[] = ([' XXXX ', 'X    X', 'X    X', 'X    X', 'X  XX ', ' XXX X']);
 
 /** Source `let` tunables: initial values only. */

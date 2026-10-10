@@ -152,6 +152,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 40** — `world/chess-debug.ts`: `调试_输出当前谜题答案`, `获取当前玩家棋盘房间`, `收集房间内棋子`, `收集背包棋子类`, `_打印棋盘方案到控制台` and `db`. `_求解棋盘布局`/`_棋子难度值` (packet `t10-chess-solver`), console, debug-tool creation and collection are ports; both realms use the same logged solver/difficulty stubs. Tests: `app/test/world-chess-debug.test.ts`.
   - Evidence: 1000 seeded sessions × 4 operations match the source, with internal helper calls logged: missing globals, off-grid players, null/undefined/-1 room-map values, rooms by id vs index with string/number id collisions, three room types, stacked/odd stack sizes, Map/object/wrapped/null/empty backpacks, limits (`undefined`, ∞, 0, 2.9, -1, NaN), solved/unsolved layouts, option combinations including `null` (throws), grid printing.
   - Mutation: 34 mutants run, 33 detected; the survivor is equivalent (dropping the early `break` when nothing remains still takes 0 per entry). DEVIATIONS SRC-29.
+- **Unit 41** — `world/utils.ts`: `深度比较`, `获取方向中文`, `哈希字符串`, `种子伪随机数`, `获取爆炸颜色`, `净化HTML`, `生成签名` (WebCrypto SHA-256 with the `数据完整性密钥` constant, checked in `world-kernel.test.ts`), `寻找最近的房间` and `处理房间状态`. Tests: `app/test/world-utils.test.ts`.
+  - Evidence: 600 seeded runs × 40 calls match the source: random nested values (NaN, -0, arrays vs objects, aliases, JSON copies, null-prototype and overridden `hasOwnProperty`), direction inputs, hash/signature texts (empty, unicode, HTML, non-strings), seeds (negative, ≥2³², fractional, strings, NaN), distances, rooms with gaps and ties, editor/non-editor room sync.
+  - Mutation: 26 mutants run, 24 detected; the 2 survivors are equivalent (an empty-length guard that the loop already covers, and a pre-truncation that later bitwise operations repeat). DEVIATIONS SRC-30.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
