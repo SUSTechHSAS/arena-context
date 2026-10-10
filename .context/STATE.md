@@ -29,7 +29,7 @@ Each module has an `app/test/world-*.test.ts` differential test against the exac
 
 ## Verification
 
-- Latest full `npm run check` with unit 27 (52c5c9d): reference hashes, integrity tests, strict types, 37 files / 272 tests and build all passed. Remote protocol check passed on 3d15539.
+- Latest full `npm run check` with unit 36 (1c6df9a): reference hashes, integrity tests, strict types, 46 files / 281 tests and build all passed. Remote protocol check passed on 7b22334; no remote workflow runs app tests (tests.yml covers `.github/scripts` only).
 - Per-unit evidence and mutation results are in VERIFICATION.md.
 
 ## Blockers and unresolved owner feedback
