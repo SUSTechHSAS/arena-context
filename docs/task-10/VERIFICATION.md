@@ -122,6 +122,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 30** — `world/red-blue-puzzle.ts`: `生成红蓝开关谜题(距离图)`. Path tracing (`回溯路径`, `t10-path-primitives`), switch/brick construction, placement and console are ports. Tests: `app/test/world-red-blue-puzzle.test.ts`.
   - Evidence: 600 seeded sessions (3 grids × 3 calls) match the source: farthest-room choice with `Infinity`/missing distances, short and long traced paths, corridor candidates, the random-comparator shuffle, switch rooms off the path and nearer than the barrier, pre-existing switches, vertical/horizontal walls, failed brick placements, missing distance rows (throws).
   - Mutation: 29 mutants run, all detected. DEVIATIONS SRC-19.
+- **Unit 31** — `world/chess-puzzle.ts`: `检查解谜是否成功(棋子数量)` and `解谜成功(房间)`. Rewards, notifications, drawing and `window[类名]` are ports; the `棋子` class check is injected and pieces keep their own `可攻击位置`. Tests: `app/test/world-chess-puzzle.test.ts`.
+  - Evidence: 800 seeded sessions match the source: off-board players, rooms by array index with shuffled ids, non-board rooms, stacked pieces, piece counts (`0`, `undefined`, above/below present), attack-board contents and mutual attacks, custom/missing/default rewards.
+  - Mutation: 20 mutants run, 19 detected; the survivor is equivalent (optional chaining on an off-grid room-map row still throws a `TypeError` one read later). DEVIATIONS SRC-20.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
