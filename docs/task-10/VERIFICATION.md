@@ -131,6 +131,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 33** — `processThunderstorm` in `world/weather.ts` (source `处理雷暴效果`). Cell effects, logs, item destruction, notifications, drawing, status effects, player damage, free-cell checks, fire creation/placement and `console.warn` are ports. Tests: `app/test/world-thunderstorm.test.ts`.
   - Evidence: 800 seeded sessions × 3 worlds × 8 turns match the source, including the injected `prng` sequence: copper/other gear on both equipment pages, corridor and room strikes, missing/thin rooms, off-map blocks, sparse grids, stairs, challenge steles, timers, carried items, empowered/plain monsters, the player, sleeping/unplaced/other-floor pets with string floors, fire placement failures, off-grid players.
   - Mutation: 37 mutants run, all detected. DEVIATIONS SRC-22.
+- **Unit 34** — `world/environment.ts`: `全局生成环境` and `生成环境簇`. Shrub/fire construction and cell placement are ports. Tests: `app/test/world-environment.test.ts`.
+  - Evidence: 600 seeded sessions × 3 worlds × 3 calls match the source, including the injected `prng` sequence: floors 0–4 (lava at ≥3), corridor/room/wall backgrounds, every environment plus `undefined`/`false`/`0`, room maps with -1/0/ids/`'0'`/`null`, numeric and string room ids, room types, sparse grids, items/monsters, direct cluster calls off the map, placement failures.
+  - Mutation: 26 mutants run, all detected (the `!环境` vs `== null` and `!= 0` vs `!== 0` mutants needed falsy environments and string room ids). DEVIATIONS SRC-23.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
