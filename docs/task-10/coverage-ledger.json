@@ -4584,7 +4584,7 @@
    "start": 39136,
    "end": 39157,
    "lines": 22,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-turn-movement-audit",
    "area": "t10-turn-movement-audit",
    "overlap": null
@@ -4639,7 +4639,7 @@
    "start": 39600,
    "end": 39625,
    "lines": 26,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-turn-movement-audit",
    "area": "t10-turn-movement-audit",
    "overlap": null
@@ -4672,7 +4672,7 @@
    "start": 40041,
    "end": 40080,
    "lines": 40,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-turn-movement-audit",
    "area": "t10-turn-movement-audit",
    "overlap": null
@@ -4925,7 +4925,7 @@
    "start": 42585,
    "end": 42760,
    "lines": 176,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-turn-movement-audit",
    "area": "t10-turn-movement-audit",
    "overlap": null
@@ -4936,7 +4936,7 @@
    "start": 42761,
    "end": 42771,
    "lines": 11,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-turn-movement-audit",
    "area": "t10-turn-movement-audit",
    "overlap": null
@@ -4969,7 +4969,7 @@
    "start": 42912,
    "end": 43096,
    "lines": 185,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-turn-movement-audit",
    "area": "t10-turn-movement-audit",
    "overlap": null

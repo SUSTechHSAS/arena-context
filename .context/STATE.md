@@ -1,7 +1,7 @@
 # Current handoff
 
 - Task: #10
-- Unit: Integration P2 — save envelope (P2 complete)
+- Unit: Integration P3 — turn actors
 - Work branch / PR: arena/5d1da57f-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/30
 - Accepted base at unit start: task/10/main@380470815a435dbe7f9a28f8ce2dffb9bfc14761 (PR #27 merged)
 - Inherited candidate at unit start: ebd5eb0642e730030c6656e26a34fb704602e176 (PR #30 review checkpoint, merged with the accepted head)
@@ -20,11 +20,12 @@ Modern rewrite of chinese-dungeon with source-consistency tests (TASK.md). PR #2
 
 ## Candidate progress
 
-- I1 coverage audit: `scripts/task10-coverage.mjs` → docs/task-10/COVERAGE.md + coverage-ledger.json (now 17.5 % of source lines ported, 49.4 % open implementation packets, 25.7 % audit-only, 7.5 % unassigned). PLAN phases P1–P8; DECISIONS K1–K3.
+- I1 coverage audit: `scripts/task10-coverage.mjs` → docs/task-10/COVERAGE.md + coverage-ledger.json (now 21.2 % of source lines ported, 49.4 % open implementation packets, 25.7 % audit-only, 7.5 % unassigned). PLAN phases P1–P8; DECISIONS K1–K3.
 - I2 (P1): `app/src/game/runtime/class-registry.ts` — session `SourceClassRegistry` replacing `window[类名]`/`constructor.name` (exact 241 names of `注册全局类`, ports bound at definition, `isA`/`nameOf`/`globals`); `vite.config.ts` keepNames (K1).
 - I3 (P2): `app/src/game/runtime/save-items-cells.ts` — `序列化物品`, `恢复物品`, `序列化单元格`, `恢复单元格`. SRC-45 (registry refuses browser globals named by tampered saves) recorded as Fixed (primary decision).
 - I4 (P2): `app/src/game/runtime/save-monsters.ts` — `序列化怪物`, `恢复怪物`; registry `className`. SRC-46 (cooldown key mismatch, attack fallback) preserved for owner review.
 - I5 (P2): `app/src/game/runtime/save-floors.ts` — `序列化楼层`, `恢复楼层`; doors via registry `门` (GameDoor + session ports). SRC-47 (TDZ destructuring defaults drop floors missing 玩家位置/已揭示洞穴格子/地牢生成方式) preserved for owner review.
+- I7 (P3): `app/src/game/runtime/turn-actors.ts` — `检查移动可行性`, `获取实际移动步数`, `更新武器冷却`, `处理宠物着陆效果`, `伤害玩家`, `处理怪物回合` over registry `isA` and the `world/move.ts` session. SRC-49 (undefined `效果颜色编号编号映射` makes pet fire/poison landing throw) and SRC-50 (damage statistic only counted while auto-move interruption is on) preserved for owner review.
 - I6 (P2): `app/src/game/runtime/save-envelope.ts` — `保存游戏状态`, `恢复游戏状态`, `导出存档`, `导入存档`; `SaveEnvelopeSession` types UI/camera/editor globals. SRC-48 (monster effects on other floors lost on load, position-matched effects, guard order, unguarded editor key, dropped 已放置配方卷轴) preserved for owner review.
 
 ## Verification
@@ -34,6 +35,7 @@ Modern rewrite of chinese-dungeon with source-consistency tests (TASK.md). PR #2
 - I4: 300 seeded sessions equal to the source; 12/12 mutants killed after strengthening one input.
 - I5: 200 seeded sessions equal to the source; 39/41 probes killed (1 equivalent dead branch, 1 no-op probe).
 - I6: 200 seeded sessions equal to the source; 45/47 probes killed (2 equivalent).
+- I7: 300 seeded sessions equal to the source; 50/52 probes killed (2 equivalent).
 - Full suite with I2: 70 files / 333 tests passed; after I3: typecheck, reference checks, build and the runtime tests pass (full suite rerun next unit; it takes ~15 min on this 2-CPU sandbox).
 
 ## Blockers and unresolved owner feedback
@@ -42,4 +44,4 @@ No owner response yet to the PR #27 review comment (process questions: oracle pa
 
 ## Next action
 
-P3 turn actors (`处理怪物回合`, `伤害玩家`, `检查移动可行性`, `获取实际移动步数`, `处理宠物着陆效果`, `更新武器冷却`), starting with an audit of which collaborators are already ported vs packet-owned.
+P4 inventory verbs (`使用物品`, `丢弃物品`, `拾取物品`, equip/unequip and the `inventory-actions` unassigned block), starting with an audit of collaborators already ported vs packet-owned.

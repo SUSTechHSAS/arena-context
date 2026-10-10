@@ -32,6 +32,12 @@ Phases P1–P8 of PLAN.md "Integration plan after PR #27". Modules live under `a
     - #4: `已放置配方卷轴` is never read by `序列化楼层` (SRC-48 (5));
     - #15: `游戏版本 && 游戏版本 > 1534` vs `游戏版本 > 1534`.
   - Four survivors of the first pass were killed after strengthening the scenario (non-numeric floor keys, survival backups pointing at stored-floor monsters, boundary HP values, bar widths recorded).
+- **I7 — turn actors (P3)** — `runtime/turn-actors.ts` (`createTurnActors`: `检查移动可行性`, `获取实际移动步数`, `更新武器冷却`, `处理宠物着陆效果`, `伤害玩家`, `处理怪物回合`). Every `instanceof` goes through the session class registry. The move queue / auto-move flag come from the `world/move.ts` session. The line check, logs, floating text, notices, status effects, landing, viewport, death, challenge area, potion water, animation table and tracker HUD are ports. Test: `app/test/runtime-turn-actors.test.ts`.
+  - Evidence: 300 seeded sessions. Each builds a real source `单元格` vs `GameCell` 5×5 grid (walls, locked doors, water, colour bricks, fences, switch bricks, webs/nets, fire/poison, potions, smoke, stelae, conveyors), room map, equipment pages (water shoes, horses, arsonist, defensive gear with fused dodge buffs, guardian armour, pets, empty bucket, stealth boots, gold-material items), weapons/hooks with cooldowns and 2–9 monsters of all seven special kinds with status-table entries. It then runs 60 move checks (half diagonal, including out-of-range and inconsistent `地牢大小`), step count, cooldown tick, 3 pet landings, 8 damage events (fire/lava/bomb/monster/meteor staff/unknown, 0/negative/fractional damage, knockback) and 2 monster turns (stub monsters call `伤害玩家` back and may die mid-turn). Results, thrown errors (including the SRC-49 ReferenceError), every port call in order, seeded draws and all 25 touched page globals match the source. A tally asserts that 46 branch markers are reached; `格挡` is not asserted because it needs a seeded draw below 0.005 after full absorption.
+  - Mutation probe: 52 probes, 50 killed. Two are equivalent:
+    - #6: the horizontal wall check inside the diagonal walk is dead (straight lines go to `快速直线检查`, so `垂直移动` is always true there);
+    - #17: `闪避率 || 0` vs `?? 0`, since `<` coerces every falsy value the same way.
+  - Four survivors of the first pass were killed after strengthening the scenario (diagonal walks with more switch bricks, diagonal knockback sources, `基础移动距离` recorded in move calls, cells typed other than 怪物 under dead monsters).
 
 ## World kernel (primary lane, PR #27) — 2026-10-10
 
