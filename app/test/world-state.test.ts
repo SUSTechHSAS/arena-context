@@ -21,7 +21,7 @@ describe('session world state mirrors source global initial values', () => {
   const read = sourceGlobals(['地牢大小', ...keys]);
 
   it('covers the intended gameplay/persisted globals, each a real top-level source declaration', () => {
-    expect(keys.length).toBe(98);
+    expect(keys.length).toBe(100);
     expect(new Set(keys).size).toBe(keys.length);
   });
   for (const key of keys) {

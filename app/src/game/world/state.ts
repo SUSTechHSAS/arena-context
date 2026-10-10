@@ -103,6 +103,7 @@ export function createWorldState<Item = unknown, Monster = unknown, Room = unkno
     上次放置的开关脉冲器: null as unknown, 上次放置的隐形毒气陷阱: null as unknown,
     怪物状态表: new WeakMap<object, unknown>(), 宠物状态表: new WeakMap<object, unknown>(), 跟踪玩家怪物数: 0,
     游戏事件日志: [] as unknown[], 游戏开始时间: null as number | null, 日志历史: [] as unknown[],
+    NPC互动中: false, 当前NPC: null as unknown,
     // Fusion and procedural recipes
     融合区物品: [null, null, null, null] as (Item | null)[], 融合结果: null as unknown, fusionGoldQuantities: [0, 0, 0, 0],
     当前匹配的融合配方: null as unknown, 已发现的程序生成配方: [] as unknown[], 程序生成配方列表: [] as unknown[],
