@@ -20,12 +20,12 @@ Modern rewrite of chinese-dungeon with source-consistency tests (TASK.md). The 1
 
 ## Candidate progress
 
-This session: took over PR #19 on this successor branch (fast-forward only, all inherited files preserved), then built the main-game **world kernel** in `app/src/game/world/`, 37 units so far:
+This session: took over PR #19 on this successor branch (fast-forward only, all inherited files preserved), then built the main-game **world kernel** in `app/src/game/world/`, 38 units so far:
 - constants, cell, state, reset, lighting, helpers
 - placement (items and monsters), targeting, generation, cave, features, cave-dungeon (the `生成洞穴地牢` orchestrator)
-- room-content, special-rooms (incl. `生成特殊房间`), drops, item-generation (`生成物品`, `物品生成配置`, `检查防化服防护`), monster-generation (`生成怪物`), theme-rooms (jar/plant/potion/library content, `生成推箱子谜题`), puzzle-board (`生成解谜棋盘`), turn (`处理回合逻辑`, `玩家等待`, `开始休息`, `停止休息`), landing (`处理玩家着陆效果`, `更新洞穴视野`), floor-switch (`切换楼层`), respawn (`处理重生`), move (`移动玩家`), interact (`尝试互动`), dungeon (`生成地牢`, `生成寻宝戒指`), dungeon-support (`计算距离图`, `处理上锁的门`, `生成并放置随机配方卷轴`, `检查推箱子解谜完成`, `解谜成功_推箱子`), red-blue-puzzle (`生成红蓝开关谜题`), chess-puzzle (`检查解谜是否成功`, `解谜成功`), weather core (`处理天气效果`, `生成天气效果`, `是否靠近火源`, `解冻药水`, `处理严寒效果`), thunderstorm (`处理雷暴效果`), environment (`全局生成环境`, `生成环境簇`), hazards (`引燃烟雾网络`, `引爆烟雾网络`, `触发药水水域效果`), wind (`处理大风效果`, `尝试执行吹动`), victory (`检查胜利条件`)
+- room-content, special-rooms (incl. `生成特殊房间`), drops, item-generation (`生成物品`, `物品生成配置`, `检查防化服防护`), monster-generation (`生成怪物`), theme-rooms (jar/plant/potion/library content, `生成推箱子谜题`), puzzle-board (`生成解谜棋盘`), turn (`处理回合逻辑`, `玩家等待`, `开始休息`, `停止休息`), landing (`处理玩家着陆效果`, `更新洞穴视野`), floor-switch (`切换楼层`), respawn (`处理重生`), move (`移动玩家`), interact (`尝试互动`), dungeon (`生成地牢`, `生成寻宝戒指`), dungeon-support (`计算距离图`, `处理上锁的门`, `生成并放置随机配方卷轴`, `检查推箱子解谜完成`, `解谜成功_推箱子`), red-blue-puzzle (`生成红蓝开关谜题`), chess-puzzle (`检查解谜是否成功`, `解谜成功`), weather core (`处理天气效果`, `生成天气效果`, `是否靠近火源`, `解冻药水`, `处理严寒效果`), thunderstorm (`处理雷暴效果`), environment (`全局生成环境`, `生成环境簇`), hazards (`引燃烟雾网络`, `引爆烟雾网络`, `触发药水水域效果`), wind (`处理大风效果`, `尝试执行吹动`), victory (`检查胜利条件`), Q easter egg (`检查Q字形彩蛋`, `触发Q字形彩蛋`)
 
-Each module has an `app/test/world-*.test.ts` differential test against the exact source declarations, with mutation checks. Per-unit evidence is in `docs/task-10/VERIFICATION.md` § World kernel. Preserved source quirks are DEVIATIONS SRC-01…SRC-26. Packet-owned collaborators stay behind typed ports.
+Each module has an `app/test/world-*.test.ts` differential test against the exact source declarations, with mutation checks. Per-unit evidence is in `docs/task-10/VERIFICATION.md` § World kernel. Preserved source quirks are DEVIATIONS SRC-01…SRC-27. Packet-owned collaborators stay behind typed ports.
 
 ## Verification
 

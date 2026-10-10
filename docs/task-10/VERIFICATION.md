@@ -143,6 +143,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 37** — `world/victory.ts`: `检查胜利条件` (creative-level victory gate). Notification and the victory screen are ports. Tests: `app/test/world-victory.test.ts`.
   - Evidence: 1500 seeded runs × 12 checks match the source: disabled/negative/string/missing limits, values exactly at each boundary, fractional damage and health formatting, negative health, all four failure messages combined.
   - Mutation: 14 mutants run, all detected (the minimum-health guard needed negative health). DEVIATIONS SRC-26.
+- **Unit 38** — `world/easter-eggs.ts`: `检查Q字形彩蛋` and `触发Q字形彩蛋`, plus the `Q字形图案` constant (checked in `world-kernel.test.ts`). Timer, compass creation, collection, cell effects and notifications are ports. Tests: `app/test/world-easter-eggs.test.ts`.
+  - Evidence: 1000 seeded sessions × 4 drops match the source: stamped Q patterns (clean, with unpickable `X` items or stray items in blanks) at several offsets, drops on every `X` and off-pattern/off-map, smaller maps, sparse grids, `undefined` items (throws), already-triggered flags, successful/failed/truthy pickups after the timer.
+  - Mutation: 18 mutants run, all detected. DEVIATIONS SRC-27.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
