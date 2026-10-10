@@ -175,6 +175,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 47** — `world/tutorial-nav.ts` (`获取上一个有效阶段`, `获取下一个有效阶段`; `获取教程文本` is a port of the audit-only packet `t10-tutorial-professions-audit`) and `world/wrench.ts` (`应用扳手规则`; `应用单个扳手规则` and `绘制` are ports of the audit-only packet `t10-editor-tools-audit`). Tests: `app/test/world-tutorial-wrench.test.ts`.
   - Evidence: 600 seeded runs × 12 rounds match the source, covering random known-stage sets, stages -1/0/0.5/2/2.5/2.4/3.7/6/7/`NaN`/`'2'`/`'3'`, rule lists null/empty/arrays/array-likes/strings, and targets with a name, a type, falsy values or `null`. Every result kind is reached, including throws.
   - Mutation: 12 mutants, 11 detected; the survivor (`Math.max(0, x)` vs `x < 0 ? 0 : x`) is equivalent for every value the loop can produce. DEVIATIONS SRC-34.
+- **Unit 48** — `world/edge-indicator.ts`: `计算精确边缘位置` as a pure function of camera, cell size, canvas rect and player (the camera belongs to the audit-only area `t10-minimap-camera-audit`). Tests: `app/test/world-edge-indicator.test.ts`.
+  - Evidence: 20 000 random cases match the source exactly (`Object.is` on both coordinates). They include zero/negative cell sizes, zero-size canvases, fractional rects and offsets, a monster on the player and `NaN` positions; more than 500 cases each give `null`, a point and in-view.
+  - Mutation: 12 mutants, 7 detected. The 5 survivors are equivalent: `!length` vs `=== 0` (a `NaN` length ends in `null` either way); `min` on the right edge (left and right are exclusive); the `Infinity` sentinel vs `> 1e9`; and two boundary ties at exact corners, where the adjacent edge yields the same `t`. DEVIATIONS SRC-35.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
