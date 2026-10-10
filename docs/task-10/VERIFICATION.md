@@ -85,6 +85,13 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
     - boss/final/sunken floors, prng burn, weather schedules, awaited `生成地牢`, blink pets, the completion callback, level-up gating, the 500 ms mercenary re-entry
     - settle outcomes `ok` / `rejected` / `pending`
   - Mutation: 24 mutants run, 22 detected; the 2 survivors are equivalent (the unused snapshot clone; optional-call on a non-function callback). DEVIATIONS SRC-13.
+- **Unit 25** — `world/respawn.ts`: `处理重生(保留物品)`. Phantom-room refresh, challenge failure/restore, socket, buffs, position checks, path search, floor switch, tutorial entry, DOM mask and UI refreshes are ports; class checks (`挑战石碑`, `王座守护者`) are injected. Tests: `app/test/world-respawn.test.ts`.
+  - Evidence: 400 seeded sessions (3 deaths each) match the source:
+    - editor/victory/codex guards, challenge failure by array index, `typeof socket` + `connected` short-circuit, survival-stele reward and room flag reset
+    - death record, HP/energy reset, status removal, scroll unequip during `forEach`, buff application order (state logged at call time)
+    - cave/maze random respawn (checkpoint, revealed cells, visited rooms), floor-5 corridor search, floor-15 room search incl. the 50-rejection fallback, weapon cooldown reset
+    - full reset path (`切换楼层(0, true, …)` with callback, tutorial entry), off-grid throws
+  - Mutation: 33 mutants run, 31 detected (removing the floor-15 `i++` hangs the worker); the 2 survivors are equivalent (the editor `return` is repeated by the next guard; `房间列表[-1]` is undefined). DEVIATIONS SRC-14.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
