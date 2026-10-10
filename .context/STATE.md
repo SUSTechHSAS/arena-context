@@ -20,10 +20,10 @@ Modern rewrite of chinese-dungeon with source-consistency tests (TASK.md). The 1
 
 ## Candidate progress
 
-This session: took over PR #19 on this successor branch (fast-forward only, all inherited files preserved), then built the main-game **world kernel** in `app/src/game/world/`, 19 units so far:
+This session: took over PR #19 on this successor branch (fast-forward only, all inherited files preserved), then built the main-game **world kernel** in `app/src/game/world/`, 20 units so far:
 - constants, cell, state, reset, lighting, helpers
 - placement (items and monsters), targeting, generation, cave, features, cave-dungeon (the `生成洞穴地牢` orchestrator)
-- room-content, special-rooms (incl. `生成特殊房间`), drops, item-generation (`生成物品`, `物品生成配置`, `检查防化服防护`), monster-generation (`生成怪物`), theme-rooms (jar/plant/potion/library content)
+- room-content, special-rooms (incl. `生成特殊房间`), drops, item-generation (`生成物品`, `物品生成配置`, `检查防化服防护`), monster-generation (`生成怪物`), theme-rooms (jar/plant/potion/library content, `生成推箱子谜题`)
 
 Each module has an `app/test/world-*.test.ts` differential test against the exact source declarations, with mutation checks. Per-unit evidence is in `docs/task-10/VERIFICATION.md` § World kernel. Preserved source quirks are DEVIATIONS SRC-01…SRC-10. Packet-owned collaborators stay behind typed ports.
 
@@ -38,4 +38,4 @@ No owner comments on PR #19 or #27. Full game, UI, saves and services remain unf
 
 ## Next action
 
-Continue the world kernel with the remaining unassigned logic (next: `生成解谜棋盘` / `生成推箱子谜题` if no packet owns them, then turn/movement orchestrators), checking packet anchors first. RNG wiring (`初始化随机数生成器`) belongs to `t10-seed-search` and is left there.
+Continue the world kernel with the remaining unassigned logic (next: `生成解谜棋盘` if no packet owns it, then turn/movement orchestrators), checking packet anchors first. RNG wiring (`初始化随机数生成器`) belongs to `t10-seed-search` and is left there.

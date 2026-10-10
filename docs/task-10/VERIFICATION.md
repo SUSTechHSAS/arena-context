@@ -50,6 +50,12 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
   - Mutation: 16 mutants run, 15 detected; the 16th was an intentional no-op control and passed as expected. DEVIATIONS SRC-10.
 - **Unit 19** — `world/theme-rooms.ts`: `生成罐子房间内容`, `生成植物房间内容`, `生成药水房内容`, `生成书库房间内容`. Packet classes come from a catalog. Tests: `app/test/world-theme-rooms.test.ts`.
   - Evidence: 300 seeded room sets match the source (negative coordinates, null weighted picks, sparse and empty potion pools, constructor-versus-prng order, every class reached). Eleven mutants run, nine detected; the two survivors are equivalent. `Math.abs` parity is equivalent because `-2 % 2 === -0 === 0` and odd sums stay non-zero. Inlining the stack count keeps the same evaluation order.
+- **Unit 20** — `world/theme-rooms.ts`: `生成推箱子谜题` (async). Solver, walls, box/target classes, the sift flag and notices are ports. Tests: `app/test/world-sokoban-room.test.ts`.
+  - Evidence: 400 seeded runs match the source:
+    - null/absent rooms, small rooms, editor and sift fallbacks
+    - generator constructor throws (rejects) versus solver throws, rejections, sync results, `成功` falsy or missing level (fallback)
+    - short boards (TypeError caught), off-grid carving, wall count at `生成墙壁`, target-before-box order, placement throws inside the try, room mutation before clearing failures
+  - Mutation: 13 mutants run, 12 detected; the 13th was a no-op control and passed as expected.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 

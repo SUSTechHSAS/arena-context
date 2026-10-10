@@ -1,3 +1,4 @@
+import { 单元格类型 } from './constants';
 import type { WorldState } from './state';
 
 type Loose = any; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -72,4 +73,71 @@ export function generateLibraryRoom(_state: WorldState, ports: ThemeRoomPorts, r
   for (let i = 0; i < shelfCount; i++) ports.placeItemInRoom(new catalog.书架({ 有内容: ports.random() < 0.2 }), room);
   const monsterCount = Math.floor(room.w * room.h * (0.1 + ports.random() * 0.2));
   for (let i = 0; i < monsterCount; i++) ports.placeMonsterInRoom(new catalog.伪装怪物({ 伪装成: '书架' }), room);
+}
+
+/** Level returned by the packet-owned `推箱子关卡生成器#生成关卡` (packet `t10-sokoban-solver`). */
+export interface SokobanLevelResult { 成功?: unknown; 关卡?: { board: string[][]; targets: { x: number; y: number }[]; boxes: { x: number; y: number }[] } }
+
+export interface SokobanRoomPorts {
+  /** Source `清空房间内容(room)` (`world/placement.ts#clearRoomContents`). */
+  clearRoom(room: Loose): void;
+  /** Page flag `isSifting` (seed search, packet `t10-seed-search`). */
+  isSifting(): unknown;
+  /** Fallback filler: source `生成罐子房间内容(room)` (`generateJarRoom`). */
+  generateJarRoom(room: Loose): void;
+  log(message: string, type: string): void;
+  /** Source `new 推箱子关卡生成器(w, h, options)`. */
+  createGenerator(width: number, height: number, options: { maxSolverIterations: number; maxNodesInMemory: number }): { 生成关卡(attempts: number): unknown };
+  /** Source `生成墙壁()` (packet `t10-main-room-geometry`). */
+  generateWalls(): void;
+  placeItemAt(item: unknown, x: number, y: number): unknown;
+  /** Source classes `推箱子目标` and `推箱子箱子` (packet `t10-display-logic-items`). */
+  catalog: { 推箱子目标: new () => Loose; 推箱子箱子: new () => Loose };
+  diagnostic(message: string, error: unknown): void;
+  notify(message: string, type: string, flag: true): void;
+}
+
+/**
+ * Source `async 生成推箱子谜题(目标房间, 编辑器模式 = false)`: clears and retypes the room, then carves the generated
+ * level into the grid. Small rooms, editor mode and seed sifting fall back to jars, and so does any failure after the
+ * generator starts (the whole carve runs inside the source try block).
+ */
+export async function generateSokobanRoom(state: WorldState, ports: SokobanRoomPorts, room: Loose, editorMode: Loose = false): Promise<void> {
+  if (!room) return;
+  ports.clearRoom(room);
+  room.类型 = '隐藏推箱子房间';
+  room.解谜已完成 = false;
+  const width = room.w;
+  const height = room.h;
+  if (width < 5 || height < 5 || editorMode || ports.isSifting()) {
+    ports.generateJarRoom(room);
+    return;
+  }
+  ports.log('正在构建一个古老的谜题...', '信息');
+  const generator = ports.createGenerator(width, height, { maxSolverIterations: 200, maxNodesInMemory: 20000 });
+  try {
+    const result = await generator.生成关卡(150) as SokobanLevelResult | null | undefined;
+    if (result && result.成功 && result.关卡) {
+      const level = result.关卡;
+      const grid = state.地牢 as Loose[][];
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          if (level.board[y]![x] === 'wall') {
+            const cell = grid[room.y + y]?.[room.x + x];
+            if (cell) cell.背景类型 = 单元格类型.墙壁;
+          }
+        }
+      }
+      ports.generateWalls();
+      level.targets.forEach(pos => { ports.placeItemAt(new ports.catalog.推箱子目标(), room.x + pos.x, room.y + pos.y); });
+      level.boxes.forEach(pos => { ports.placeItemAt(new ports.catalog.推箱子箱子(), room.x + pos.x, room.y + pos.y); });
+      ports.log('古老的谜题形成了！', '成功');
+    } else {
+      throw new Error('生成器未能产出有效关卡。');
+    }
+  } catch (error) {
+    ports.diagnostic('生成推箱子谜题时发生错误:', error);
+    ports.notify('谜题构建失败，空间似乎不稳定。', '错误', true);
+    ports.generateJarRoom(room);
+  }
 }
