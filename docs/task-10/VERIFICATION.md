@@ -125,6 +125,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 31** — `world/chess-puzzle.ts`: `检查解谜是否成功(棋子数量)` and `解谜成功(房间)`. Rewards, notifications, drawing and `window[类名]` are ports; the `棋子` class check is injected and pieces keep their own `可攻击位置`. Tests: `app/test/world-chess-puzzle.test.ts`.
   - Evidence: 800 seeded sessions match the source: off-board players, rooms by array index with shuffled ids, non-board rooms, stacked pieces, piece counts (`0`, `undefined`, above/below present), attack-board contents and mutual attacks, custom/missing/default rewards.
   - Mutation: 20 mutants run, 19 detected; the survivor is equivalent (optional chaining on an off-grid room-map row still throws a `TypeError` one read later). DEVIATIONS SRC-20.
+- **Unit 32** — `world/weather.ts`: `处理天气效果`, `生成天气效果`, `是否靠近火源`, `解冻药水` and `处理严寒效果` (the weather-terrain audit's core ranges). Thunderstorm/wind handlers, status effects, icons, logs, notifications and inventory refresh are ports; class checks are injected. Tests: `app/test/world-weather.test.ts`.
+  - Evidence: 800 seeded sessions × 3 worlds × 5 random operations match the source, including the injected `prng` call sequence: weather off/on, every notification, water freezing over sparse/short grids, burning player or equipped torch (with and without `自定义数据`), equipment pages, fire items, dropped/held floor torches, burning monsters, off-grid targets, potion freezing/thawing.
+  - Mutation: 31 mutants run, 30 detected; the survivor is equivalent (swapping the two side-effect-free conditions before the freeze roll). DEVIATIONS SRC-21.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
