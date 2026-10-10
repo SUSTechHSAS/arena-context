@@ -52,7 +52,7 @@ const walk = dir => { for (const e of readdirSync(dir, { withFileTypes: true }).
 walk(root + 'app/src');
 const src = srcText.join('\n');
 const esc = x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const OVERRIDES = { 状态效果: 'app/src/game/status-effect.ts', 门: 'app/src/game/door.ts', 物品: 'app/src/game/item-core.ts', 防御装备类: 'app/src/game/armor.ts', 生成玩家距离图: 'app/src/domain/distance-map.ts' };
+const OVERRIDES = { 注册全局类: 'app/src/game/runtime/class-registry.ts', 状态效果: 'app/src/game/status-effect.ts', 门: 'app/src/game/door.ts', 物品: 'app/src/game/item-core.ts', 防御装备类: 'app/src/game/armor.ts', 生成玩家距离图: 'app/src/domain/distance-map.ts' };
 const srcLines = src.split('\n');
 const citedPort = n => {
   const re = new RegExp('[Ss]ource `(async |new )?' + n + '[`( ]');

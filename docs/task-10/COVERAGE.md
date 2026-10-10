@@ -10,9 +10,9 @@ Scope: the 757 top-level statements of the main page that declare a function, cl
 
 | Status | Declarations | Source lines | Share of lines |
 | --- | ---: | ---: | ---: |
-| Ported in `app/src` (foundation + primary world kernel) | 147 | 9892 | 16.4% |
+| Ported in `app/src` (foundation + primary world kernel) | 152 | 10533 | 17.5% |
 | Assigned to a secondary implementation packet, not yet ported | 304 | 29786 | 49.4% |
-| Covered only by an audit packet: implementation is primary/integration work | 159 | 16098 | 26.7% |
+| Covered only by an audit packet: implementation is primary/integration work | 154 | 15457 | 25.7% |
 | No packet: primary/integration work (mostly DOM UI) | 133 | 4069 | 6.8% |
 | Top-level DOM event listeners (input/UI wiring) | 14 | 397 | 0.7% |
 | **Total** | 757 | 60242 | 100% |
@@ -37,12 +37,12 @@ Every declaration below is neither ported nor owned by an implementation packet.
 | windows-menus | 35 | 1366 | `初始化背包事件监听` (175), `显示楼层选择窗口` (94), `打开配方书` (86), `更新胜利条件显示` (84), `显示修复界面` (81), `刷新传送菜单` (75), `打开收购窗口` (74), `打开传送菜单` (68), … |
 | t10-main-canvas-audit | 8 | 1239 | `绘制` (529), `单元格` (371), `动画帧` (210), `drawIcon` (53), `获取单元格字符` (24), `获取字体预设` (19), `同步Ctx缓存到真实值` (18), `获取单元格类名` (15) |
 | t10-minimap-camera-audit | 14 | 982 | `绘制大地图` (398), `绘制小地图` (255), `大地图拖拽开始` (72), `更新视口` (53), `打开大地图` (37), `大地图点击信息` (29), `关闭大地图` (24), `居中大地图` (24), … |
-| t10-script-facade-audit | 7 | 944 | `调试工具` (438), `注册全局类` (266), `获取所有可用的定义` (100), `进度条元素` (65), `文本元素` (35), `自定义NPC` (20), `界面元素基类` (20) |
 | t10-save-envelope-audit | 8 | 896 | `恢复游戏状态` (359), `保存游戏状态` (268), `应用所有设置` (83), `保存并应用设置` (50), `导出存档` (43), `保存全局设置` (39), `导入存档` (33), `加载设置` (21) |
 | t10-menus-inventory-ui-audit | 10 | 874 | `显示死亡界面` (252), `更新背包显示` (120), `初始化装备系统` (104), `更新装备显示` (104), `显示结算界面` (88), `显示通知` (59), `显示胜利界面` (59), `显示主菜单` (46), … |
 | t10-editor-tools-audit | 13 | 759 | `编辑器放置逻辑` (294), `创建并放置房间` (98), `编辑器粘贴选区` (58), `油漆桶填充` (50), `应用单个扳手规则` (50), `笔刷绘制` (44), `编辑器复制选区` (40), `推开生物` (34), … |
 | t10-tutorial-professions-audit | 9 | 717 | `显示职业选择界面` (147), `获取教程文本` (143), `生成教程地牢` (116), `显示自定义游戏界面` (116), `启动游戏` (92), `应用职业效果` (46), `重置玩家状态` (27), `进入教程层` (15), … |
 | t10-inventory-actions-audit | 12 | 701 | `使用装备槽物品` (95), `使用背包物品` (84), `尝试出售` (78), `处理丢弃物品` (76), `执行重铸` (74), `处理销毁物品` (63), `尝试收集物品` (58), `整理背包` (48), … |
+| t10-script-facade-audit | 6 | 678 | `调试工具` (438), `获取所有可用的定义` (100), `进度条元素` (65), `文本元素` (35), `自定义NPC` (20), `界面元素基类` (20) |
 | t10-save-floors-audit | 2 | 657 | `恢复楼层` (467), `序列化楼层` (190) |
 | editor | 22 | 604 | `填充编辑器背包` (236), `更新扳手规则窗口` (69), `更新编辑器快速访问栏` (45), `初始化编辑器工具栏` (44), `设置编辑器选中项` (41), `打开扳手规则窗口` (38), `应用编辑器工具栏模式` (35), `显示编辑器教程` (28), … |
 | t10-socket-contract-audit | 3 | 522 | `初始化Socket连接` (461), `构建联机设置窗口` (41), `执行联机连接` (20) |
@@ -54,7 +54,6 @@ Every declaration below is neither ported nor owned by an implementation packet.
 | t10-portal-runtime-audit | 8 | 403 | `处理沉浸式传送门` (119), `处理传送带效果` (110), `执行传送` (63), `保存传送点` (53), `寻找传送带最远可达点` (30), `寻找传送出口` (11), `查找配对传送门` (9), `删除传送点` (8) |
 | t10-save-monsters-audit | 2 | 401 | `序列化怪物` (208), `恢复怪物` (193) |
 | dom-listeners | 14 | 397 | `document:keydown` (119), `canvas:wheel` (90), `document:click` (45), `document:keyup` (44), `读取存档按钮:click` (28), `window:load` (24), `document.getElementById('联机按钮':click` (10), `canvas:mousedown` (9), … |
-| t10-save-items-cells-audit | 4 | 375 | `序列化物品` (116), `恢复单元格` (106), `恢复物品` (88), `序列化单元格` (65) |
 | t10-input-hud-audit | 13 | 371 | `控制键处理移动` (57), `startAutoMove` (51), `handleCanvasTouchMove` (48), `handleCanvasTouchStart` (46), `handleCanvasWheelZoom` (44), `handleCanvasTouchEnd` (34), `processSwipeMove` (25), `切换HUD模式` (23), … |
 | workshop-levels | 9 | 349 | `显示关卡详情` (105), `刷新关卡列表` (80), `显示创意关卡浏览器` (50), `隐藏创意关卡浏览器` (29), `隐藏关卡详情` (27), `关闭种子筛选器窗口` (19), `打开种子筛选器窗口` (16), `关闭联机设置窗口` (12), … |
 | t10-challenge-runtime-audit | 6 | 316 | `生成挑战房间怪物` (93), `开始挑战` (80), `处理挑战失败` (49), `完成挑战` (46), `刷新挑战房间下一波` (26), `恢复挑战区域` (22) |
@@ -63,7 +62,7 @@ Every declaration below is neither ported nor owned by an implementation packet.
 | t10-cdn-bootstrap-audit | 6 | 157 | `初始化创意工坊` (57), `初始化canvas` (30), `checkCdnAvailability` (26), `getIconHTML` (20), `fetchAndCacheEmoji` (19), `getIconChar` (5) |
 | big-map | 9 | 122 | `大地图悬停信息` (22), `切换大地图标记模式` (21), `切换大地图传送模式` (21), `切换大地图楼层` (15), `添加大地图事件监听` (11), `移除大地图事件监听` (11), `更新大地图楼层显示` (8), `大地图滚轮缩放` (8), … |
 
-Backlog total: 306 declarations, 20564 source lines.
+Backlog total: 301 declarations, 19923 source lines.
 
 ## Implementation packets still open
 

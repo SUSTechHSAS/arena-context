@@ -448,7 +448,7 @@
    "start": 3205,
    "end": 3470,
    "lines": 266,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-script-facade-audit",
    "area": "t10-script-facade-audit",
    "overlap": null
@@ -7389,7 +7389,7 @@
    "start": 56507,
    "end": 56571,
    "lines": 65,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-save-items-cells-audit",
    "area": "t10-save-items-cells-audit",
    "overlap": null
@@ -7400,7 +7400,7 @@
    "start": 56573,
    "end": 56678,
    "lines": 106,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-save-items-cells-audit",
    "area": "t10-save-items-cells-audit",
    "overlap": null
@@ -7411,7 +7411,7 @@
    "start": 56680,
    "end": 56795,
    "lines": 116,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-save-items-cells-audit",
    "area": "t10-save-items-cells-audit",
    "overlap": null
@@ -7444,7 +7444,7 @@
    "start": 57210,
    "end": 57297,
    "lines": 88,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-save-items-cells-audit",
    "area": "t10-save-items-cells-audit",
    "overlap": null
