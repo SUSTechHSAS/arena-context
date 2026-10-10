@@ -118,3 +118,65 @@ export function handleOneWayRoom(state: WorldState, ports: OneWayRoomPorts, oldX
     }
   });
 }
+
+/** Source theme table inside `生成特殊房间`. */
+export const SPECIAL_ROOM_THEMES = [
+  { 类型: '隐藏解谜棋盘', 概率: 0.15 },
+  { 类型: '隐藏罐子房间', 概率: 0.25 },
+  { 类型: '隐藏植物房间', 概率: 0.2 },
+  { 类型: '隐藏书库房间', 概率: 0.25 },
+  { 类型: '隐藏药水房间', 概率: 0.15 },
+  { 类型: '隐藏推箱子房间', 概率: 0.2 },
+];
+
+export interface SpecialRoomGenerationPorts {
+  random(): number;
+  /** Source `加权随机选择` (packet `t10-spawn-selection`). */
+  weightedPick(options: readonly Loose[]): Loose;
+  /** Source `区域是否空闲` and `放置房间` (packet `t10-main-room-geometry`). */
+  isAreaFree(x: number, y: number, w: number, h: number): boolean;
+  placeRoom(room: Loose): void;
+  /** Theme content generators (`生成推箱子谜题(room, editor)`, `生成解谜棋盘`, `生成罐子房间内容`, `生成植物房间内容`, `生成书库房间内容`, `生成药水房内容`). */
+  generateSokoban(room: Loose, editorMode: boolean): unknown;
+  generatePuzzleBoard(room: Loose): void;
+  generateJarRoom(room: Loose): void;
+  generatePlantRoom(room: Loose): void;
+  generateLibraryRoom(room: Loose): void;
+  generatePotionRoom(room: Loose): void;
+}
+
+/**
+ * Source `async 生成特殊房间(编辑器模式 = false)`: one theme is drawn up front, then up to 100 square placements
+ * (side 7–9) are tried. The function stays async (no awaits) so a throwing theme generator rejects, as in the source.
+ */
+export async function generateSpecialRoom(state: WorldState, ports: SpecialRoomGenerationPorts, editorMode: Loose = false): Promise<void> {
+  let placed = false;
+  let attempts = 0;
+  const theme = ports.weightedPick(SPECIAL_ROOM_THEMES.map(t => ({ 值: t.类型, 权重: t.概率 })));
+  while (!placed && attempts < 100) {
+    attempts++;
+    const w = Math.floor(ports.random() * 3) + 7;
+    const h = w;
+    const x = Math.floor(ports.random() * (state.地牢大小 - w - 2)) + 1;
+    const y = Math.floor(ports.random() * (state.地牢大小 - h - 2)) + 1;
+    if (ports.isAreaFree(x, y, w, h)) {
+      const rooms = state.房间列表 as Loose[];
+      const room = { x, y, w, h, id: rooms.length, 门: [], 已连接: false, 类型: theme };
+      rooms.push(room);
+      rooms.sort((a, b) => a.id - b.id);
+      ports.placeRoom(room);
+      if (theme === '隐藏推箱子房间') {
+        (state.推箱子任务列表 as unknown[]).push(ports.generateSokoban(room, editorMode));
+      } else {
+        switch (theme) {
+          case '隐藏解谜棋盘': ports.generatePuzzleBoard(room); break;
+          case '隐藏罐子房间': ports.generateJarRoom(room); break;
+          case '隐藏植物房间': ports.generatePlantRoom(room); break;
+          case '隐藏书库房间': ports.generateLibraryRoom(room); break;
+          case '隐藏药水房间': ports.generatePotionRoom(room); break;
+        }
+      }
+      placed = true;
+    }
+  }
+}

@@ -38,6 +38,8 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
   - Evidence: 300 seeded worlds match the source, including originals kept in the graph so Map aliasing is observable. Eight mutants detected.
 - **Unit 16** — `world/item-generation.ts`: `物品生成配置` (graph-equal to the source declaration), `生成物品`, `检查防化服防护`. Tests: `app/test/world-item-generation.test.ts`.
   - Evidence: 300 seeded worlds match the source (locked multi-roll, clamp, depth weight, early room return, half-weight endpoints, empty room arrays, placement-failure diagnostics, suit durability, unbreakable suits, page slots, pet slot break). Thirteen mutants detected. DEVIATIONS SRC-09.
+- **Unit 17** — `world/special-rooms.ts`: `生成特殊房间` (async orchestrator). Geometry, weighted pick and theme generators are ports. Tests: `app/test/world-special-room-generation.test.ts`.
+  - Evidence: 400 seeded worlds match the source (theme drawn once, square 7–9 sizes, negative ranges on small maps, exhausted 100 attempts, id-then-sort with duplicate ids, unknown themes, sokoban push, rejection when a generator throws, thenable return). Nine mutants detected, including making the function synchronous.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
