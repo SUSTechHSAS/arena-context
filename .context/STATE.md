@@ -20,16 +20,16 @@ Modern rewrite of chinese-dungeon with source-consistency tests (TASK.md). The 1
 
 ## Candidate progress
 
-This session: took over PR #19 on this successor branch (fast-forward only, all inherited files preserved), then built the main-game **world kernel** in `app/src/game/world/`, 23 units so far:
+This session: took over PR #19 on this successor branch (fast-forward only, all inherited files preserved), then built the main-game **world kernel** in `app/src/game/world/`, 24 units so far:
 - constants, cell, state, reset, lighting, helpers
 - placement (items and monsters), targeting, generation, cave, features, cave-dungeon (the `生成洞穴地牢` orchestrator)
-- room-content, special-rooms (incl. `生成特殊房间`), drops, item-generation (`生成物品`, `物品生成配置`, `检查防化服防护`), monster-generation (`生成怪物`), theme-rooms (jar/plant/potion/library content, `生成推箱子谜题`), puzzle-board (`生成解谜棋盘`), turn (`处理回合逻辑`, `玩家等待`, `开始休息`, `停止休息`), landing (`处理玩家着陆效果`, `更新洞穴视野`)
+- room-content, special-rooms (incl. `生成特殊房间`), drops, item-generation (`生成物品`, `物品生成配置`, `检查防化服防护`), monster-generation (`生成怪物`), theme-rooms (jar/plant/potion/library content, `生成推箱子谜题`), puzzle-board (`生成解谜棋盘`), turn (`处理回合逻辑`, `玩家等待`, `开始休息`, `停止休息`), landing (`处理玩家着陆效果`, `更新洞穴视野`), floor-switch (`切换楼层`)
 
-Each module has an `app/test/world-*.test.ts` differential test against the exact source declarations, with mutation checks. Per-unit evidence is in `docs/task-10/VERIFICATION.md` § World kernel. Preserved source quirks are DEVIATIONS SRC-01…SRC-12. Packet-owned collaborators stay behind typed ports.
+Each module has an `app/test/world-*.test.ts` differential test against the exact source declarations, with mutation checks. Per-unit evidence is in `docs/task-10/VERIFICATION.md` § World kernel. Preserved source quirks are DEVIATIONS SRC-01…SRC-13. Packet-owned collaborators stay behind typed ports.
 
 ## Verification
 
-- Latest full `npm run check` with unit 16: reference hashes, integrity tests, strict types, 26 files / 260 tests and build all passed. Remote Protocol and Checkpoint last confirmed on 84495bf.
+- Latest full `npm run check` with unit 23 (b214e4a): reference hashes, integrity tests, strict types, 33 files / 268 tests and build all passed. Remote protocol check passed on b214e4a.
 - Per-unit evidence and mutation results are in VERIFICATION.md.
 
 ## Blockers and unresolved owner feedback
@@ -38,4 +38,4 @@ No owner comments on PR #19 or #27. Full game, UI, saves and services remain unf
 
 ## Next action
 
-Continue the world kernel with the remaining unassigned logic (next: 移动玩家, 尝试互动, 处理重生, 切换楼层 — checking packet anchors first), checking packet anchors first. RNG wiring (`初始化随机数生成器`) belongs to `t10-seed-search` and is left there.
+Continue the world kernel with the remaining unassigned logic (next: 移动玩家, 尝试互动, 处理重生, then the 生成地牢 orchestrator — checking packet anchors first), checking packet anchors first. RNG wiring (`初始化随机数生成器`) belongs to `t10-seed-search` and is left there.

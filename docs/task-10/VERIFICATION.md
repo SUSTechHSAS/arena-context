@@ -4,7 +4,7 @@ This records actual local commands, not owner acceptance. Reference pin: `8d80b5
 
 ## World kernel (primary lane, PR #27) — 2026-10-10
 
-Each unit ports unassigned main-page functions into `app/src/game/world/` and compares them with the exact source declarations, evaluated in a VM. Both realms run the same seeded world script, and packet-owned collaborators are injected as logged ports. Mutants were applied by hand and the originals restored. Preserved source quirks are DEVIATIONS SRC-01…SRC-12.
+Each unit ports unassigned main-page functions into `app/src/game/world/` and compares them with the exact source declarations, evaluated in a VM. Both realms run the same seeded world script, and packet-owned collaborators are injected as logged ports. Mutants were applied by hand and the originals restored. Preserved source quirks are DEVIATIONS SRC-01…SRC-13.
 
 - **Unit 1** — `world/constants.ts` (cell/env/colour/effect tables, weather list, versions, DEFAULT_* tunables) and `world/cell.ts` (`单元格` data contract + `获取物品颜色`). Tests: `app/test/world-kernel.test.ts`.
   - Evidence: 23 new tests pass; each of 20 declarations is graph-equal to the exact source AST declaration; the cell is graph-equal for 5 coordinate cases and colour lookup over 460 cases. Manual mutants (`||`→`??` fallback, swapped property order) both failed the suite; originals restored. `tsc --noEmit` clean.
@@ -78,6 +78,13 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
     - floors: tutorial staircase (array identity, monster cleanup), stairs `使用`, floor arguments, warp gates
     - rooms: one-way hand-off, room entry energy, challenge start, tutorial hint; cave vision radius and the editor guard; throwing old coordinates
   - Mutation: 21 mutants detected after the stubs were made to expose array identity and sign state. DEVIATIONS SRC-12.
+- **Unit 24** — `world/floor-switch.ts`: `切换楼层` (async). Timers, socket, DOM, generators and class checks are ports; `deepClone` is `world/helpers.ts`. Tests: `app/test/world-floor-switch.test.ts`.
+  - Evidence: 400 seeded sessions (3 switches each, timers fired manually) match the source:
+    - online paths, title texts, locator-map consumption, mercenary carry/expiry including the old minion array
+    - floor save/restore, the full-respawn and null-floor portal reset, target placement
+    - boss/final/sunken floors, prng burn, weather schedules, awaited `生成地牢`, blink pets, the completion callback, level-up gating, the 500 ms mercenary re-entry
+    - settle outcomes `ok` / `rejected` / `pending`
+  - Mutation: 24 mutants run, 22 detected; the 2 survivors are equivalent (the unused snapshot clone; optional-call on a non-function callback). DEVIATIONS SRC-13.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
