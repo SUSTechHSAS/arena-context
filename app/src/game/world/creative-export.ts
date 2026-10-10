@@ -18,7 +18,7 @@ export interface CreativeExportPorts {
 }
 
 /** Sloppy-mode property write: throws on null/undefined, silently ignored on other primitives (source is not strict). */
-function sloppySet(target: Loose, key: string, value: unknown): void {
+export function sloppySet(target: Loose, key: string, value: unknown): void {
   // null/undefined fall through to the native TypeError, exactly as the sloppy-mode source throws.
   if (target == null || typeof target === 'object' || typeof target === 'function') target[key] = value;
 }
