@@ -22,7 +22,7 @@ The owner selected a **fresh implementation** on 2026-10-08. No implementation, 
 | U02 | Complete viewer generation and rendering; seed/floor/small-map parity and real-browser interactions | Complete: full graph/draw/render parity plus 16-PNG equality in real Chromium |
 | U03 | Typed entities, effects, combat, equipment, inventory/pets and deterministic action engine; class/lifecycle parity | Status, base item, main-door, defense base and all 12 defensive subclasses isolated contracts pass; concrete derived entities/actions/integration pending |
 | U04 | Main dungeon/cave/tutorial/floor/boss/puzzle generation and seed search; maps and random-stream parity | Pending |
-| U05 | Cross-load save/export/import, signatures, settings, custom NPC scripting/data; preserved object graph and version handling | Shared codec/signature primitive: 8 source-parity tests + real browser WebCrypto pass; cross-load/schema/actors/UI pending |
+| U05 | Cross-load save/export/import, signatures, settings, custom NPC scripting/data; preserved object graph and version handling | Shared codec/signature primitive: 8 source-parity tests + real browser WebCrypto pass; cross-load/schema/actors/UI pending (integration phases P1–P2) |
 | U06 | Full React game UI/HUD/menus/canvas/touch/keyboard, map controls, editor and local custom-level workflows | Pending |
 | U07 | Viewer/level manager/workshop/socket integration, offline fallback and deterministic request/event contract tests | Pending |
 | U08 | End-to-end differential action transcripts, randomized replay, mutation detection, save interoperability, browser/preview verification | Pending |
@@ -39,6 +39,29 @@ Use the latest published primary checkpoint on `arena/db5ddb58-arena-context` fo
 ## Primary world-kernel lane — 2026-10-10
 
 Successor branch `arena/e4cc53a2-arena-context` (Draft PR #27, fast-forwarded from PR #19). Primary turns implement integration code that no packet assigns, under `app/src/game/world/` (see DECISIONS 2026-10-10). Done so far: constants and the `单元格` data contract, the session world state, the global reset, and lighting/visibility. Collaborators owned by packets (path search, torches, RNG seeding) are injected as ports and replaced by reviewed packet outputs during integration.
+
+## Integration plan after PR #27 — 2026-10-10
+
+Branch `arena/5d1da57f-arena-context` (Draft PR #30) continues the primary lane on accepted base `3804708`. The [coverage ledger](COVERAGE.md) (generator `scripts/task10-coverage.mjs`) classifies all 757 top-level main-page declarations (60,242 JS lines): **16.4 %** ported, **49.4 %** owned by open implementation packets, **26.7 %** covered only by audit packets and **7.5 %** unassigned (DOM UI, listeners). The audit-only and unassigned 34 % (306 declarations, ~20.6k lines) is primary/integration work; implementation packets stay with secondaries.
+
+Primary critical path (each phase is a sequence of small differential units; packet-owned collaborators remain ports until reviewed packet output exists):
+
+| Phase | Scope (source anchors) | Why primary |
+|---|---|---|
+| P1 Runtime composition | Source-name class registry replacing `window[类名]`/`constructor.name` (`注册全局类`, `获取所有可用的定义`); session port binding; build keeps names | Every packet class, save and script depends on it |
+| P2 Save model | `序列化单元格/物品/怪物/楼层`, `恢复…`, then `保存游戏状态`/`恢复游戏状态`/export/import envelope | Cross-load acceptance criterion; needs P1 |
+| P3 Turn actors | `处理怪物回合`, `伤害玩家`, `检查移动可行性`, `获取实际移动步数`, `处理宠物着陆效果`, `更新武器冷却` | Completes the turn loop around monster/pet core packets |
+| P4 Inventory actions | `使用背包物品`, `使用装备槽物品`, `尝试收集物品`, `处理丢弃物品`, `整理背包`, buy/sell/repair/reforge | Player verbs for a playable game |
+| P5 Game start/floors | `启动游戏`, `应用职业效果`, `重置玩家状态`, tutorial floor/text, `应用难度预设`, `放置楼梯`, `生成金币`, `生成奖励`, `生成迷宫地牢` | Composition root to a running session |
+| P6 Rendering and input | `单元格.绘制`, `动画帧`, minimap/big map, keyboard/touch/HUD, menus, inventory UI, settings windows | React/canvas surface of the playable game |
+| P7 Special runtime | special floors, challenge rooms, portal/conveyor runtime, enchantment scrolls | Late-game content |
+| P8 Tools and services | editor property/tools/UI, creative workshop, level manager, socket | U06/U07 |
+
+Key constraints introduced by this plan (recorded in DECISIONS):
+
+- **K1 — names survive production builds.** Vite 8's minifier drops class names (`class 物品{}` → `var e=class{}`), which would break `constructor.name` in saves, fusion identity checks and the `.类.name` pool deduplication already ported. Production builds set `build.rolldownOptions.output.keepNames`, and persistence/lookups go through the explicit registry rather than `Function.prototype.name`.
+- **K2 — one registry per session.** Source globals such as `window[类名]` resolve through a session-owned registry keyed by the original class name; packet classes keep their ports-first constructors and are bound to the session's ports when registered, so restored/scripted construction (`new 类构造器(配置)`) keeps the source single-argument shape.
+- **K3 — packet overlap.** `是否为有效融合武器` and `是否为有效融合材料` are already ported (PR #27) inside the `t10-fusion-buff-engine` scope; that packet must reuse them. COVERAGE lists any future overlap.
 
 ## Acceptance evidence required (not yet met)
 
