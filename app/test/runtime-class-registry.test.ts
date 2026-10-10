@@ -97,6 +97,11 @@ describe('SourceClassRegistry', () => {
     expect(() => registry.nameOf(null)).toThrow(TypeError);
     expect(registry.nameOf({ constructor: { name: 'x' } })).toBe('x');
     expect(registry.nameOf({ constructor: 1 })).toBeUndefined();
+    expect(registry.className(ItemCore)).toBe('物品');
+    expect(registry.className(registry.lookup('钥匙'))).toBe('钥匙');
+    expect(registry.className(minified)).toBe('钥匙');
+    expect(registry.className(未登记)).toBe('未登记');
+    expect(() => registry.className(undefined)).toThrow(TypeError);
   });
   it('rejects duplicate names and shared implementations', () => {
     const { registry } = setup();

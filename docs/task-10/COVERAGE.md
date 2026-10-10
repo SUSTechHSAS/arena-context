@@ -10,9 +10,9 @@ Scope: the 757 top-level statements of the main page that declare a function, cl
 
 | Status | Declarations | Source lines | Share of lines |
 | --- | ---: | ---: | ---: |
-| Ported in `app/src` (foundation + primary world kernel) | 152 | 10533 | 17.5% |
+| Ported in `app/src` (foundation + primary world kernel) | 154 | 10934 | 18.2% |
 | Assigned to a secondary implementation packet, not yet ported | 304 | 29786 | 49.4% |
-| Covered only by an audit packet: implementation is primary/integration work | 154 | 15457 | 25.7% |
+| Covered only by an audit packet: implementation is primary/integration work | 152 | 15056 | 25.0% |
 | No packet: primary/integration work (mostly DOM UI) | 133 | 4069 | 6.8% |
 | Top-level DOM event listeners (input/UI wiring) | 14 | 397 | 0.7% |
 | **Total** | 757 | 60242 | 100% |
@@ -52,7 +52,6 @@ Every declaration below is neither ported nor owned by an implementation packet.
 | t10-turn-movement-audit | 6 | 460 | `处理怪物回合` (185), `伤害玩家` (176), `检查移动可行性` (40), `获取实际移动步数` (26), `处理宠物着陆效果` (22), `更新武器冷却` (11) |
 | t10-scroll-enchantment-audit | 2 | 438 | `附魔卷轴` (295), `大师附魔卷轴` (143) |
 | t10-portal-runtime-audit | 8 | 403 | `处理沉浸式传送门` (119), `处理传送带效果` (110), `执行传送` (63), `保存传送点` (53), `寻找传送带最远可达点` (30), `寻找传送出口` (11), `查找配对传送门` (9), `删除传送点` (8) |
-| t10-save-monsters-audit | 2 | 401 | `序列化怪物` (208), `恢复怪物` (193) |
 | dom-listeners | 14 | 397 | `document:keydown` (119), `canvas:wheel` (90), `document:click` (45), `document:keyup` (44), `读取存档按钮:click` (28), `window:load` (24), `document.getElementById('联机按钮':click` (10), `canvas:mousedown` (9), … |
 | t10-input-hud-audit | 13 | 371 | `控制键处理移动` (57), `startAutoMove` (51), `handleCanvasTouchMove` (48), `handleCanvasTouchStart` (46), `handleCanvasWheelZoom` (44), `handleCanvasTouchEnd` (34), `processSwipeMove` (25), `切换HUD模式` (23), … |
 | workshop-levels | 9 | 349 | `显示关卡详情` (105), `刷新关卡列表` (80), `显示创意关卡浏览器` (50), `隐藏创意关卡浏览器` (29), `隐藏关卡详情` (27), `关闭种子筛选器窗口` (19), `打开种子筛选器窗口` (16), `关闭联机设置窗口` (12), … |
@@ -62,7 +61,7 @@ Every declaration below is neither ported nor owned by an implementation packet.
 | t10-cdn-bootstrap-audit | 6 | 157 | `初始化创意工坊` (57), `初始化canvas` (30), `checkCdnAvailability` (26), `getIconHTML` (20), `fetchAndCacheEmoji` (19), `getIconChar` (5) |
 | big-map | 9 | 122 | `大地图悬停信息` (22), `切换大地图标记模式` (21), `切换大地图传送模式` (21), `切换大地图楼层` (15), `添加大地图事件监听` (11), `移除大地图事件监听` (11), `更新大地图楼层显示` (8), `大地图滚轮缩放` (8), … |
 
-Backlog total: 301 declarations, 19923 source lines.
+Backlog total: 299 declarations, 19522 source lines.
 
 ## Implementation packets still open
 

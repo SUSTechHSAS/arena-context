@@ -7422,7 +7422,7 @@
    "start": 56804,
    "end": 57011,
    "lines": 208,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-save-monsters-audit",
    "area": "t10-save-monsters-audit",
    "overlap": null
@@ -7455,7 +7455,7 @@
    "start": 57307,
    "end": 57499,
    "lines": 193,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-save-monsters-audit",
    "area": "t10-save-monsters-audit",
    "overlap": null

@@ -136,6 +136,17 @@ export class SourceClassRegistry {
     return (constructor as { name: string }).name;
   }
 
+  /**
+   * Source \`类.name\` for a class reference held in data (e.g. \`召唤物类.name\`): the registered
+   * source name of an implementation, otherwise the value's own \`name\` (a looked-up global
+   * already carries its source name). Nullish values throw the source TypeError.
+   */
+  className(constructor: unknown): string {
+    const registered = this.#nameByImplementation.get(constructor as AnyClass);
+    if (registered !== undefined) return registered;
+    return (constructor as { name: string }).name;
+  }
+
   /** Defined names in definition order. */
   definedNames(): string[] { return [...this.#byName.keys()]; }
 
