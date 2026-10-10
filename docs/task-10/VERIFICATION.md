@@ -196,6 +196,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 54** — `world/editor-click.ts`: `编辑器单击处理` (map-editor click dispatch). It shares `编辑器状态`/`旧编辑器状态` with `InteractSession` and adds `编辑器剪贴板`. The paste/bucket/brush/place tools (audit `t10-editor-tools-audit`), `应用扳手规则` (`world/wrench.ts`), the cell flash and the autosave are ports. Tests: `app/test/world-editor-click.test.ts`.
   - Evidence: 600 seeded runs × 20 clicks match the source (ordered calls, player, start position, editor state). They cover every mode and tool, missing rows/cells, monsters vs items vs falsy entities, all wrench slots including missing ones, empty clipboards and out-of-range clicks.
   - Mutation: 16 mutants, all detected. DEVIATIONS SRC-40.
+- **Unit 55** — `world/editor-canvas.ts`: `编辑器画布事件处理` (map-editor pointer start/move/end). It covers overlay pass-through, out-of-map cancellation, area selection for room/wrench/copy/background, the rAF constant-speed player drag, entity drag-and-drop with stack merging and set-as-drop, brush/placement painting, and single-click forwarding. The editor tools (audit `t10-editor-tools-audit`), `重置单元格` (audit `t10-editor-ui-import-audit`), `生成墙壁` (packet `t10-main-room-geometry`), placement and wrench functions, DOM, clock and animation frames are ports. Tests: `app/test/world-editor-canvas.test.ts`.
+  - Evidence: 800 seeded runs × 40 pointer events match the source. Events follow start→move→end sequences with coordinate reuse, and animation frames run between events. The comparison covers ordered calls, editor state after every event, player, animation state, final dungeon and monster list. Every branch guard is reached (more than 5 hits each), including exact 6 px drags and exact 300 ms double-taps.
+  - Mutation: 49 mutants, 48 detected. The survivor is the dead store `上次点击时间 = 0`, which is equivalent. DEVIATIONS SRC-41.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
