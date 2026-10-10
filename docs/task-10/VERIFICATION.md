@@ -99,6 +99,13 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
     - landing interrupts, scroll energy, animation state, distance map, warp gates, move history and the debug sequence reward, treasure rings on the current equipment page
     - phantom weather refresh, auto-move cancel, cursed random drop, rejected moves, history array identity
   - Mutation: 64 mutants run, 61 detected; the 3 survivors are equivalent (both `缓慢` sign normalisations, see SRC-15; `targetX - 玩家.x` equals `Math.sign(dx)`).
+- **Unit 27** — `world/interact.ts`: `尝试互动()`. Editor UI state lives in an `InteractSession`; DOM, socket, energy, landing, pickup, events, item destruction, line checks, nearby-monster search and burst attacks are ports; class checks (`陷阱基类`, `隐形毒气陷阱`, `祭坛类`, `充能魔杖`, `金币手枪`, `宠物`) and the seed class pool are injected. Tests: `app/test/world-interact.test.ts`.
+  - Evidence: 600 seeded sessions (2 setups × 3 interactions) match the source:
+    - death/online/auto-move guards, editor teleport toggle with DOM writes and missing elements
+    - hidden-trap search (energy ok/short), water search and underground-river teleport, grass seed search with full backpack refund
+    - pickups, chess pieces, NPCs, `尝试互动` hooks, placed pets (`==` floor match), strength-trial altars, locked doors with keys and paired cells, line-checked neighbours
+    - weapon attacks with dead-target refiltering, burst enchantments, pet follow-up attacks, the always-run monster search, off-grid sizes, missing player cells
+  - Mutation: 67 mutants run, all detected. DEVIATIONS SRC-16.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
