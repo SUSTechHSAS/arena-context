@@ -178,6 +178,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 48** — `world/edge-indicator.ts`: `计算精确边缘位置` as a pure function of camera, cell size, canvas rect and player (the camera belongs to the audit-only area `t10-minimap-camera-audit`). Tests: `app/test/world-edge-indicator.test.ts`.
   - Evidence: 20 000 random cases match the source exactly (`Object.is` on both coordinates). They include zero/negative cell sizes, zero-size canvases, fractional rects and offsets, a monster on the player and `NaN` positions; more than 500 cases each give `null`, a point and in-view.
   - Mutation: 12 mutants, 7 detected. The 5 survivors are equivalent: `!length` vs `=== 0` (a `NaN` length ends in `null` either way); `min` on the right edge (left and right are exclusive); the `Infinity` sentinel vs `> 1e9`; and two boundary ties at exact corners, where the adjacent edge yields the same `t`. DEVIATIONS SRC-35.
+- **Unit 49** — `world/editor-template.ts`: `generateDungeonTemplate` (the editor's floor-template generator). `保存编辑器状态` is a port of the packet `t10-editor-history`. The special-floor generators (audit `t10-special-floors-audit`), `生成地牢`, `重置所有游戏状态` and the editor UI refreshers are ports too. Tests: `app/test/world-editor-template.test.ts`.
+  - Evidence: 400 seeded async runs × 6 sessions match the source (call order, final state, dungeon and rooms). They cover prompt cancel, invalid, negative, fractional and suffixed input, confirm refusal, floors 5/10/15 and generic floors, the awaited generator changing the floor, start-room id present or absent, all six special item classes, stairs with and without items, and `null` cells that throw.
+  - Mutation: 21 mutants, all detected (after one stub was widened so the merchant's `Math.max` clamp is reachable). DEVIATIONS SRC-36.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
