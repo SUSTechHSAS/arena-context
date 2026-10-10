@@ -20,17 +20,17 @@ Modern rewrite of chinese-dungeon with source-consistency tests (TASK.md). The 1
 
 ## Candidate progress
 
-This session: took over PR #19 on this successor branch (fast-forward only, all inherited files preserved), then built the main-game **world kernel** in `app/src/game/world/`, 15 units so far:
+This session: took over PR #19 on this successor branch (fast-forward only, all inherited files preserved), then built the main-game **world kernel** in `app/src/game/world/`, 16 units so far:
 - constants, cell, state, reset, lighting, helpers
 - placement (items and monsters), targeting, generation, cave, features, cave-dungeon (the `生成洞穴地牢` orchestrator)
-- room-content, special-rooms, drops
+- room-content, special-rooms, drops, item-generation (`生成物品`, `物品生成配置`, `检查防化服防护`)
 
-Each module has an `app/test/world-*.test.ts` differential test against the exact source declarations, with mutation checks. Per-unit evidence is in `docs/task-10/VERIFICATION.md` § World kernel. Preserved source quirks are DEVIATIONS SRC-01…SRC-08. Packet-owned collaborators stay behind typed ports.
+Each module has an `app/test/world-*.test.ts` differential test against the exact source declarations, with mutation checks. Per-unit evidence is in `docs/task-10/VERIFICATION.md` § World kernel. Preserved source quirks are DEVIATIONS SRC-01…SRC-09. Packet-owned collaborators stay behind typed ports.
 
 ## Verification
 
-- Latest full `npm run check` at 84495bf: 8 reference hashes, 5 integrity tests, strict types, 22 files / 255 tests, build — all passed. Remote Protocol and Checkpoint passed on 84495bf.
-- Later units (13–15) pass with `tsc --noEmit` clean. Per-unit evidence and mutation results are in VERIFICATION.md.
+- Latest full `npm run check` with unit 16: reference hashes, integrity tests, strict types, 26 files / 260 tests and build all passed. Remote Protocol and Checkpoint last confirmed on 84495bf.
+- Per-unit evidence and mutation results are in VERIFICATION.md.
 
 ## Blockers and unresolved owner feedback
 
@@ -38,4 +38,4 @@ No owner comments on PR #19 or #27. Full game, UI, saves and services remain unf
 
 ## Next action
 
-Continue the world kernel with the remaining unassigned logic (e.g. 检查防化服防护, 生成特殊房间, 生成怪物 / 生成物品), checking packet anchors first. RNG wiring (`初始化随机数生成器`) belongs to `t10-seed-search` and is left there.
+Continue the world kernel with the remaining unassigned logic (e.g. 生成特殊房间, 生成怪物), checking packet anchors first. RNG wiring (`初始化随机数生成器`) belongs to `t10-seed-search` and is left there.

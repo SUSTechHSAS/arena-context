@@ -4,7 +4,7 @@ This records actual local commands, not owner acceptance. Reference pin: `8d80b5
 
 ## World kernel (primary lane, PR #27) — 2026-10-10
 
-Each unit ports unassigned main-page functions into `app/src/game/world/` and compares them with the exact source declarations, evaluated in a VM. Both realms run the same seeded world script, and packet-owned collaborators are injected as logged ports. Mutants were applied by hand and the originals restored. Preserved source quirks are DEVIATIONS SRC-01…SRC-08.
+Each unit ports unassigned main-page functions into `app/src/game/world/` and compares them with the exact source declarations, evaluated in a VM. Both realms run the same seeded world script, and packet-owned collaborators are injected as logged ports. Mutants were applied by hand and the originals restored. Preserved source quirks are DEVIATIONS SRC-01…SRC-09.
 
 - **Unit 1** — `world/constants.ts` (cell/env/colour/effect tables, weather list, versions, DEFAULT_* tunables) and `world/cell.ts` (`单元格` data contract + `获取物品颜色`). Tests: `app/test/world-kernel.test.ts`.
   - Evidence: 23 new tests pass; each of 20 declarations is graph-equal to the exact source AST declaration; the cell is graph-equal for 5 coordinate cases and colour lookup over 460 cases. Manual mutants (`||`→`??` fallback, swapped property order) both failed the suite; originals restored. `tsc --noEmit` clean.
@@ -34,8 +34,10 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
   - Evidence: 200 seeded worlds match the source (random-comparator shuffle, density lookup, locked-room empowerment, key/stair skip, timer, inventory and status cleanup, weighted respawn, coin/item fallback). Nine mutants detected; `<=`→`<` on a continuous roll is equivalent.
 - **Unit 14** — `world/special-rooms.ts` — `连接特殊房间`, `尝试进入特殊房间`, `处理单向房间`. Tests: `app/test/world-special-rooms.test.ts`. DEVIATIONS SRC-08.
   - Evidence: 300 seeded worlds match the source (nearest-room ties, loose id matching, ring consumption, multiplayer guard, entrance reopening, first-entry door choice, pair handling, throws). Nine mutants detected; the `oldX !== undefined` guard is equivalent for in-range targets.
-- **Unit 15** — `world/drops.ts` — `克隆物品` (clock/prng id, constructor rebuild), `怪物放置物品`, `玩家放置物品`. Tests: `app/test/world-drops.test.ts`.
-  - Evidence: 300 seeded worlds match the source (constructor configs, `数据` merge, Map copy versus alias, reset fields, `Symbol.for` ids, invalid originals, centre-versus-neighbour player rule, direction order, no-spot logs). Eight mutants detected.
+- **Unit 15** — `world/drops.ts`: `克隆物品`, `怪物放置物品`, `玩家放置物品`. Tests: `app/test/world-drops.test.ts`.
+  - Evidence: 300 seeded worlds match the source, including originals kept in the graph so Map aliasing is observable. Eight mutants detected.
+- **Unit 16** — `world/item-generation.ts`: `物品生成配置` (graph-equal to the source declaration), `生成物品`, `检查防化服防护`. Tests: `app/test/world-item-generation.test.ts`.
+  - Evidence: 300 seeded worlds match the source (locked multi-roll, clamp, depth weight, early room return, half-weight endpoints, empty room arrays, placement-failure diagnostics, suit durability, unbreakable suits, page slots, pet slot break). Thirteen mutants detected. DEVIATIONS SRC-09.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
