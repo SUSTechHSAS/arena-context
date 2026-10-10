@@ -128,6 +128,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 32** — `world/weather.ts`: `处理天气效果`, `生成天气效果`, `是否靠近火源`, `解冻药水` and `处理严寒效果` (the weather-terrain audit's core ranges). Thunderstorm/wind handlers, status effects, icons, logs, notifications and inventory refresh are ports; class checks are injected. Tests: `app/test/world-weather.test.ts`.
   - Evidence: 800 seeded sessions × 3 worlds × 5 random operations match the source, including the injected `prng` call sequence: weather off/on, every notification, water freezing over sparse/short grids, burning player or equipped torch (with and without `自定义数据`), equipment pages, fire items, dropped/held floor torches, burning monsters, off-grid targets, potion freezing/thawing.
   - Mutation: 31 mutants run, 30 detected; the survivor is equivalent (swapping the two side-effect-free conditions before the freeze roll). DEVIATIONS SRC-21.
+- **Unit 33** — `processThunderstorm` in `world/weather.ts` (source `处理雷暴效果`). Cell effects, logs, item destruction, notifications, drawing, status effects, player damage, free-cell checks, fire creation/placement and `console.warn` are ports. Tests: `app/test/world-thunderstorm.test.ts`.
+  - Evidence: 800 seeded sessions × 3 worlds × 8 turns match the source, including the injected `prng` sequence: copper/other gear on both equipment pages, corridor and room strikes, missing/thin rooms, off-map blocks, sparse grids, stairs, challenge steles, timers, carried items, empowered/plain monsters, the player, sleeping/unplaced/other-floor pets with string floors, fire placement failures, off-grid players.
+  - Mutation: 37 mutants run, all detected. DEVIATIONS SRC-22.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
