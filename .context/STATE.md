@@ -21,7 +21,7 @@ Modern rewrite of chinese-dungeon with source-consistency tests (TASK.md). PR #2
 ## Candidate progress
 
 - PR #27 review report (docs/task-10/reviews/pr27-quality-review.md) — previous turn.
-- Integration coverage audit: `scripts/task10-coverage.mjs` → docs/task-10/COVERAGE.md + coverage/coverage.json. 757 main-page declarations: 16.4 % of lines ported, 49.4 % open implementation packets, 26.7 % audit-only, 7.5 % unassigned. Overlap found: `是否为有效融合武器/材料` (ported) inside `t10-fusion-buff-engine`.
+- Integration coverage audit: `scripts/task10-coverage.mjs` → docs/task-10/COVERAGE.md + coverage-ledger.json. 757 main-page declarations: 16.4 % of lines ported, 49.4 % open implementation packets, 26.7 % audit-only, 7.5 % unassigned. Overlap found: `是否为有效融合武器/材料` (ported) inside `t10-fusion-buff-engine`.
 - PLAN.md: phases P1–P8 and key constraints K1 (Vite 8 minifier erases class names; keepNames + explicit registry), K2 (session-owned source-name registry with ports bound at registration), K3 (packet overlap reuse).
 
 ## Verification
