@@ -149,6 +149,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 39** — `world/equipment-page.ts`: `切换装备页`. Online flag, socket emit, equipment refresh, the `.装备栏` element and the timer are ports. Tests: `app/test/world-equipment-page.test.ts`.
   - Evidence: 1500 seeded sessions × 6 switches match the source: online/offline, capacities 0–30, page limits, per-page sizes, out-of-range and string starting pages, directions ±1/2/-3/0/`'1'`/0.5, present/missing bar element, timers run or pending.
   - Mutation: 14 mutants run, 13 detected; the survivor is equivalent (lowering the inner page floor to -1 is undone by the outer `Math.max(0, …)`). DEVIATIONS SRC-28.
+- **Unit 40** — `world/chess-debug.ts`: `调试_输出当前谜题答案`, `获取当前玩家棋盘房间`, `收集房间内棋子`, `收集背包棋子类`, `_打印棋盘方案到控制台` and `db`. `_求解棋盘布局`/`_棋子难度值` (packet `t10-chess-solver`), console, debug-tool creation and collection are ports; both realms use the same logged solver/difficulty stubs. Tests: `app/test/world-chess-debug.test.ts`.
+  - Evidence: 1000 seeded sessions × 4 operations match the source, with internal helper calls logged: missing globals, off-grid players, null/undefined/-1 room-map values, rooms by id vs index with string/number id collisions, three room types, stacked/odd stack sizes, Map/object/wrapped/null/empty backpacks, limits (`undefined`, ∞, 0, 2.9, -1, NaN), solved/unsolved layouts, option combinations including `null` (throws), grid printing.
+  - Mutation: 34 mutants run, 33 detected; the survivor is equivalent (dropping the early `break` when nothing remains still takes 0 per entry). DEVIATIONS SRC-29.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
