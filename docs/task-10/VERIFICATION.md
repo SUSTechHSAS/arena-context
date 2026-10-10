@@ -112,6 +112,13 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
     - placement failures (blocked 300-call bursts) and the stale-room `回溯` path, special rooms with treasure rings, locked rooms, red-blue puzzles on floors 7/11, starter sword on floor 0
     - farthest-room stairs with `undefined`/`Infinity` distances and locked rooms, the random fallback, up stairs, patrol initialisation, the single-room throw, direct ring generation with empty/no-`房间` pools
   - Mutation: 59 mutants run, 57 detected; the 2 survivors are equivalent (`return` vs `return await` on the cave branch; a room pair cannot repeat within one call, so the `已连接房间对` guard is never false). DEVIATIONS SRC-17.
+- **Unit 29** — `world/dungeon-support.ts`: `计算距离图`, `处理上锁的门`, `生成并放置随机配方卷轴`, `检查推箱子解谜完成`, `解谜成功_推箱子`. Recipe generation, scroll construction, item placement, rewards, notifications, drawing, console and `window[类名]` are ports; Sokoban class checks are injected. Tests: `app/test/world-dungeon-support.test.ts`.
+  - Evidence: 500 seeded sessions (3 setups × 4 random operations on one mutable world) match the source:
+    - BFS distances with wall flags, locked doors, `开关砖`, missing rows/cells, smaller logical sizes and off-grid starts (throws)
+    - room locking with shared door ids, door instances, colour wrap past 6 locks, single-room and large lists, `null` rooms
+    - recipe scroll counts for `null`/negative/string floors, failed placements and the no-room warning
+    - Sokoban completion (covered/uncovered/target-free rooms, finished rooms, loose ids) and rewards (custom classes, missing classes, default reward)
+  - Mutation: 49 mutants run, 47 detected; the 2 survivors are equivalent (BFS neighbour order does not change distances; `break` after the first uncovered target). DEVIATIONS SRC-18.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
