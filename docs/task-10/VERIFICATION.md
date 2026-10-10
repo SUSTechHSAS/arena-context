@@ -155,6 +155,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 41** — `world/utils.ts`: `深度比较`, `获取方向中文`, `哈希字符串`, `种子伪随机数`, `获取爆炸颜色`, `净化HTML`, `生成签名` (WebCrypto SHA-256 with the `数据完整性密钥` constant, checked in `world-kernel.test.ts`), `寻找最近的房间` and `处理房间状态`. Tests: `app/test/world-utils.test.ts`.
   - Evidence: 600 seeded runs × 40 calls match the source: random nested values (NaN, -0, arrays vs objects, aliases, JSON copies, null-prototype and overridden `hasOwnProperty`), direction inputs, hash/signature texts (empty, unicode, HTML, non-strings), seeds (negative, ≥2³², fractional, strings, NaN), distances, rooms with gaps and ties, editor/non-editor room sync.
   - Mutation: 26 mutants run, 24 detected; the 2 survivors are equivalent (an empty-length guard that the loop already covers, and a pre-truncation that later bitwise operations repeat). DEVIATIONS SRC-30.
+- **Unit 42** — `world/fusion-slots.ts`: `添加到融合区`, `从融合区移除`, `清空融合区` and `处理燃烧木质卷轴`. Socket, notifications, cloning, animation, DOM elements, `typeof gsap`, the timer, gold creation, collection, `检查融合配方` (packet `t10-fusion-engine-audit`) and display refreshes are ports. Tests: `app/test/world-fusion-slots.test.ts`.
+  - Evidence: 1000 seeded sessions × 6 operations match the source: online/offline, gsap present/missing with/without command-line mode, 4- and 5-slot areas, gold stacks at 0/1/63/64, single/stacked/equipped items with display elements, full areas, out-of-range indices, failed collections, backpacks keyed by objects (reaching the clear-gold branch), wooden/iron scrolls in backpack and equipment.
+  - Mutation: 35 mutants run, all detected (clone ids and the hidden flag needed slot objects in the snapshot). DEVIATIONS SRC-31.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
