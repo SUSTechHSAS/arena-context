@@ -146,6 +146,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 38** — `world/easter-eggs.ts`: `检查Q字形彩蛋` and `触发Q字形彩蛋`, plus the `Q字形图案` constant (checked in `world-kernel.test.ts`). Timer, compass creation, collection, cell effects and notifications are ports. Tests: `app/test/world-easter-eggs.test.ts`.
   - Evidence: 1000 seeded sessions × 4 drops match the source: stamped Q patterns (clean, with unpickable `X` items or stray items in blanks) at several offsets, drops on every `X` and off-pattern/off-map, smaller maps, sparse grids, `undefined` items (throws), already-triggered flags, successful/failed/truthy pickups after the timer.
   - Mutation: 18 mutants run, all detected. DEVIATIONS SRC-27.
+- **Unit 39** — `world/equipment-page.ts`: `切换装备页`. Online flag, socket emit, equipment refresh, the `.装备栏` element and the timer are ports. Tests: `app/test/world-equipment-page.test.ts`.
+  - Evidence: 1500 seeded sessions × 6 switches match the source: online/offline, capacities 0–30, page limits, per-page sizes, out-of-range and string starting pages, directions ±1/2/-3/0/`'1'`/0.5, present/missing bar element, timers run or pending.
+  - Mutation: 14 mutants run, 13 detected; the survivor is equivalent (lowering the inner page floor to -1 is undone by the outer `Math.max(0, …)`). DEVIATIONS SRC-28.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
