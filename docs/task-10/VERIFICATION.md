@@ -119,6 +119,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
     - recipe scroll counts for `null`/negative/string floors, failed placements and the no-room warning
     - Sokoban completion (covered/uncovered/target-free rooms, finished rooms, loose ids) and rewards (custom classes, missing classes, default reward)
   - Mutation: 49 mutants run, 47 detected; the 2 survivors are equivalent (BFS neighbour order does not change distances; `break` after the first uncovered target). DEVIATIONS SRC-18.
+- **Unit 30** — `world/red-blue-puzzle.ts`: `生成红蓝开关谜题(距离图)`. Path tracing (`回溯路径`, `t10-path-primitives`), switch/brick construction, placement and console are ports. Tests: `app/test/world-red-blue-puzzle.test.ts`.
+  - Evidence: 600 seeded sessions (3 grids × 3 calls) match the source: farthest-room choice with `Infinity`/missing distances, short and long traced paths, corridor candidates, the random-comparator shuffle, switch rooms off the path and nearer than the barrier, pre-existing switches, vertical/horizontal walls, failed brick placements, missing distance rows (throws).
+  - Mutation: 29 mutants run, all detected. DEVIATIONS SRC-19.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
