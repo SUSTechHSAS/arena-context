@@ -33,3 +33,27 @@ export function generateDeathParticles(prng: () => number): DeathParticle[] {
   }
   return particles;
 }
+
+/** One floating particle on the run-summary screen. */
+export interface SummaryParticle {
+  left: number; // %
+  delay: number; // s, animationDelay
+  duration: number; // s, animationDuration
+}
+
+/**
+ * Source `生成结算粒子(容器)` (HTML L34991): 20 summary-screen particles, 3 seeded `prng` draws each (left, delay,
+ * duration), so 60 draws. When there is no container the source returns before drawing anything; pass
+ * `hasContainer = false` for the same effect.
+ */
+export function generateSummaryParticles(prng: () => number, hasContainer: unknown = true): SummaryParticle[] {
+  if (!hasContainer) return [];
+  const particles: SummaryParticle[] = [];
+  for (let i = 0; i < 20; i++) {
+    const left = prng() * 100;
+    const delay = prng() * 15;
+    const duration = 5 + prng() * 10;
+    particles.push({ left, delay, duration });
+  }
+  return particles;
+}

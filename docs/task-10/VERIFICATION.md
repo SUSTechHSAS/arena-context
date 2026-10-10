@@ -205,9 +205,10 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 57** — `world/creative-levels.ts`: `导入创意关卡`, `发布关卡`, `游玩创意关卡`, `重置创意关卡`. `启动游戏` (audit `t10-tutorial-professions-audit`), `显示主菜单` (audit `t10-menus-inventory-ui-audit`), Supabase RPC, `fetch`, the confirm dialog, timers, `prng`, signing and the download steps are ports. Tests: `app/test/world-creative-levels.test.ts`.
   - Evidence: 500 seeded async runs × 10 sessions match the source (ordered calls including every `prng` draw, started save data, `当前关卡ID`, stored level string). They cover invalid/primitive/unpublished/unsigned/empty-signature/tampered/correctly signed files, versions above/equal/below the game version, titled and untitled levels, every backup shape for publishing (including primitive `属性` and missing `玩家`), cancelled and blank titles, signature failures, RPC errors, cache hits with loose ids, fetch failures (Error, string, `null`, non-ok responses), confirmed and dismissed resets and corrupt reset strings.
   - Mutation: 34 mutants, 33 detected. The survivor (dropping the `游戏版本 &&` guard) is equivalent, because no falsy version can exceed the current one. DEVIATIONS SRC-43.
-- **Unit 58** — `world/death-particles.ts`: `生成死亡粒子` as a pure generator of particle specs over an injected `prng`. Tests: `app/test/world-death-particles.test.ts`.
+- **Unit 58** — `world/death-particles.ts`: `生成死亡粒子` and `生成结算粒子` as pure generators of particle specs over an injected `prng`. Tests: `app/test/world-death-particles.test.ts`.
   - Evidence: 300 seeds. The source's generated `cssText` and `--random` are parsed back into numbers (`String(n)` round-trips exactly) and equal the rewrite's specs. The number of `prng` draws is identical (240), as are the element tag and class.
-  - Mutation: 8 mutants (count, draw order, scales, colour order and index, an RNG swap), all detected. DEVIATIONS SRC-44.
+  - Summary particles (`生成结算粒子`): 300 seeds with and without a container. Draw counts (60 or 0), the cleared container, and the left/delay/duration values all equal the rewrite's `generateSummaryParticles`.
+  - Mutation: 12 mutants (counts, draw order, scales, colour order and index, an RNG swap, the missing-container guard), all detected. DEVIATIONS SRC-44.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 

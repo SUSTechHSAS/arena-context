@@ -1,6 +1,6 @@
 import vm from 'node:vm';
 import { describe, expect, it } from 'vitest';
-import { generateDeathParticles } from '../src/game/world/death-particles';
+import { generateDeathParticles, generateSummaryParticles } from '../src/game/world/death-particles';
 import { declaration } from './oracle/source';
 
 const lcg = (seed: number) => { let s = seed; return () => (s = (s * 1103515245 + 12345) % 2147483648) / 2147483648; };
@@ -31,6 +31,28 @@ describe('death screen particles (生成死亡粒子)', () => {
           random: child.style.props.length === 1 && child.style.props[0]![0] === '--random' ? child.style.props[0]![1] : NaN,
         }).toEqual(p);
       });
+    }
+  });
+
+  it('summary particles (生成结算粒子) match the source draws and values', () => {
+    const context = vm.createContext({});
+    new vm.Script(`${declaration('生成结算粒子')}
+      class Div { constructor(tag) { this.tag = tag; this.className = ''; this.style = {}; } }
+      globalThis.document = { createElement: tag => new Div(tag) };
+      globalThis.run = (rand, has) => { let draws = 0; globalThis.prng = () => { draws++; return rand(); };
+        const children = []; const box = has ? { innerHTML: 'old', appendChild: c => children.push(c) } : null; 生成结算粒子(box);
+        return { children, draws, html: box && box.innerHTML }; };`).runInContext(context);
+    const run = new vm.Script('run').runInContext(context) as (r: () => number, has: boolean) => { children: { tag: string; className: string; style: Record<string, string> }[]; draws: number; html: string | null };
+    for (let seed = 1; seed <= 300; seed++) {
+      const has = seed % 7 !== 0;
+      const source = run(lcg(seed), has);
+      let draws = 0; const rand = lcg(seed);
+      const mine = generateSummaryParticles(() => { draws++; return rand(); }, has);
+      expect(draws).toBe(source.draws);
+      expect(source.html).toBe(has ? '' : null);
+      expect(source.children.map((c) => ({ left: Number(c.style.left!.slice(0, -1)), delay: Number(c.style.animationDelay!.slice(0, -1)),
+        duration: Number(c.style.animationDuration!.slice(0, -1)) }))).toEqual(mine);
+      expect(source.children.every((c) => c.tag === 'div' && c.className === '结算粒子')).toBe(true);
     }
   });
 });
