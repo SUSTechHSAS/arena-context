@@ -4,7 +4,7 @@ This records actual local commands, not owner acceptance. Reference pin: `8d80b5
 
 ## World kernel (primary lane, PR #27) — 2026-10-10
 
-Each unit ports unassigned main-page functions into `app/src/game/world/` and compares them with the exact source declarations, evaluated in a VM. Both realms run the same seeded world script, and packet-owned collaborators are injected as logged ports. Mutants were applied by hand and the originals restored. Preserved source quirks are DEVIATIONS SRC-01…SRC-11.
+Each unit ports unassigned main-page functions into `app/src/game/world/` and compares them with the exact source declarations, evaluated in a VM. Both realms run the same seeded world script, and packet-owned collaborators are injected as logged ports. Mutants were applied by hand and the originals restored. Preserved source quirks are DEVIATIONS SRC-01…SRC-12.
 
 - **Unit 1** — `world/constants.ts` (cell/env/colour/effect tables, weather list, versions, DEFAULT_* tunables) and `world/cell.ts` (`单元格` data contract + `获取物品颜色`). Tests: `app/test/world-kernel.test.ts`.
   - Evidence: 23 new tests pass; each of 20 declarations is graph-equal to the exact source AST declaration; the cell is graph-equal for 5 coordinate cases and colour lookup over 460 cases. Manual mutants (`||`→`??` fallback, swapped property order) both failed the suite; originals restored. `tsc --noEmit` clean.
@@ -70,6 +70,14 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
     - challenge-wave filtering and timers, bar widths and warning classes
     - rest denial reasons, the tick/timer order, the stop-rest guard
   - Mutation: 18 mutants run, 16 detected; the 2 survivors are equivalent controls. DEVIATIONS SRC-11.
+- **Unit 23** — `world/landing.ts`: `处理玩家着陆效果`, `更新洞穴视野`. Class checks, DOM lookups, auto-move and tutorial flags are ports. Tests: `app/test/world-landing.test.ts`.
+  - Evidence: 400 seeded sessions match the source:
+    - terrain: lava resistance/shoes, water soaking (scrolls, wood, torches, silence, timers), rust/destroy, fire quench, blood-water percentage heal
+    - dialogue and challenges: forced-dialogue NPC break, challenge exit failure
+    - items: sign and hidden-item order, pickup with dropped flag
+    - floors: tutorial staircase (array identity, monster cleanup), stairs `使用`, floor arguments, warp gates
+    - rooms: one-way hand-off, room entry energy, challenge start, tutorial hint; cave vision radius and the editor guard; throwing old coordinates
+  - Mutation: 21 mutants detected after the stubs were made to expose array identity and sign state. DEVIATIONS SRC-12.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
