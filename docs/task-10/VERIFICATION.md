@@ -140,6 +140,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 36** — `world/wind.ts`: `处理大风效果` and `尝试执行吹动` (the wind helper the weather audit calls). Canvas size, camera, cell size, line-of-movement checks, landing, logs, indicators, animations, the clock and `console.error` are ports; class checks are injected. Tests: `app/test/world-wind.test.ts`.
   - Evidence: 800 seeded sessions × 3 worlds × 4 wind turns plus direct `尝试执行吹动` calls with crafted plans and done-sets match the source, including the injected `prng` sequence: fractional cameras, canvas sizes, visited/unvisited rooms, walls/locked doors, sparse grids and missing rows (throws), immovable/unpickable/plain occupants, fire items, triggered poison-gas traps, chained pushes, sleeping monsters, monster hook failures, the player's blocked/unblocked moves.
   - Mutation: 48 mutants run, 47 detected; the survivor is equivalent (the player is never in the done-set before the final player move). Direct helper calls were added for guard mutants unreachable through the planner. DEVIATIONS SRC-25.
+- **Unit 37** — `world/victory.ts`: `检查胜利条件` (creative-level victory gate). Notification and the victory screen are ports. Tests: `app/test/world-victory.test.ts`.
+  - Evidence: 1500 seeded runs × 12 checks match the source: disabled/negative/string/missing limits, values exactly at each boundary, fractional damage and health formatting, negative health, all four failure messages combined.
+  - Mutation: 14 mutants run, all detected (the minimum-health guard needed negative health). DEVIATIONS SRC-26.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
