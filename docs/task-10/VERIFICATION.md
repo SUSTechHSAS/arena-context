@@ -26,6 +26,12 @@ Phases P1–P8 of PLAN.md "Integration plan after PR #27". Modules live under `a
     - the minion index list has duplicates;
     - `null` revealed cells are generated;
     - the identity map is pre-seeded.
+- **I6 — save envelope** — `runtime/save-envelope.ts` (`createSaveEnvelope`: `保存游戏状态`, `恢复游戏状态`, `导出存档`, `导入存档`), composing the I3–I5 codecs. UI, camera and editor globals the kernel does not own are typed as `SaveEnvelopeSession`. Test: `app/test/runtime-save-envelope.test.ts`.
+  - Evidence: 200 seeded sessions. Each one builds a full session (bag/equipment/status/active scrolls/pets/portals, three stored floors plus the current floor, editor state, survival backups, buffs, recipes, map markers), saves it and exports it under every game state. It then restores the tampered JSON (newer versions, missing floors, author overrides, missing settings/player, broken UI data, editor payloads, survival backups, non-numeric floor keys; normal and creative mode) and imports 3 picks of valid/invalid files. The saved JSON text, the export download, every touched page global after restore (68), the health/power bars and every port call (reset, seed, profession, kill hint, status effects, buffs, dungeon regeneration, scroll use, notices, menu, game start) match the source.
+  - Mutation probe: 47 probes, 45 killed. Two are equivalent:
+    - #4: `已放置配方卷轴` is never read by `序列化楼层` (SRC-48 (5));
+    - #15: `游戏版本 && 游戏版本 > 1534` vs `游戏版本 > 1534`.
+  - Four survivors of the first pass were killed after strengthening the scenario (non-numeric floor keys, survival backups pointing at stored-floor monsters, boundary HP values, bar widths recorded).
 
 ## World kernel (primary lane, PR #27) — 2026-10-10
 

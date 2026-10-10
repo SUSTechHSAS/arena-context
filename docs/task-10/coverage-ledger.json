@@ -7367,7 +7367,7 @@
    "start": 55879,
    "end": 56146,
    "lines": 268,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-save-envelope-audit",
    "area": "t10-save-envelope-audit",
    "overlap": null
@@ -7378,7 +7378,7 @@
    "start": 56148,
    "end": 56506,
    "lines": 359,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-save-envelope-audit",
    "area": "t10-save-envelope-audit",
    "overlap": null
@@ -7477,7 +7477,7 @@
    "start": 57968,
    "end": 58010,
    "lines": 43,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-save-envelope-audit",
    "area": "t10-save-envelope-audit",
    "overlap": null
@@ -7488,7 +7488,7 @@
    "start": 58012,
    "end": 58044,
    "lines": 33,
-   "status": "audit-only",
+   "status": "ported",
    "packet": "t10-save-envelope-audit",
    "area": "t10-save-envelope-audit",
    "overlap": null

@@ -1,7 +1,7 @@
 # Current handoff
 
 - Task: #10
-- Unit: Integration P2 — floor save records
+- Unit: Integration P2 — save envelope (P2 complete)
 - Work branch / PR: arena/5d1da57f-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/30
 - Accepted base at unit start: task/10/main@380470815a435dbe7f9a28f8ce2dffb9bfc14761 (PR #27 merged)
 - Inherited candidate at unit start: ebd5eb0642e730030c6656e26a34fb704602e176 (PR #30 review checkpoint, merged with the accepted head)
@@ -25,6 +25,7 @@ Modern rewrite of chinese-dungeon with source-consistency tests (TASK.md). PR #2
 - I3 (P2): `app/src/game/runtime/save-items-cells.ts` — `序列化物品`, `恢复物品`, `序列化单元格`, `恢复单元格`. SRC-45 (registry refuses browser globals named by tampered saves) recorded as Fixed (primary decision).
 - I4 (P2): `app/src/game/runtime/save-monsters.ts` — `序列化怪物`, `恢复怪物`; registry `className`. SRC-46 (cooldown key mismatch, attack fallback) preserved for owner review.
 - I5 (P2): `app/src/game/runtime/save-floors.ts` — `序列化楼层`, `恢复楼层`; doors via registry `门` (GameDoor + session ports). SRC-47 (TDZ destructuring defaults drop floors missing 玩家位置/已揭示洞穴格子/地牢生成方式) preserved for owner review.
+- I6 (P2): `app/src/game/runtime/save-envelope.ts` — `保存游戏状态`, `恢复游戏状态`, `导出存档`, `导入存档`; `SaveEnvelopeSession` types UI/camera/editor globals. SRC-48 (monster effects on other floors lost on load, position-matched effects, guard order, unguarded editor key, dropped 已放置配方卷轴) preserved for owner review.
 
 ## Verification
 
@@ -32,6 +33,7 @@ Modern rewrite of chinese-dungeon with source-consistency tests (TASK.md). PR #2
 - I3: 400 seeded sessions equal to the source; 9/9 mutants killed (VERIFICATION.md § Integration layer).
 - I4: 300 seeded sessions equal to the source; 12/12 mutants killed after strengthening one input.
 - I5: 200 seeded sessions equal to the source; 39/41 probes killed (1 equivalent dead branch, 1 no-op probe).
+- I6: 200 seeded sessions equal to the source; 45/47 probes killed (2 equivalent).
 - Full suite with I2: 70 files / 333 tests passed; after I3: typecheck, reference checks, build and the runtime tests pass (full suite rerun next unit; it takes ~15 min on this 2-CPU sandbox).
 
 ## Blockers and unresolved owner feedback
@@ -40,4 +42,4 @@ No owner response yet to the PR #27 review comment (process questions: oracle pa
 
 ## Next action
 
-P2 continued: the save envelope (`保存游戏状态`/`恢复游戏状态`, export/import), composing the item/cell, monster and floor codecs through the registry.
+P3 turn actors (`处理怪物回合`, `伤害玩家`, `检查移动可行性`, `获取实际移动步数`, `处理宠物着陆效果`, `更新武器冷却`), starting with an audit of which collaborators are already ported vs packet-owned.

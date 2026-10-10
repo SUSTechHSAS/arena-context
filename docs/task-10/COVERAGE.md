@@ -10,9 +10,9 @@ Scope: the 757 top-level statements of the main page that declare a function, cl
 
 | Status | Declarations | Source lines | Share of lines |
 | --- | ---: | ---: | ---: |
-| Ported in `app/src` (foundation + primary world kernel) | 156 | 11591 | 19.2% |
+| Ported in `app/src` (foundation + primary world kernel) | 160 | 12294 | 20.4% |
 | Assigned to a secondary implementation packet, not yet ported | 304 | 29786 | 49.4% |
-| Covered only by an audit packet: implementation is primary/integration work | 150 | 14399 | 23.9% |
+| Covered only by an audit packet: implementation is primary/integration work | 146 | 13696 | 22.7% |
 | No packet: primary/integration work (mostly DOM UI) | 133 | 4069 | 6.8% |
 | Top-level DOM event listeners (input/UI wiring) | 14 | 397 | 0.7% |
 | **Total** | 757 | 60242 | 100% |
@@ -37,7 +37,6 @@ Every declaration below is neither ported nor owned by an implementation packet.
 | windows-menus | 35 | 1366 | `初始化背包事件监听` (175), `显示楼层选择窗口` (94), `打开配方书` (86), `更新胜利条件显示` (84), `显示修复界面` (81), `刷新传送菜单` (75), `打开收购窗口` (74), `打开传送菜单` (68), … |
 | t10-main-canvas-audit | 8 | 1239 | `绘制` (529), `单元格` (371), `动画帧` (210), `drawIcon` (53), `获取单元格字符` (24), `获取字体预设` (19), `同步Ctx缓存到真实值` (18), `获取单元格类名` (15) |
 | t10-minimap-camera-audit | 14 | 982 | `绘制大地图` (398), `绘制小地图` (255), `大地图拖拽开始` (72), `更新视口` (53), `打开大地图` (37), `大地图点击信息` (29), `关闭大地图` (24), `居中大地图` (24), … |
-| t10-save-envelope-audit | 8 | 896 | `恢复游戏状态` (359), `保存游戏状态` (268), `应用所有设置` (83), `保存并应用设置` (50), `导出存档` (43), `保存全局设置` (39), `导入存档` (33), `加载设置` (21) |
 | t10-menus-inventory-ui-audit | 10 | 874 | `显示死亡界面` (252), `更新背包显示` (120), `初始化装备系统` (104), `更新装备显示` (104), `显示结算界面` (88), `显示通知` (59), `显示胜利界面` (59), `显示主菜单` (46), … |
 | t10-editor-tools-audit | 13 | 759 | `编辑器放置逻辑` (294), `创建并放置房间` (98), `编辑器粘贴选区` (58), `油漆桶填充` (50), `应用单个扳手规则` (50), `笔刷绘制` (44), `编辑器复制选区` (40), `推开生物` (34), … |
 | t10-tutorial-professions-audit | 9 | 717 | `显示职业选择界面` (147), `获取教程文本` (143), `生成教程地牢` (116), `显示自定义游戏界面` (116), `启动游戏` (92), `应用职业效果` (46), `重置玩家状态` (27), `进入教程层` (15), … |
@@ -56,11 +55,12 @@ Every declaration below is neither ported nor owned by an implementation packet.
 | workshop-levels | 9 | 349 | `显示关卡详情` (105), `刷新关卡列表` (80), `显示创意关卡浏览器` (50), `隐藏创意关卡浏览器` (29), `隐藏关卡详情` (27), `关闭种子筛选器窗口` (19), `打开种子筛选器窗口` (16), `关闭联机设置窗口` (12), … |
 | t10-challenge-runtime-audit | 6 | 316 | `生成挑战房间怪物` (93), `开始挑战` (80), `处理挑战失败` (49), `完成挑战` (46), `刷新挑战房间下一波` (26), `恢复挑战区域` (22) |
 | t10-main-generation-audit | 5 | 267 | `生成奖励` (111), `应用难度预设` (73), `放置楼梯` (32), `生成迷宫地牢` (27), `生成金币` (24) |
+| t10-save-envelope-audit | 4 | 193 | `应用所有设置` (83), `保存并应用设置` (50), `保存全局设置` (39), `加载设置` (21) |
 | tutorial | 8 | 169 | `显示教程选择菜单` (32), `显示回放教程页` (26), `加载并开始教程` (25), `显示教程提示` (22), `打开教程回放窗口` (22), `隐藏教程选择菜单` (20), `关闭教程提示` (13), `关闭教程回放窗口` (9) |
 | t10-cdn-bootstrap-audit | 6 | 157 | `初始化创意工坊` (57), `初始化canvas` (30), `checkCdnAvailability` (26), `getIconHTML` (20), `fetchAndCacheEmoji` (19), `getIconChar` (5) |
 | big-map | 9 | 122 | `大地图悬停信息` (22), `切换大地图标记模式` (21), `切换大地图传送模式` (21), `切换大地图楼层` (15), `添加大地图事件监听` (11), `移除大地图事件监听` (11), `更新大地图楼层显示` (8), `大地图滚轮缩放` (8), … |
 
-Backlog total: 297 declarations, 18865 source lines.
+Backlog total: 293 declarations, 18162 source lines.
 
 ## Implementation packets still open
 
