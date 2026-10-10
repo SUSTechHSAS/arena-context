@@ -56,6 +56,12 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
     - generator constructor throws (rejects) versus solver throws, rejections, sync results, `成功` falsy or missing level (fallback)
     - short boards (TypeError caught), off-grid carving, wall count at `生成墙壁`, target-before-box order, placement throws inside the try, room mutation before clearing failures
   - Mutation: 13 mutants run, 12 detected; the 13th was a no-op control and passed as expected.
+- **Unit 21** — `world/puzzle-board.ts`: `生成解谜棋盘`. Time-budgeted restart beam search; the clock, piece classes and the packet-owned `可以放置` / `计算新增威胁格子数` are ports. Tests: `app/test/world-puzzle-board.test.ts`.
+  - Evidence: 250 seeded runs with a deterministic stepping clock (steps 0.05–20) match the source:
+    - every prng draw, the clock-call count, timeouts versus completed searches
+    - the board digest passed to the solver, and the `__权重` descriptor flags and value
+    - best-board copies, empty or zero-area rooms, `棋子数量` order
+  - Mutation: 15 mutants run, 14 detected; the 15th was invalid because it referenced an undefined variable. The area-64 beam boundary needed a boundary room and a fine clock step before it was detected.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
