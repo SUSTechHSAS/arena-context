@@ -4,7 +4,7 @@ This records actual local commands, not owner acceptance. Reference pin: `8d80b5
 
 ## World kernel (primary lane, PR #27) — 2026-10-10
 
-Each unit ports unassigned main-page functions into `app/src/game/world/` and compares them with the exact source declarations, evaluated in a VM. Both realms run the same seeded world script, and packet-owned collaborators are injected as logged ports. Mutants were applied by hand and the originals restored. Preserved source quirks are DEVIATIONS SRC-01…SRC-10.
+Each unit ports unassigned main-page functions into `app/src/game/world/` and compares them with the exact source declarations, evaluated in a VM. Both realms run the same seeded world script, and packet-owned collaborators are injected as logged ports. Mutants were applied by hand and the originals restored. Preserved source quirks are DEVIATIONS SRC-01…SRC-11.
 
 - **Unit 1** — `world/constants.ts` (cell/env/colour/effect tables, weather list, versions, DEFAULT_* tunables) and `world/cell.ts` (`单元格` data contract + `获取物品颜色`). Tests: `app/test/world-kernel.test.ts`.
   - Evidence: 23 new tests pass; each of 20 declarations is graph-equal to the exact source AST declaration; the cell is graph-equal for 5 coordinate cases and colour lookup over 460 cases. Manual mutants (`||`→`??` fallback, swapped property order) both failed the suite; originals restored. `tsc --noEmit` clean.
@@ -62,6 +62,14 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
     - the board digest passed to the solver, and the `__权重` descriptor flags and value
     - best-board copies, empty or zero-area rooms, `棋子数量` order
   - Mutation: 15 mutants run, 14 detected; the 15th was invalid because it referenced an undefined variable. The area-64 beam boundary needed a boundary room and a fine clock step before it was detected.
+- **Unit 22** — `world/turn.ts`: `处理回合逻辑`, `玩家等待`, `开始休息`, `停止休息`. Rest timer and interval live in a `RestSession` with timer ports; DOM bars go through `renderVitalBars`. Tests: `app/test/world-turn.test.ts`.
+  - Evidence: 300 seeded sessions (14 ops each, including firing queued rest ticks) match the source:
+    - guards (online, movement lock, grid-size mismatch), turn counter visible to the victory display, loose pet-floor equality
+    - energy/health defaults, `|| 100`, energy roll below 70 and drain, light refresh at night or in dark rooms
+    - monster-turn skip, floor-5 top-up, survival stele search with nested break, equipped and active pet healing
+    - challenge-wave filtering and timers, bar widths and warning classes
+    - rest denial reasons, the tick/timer order, the stop-rest guard
+  - Mutation: 18 mutants run, 16 detected; the 2 survivors are equivalent controls. DEVIATIONS SRC-11.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
