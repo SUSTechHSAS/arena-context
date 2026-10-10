@@ -1,0 +1,137 @@
+[
+ [
+  "B37 victory",
+  "S.玩家死亡次数 >= conditions.死亡次数限制",
+  "killed"
+ ],
+ [
+  "B37 victory",
+  "health.toFixed(1)}%",
+  "killed"
+ ],
+ [
+  "B39 equip-page",
+  "Math.max(0, Math.ceil(highestSlot / S.装备栏每页装备数) - 1)",
+  "SURVIVED"
+ ],
+ [
+  "B39 equip-page",
+  "}, 100);",
+  "killed"
+ ],
+ [
+  "D49 template",
+  "levelNumber < 0",
+  "killed"
+ ],
+ [
+  "D49 template",
+  "生成库存(Math.max(cell.关联物品.自定义数据.get('商品层数'), 0))",
+  "killed"
+ ],
+ [
+  "D49 template",
+  "ports.saveEditorState();⏎  ports.resetAll();",
+  "killed"
+ ],
+ [
+  "D49 template",
+  "if (startRoom) startRoom.已探索 = true;",
+  "killed"
+ ],
+ [
+  "D50 path",
+  "for (let i = 1; i < path.length; i++)",
+  "killed"
+ ],
+ [
+  "D50 path",
+  "ctx.lineWidth = 2 * view.devicePixelRatio;",
+  "killed"
+ ],
+ [
+  "D51 c-death",
+  "p.x < right",
+  "killed"
+ ],
+ [
+  "D51 c-death",
+  "elapsed < animationDuration",
+  "killed"
+ ],
+ [
+  "D51 c-death",
+  "ports.now() + ports.random() * 300",
+  "killed"
+ ],
+ [
+  "D53 click",
+  "if (roomId !== -1 && !S.已访问房间.has(roomId))",
+  "killed"
+ ],
+ [
+  "D53 click",
+  "const gridX = Math.floor(view.offsetX + x / view.cellSize);",
+  "killed"
+ ],
+ [
+  "D53 click",
+  "  cut.shift();⏎",
+  "killed"
+ ],
+ [
+  "D53 click",
+  "50, true, false, false, !isStairs",
+  "killed"
+ ],
+ [
+  "D55 e-canvas",
+  "if (distPx < 6) return 0;",
+  "killed"
+ ],
+ [
+  "D55 e-canvas",
+  "const dt = Math.min(0.05, (t - last) / 1000);",
+  "killed"
+ ],
+ [
+  "D55 e-canvas",
+  "targetItem.最大堆叠数量 > 1)",
+  "killed"
+ ],
+ [
+  "D55 e-canvas",
+  "if (dragged.堆叠数量 <= 0) E.拖拽对象 = null;",
+  "killed"
+ ],
+ [
+  "D57 c-levels",
+  "for (let i = 0; i < Math.ceil(ports.prng() * 10); i++) ports",
+  "killed"
+ ],
+ [
+  "D57 c-levels",
+  "ports.startGame(data, true);⏎    S.当前关卡存档数据字符串 = saveString;",
+  "killed"
+ ],
+ [
+  "D57 c-levels",
+  "}, 310);",
+  "killed"
+ ],
+ [
+  "D57 c-levels",
+  "delete mapData.配方信息;",
+  "killed"
+ ],
+ [
+  "D58 particles",
+  "prng() * 0.6 + 0.4",
+  "killed"
+ ],
+ [
+  "D58 particles",
+  "const delay = prng() * 15;",
+  "killed"
+ ]
+]
