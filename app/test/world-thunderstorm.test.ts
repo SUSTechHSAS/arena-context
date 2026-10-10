@@ -2,7 +2,7 @@ import vm from 'node:vm';
 import { describe, expect, it } from 'vitest';
 import { createWorldState } from '../src/game/world/state';
 import { processThunderstorm } from '../src/game/world/weather';
-import { declaration } from './oracle/source';
+import { declaration, originalDeclaration } from './oracle/source';
 import { graphSnapshot } from './oracle/graph';
 
 const FUNCTIONS = ['处理雷暴效果'];
@@ -32,7 +32,7 @@ const scenario = (seed: number) => `
       关联怪物: r() < 0.15 ? monster() : null })));
     所有计时器 = 地牢.flat().filter(c => c?.关联物品 && r() < 0.4).map(c => ({ 唯一标识: c.关联物品.唯一标识 }));
     玩家背包 = new Map(地牢.flat().filter(c => c?.关联物品 && r() < 0.3).map(c => [c.关联物品.唯一标识, c.关联物品]));
-    房间列表 = [0, 1, 2].map(i => r() < 0.1 ? undefined : ({ x: pick([0, 1, 2]), y: pick([0, 2]), w: pick([1, 2, 3, 5]), h: pick([1, 2, 4, 5]) }));
+    房间列表 = [0, 1, 2].map(i => r() < 0.1 ? undefined : ({ id: r() < 0.5 ? i : (i + 1) % 3, x: pick([0, 1, 2]), y: pick([0, 2]), w: pick([1, 2, 3, 5]), h: pick([1, 2, 4, 5]) }));
     房间地图 = Array.from({ length: 8 }, () => Array.from({ length: 8 }, () => pick([-1, 0, 1, 2, 2, 4])));
     当前装备页 = pick([0, 1]); 装备栏每页装备数 = 2;
     玩家装备 = new Map([1, 2, 3, 4].map(slot => [slot, r() < 0.35 ? { 材质: pick(['铜质', '铁质']) } : null]));
@@ -48,9 +48,9 @@ const scenario = (seed: number) => `
 
 const final = 'globalThis.final = { results, calls }';
 
-function sourceRun(seed: number) {
+function sourceRun(seed: number, read: (name: string) => string = declaration) {
   const context = vm.createContext({ calls: [], results: [] });
-  new vm.Script(`${[...new Set([...GLOBALS, ...FUNCTIONS].map(name => declaration(name)))].join('\n')}
+  new vm.Script(`${[...new Set([...GLOBALS, ...FUNCTIONS].map(name => read(name)))].join('\n')}
     globalThis.__setPrng = f => { prng = f; };`).runInContext(context);
   new vm.Script(scenario(seed).replace('const pick', '__setPrng(rand); const pick')).runInContext(context);
   return new vm.Script(`${final}; final`).runInContext(context) as Record<string, unknown>;
@@ -80,12 +80,15 @@ describe('thunderstorm (处理雷暴效果)', () => {
   it('matches the source over 800 seeded sessions', () => {
     const tally: Record<string, number> = {};
     const bump = (key: string) => { tally[key] = (tally[key] ?? 0) + 1; };
+    let fixedSeeds = 0;
     for (let seed = 1; seed <= 800; seed++) {
       const source = sourceRun(seed); const mine = rewriteRun(seed);
       expect(snap(mine), `seed ${seed}`).toBe(snap(source));
+      if (snap(sourceRun(seed, originalDeclaration)) !== snap(source)) fixedSeeds++; // SRC-22: unpatched source differs
       for (const call of source.calls as unknown[][]) bump(String(call[0]));
       for (const entry of source.results as unknown[][]) if (entry[0] === 'throw') bump('throw');
     }
+    expect(fixedSeeds, 'unpatched SRC-22 differs').toBeGreaterThan(5);
     for (const key of ['计划显示格子特效', '添加日志', '处理销毁物品', '显示通知', 'hurt', 'bar', 'status', '伤害玩家', 'pet-hurt', 'fire-new', 'warn', 'throw'])
       expect(tally[key] ?? 0, key).toBeGreaterThan(5);
   }, 120_000);

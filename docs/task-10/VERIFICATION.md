@@ -165,6 +165,7 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
   - Evidence: `test/source-patches.test.ts` checks, for every patch, that each edit matches exactly once, that undoing the edits restores the exact source, that the result parses, and that a DEVIATIONS row marks it Fixed. The 8 existing differential suites pass against the patched oracle, and each also requires the unpatched source to differ on more than 5 seeds, so the random inputs reach every bug. Throw guards that only the old bugs produced were removed.
   - Mutation: 12 revert mutants (each restoring one source defect in the rewrite, plus a wrong quote entity), all detected.
   - Follow-up: SRC-01 patch on `重置所有游戏状态` (3 edits: reset settings in declaration shape) and `world/reset.ts`. `world-reset.test.ts` compares the rewrite and patched source with the evaluated `自定义全局设置` declaration over 4 dirty variants, and requires the unpatched source to differ. A revert mutant (`死亡次数限制` back under `玩家属性`) fails 5 tests.
+  - Follow-up: SRC-22 patch on `处理雷暴效果` (room by id with index fallback) and `world/weather.ts`. `world-thunderstorm.test.ts` now gives rooms ids that differ from their indices (800 sessions) and requires the unpatched source to differ on more than 5 seeds. The index-only revert mutant is detected.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 

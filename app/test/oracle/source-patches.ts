@@ -44,6 +44,11 @@ export const SOURCE_PATCHES: readonly SourcePatch[] = [
     ],
   },
   {
+    id: 'SRC-22', declaration: '处理雷暴效果',
+    reason: 'look the player room up by id with index fallback, as for SRC-20 (room-map values are room ids)',
+    edits: [{ find: 'const 玩家所在房间 = 房间列表[玩家房间ID];', replace: 'const 玩家所在房间 = 房间列表.find((r) => r && r.id === 玩家房间ID) || 房间列表[玩家房间ID];' }],
+  },
+  {
     id: 'SRC-24a', declaration: '引爆烟雾网络',
     reason: 'a missing dungeon row must be treated like a missing cell',
     edits: [{ find: '地牢[ny][nx]?.关联物品', replace: '地牢[ny]?.[nx]?.关联物品' }],

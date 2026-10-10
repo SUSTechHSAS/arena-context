@@ -164,7 +164,8 @@ export function processThunderstorm(state: WorldState, ports: ThunderstormPorts)
     rx = S.玩家.x - 7 + Math.floor(ports.random() * 14);
     ry = S.玩家.y - 7 + Math.floor(ports.random() * 14);
   } else {
-    const room = S.房间列表[roomId];
+    // SRC-22 fixed (owner rule 2026-10-10): by id with index fallback; the source used the index only.
+    const room = S.房间列表.find((r: Loose) => r && r.id === roomId) || S.房间列表[roomId];
     if (!room || room.w < 2 || room.h < 2) return;
     rx = room.x + Math.floor(ports.random() * (room.w - 1));
     ry = room.y + Math.floor(ports.random() * (room.h - 1));
