@@ -1,0 +1,42 @@
+[
+ [
+  "C44 SRC-30 revert",
+  "'&': '&amp;', '\"': '&quot;', \"'\": '&#39;' }",
+  "killed"
+ ],
+ [
+  "C44 SRC-11 revert",
+  "low: attributes.当前生命值 <= 20 }",
+  "killed"
+ ],
+ [
+  "C44 SRC-03 revert",
+  "timer?.x != null) addLight",
+  "killed"
+ ],
+ [
+  "C45 f-check",
+  "if (whetstone.自定义数据.get('耐久') > 0) {",
+  "killed"
+ ],
+ [
+  "C45 f-check",
+  "if (onlyPotionAndGold && totalGold > 0) {",
+  "SURVIVED"
+ ],
+ [
+  "C47 tut-nav",
+  "while (ports.tutorialText(stage) === UNKNOWN && stage <= 6);",
+  "killed"
+ ],
+ [
+  "C47 tut-nav",
+  "if (stage === 2.5) stage = 2;",
+  "killed"
+ ],
+ [
+  "C47 wrench",
+  "target.名称 || target.类型",
+  "killed"
+ ]
+]
