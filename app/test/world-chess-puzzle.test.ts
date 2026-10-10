@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { createWorldState } from '../src/game/world/state';
 import { 单元格类型 } from '../src/game/world/constants';
 import { checkChessPuzzle, completeChessPuzzle, type ChessPuzzlePorts } from '../src/game/world/chess-puzzle';
-import { declaration } from './oracle/source';
+import { declaration, originalDeclaration } from './oracle/source';
 import { graphSnapshot } from './oracle/graph';
 
 const FUNCTIONS = ['检查解谜是否成功', '解谜成功'];
@@ -43,9 +43,9 @@ const scenario = (seed: number) => `
 
 const final = 'globalThis.final = { results, calls }';
 
-function sourceRun(seed: number) {
+function sourceRun(seed: number, read: (name: string) => string = declaration) {
   const context = vm.createContext({ calls: [], results: [] });
-  new vm.Script(`${[...new Set([...GLOBALS, ...FUNCTIONS].map(name => declaration(name)))].join('\n')}`).runInContext(context);
+  new vm.Script(`${[...new Set([...GLOBALS, ...FUNCTIONS].map(name => read(name)))].join('\n')}`).runInContext(context);
   new vm.Script(scenario(seed)).runInContext(context);
   return new vm.Script(`${final}; final`).runInContext(context) as Record<string, unknown>;
 }
@@ -72,12 +72,15 @@ describe('chess puzzle completion (检查解谜是否成功, 解谜成功)', () 
   it('matches the source over 800 seeded sessions', () => {
     const tally: Record<string, number> = {};
     const bump = (key: string) => { tally[key] = (tally[key] ?? 0) + 1; };
+    let fixedSeeds = 0;
     for (let seed = 1; seed <= 800; seed++) {
       const source = sourceRun(seed); const mine = rewriteRun(seed);
       expect(snap(mine), `seed ${seed}`).toBe(snap(source));
+      if (snap(sourceRun(seed, originalDeclaration)) !== snap(source)) fixedSeeds++; // SRC-20: unpatched source differs
       for (const call of source.calls as unknown[][]) bump(String(call[0]));
       for (const entry of source.results as unknown[][]) if (typeof entry[0] === 'string') bump(`${entry[0]}:${String(entry[1])}`);
     }
+    expect(fixedSeeds, 'unpatched SRC-20 differs').toBeGreaterThan(5);
     for (const key of ['check:true', 'check:false', 'throw:TypeError', 'solve:undefined', 'attacks', 'reward-new', '生成奖励', '显示通知', '绘制', '放置物品到房间'])
       expect(tally[key] ?? 0, key).toBeGreaterThan(5);
   }, 120_000);

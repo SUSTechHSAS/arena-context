@@ -38,14 +38,15 @@ export function completeChessPuzzle(state: WorldState, ports: ChessPuzzlePorts, 
 
 /**
  * Source `检查解谜是否成功(棋子数量)` (HTML L50729): with enough single pieces on the player's puzzle board and no
- * piece attacking another, completes the puzzle (`onSolved` = `解谜成功`). The room is `房间列表[房间地图值]` by index.
+ * piece attacking another, completes the puzzle (`onSolved` = `解谜成功`). SRC-20 fixed (owner rule 2026-10-10): the room is looked up by
+ * id with index fallback (source used the index only and threw on a missing entry); a missing room returns false.
  */
 export function checkChessPuzzle(state: WorldState, ports: Pick<ChessPuzzlePorts, 'isChessPiece'> & { onSolved(room: unknown): void }, pieceCount: Loose): boolean {
   const S = state as Loose;
   const roomId = S.房间地图[S.玩家.y][S.玩家.x];
   if (roomId === -1) return false;
-  const room = S.房间列表[roomId];
-  if (room.类型 !== '隐藏解谜棋盘') return false;
+  const room = S.房间列表.find((r: Loose) => r && r.id === roomId) || S.房间列表[roomId];
+  if (!room || room.类型 !== '隐藏解谜棋盘') return false;
   let present = 0;
   const board = Array(room.h).fill(null).map(() => Array(room.w).fill(0));
   const pieces: { x: number; y: number; 棋子: Loose }[] = [];

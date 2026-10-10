@@ -24,7 +24,7 @@ export interface TurnPorts {
   log(message: string, type: string): void;
   processMonsterTurn(): void; // 处理怪物回合
   drawMinimap(): void; // 绘制小地图
-  /** Source `.health-bar` / `.power-bar` DOM writes; both warnings follow the *energy* value (source quirk). */
+  /** Source `.health-bar` / `.power-bar` DOM writes; each warning follows its own value (SRC-11 fixed). */
   renderVitalBars(health: VitalBar, power: VitalBar): void;
   processWeather(): void; // 处理天气效果
   updateObjectIndicators(): void; // 更新物体指示器
@@ -80,10 +80,10 @@ export function processTurn(state: WorldState, ports: TurnPorts): void {
     const petState = (state.宠物状态表 as Loose).get(pet);
     if (petState) petState.更新状态();
   });
-  const low = attributes.当前能量值 <= 20;
+  // SRC-11 fixed (owner rule 2026-10-10): source toggled the health warning from energy.
   ports.renderVitalBars(
-    { width: `${Math.max(0, Math.min(100, attributes.当前生命值))}%`, low },
-    { width: `${Math.max(0, Math.min(100, attributes.当前能量值))}%`, low },
+    { width: `${Math.max(0, Math.min(100, attributes.当前生命值))}%`, low: attributes.当前生命值 <= 20 },
+    { width: `${Math.max(0, Math.min(100, attributes.当前能量值))}%`, low: attributes.当前能量值 <= 20 },
   );
   ports.processWeather();
   ports.updateObjectIndicators();

@@ -3,7 +3,7 @@ import { webcrypto } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { createWorldState } from '../src/game/world/state';
 import { createSignature, deepEqual, directionName, explosionColor, findNearestRoom, hashString, sanitizeHtml, seededRandom, syncEditorRoomState } from '../src/game/world/utils';
-import { declaration } from './oracle/source';
+import { declaration, originalDeclaration } from './oracle/source';
 import { graphSnapshot } from './oracle/graph';
 
 const FUNCTIONS = ['深度比较', '获取方向中文', '哈希字符串', '种子伪随机数', '获取爆炸颜色', '净化HTML', '寻找最近的房间', '处理房间状态', '生成签名'];
@@ -42,9 +42,9 @@ const scenario = (seed: number) => `
 
 const final = 'globalThis.final = { results }';
 
-async function sourceRun(seed: number) {
+async function sourceRun(seed: number, read: (name: string) => string = declaration) {
   const context = vm.createContext({ results: [], TextEncoder, crypto: webcrypto });
-  new vm.Script(`${[...new Set([...GLOBALS, ...FUNCTIONS].map(name => declaration(name)))].join('\n')}`).runInContext(context);
+  new vm.Script(`${[...new Set([...GLOBALS, ...FUNCTIONS].map(name => read(name)))].join('\n')}`).runInContext(context);
   await new vm.Script(scenario(seed)).runInContext(context);
   return new vm.Script(`${final}; final`).runInContext(context) as Record<string, unknown>;
 }
@@ -64,11 +64,14 @@ async function rewriteRun(seed: number) {
 describe('source utilities (深度比较, 哈希字符串, 种子伪随机数, 净化HTML, 生成签名, rooms …)', () => {
   it('matches the source over 600 seeded runs', async () => {
     const tally: Record<string, number> = {};
+    let fixedSeeds = 0;
     for (let seed = 1; seed <= 600; seed++) {
       const source = await sourceRun(seed); const mine = await rewriteRun(seed);
       expect(snap(mine), `seed ${seed}`).toBe(snap(source));
+      if (snap(await sourceRun(seed, originalDeclaration)) !== snap(source)) fixedSeeds++; // SRC-30: unpatched source differs
       for (const entry of source.results as unknown[][]) { const key = `${String(entry[0])}:${entry[0] === 'throw' ? String(entry[1]) : typeof entry[1] === 'boolean' ? String(entry[1]) : ''}`; tally[key] = (tally[key] ?? 0) + 1; }
     }
+    expect(fixedSeeds, 'unpatched SRC-30 differs').toBeGreaterThan(5);
     for (const key of ['deep:true', 'deep:false', 'dir:', 'hash:', 'rand:', 'boom:', 'html:', 'near:', 'rooms:', 'sign:', 'throw:deep']) expect(tally[key] ?? 0, key).toBeGreaterThan(5);
   }, 120_000);
 });

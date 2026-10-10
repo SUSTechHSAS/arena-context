@@ -2,7 +2,7 @@ import vm from 'node:vm';
 import { describe, expect, it } from 'vitest';
 import { createWorldState, type WorldState } from '../src/game/world/state';
 import { getPlayerSightRange, getVisibleRoomIds, isLit, updateLightMap, type LightingPorts } from '../src/game/world/lighting';
-import { declaration } from './oracle/source';
+import { declaration, originalDeclaration } from './oracle/source';
 
 const FUNCTIONS = ['获取玩家视野范围', '是否在光源范围内', '更新光源地图', '获取视野内房间ID'];
 const GLOBALS = ['地牢大小', '玩家状态', '房间地图', '玩家', '房间列表', '当前天气效果', '玩家属性', '玩家装备', '当前装备页',
@@ -38,11 +38,11 @@ const world = (seed: number) => `
   globalThis.sight = (sx, sy, ex, ey, max) => { calls.push([sx, sy, ex, ey, max]); return ((sx * 7 + sy * 3 + ex * 5 + ey * 11) % 4) !== 0; };
 `;
 
-function sourceRun(seed: number) {
+function sourceRun(seed: number, read: (name: string) => string = declaration) {
   const calls: unknown[][] = [];
   const context = vm.createContext({ calls });
-  const declarations = [...new Set(GLOBALS.map(name => declaration(name)))].join('\n');
-  new vm.Script(`${declarations}\n${FUNCTIONS.map(name => declaration(name)).join('\n')}
+  const declarations = [...new Set(GLOBALS.map(name => read(name)))].join('\n');
+  new vm.Script(`${declarations}\n${FUNCTIONS.map(name => read(name)).join('\n')}
     const document = { getElementById(id) { calls.push(['dom', id]); return { getBoundingClientRect() { return { width: canvasWidth }; } }; } };
     let 单元格大小 = 0; function 检查视线(...args) { return sight(...args); }`).runInContext(context);
   new vm.Script(`${world(seed)}; 单元格大小 = cellSize;`).runInContext(context);
@@ -67,7 +67,7 @@ function rewriteRun(seed: number) {
 describe('world lighting and visibility', () => {
   const seeds = Array.from({ length: 120 }, (_, index) => index * 7919 + 13);
   it('sight range, visible room ids, light map (incl. insertion order) and lit tests match across 120 worlds', () => {
-    let litChecks = 0; let lightCells = 0; let nights = 0;
+    let litChecks = 0; let lightCells = 0; let nights = 0; let fixedSeeds = 0;
     for (const seed of seeds) {
       const source = sourceRun(seed); const mine = rewriteRun(seed);
       expect(getPlayerSightRange(mine.state, mine.ports), `seed ${seed}`).toBe(source.run('获取玩家视野范围()'));
@@ -77,6 +77,8 @@ describe('world lighting and visibility', () => {
       updateLightMap(mine.state, mine.ports); source.run('更新光源地图()');
       const expectedLight = [...source.run('光源地图') as Set<string>];
       expect([...mine.state.光源地图], `seed ${seed}`).toEqual(expectedLight);
+      const unpatched = sourceRun(seed, originalDeclaration); unpatched.run('更新光源地图()');
+      if (JSON.stringify([...unpatched.run('光源地图') as Set<string>]) !== JSON.stringify(expectedLight)) fixedSeeds++;
       lightCells += expectedLight.length; if (mine.state.当前天气效果.includes('深夜')) nights++;
       for (let y = -1; y <= mine.state.地牢大小; y++) for (let x = -1; x <= mine.state.地牢大小; x++) {
         expect(isLit(mine.state, x, y), `seed ${seed} ${x},${y}`).toBe(source.run(`是否在光源范围内(${x}, ${y})`));
@@ -86,6 +88,8 @@ describe('world lighting and visibility', () => {
     }
     // Guard against a vacuous harness: the worlds must exercise night, light sources and many checks.
     expect(nights).toBeGreaterThan(40); expect(lightCells).toBeGreaterThan(500); expect(litChecks).toBeGreaterThan(8000);
+    // SRC-03: the unpatched source must differ (x = 0 light timers) on some worlds, so the fix is exercised.
+    expect(fixedSeeds, 'unpatched SRC-03 differs').toBeGreaterThan(5);
   });
   it('light map is cleared and refilled in place (same Set identity)', () => {
     const mine = rewriteRun(13); const map = mine.state.光源地图; map.add('stale');

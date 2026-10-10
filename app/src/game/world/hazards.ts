@@ -17,8 +17,8 @@ function collectSmoke(state: WorldState, isSmoke: (item: unknown) => boolean, st
       const nx = current.x + dx;
       const ny = current.y + dy;
       if (nx >= 0 && nx < S.地牢大小 && ny >= 0 && ny < S.地牢大小) {
-        // Source guards the cell but not the row.
-        const neighbour = S.地牢[ny][nx]?.关联物品;
+        // SRC-24 fixed (owner rule 2026-10-10): source guarded the cell but not the row.
+        const neighbour = S.地牢[ny]?.[nx]?.关联物品;
         if (isSmoke(neighbour) && !seen.has(neighbour.唯一标识)) {
           seen.add(neighbour.唯一标识);
           list.push(neighbour);

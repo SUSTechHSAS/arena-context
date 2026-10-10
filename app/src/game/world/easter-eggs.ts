@@ -9,8 +9,8 @@ export interface QEggPorts {
 
 /**
  * Source `检查Q字形彩蛋(丢弃X, 丢弃Y)` (HTML L66408): after a drop, tries every `X` of the 6×6 Q pattern as the dropped
- * cell; a match needs pickable items exactly on the `X` cells. A cell whose `关联物品` is `undefined` counts as holding
- * an item and then throws on `.能否拾起`, as in the source.
+ * cell; a match needs pickable items exactly on the `X` cells. A cell whose `关联物品` is `undefined` is empty (SRC-27
+ * fixed, owner rule 2026-10-10; the source counted it as holding an item and threw on `.能否拾起`).
  */
 export function checkQEasterEgg(state: WorldState, ports: QEggPorts, dropX: number, dropY: number): void {
   const S = state as Loose;
@@ -32,7 +32,7 @@ export function checkQEasterEgg(state: WorldState, ports: QEggPorts, dropX: numb
             }
             const cell = S.地牢[y]?.[x];
             const char = Q字形图案[r]![c];
-            const hasItem = cell && cell.关联物品 !== null && cell.关联物品.能否拾起 !== false;
+            const hasItem = cell && cell.关联物品 != null && cell.关联物品.能否拾起 !== false;
             if ((char === 'X' && !hasItem) || (char === ' ' && hasItem)) {
               matched = false;
               break;

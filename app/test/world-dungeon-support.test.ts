@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { createWorldState } from '../src/game/world/state';
 import { 单元格类型 } from '../src/game/world/constants';
 import { checkSokobanSolved, completeSokobanRoom, computeDistanceMap, lockRooms, placeRandomRecipeScrolls, type SokobanSolvedPorts } from '../src/game/world/dungeon-support';
-import { declaration } from './oracle/source';
+import { declaration, originalDeclaration } from './oracle/source';
 import { graphSnapshot } from './oracle/graph';
 
 const FUNCTIONS = ['计算距离图', '处理上锁的门', '生成并放置随机配方卷轴', '检查推箱子解谜完成', '解谜成功_推箱子'];
@@ -58,9 +58,9 @@ const scenario = (seed: number) => `
 
 const final = 'globalThis.final = { results, calls }';
 
-function sourceRun(seed: number) {
+function sourceRun(seed: number, read: (name: string) => string = declaration) {
   const context = vm.createContext({ calls: [], results: [] });
-  new vm.Script(`${[...new Set([...GLOBALS, ...FUNCTIONS].map(name => declaration(name)))].join('\n')}
+  new vm.Script(`${[...new Set([...GLOBALS, ...FUNCTIONS].map(name => read(name)))].join('\n')}
     globalThis.__setPrng = f => { prng = f; };`).runInContext(context);
   new vm.Script(scenario(seed).replace('const pick', '__setPrng(rand); const pick')).runInContext(context);
   return new vm.Script(`${final}; final`).runInContext(context) as Record<string, unknown>;
@@ -96,12 +96,15 @@ describe('dungeon support (计算距离图, 处理上锁的门, 生成并放置�
   it('matches the source over 500 seeded sessions', () => {
     const tally: Record<string, number> = {};
     const bump = (key: string) => { tally[key] = (tally[key] ?? 0) + 1; };
+    let fixedSeeds = 0;
     for (let seed = 1; seed <= 500; seed++) {
       const source = sourceRun(seed); const mine = rewriteRun(seed);
       expect(snap(mine), `seed ${seed}`).toBe(snap(source));
+      if (snap(sourceRun(seed, originalDeclaration)) !== snap(source)) fixedSeeds++; // SRC-18: unpatched source differs
       for (const call of source.calls as unknown[][]) bump(String(call[0]));
       for (const entry of source.results as unknown[][]) if (Array.isArray(entry) && typeof entry[0] === 'string') bump(entry[0] === 'throw' ? `throw:${String(entry[1])}` : String(entry[0]));
     }
+    expect(fixedSeeds, 'unpatched SRC-18 differs').toBeGreaterThan(5);
     for (const key of ['dist', 'lock', 'recipes', 'check', 'solve', 'throw:dist', 'recipe', 'scroll', 'place', 'log', 'warn', '显示通知', 'reward-new', '生成奖励', '绘制', 'prng'])
       expect(tally[key] ?? 0, key).toBeGreaterThan(5);
   }, 120_000);

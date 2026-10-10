@@ -40,11 +40,13 @@ export function computeDistanceMap(state: WorldState, startX: number, startY: nu
   return distances;
 }
 
-/** Source `处理上锁的门()` (HTML L42517): locks the doors of a random subset of later plain rooms. */
+/** Source `处理上锁的门()` (HTML L42517): locks the doors of a random subset of later plain rooms.
+ * SRC-18 fixed (owner rule 2026-10-10): `null` room-list entries are skipped instead of throwing. */
 export function lockRooms(state: WorldState, ports: { random(): number }): void {
   const S = state as Loose;
   const firstLockable = Math.floor(S.房间列表.length * 0.5);
-  const candidates = S.房间列表.filter((room: Loose) => room.门.length > 0 && room.id >= firstLockable && room.类型 == '房间'); // eslint-disable-line eqeqeq
+  const candidates = S.房间列表.filter((room: Loose) => room && room.门.length > 0 && // SRC-18 fixed: null entries skipped
+    room.id >= firstLockable && room.类型 == '房间'); // eslint-disable-line eqeqeq
   const count = Math.min(candidates.length, Math.floor(ports.random() * candidates.length * 0.5) + 1);
   for (let i = 0; i < count; i++) {
     if (candidates.length === 0) break;
@@ -76,7 +78,7 @@ export function lockRooms(state: WorldState, ports: { random(): number }): void 
     }
   }
   S.上锁房间列表.forEach((locked: Loose) => {
-    const original = S.房间列表.find((r: Loose) => r.id === locked.id);
+    const original = S.房间列表.find((r: Loose) => r && r.id === locked.id);
     if (original) original.已解锁 = false;
   });
 }

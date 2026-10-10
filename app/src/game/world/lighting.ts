@@ -81,9 +81,9 @@ export function updateLightMap(state: WorldState, ports: LightingPorts): void {
       }
     }
   };
-  // Source quirk preserved: `计时器?.x` is a truthiness test, so a light timer at x = 0 is skipped.
+  // SRC-03 fixed (owner rule 2026-10-10): source tested `计时器?.x` for truthiness and skipped x = 0.
   (state.所有计时器 as unknown as (Light | null | undefined)[]).forEach(timer => {
-    if (timer && timer.自定义数据?.has('光照范围') && timer?.x) addLight(timer);
+    if (timer && timer.自定义数据?.has('光照范围') && timer?.x != null) addLight(timer);
   });
   if (state.地牢.length >= size) {
     for (let y = 0; y < size; y++) {

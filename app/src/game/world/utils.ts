@@ -58,12 +58,12 @@ export function explosionColor(distance: Loose): string | undefined {
 }
 
 /**
- * Source `净化HTML(文本)` (HTML L55796): escapes `<`/`>`. The pattern also matches `&`, `"` and `'`, which have no
- * replacement and therefore become the text `undefined` (source bug, preserved).
+ * Source `净化HTML(文本)` (HTML L55796): escapes `<`, `>`, `&`, `"` and `'`. SRC-30 fixed (owner rule 2026-10-10): the
+ * source map lacked the last three, so they became the text `undefined`.
  */
 export function sanitizeHtml(text: unknown): string {
   if (typeof text !== 'string') return '';
-  const map: Record<string, string> = { '<': '&lt;', '>': '&gt;' };
+  const map: Record<string, string> = { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;' };
   return text.replace(/[&<>"']/g, (match) => map[match] as string);
 }
 

@@ -27,11 +27,12 @@ export interface FusionSlotPorts extends FusionRefreshPorts {
 
 /**
  * Source `添加到融合区(物品实例, 起始元素)` (HTML L46326): moves one unit of an item (gold stacks into gold slots of the
- * first four) into the fusion area. Online play emits before the null check, so a missing item throws there.
+ * first four) into the fusion area. SRC-31 fixed (owner rule 2026-10-10): the online emit is skipped for a missing item
+ * (source emitted before its null check and threw).
  */
 export function addToFusion(state: WorldState, ports: FusionSlotPorts, item: Loose, startElement: unknown): void {
   const S = state as Loose;
-  if (ports.isOnline()) ports.emit('playerAction', { type: 'fuseAdd', id: item.唯一标识.toString() });
+  if (ports.isOnline() && item) ports.emit('playerAction', { type: 'fuseAdd', id: item.唯一标识.toString() });
   if (!item) return;
   const target = S.融合区物品.findIndex((slot: unknown) => slot === null);
   if (target === -1) {
@@ -88,14 +89,14 @@ export function addToFusion(state: WorldState, ports: FusionSlotPorts, item: Loo
 }
 
 /**
- * Source `从融合区移除(格子索引)` (HTML L46404): returns a slot to the backpack (gold as a fresh 金币 stack). Only `null`
- * slots are skipped; an out-of-range index is processed as an empty item.
+ * Source `从融合区移除(格子索引)` (HTML L46404): returns a slot to the backpack (gold as a fresh 金币 stack). Empty (`null`)
+ * and out-of-range (`undefined`) slots are skipped (SRC-31 fixed).
  */
 export function removeFromFusion(state: WorldState, ports: FusionSlotPorts, index: Loose): void {
   const S = state as Loose;
   if (ports.isOnline()) ports.emit('playerAction', { type: 'fuseRemove', index });
   const item = S.融合区物品[index];
-  if (item === null) return;
+  if (item == null) return; // SRC-31 fixed: source skipped only null, not out-of-range (undefined) slots
   ports.getElement('浮动提示框').style.display = 'none';
   if (ports.isGold(item)) {
     const amount = S.fusionGoldQuantities[index] || 0;

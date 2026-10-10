@@ -72,3 +72,10 @@ The owner requested continuation when all statistically indistinguishable models
 - Contract rules: constants stay unfrozen plain objects (freezing changes descriptors compared by the oracle); immutability comes from readonly types. Source `let` tunables are DEFAULT_* values copied into a session, never module-level mutable state. Canvas methods of `单元格` belong to the rendering layer (audited by `t10-main-canvas-audit`).
 - Alternatives rejected: implementing pool packets directly (blocks dependency chains); a global mutable module mirroring source globals (prevents parallel sessions/tests and deterministic replay).
 - Status: unreviewed candidate; Kibiandkimi decides acceptance.
+
+## 2026-10-10: Primary may fix small upstream defects (owner instruction, primary turn 20261010T101013Z-3c436878)
+
+- Owner instruction (Kibiandkimi, this turn): small upstream problems recorded as SRC-01, SRC-02, SRC-03 … may be changed by the primary model on its own judgment; the change only has to be recorded.
+- Scope: local, evident source defects (copy-paste conditions, wrong falsy checks, missing guards on malformed data, broken escaping, null checks in the wrong order). Not included: balance/odds changes, intent-ambiguous behaviour (where the intended value cannot be read from the source), redesigns, async/flow restructuring, or anything a secondary packet owns.
+- Evidence rule: a fix must stay differential. The test oracle applies a recorded text patch to the exact source declaration (`app/test/oracle/source-patches.ts`; each patch must match exactly once), so the test proves the rewrite equals *source + that patch* and nothing else; a separate check shows the unpatched source differs on a targeted input. `docs/task-10/DEVIATIONS.md` marks the entry **Fixed (primary decision)** with the patch id; secondaries may not add patches.
+- Status: the owner pre-authorised this class of change; individual fixes remain reviewable in the PR and can be reverted by deleting the patch and restoring the preserved branch.

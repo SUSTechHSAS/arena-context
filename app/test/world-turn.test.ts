@@ -2,7 +2,7 @@ import vm from 'node:vm';
 import { describe, expect, it } from 'vitest';
 import { createWorldState } from '../src/game/world/state';
 import { playerWait, processTurn, startRest, stopRest, type RestSession, type TurnPorts } from '../src/game/world/turn';
-import { declaration } from './oracle/source';
+import { declaration, originalDeclaration } from './oracle/source';
 import { graphSnapshot } from './oracle/graph';
 
 const FUNCTIONS = ['处理回合逻辑', '玩家等待', '开始休息', '停止休息'];
@@ -83,9 +83,9 @@ const scenario = (seed: number) => `
   globalThis.final = { results, calls, 玩家属性, 房间列表, 移动历史, 玩家正在休息, 休息定时器, 跳过怪物回合剩余次数, 玩家总移动回合数, 所有怪物, queue: queue.length };
 `;
 
-function sourceRun(seed: number) {
+function sourceRun(seed: number, read: (name: string) => string = declaration) {
   const context = vm.createContext({ calls: [], results: [] });
-  new vm.Script(`${[...new Set([...GLOBALS, ...FUNCTIONS].map(name => declaration(name)))].join('\n')}
+  new vm.Script(`${[...new Set([...GLOBALS, ...FUNCTIONS].map(name => read(name)))].join('\n')}
     globalThis.__setPrng = f => { prng = f; };`).runInContext(context);
   new vm.Script(scenario(seed).replace('const pick', '__setPrng(rand); const pick')).runInContext(context);
   return new vm.Script('final').runInContext(context) as Record<string, unknown>;
@@ -129,9 +129,11 @@ function rewriteRun(seed: number) {
 describe('turn loop (处理回合逻辑 / 玩家等待 / 开始休息 / 停止休息)', () => {
   it('matches the source over 300 seeded sessions', () => {
     const tally: Record<string, number> = { turns: 0, skipped: 0, energyRoll: 0, mazeTopUp: 0, survival: 0, challenge: 0, restTicks: 0, restDenied: 0, lowWarn: 0, light: 0 };
+    let fixedSeeds = 0;
     for (let seed = 1; seed <= 300; seed++) {
       const source = sourceRun(seed); const mine = rewriteRun(seed);
       expect(snap(mine), `seed ${seed}`).toBe(snap(source));
+      if (snap(sourceRun(seed, originalDeclaration)) !== snap(source)) fixedSeeds++; // SRC-11: unpatched source differs
       const calls = source.calls as unknown[][];
       const count = (pred: (c: unknown[]) => boolean) => calls.filter(pred).length;
       tally.turns! += count(c => c[0] === 'victory-ui');
@@ -145,6 +147,7 @@ describe('turn loop (处理回合逻辑 / 玩家等待 / 开始休息 / 停止�
       tally.lowWarn! += count(c => c[0] === 'class+');
       tally.light! += count(c => c[0] === '更新光源地图');
     }
+    expect(fixedSeeds, 'unpatched SRC-11 differs').toBeGreaterThan(5);
     for (const [key, value] of Object.entries(tally)) expect(value, key).toBeGreaterThan(5);
   });
 });
