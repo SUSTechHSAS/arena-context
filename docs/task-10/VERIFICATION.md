@@ -193,6 +193,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 53** — `world/click.ts`: `处理点击` (canvas click: online/offline obstacle placement, item-targeting listener, overlay dismissal, click-to-move path truncation). Page UI flags live in a `ClickSession`, and `moveQueue` is shared with `MoveSession`. `广度优先搜索路径` (packet `t10-path-search`), the obstacle classes (packet `t10-obstacles-obsidian`), `处理销毁物品`, `startAutoMove`, the DOM queries and the socket are ports. Tests: `app/test/world-click.test.ts`.
   - Evidence: 600 seeded runs × 14 clicks match the source (ordered calls, placement flags, `待放置物品ID`, `moveQueue`, backpack). They cover every game state, online/offline placement, listener precedence, each overlay, unavailable/failed placement, stack exhaustion, disabled click-move, stairs targets, fractional rects and offsets, zero cell size, out-of-grid targets and paths that throw.
   - Mutation: 25 mutants, all detected (after fractional Y offsets were added so the floor placement is observable). DEVIATIONS SRC-39.
+- **Unit 54** — `world/editor-click.ts`: `编辑器单击处理` (map-editor click dispatch). It shares `编辑器状态`/`旧编辑器状态` with `InteractSession` and adds `编辑器剪贴板`. The paste/bucket/brush/place tools (audit `t10-editor-tools-audit`), `应用扳手规则` (`world/wrench.ts`), the cell flash and the autosave are ports. Tests: `app/test/world-editor-click.test.ts`.
+  - Evidence: 600 seeded runs × 20 clicks match the source (ordered calls, player, start position, editor state). They cover every mode and tool, missing rows/cells, monsters vs items vs falsy entities, all wrench slots including missing ones, empty clipboards and out-of-range clicks.
+  - Mutation: 16 mutants, all detected. DEVIATIONS SRC-40.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
