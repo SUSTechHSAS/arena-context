@@ -187,6 +187,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 51** — `world/creative-death.ts`: `处理创意关卡死亡事件` (online creative-level death markers). The Supabase `death_locations` select/insert, viewport, DOM class toggle, marker list, clock, RNG, animation frames, `绘制` and `显示死亡界面` are ports. Tests: `app/test/world-creative-death.test.ts`.
   - Evidence: 400 seeded async runs × 8 sessions match the source (ordered calls including RNG draws, final `玩家属性`, markers, pending frames). They cover synchronous fetch throws, rejected fetches, error objects, falsy errors, `null` data, empty/partial/fully visible death sets, zero-size viewports, synchronous insert throws, upload errors and animation frames before, at and after 2.5 s.
   - Mutation: 19 mutants, all detected (after two stubs were widened: the class-removal stub now records `允许移动`, and `null` data now arrives without an error). DEVIATIONS SRC-37.
+- **Unit 52** — `world/creative-export.ts`: `导出当前状态为创意关卡` (developer export of the live state as a signed creative level). `保存游戏状态` is a port of the audit packet `t10-save-envelope-audit`. `生成签名` (already in `world/utils.ts`), `切换动画`, the Blob/object-URL/link download steps, the clock and `console.error` are ports. Tests: `app/test/world-creative-export.test.ts`.
+  - Evidence: 500 seeded async runs × 8 sessions match the source (ordered calls, including the exact signed text and file name). They cover the mode/developer gate, cancelled/blank/untrimmed titles, empty/null/invalid/primitive/array/object saves with and without the stripped keys, throwing saves and rejected signatures.
+  - Mutation: 17 mutants, 14 detected. The 3 survivors are equivalent: an explicit `null` throw vs the native one, and two no-op rewrites (`JSON.stringify(x, null, 0)`, a comma expression). DEVIATIONS SRC-38.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
