@@ -1,43 +1,37 @@
 # Current handoff
 
 - Task: #10
-- Unit: Successor of PR #19 — primary implementation turn
-- Work branch / PR: arena/e4cc53a2-arena-context / successor PR pending (predecessor https://github.com/SUSTechHSAS/arena-context/pull/19, head 9539c29)
+- Unit: Successor of PR #19 — primary world-kernel lane
+- Work branch / PR: arena/e4cc53a2-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/27 (successor of PR #19, whose head stays at 9539c29)
 - Accepted base at unit start: task/10/main@45f8811ce9c7ec910ff6346d7c6b489fb1cf8f5e
-- Inherited candidate at unit start: 9539c29c65b763d95613265c20b570a4394c2c4c (fast-forwarded from PR #19)
+- Inherited candidate at unit start: 9539c29c65b763d95613265c20b570a4394c2c4c (fast-forwarded from PR #19; unreviewed)
 - Updated: 2026-10-10
 - Fingerprint: .context/fingerprints/20261010T052904Z-330f7ea6/report.json
 - Model role: primary
-- Work packet: none; primary published the assignment pool
-- Primary review: not applicable; no secondary output is claimed here
-- Candidate stage: 114 packets published; 73 available, 41 waiting for dependency review
-- Pool introduction: 4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596 (original four remain at 04c2f6d)
-- Last verified remote before this checkpoint: 7260a950771e0fe08c60f5f28a1956c987b80c65
+- Work packet: none; primary lane outside all packet paths (see DECISIONS 2026-10-10)
+- Primary review: not applicable; no secondary run exists yet in this history
+- Candidate stage: in progress; Draft
 
 Only Kibiandkimi decides acceptance; this card is not approval.
 
 ## Current objective
 
-Provide enough bounded assignments for many secondary sessions between scarce primary turns, as requested by the owner. The full modern rewrite and source-consistency acceptance in TASK.md remain unchanged.
+Modern rewrite of chinese-dungeon with source-consistency tests (TASK.md). The 114-packet pool from PR #19 remains for secondaries (73 available, 41 dependency-blocked). This primary session builds the non-packet main-game world kernel under `app/src/game/world/` that integration will need.
 
-## Candidate progress
+## Candidate progress (this session)
 
-Preserved the original four immutable packets and added 110: 68 class-contract implementations, 16 algorithm/data-interface implementations, and 26 executable source audits. Every named main-page class declaration in the static AST maps to existing work or an implementation/audit assignment. This is assignment coverage, not completed game coverage.
-
-The [pool guide and full directory](../docs/task-10/packet-pool/README.md) give exact definitions, dependency chains and review priorities. Work spans items, weapons, monsters, pets, generation, puzzles, storage, editor, UI, workshop/socket and action contracts. New task paths are pairwise disjoint, including against the original packets.
-
-ItemCore now permits source-compatible action arguments and boolean/numeric/empty hook results; the inherited bush hook annotation matches. Existing runtime return values and state updates are preserved. This prevents independent subclasses from each needing to edit the shared base.
+1. Took over PR #19 on successor branch `arena/e4cc53a2-arena-context`; fast-forward only, all inherited files preserved.
+2. World kernel unit 1: `world/constants.ts` (cell/env/colour/effect tables, weather list, versions, DEFAULT_* tunables) and `world/cell.ts` (`单元格` data contract + `获取物品颜色`). Tests: `app/test/world-kernel.test.ts`.
 
 ## Verification
 
-At `0ec3698`, 8 source hashes, 5 integrity tests, strict types, 110 domain tests and the build passed. A compiler fixture also accepts multi-argument/numeric/empty-return subclasses. The first narrow bush annotation error was corrected before the successful regression. Logs: `docs/task-10/packet-pool/verification.json`.
-
-110 CLI creation commands and 503 exact AST anchor checks passed; the dependency graph has no missing IDs/cycles, and scopes do not overlap. At published `4cc1298`, collaboration.mjs status verified 114 packets: 73 available, 41 blocked only by required primary dependency review, zero unexpected blockers. Saved output: `docs/task-10/packet-pool/status.json`. Its remote arena/protocol check passed. Original packet definitions, fingerprint records, TASK and shared protocol files are preserved.
+- Inherited baseline rerun at 9539c29: `npm run check` passed (8 reference hashes, 5 integrity tests, strict types, 110 tests, build).
+- Unit 1: 23 new tests pass; each of 20 declarations is graph-equal to the exact source AST declaration; the cell is graph-equal for 5 coordinate cases and colour lookup over 460 cases. Manual mutants (`||`→`??` fallback, swapped property order) both failed the suite; originals restored. `tsc --noEmit` clean.
 
 ## Blockers and unresolved owner feedback
 
-No owner comments or unresolved reviews were present at the latest PR check. The 41 dependency waits are intentional; use one of the 73 available packets first. Check open task PRs before choosing because status is branch-local. Complete gameplay, real actor/world integration, UI, save cross-load and live-service behavior remain unfinished. PR #19 stays Draft.
+No owner comments on PR #19 or #27 at takeover. Full game, UI, saves and services remain unfinished. Draft.
 
 ## Next action
 
-Start separate Arena branches from the latest published primary checkpoint containing this pool. Each turn fingerprints; secondary turns claim one packet before edits and keep one packet per PR. Primary turns should prioritize source audits and base-class/kernel results that unlock multiple descendants, then review actual committed outputs. Kibiandkimi retains human review and final merge.
+World kernel unit 2: session-owned world state (`world/state.ts`), mirroring source global initial values, with an oracle comparison; then grid/room-map initialisation used by generation.

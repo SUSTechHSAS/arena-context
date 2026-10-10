@@ -64,3 +64,11 @@ The owner requested continuation when all statistically indistinguishable models
 - Keep the pool below the protocol's 300-file comparison boundary; the current PR plus these definitions and evidence remains below that bound. Use the latest published primary checkpoint and inspect open packet PRs before selecting work, because status is branch-local rather than a global claim lock.
 
 - Publication: all 110 additions were created through the accepted CLI and introduced in ordinary commit `4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596`. After push/remote verification, CLI status found 73 available packets and 41 waits exclusively for primary-reviewed dependencies, with no other blocker. Original four definitions remain byte-identical at their original introduction. Remote arena/protocol passed for the pool checkpoint.
+
+## 2026-10-10: Primary lane for the world kernel (candidate, primary turn 20261010T052904Z-330f7ea6)
+
+- Context: the 114-packet pool assigns class contracts and source audits to secondaries; dependency checks accept only a primary review of an actual secondary run, so a primary implementing a packet's own scope would leave its descendants blocked and duplicate available work.
+- Choice: primary turns work in a separate, non-overlapping lane — the main-game world kernel under `app/src/game/world/` with tests `app/test/world-*.test.ts` — covering integration pieces that no packet implements: source constants/tunables, the `单元格` data contract, the session-owned global world state, and later the generation/turn orchestration that consumes reviewed packet outputs. No packet definition or allowed path is touched.
+- Contract rules: constants stay unfrozen plain objects (freezing changes descriptors compared by the oracle); immutability comes from readonly types. Source `let` tunables are DEFAULT_* values copied into a session, never module-level mutable state. Canvas methods of `单元格` belong to the rendering layer (audited by `t10-main-canvas-audit`).
+- Alternatives rejected: implementing pool packets directly (blocks dependency chains); a global mutable module mirroring source globals (prevents parallel sessions/tests and deterministic replay).
+- Status: unreviewed candidate; Kibiandkimi decides acceptance.
