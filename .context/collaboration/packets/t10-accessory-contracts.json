@@ -1,0 +1,28 @@
+{
+  "id": "t10-accessory-contracts",
+  "title": "Port the accessory base and seven direct accessory subclasses",
+  "objective": "Advance U03 with isolated source-consistent accessory data/lifecycle contracts on the existing ItemCore foundation, leaving actual pet behavior and save/script integration to later units.",
+  "allowed_paths": [
+    "app/src/game/accessory-items.ts",
+    "app/test/accessory-items.test.ts",
+    "app/test/oracle/accessory-fixture.ts",
+    "docs/task-10/packets/accessory-contracts.md"
+  ],
+  "acceptance": [
+    "Implement exactly 饰品 and its seven direct subclasses 陷阱先锋饰品, 飞毛腿饰品, 瞬间移动饰品, 博士之卷饰品, 恢复之心饰品, 以牙还牙饰品 and 嗅探之鼻饰品 from ChineseDungeon.html HTML lines 32998-33100. Confirm boundaries with the unchanged source/AST before relying on line numbers.",
+    "Follow the existing ItemCore/ArmorItem explicit-port pattern. Keep accessory types and icon lookup ports in the new module; preserve source config-spread precedence, defaults, strings, 使用 returning false and inherited data/lifecycle semantics. Read existing ItemCore and shared oracle/graph helpers without editing them.",
+    "Differentially instantiate exact original declarations through createOracle with independently cloned configurations and explicit matching icon/time/RNG/equipment doubles. Cover all eight classes, default/overridden/falsy config, Map/object data and aliases, draw order, hints/names, equipment and non-consuming 使用 behavior; preserve relevant non-finite and Symbol identity semantics.",
+    "Treat pet effects described by accessory text as unimplemented interactions elsewhere in the game. Do not invent those effects, port pets, add UI, or claim constructor/source-name compatibility proves the pending legacy no-port facade or save hydration.",
+    "Production imports must contain only the rewritten code. Record precise coverage, actual verification, remaining integration gaps and any source quirks in the packet document and this turn's result; keep the PR Draft for primary review."
+  ],
+  "verification": [
+    "From app: npm ci --ignore-scripts if needed; npm run typecheck; npm test -- test/accessory-items.test.ts. Record actual case counts and observed original/candidate state/event/draw agreement.",
+    "Before handing off the completed packet, run npm run check from app to include unchanged-reference validation, all domain tests, strict types and the production build. Do not update dependencies or reduce an existing test.",
+    "Inspect the final diff for packet scope and production/oracle separation. Report any inability to run checks instead of calling unexecuted checks passed."
+  ],
+  "depends_on": [],
+  "schema": 1,
+  "task_issue": 10,
+  "accepted_branch": "task/10/main",
+  "issued_by": ".context/fingerprints/20261009T045933Z-88646267/report.json"
+}

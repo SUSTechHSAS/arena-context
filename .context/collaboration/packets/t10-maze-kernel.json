@@ -1,0 +1,33 @@
+{
+  "id": "t10-maze-kernel",
+  "title": "主游戏迷宫生长、连通与最终化",
+  "objective": "Advance Task #10's full modern rewrite and source-consistency acceptance in the generation surface through isolated implementation with exact-source differential tests. This is one bounded candidate unit, not a change to the complete task scope.",
+  "allowed_paths": [
+    "app/src/domain/maze-kernel.ts",
+    "app/test/maze-kernel.test.ts",
+    "app/test/oracle/maze-kernel-fixture.ts",
+    "docs/task-10/packets/maze-kernel.md"
+  ],
+  "acceptance": [
+    "Reference is the unchanged eight-file snapshot at upstream 8d80b5a4dd3d737ed6d3060f05611eaa3de611ab. The following ranges are original HTML lines and must be rechecked against the exact AST before edits: ChineseDungeon.html:38912-39015 移除死胡同; ChineseDungeon.html:39016-39134 确保所有房间均已连接; ChineseDungeon.html:39135-39231 放置房间群; ChineseDungeon.html:39233-39244 填充迷宫; ChineseDungeon.html:39246-39293 生长树算法; ChineseDungeon.html:39295-39347 连接所有区域; ChineseDungeon.html:39349-39423 _放置门; ChineseDungeon.html:39425-39511 最终化地牢.",
+    "Use reviewed main-room geometry where called; compare region discovery/connection, dead-end updates, doorway and final cell conversion ordering with full deterministic grid snapshots.",
+    "Expose createMazeKernel(ports) in the new module, returning an object whose callable names and argument order match the selected source functions. Keep mutable world state, factories, time/RNG and UI/service effects explicit in a typed ports interface; preserve aliasing and write-through semantics. Reuse declared reviewed dependencies rather than silently duplicating their candidate algorithms.",
+    "Compare the candidate with exact AST-selected original declarations in separate environments. Match input graph aliases while separating candidate/oracle objects; compare fields, relevant identity/prototypes/Map/Symbols, non-finite values, returns/errors, every RNG draw and ordered callbacks. Include source-specific edge cases and demonstrate a meaningful boundary/ordering mutant is detected without changing the tracked reference.",
+    "External actors, factories, scheduling, canvas/DOM and network remain explicit typed ports with matching test doubles; production modules never execute original source. Preserve the conditions/arguments/order of UI requests without designing a new interface. This unit proves isolated contracts only; full actor/world/UI/script/save integration stays explicitly pending.",
+    "Claim only after these packets have current primary-approved results: t10-main-room-geometry. Start from an accepted task checkpoint containing those outputs/reviews and this unchanged packet (or a valid published primary checkpoint satisfying the same checks). Do not combine independent pending PR histories or substitute missing dependency outputs with candidate stubs.",
+    "Use only the exact allowed task paths, this turn's protocol-permitted fingerprint/run/result files and STATE. Read shared code, the reference and dependencies without modifying them. Do not edit TASK/DECISIONS/shared rules, weaken compiler/tests, repair source quirks silently, change packet definitions, or introduce live service calls. Report an unforeseen interface or scope need in result.md for primary review.",
+    "Record exact coverage, original-vs-candidate or source-only limits, commands/results, detected source quirks and the next action in the packet document and this turn's result.md. Keep the PR Draft for later primary review."
+  ],
+  "verification": [
+    "From app, use npm ci --ignore-scripts if dependencies are absent, then npm run typecheck and npm test -- test/maze-kernel.test.ts. Report actual counts and commands; do not infer results from earlier packets.",
+    "Before the completed handoff, run npm run check from app: immutable-reference hashes/integrity tests, strict types, all domain tests and production build. Run only relevant local/offline fixtures; no live service write or unlisted dependency installation.",
+    "Inspect the real diff for allowed paths, source-anchor accuracy, concrete superclass/dependency use and production/oracle separation. Preserve meaningful counterexample/trace evidence; document untested UI/browser/whole-game boundaries explicitly."
+  ],
+  "depends_on": [
+    "t10-main-room-geometry"
+  ],
+  "schema": 1,
+  "task_issue": 10,
+  "accepted_branch": "task/10/main",
+  "issued_by": ".context/fingerprints/20261009T091343Z-0e4cf368/report.json"
+}

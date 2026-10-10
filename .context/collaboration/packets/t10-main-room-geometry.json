@@ -1,0 +1,33 @@
+{
+  "id": "t10-main-room-geometry",
+  "title": "主游戏房间、走廊和门几何",
+  "objective": "Advance Task #10's full modern rewrite and source-consistency acceptance in the generation surface through isolated implementation with exact-source differential tests. This is one bounded candidate unit, not a change to the complete task scope.",
+  "allowed_paths": [
+    "app/src/domain/main-room-geometry.ts",
+    "app/test/main-room-geometry.test.ts",
+    "app/test/oracle/main-room-geometry-fixture.ts",
+    "docs/task-10/packets/main-room-geometry.md"
+  ],
+  "acceptance": [
+    "Reference is the unchanged eight-file snapshot at upstream 8d80b5a4dd3d737ed6d3060f05611eaa3de611ab. The following ranges are original HTML lines and must be rechecked against the exact AST before edits: ChineseDungeon.html:42443-42487 区域是否空闲; ChineseDungeon.html:42489-42505 放置房间; ChineseDungeon.html:42507-42515 更新房间墙壁; ChineseDungeon.html:42614-42647 寻找房间入口; ChineseDungeon.html:42649-42809 连接房间; ChineseDungeon.html:42811-42987 生成走廊; ChineseDungeon.html:42989-42997 是否在任意房间内; ChineseDungeon.html:42999-43156 放置门; ChineseDungeon.html:43157-43171 randomlySetOneWayDirection; ChineseDungeon.html:40505-40621 生成墙壁; ChineseDungeon.html:40622-40648 添加额外走廊.",
+    "Read the reviewed main-generation audit; implement exact main-game geometry with typed grid/cell/room ports and deterministic factories. Preserve all wall/door identities, room order, side effects and draws; do not reuse viewer algorithms merely because names match.",
+    "Expose createMainRoomGeometry(ports) in the new module, returning an object whose callable names and argument order match the selected source functions. Keep mutable world state, factories, time/RNG and UI/service effects explicit in a typed ports interface; preserve aliasing and write-through semantics. Reuse declared reviewed dependencies rather than silently duplicating their candidate algorithms.",
+    "Compare the candidate with exact AST-selected original declarations in separate environments. Match input graph aliases while separating candidate/oracle objects; compare fields, relevant identity/prototypes/Map/Symbols, non-finite values, returns/errors, every RNG draw and ordered callbacks. Include source-specific edge cases and demonstrate a meaningful boundary/ordering mutant is detected without changing the tracked reference.",
+    "External actors, factories, scheduling, canvas/DOM and network remain explicit typed ports with matching test doubles; production modules never execute original source. Preserve the conditions/arguments/order of UI requests without designing a new interface. This unit proves isolated contracts only; full actor/world/UI/script/save integration stays explicitly pending.",
+    "Claim only after these packets have current primary-approved results: t10-main-generation-audit. Start from an accepted task checkpoint containing those outputs/reviews and this unchanged packet (or a valid published primary checkpoint satisfying the same checks). Do not combine independent pending PR histories or substitute missing dependency outputs with candidate stubs.",
+    "Use only the exact allowed task paths, this turn's protocol-permitted fingerprint/run/result files and STATE. Read shared code, the reference and dependencies without modifying them. Do not edit TASK/DECISIONS/shared rules, weaken compiler/tests, repair source quirks silently, change packet definitions, or introduce live service calls. Report an unforeseen interface or scope need in result.md for primary review.",
+    "Record exact coverage, original-vs-candidate or source-only limits, commands/results, detected source quirks and the next action in the packet document and this turn's result.md. Keep the PR Draft for later primary review."
+  ],
+  "verification": [
+    "From app, use npm ci --ignore-scripts if dependencies are absent, then npm run typecheck and npm test -- test/main-room-geometry.test.ts. Report actual counts and commands; do not infer results from earlier packets.",
+    "Before the completed handoff, run npm run check from app: immutable-reference hashes/integrity tests, strict types, all domain tests and production build. Run only relevant local/offline fixtures; no live service write or unlisted dependency installation.",
+    "Inspect the real diff for allowed paths, source-anchor accuracy, concrete superclass/dependency use and production/oracle separation. Preserve meaningful counterexample/trace evidence; document untested UI/browser/whole-game boundaries explicitly."
+  ],
+  "depends_on": [
+    "t10-main-generation-audit"
+  ],
+  "schema": 1,
+  "task_issue": 10,
+  "accepted_branch": "task/10/main",
+  "issued_by": ".context/fingerprints/20261009T091343Z-0e4cf368/report.json"
+}

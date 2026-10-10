@@ -1,0 +1,649 @@
+{
+  "role": "primary",
+  "packets": [
+    {
+      "id": "t10-accessory-contracts",
+      "title": "Port the accessory base and seven direct accessory subclasses",
+      "source_commit": "04c2f6dcfd2e4b7436f3bfdd82e5df1ae8938377",
+      "status": "available"
+    },
+    {
+      "id": "t10-altar-core",
+      "title": "祭坛基类的激活与奖励契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-altar-rewards.json",
+      "status": "blocked",
+      "reason": "Dependency t10-altar-core needs primary review first."
+    },
+    {
+      "id": "t10-bandages-flares",
+      "title": "急救绷带与照明弹生命周期",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-basin-compass",
+      "title": "洗身砚与时空罗盘的状态契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-bomb-core",
+      "title": "炸弹基类的引爆与范围契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-books-formulas",
+      "title": "书架、泉水与配方卷轴契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-boss-minotaur.json",
+      "status": "blocked",
+      "reason": "Dependency t10-monster-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-boss-throne.json",
+      "status": "blocked",
+      "reason": "Dependency t10-monster-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-boss-wizards.json",
+      "status": "blocked",
+      "reason": "Dependency t10-monster-contract-audit needs primary review first."
+    },
+    {
+      "id": "t10-camp-services",
+      "title": "存档点、重铸台与神龛触发契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-cave-kernel",
+      "title": "洞穴元胞、连通区域与评分核心",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-cdn-bootstrap-audit",
+      "title": "CDN、图标缓存与离线启动契约审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-challenge-runtime-audit",
+      "title": "挑战房间、奖励和失败回收审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-challenge-stone",
+      "title": "挑战石碑的独立状态契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-chess-pieces",
+      "title": "棋子基类与四种棋子的移动契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-chess-solver.json",
+      "status": "blocked",
+      "reason": "Dependency t10-chess-pieces needs primary review first."
+    },
+    {
+      "id": "t10-color-math",
+      "title": "颜色解析与混色算法",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-color-switches",
+      "title": "红蓝、绿紫开关与四色砖块",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-containers",
+      "title": "罐子与空罐子的内容、破碎契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-conveyor-items",
+      "title": "传送带与卷轴滚动墙契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-crystal-runes",
+      "title": "魔法水晶与符文圈契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-display-logic-items",
+      "title": "文本框、告示牌及逻辑物品契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-editor-history",
+      "title": "编辑器深拷贝、快照与撤销核心",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-editor-tools-audit",
+      "title": "编辑器放置、填充、复制与规则审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-editor-ui-import-audit",
+      "title": "属性面板、地图导入与编辑试玩审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-ending-certificates",
+      "title": "结局评级与死亡凭证格式",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-energy-plants-furnace",
+      "title": "吸能种子、能量草与能量熔炉",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-fences",
+      "title": "栅栏及木、石、铁栅栏契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-fusion-buff-engine.json",
+      "status": "blocked",
+      "reason": "Dependency t10-fusion-engine-audit needs primary review first."
+    },
+    {
+      "id": "t10-fusion-engine-audit",
+      "title": "融合配方、增益计算与提交顺序审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-fusion-list-helpers",
+      "title": "融合增益、附魔合并与提示算法",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-guard-ranged-plants",
+      "title": "护卫、远射种子与植物契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-input-hud-audit",
+      "title": "键盘、触摸、滑动与 HUD 契约审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-inventory-actions-audit",
+      "title": "背包、装备、拾取与交易契约审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-keys-coins",
+      "title": "钥匙、万能钥匙与金币契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-liquid-buckets",
+      "title": "岩浆及五种桶的独立契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-main-canvas-audit",
+      "title": "主画布、单元格与动画渲染审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-main-generation-audit",
+      "title": "主地牢、楼层切换与内容放置审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-main-room-geometry.json",
+      "status": "blocked",
+      "reason": "Dependency t10-main-generation-audit needs primary review first."
+    },
+    {
+      "id": "t10-manager-data",
+      "title": "关卡管理器的离线数据请求契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-manager-ui-launch-audit",
+      "title": "关卡管理器列表、详情与启动路由审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-map-quest-items",
+      "title": "定位地图、旗帜、奖杯与寻宝戒指",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-maze-kernel.json",
+      "status": "blocked",
+      "reason": "Dependency t10-main-generation-audit needs primary review first."
+    },
+    {
+      "id": "t10-menus-inventory-ui-audit",
+      "title": "菜单、背包、装备与通知界面审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-merchants-well",
+      "title": "商人、探险家、赌徒与许愿井契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-minimap-camera-audit",
+      "title": "大地图、小地图与相机交互审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-monster-contract-audit",
+      "title": "怪物基类全部成员的契约审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-monster-core.json",
+      "status": "blocked",
+      "reason": "Dependency t10-monster-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-monsters-basic.json",
+      "status": "blocked",
+      "reason": "Dependency t10-monster-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-monsters-centipede.json",
+      "status": "blocked",
+      "reason": "Dependency t10-monster-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-monsters-ghost-water.json",
+      "status": "blocked",
+      "reason": "Dependency t10-monster-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-monsters-giant.json",
+      "status": "blocked",
+      "reason": "Dependency t10-monster-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-monsters-guard-projectiles.json",
+      "status": "blocked",
+      "reason": "Dependency t10-monster-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-monsters-hazards-patrol.json",
+      "status": "blocked",
+      "reason": "Dependency t10-monster-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-monsters-slimes-teleport.json",
+      "status": "blocked",
+      "reason": "Dependency t10-monster-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-monsters-status-thieves.json",
+      "status": "blocked",
+      "reason": "Dependency t10-monster-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-monsters-summoners.json",
+      "status": "blocked",
+      "reason": "Dependency t10-monster-contract-audit needs primary review first."
+    },
+    {
+      "id": "t10-npc-contract-item",
+      "title": "佣兵契约与自定义 NPC 入口契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-obstacles-obsidian",
+      "title": "便携路障与黑曜石生命周期",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-path-primitives",
+      "title": "路径、方向与回溯基础算法",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-path-search.json",
+      "status": "blocked",
+      "reason": "Dependency t10-path-primitives needs primary review first."
+    },
+    {
+      "id": "t10-pet-contract-audit",
+      "title": "宠物基类及装备管理的契约审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-pet-core.json",
+      "status": "blocked",
+      "reason": "Dependency t10-pet-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-pets-elemental.json",
+      "status": "blocked",
+      "reason": "Dependency t10-pet-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-pets-mount-panda.json",
+      "status": "blocked",
+      "reason": "Dependency t10-pet-contract-audit needs primary review first."
+    },
+    {
+      "id": "t10-poison-smoke-items",
+      "title": "毒气、毒液与烟雾物品契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-portal-geometry",
+      "title": "传送门方向与墙壁旋转算法",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-portal-items",
+      "title": "普通、折跃与沉浸式传送门物品",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-portal-runtime-audit",
+      "title": "传送、楼层与传送带运行时审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-potion-base-contracts",
+      "title": "Port the isolated potion base-class lifecycle",
+      "source_commit": "04c2f6dcfd2e4b7436f3bfdd82e5df1ae8938377",
+      "status": "available"
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-potion-bomb.json",
+      "status": "blocked",
+      "reason": "Dependency t10-bomb-core needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-potion-harmful-elements.json",
+      "status": "blocked",
+      "reason": "Dependency t10-potion-base-contracts needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-potion-restoration.json",
+      "status": "blocked",
+      "reason": "Dependency t10-potion-base-contracts needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-potion-stealth-mystery.json",
+      "status": "blocked",
+      "reason": "Dependency t10-potion-base-contracts needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-potion-terrain.json",
+      "status": "blocked",
+      "reason": "Dependency t10-potion-base-contracts needs primary review first."
+    },
+    {
+      "id": "t10-pulse-pressure-switches",
+      "title": "脉冲器与压感开关契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-save-envelope-audit",
+      "title": "整体存档、设置与导入导出审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-save-floors-audit",
+      "title": "楼层对象图存档与恢复审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-save-items-cells-audit",
+      "title": "物品与单元格存档格式审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-save-monsters-audit",
+      "title": "怪物存档与恢复契约审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-script-facade-audit",
+      "title": "自定义 NPC、脚本 API 与界面元素审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-scroll-buffs.json",
+      "status": "blocked",
+      "reason": "Dependency t10-scroll-core needs primary review first."
+    },
+    {
+      "id": "t10-scroll-core",
+      "title": "卷轴基类的非 DOM 生命周期",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-scroll-enchantment-audit",
+      "title": "附魔与大师附魔卷轴完整契约审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-scroll-solar-verbal.json",
+      "status": "blocked",
+      "reason": "Dependency t10-scroll-core needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-scroll-spatial.json",
+      "status": "blocked",
+      "reason": "Dependency t10-scroll-core needs primary review first."
+    },
+    {
+      "id": "t10-seed-search",
+      "title": "种子筛选的调度与判定核心",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-socket-contract-audit",
+      "title": "联机连接、事件与同步数据审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-sokoban-solver",
+      "title": "推箱子搜索、生成与质量评估核心",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-source-ast-inventory",
+      "title": "Build a reproducible AST inventory of the three original pages",
+      "source_commit": "04c2f6dcfd2e4b7436f3bfdd82e5df1ae8938377",
+      "status": "available"
+    },
+    {
+      "id": "t10-spawn-selection",
+      "title": "怪物引入与加权随机选择",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-spawners-whirlwinds",
+      "title": "刷怪笼、旋风物品与磨刀石契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-special-floors-audit",
+      "title": "沉没迷宫、图书馆与首领层审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-thorn-plants",
+      "title": "荆棘种子与荆棘丛契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-torch-fire",
+      "title": "火把与火焰物品生命周期",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-trap-advanced.json",
+      "status": "blocked",
+      "reason": "Dependency t10-trap-core needs primary review first."
+    },
+    {
+      "id": "t10-trap-core",
+      "title": "陷阱基类与落石、地刺、失明陷阱",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-turn-movement-audit",
+      "title": "玩家移动、回合与怪物调度审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-tutorial-professions-audit",
+      "title": "教程、职业与新游戏启动契约审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-weapon-contract-audit",
+      "title": "Audit and exercise the original weapon class before implementation",
+      "source_commit": "04c2f6dcfd2e4b7436f3bfdd82e5df1ae8938377",
+      "status": "available"
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-weapon-core.json",
+      "status": "blocked",
+      "reason": "Dependency t10-weapon-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-weapons-economy-tools.json",
+      "status": "blocked",
+      "reason": "Dependency t10-weapon-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-weapons-force.json",
+      "status": "blocked",
+      "reason": "Dependency t10-weapon-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-weapons-frost-fire.json",
+      "status": "blocked",
+      "reason": "Dependency t10-weapon-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-weapons-lightning.json",
+      "status": "blocked",
+      "reason": "Dependency t10-weapon-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-weapons-melee.json",
+      "status": "blocked",
+      "reason": "Dependency t10-weapon-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-weapons-projectiles.json",
+      "status": "blocked",
+      "reason": "Dependency t10-weapon-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-weapons-special-magic.json",
+      "status": "blocked",
+      "reason": "Dependency t10-weapon-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-weapons-summon-wind.json",
+      "status": "blocked",
+      "reason": "Dependency t10-weapon-contract-audit needs primary review first."
+    },
+    {
+      "packet": ".context/collaboration/packets/t10-weapons-sweep-whip.json",
+      "status": "blocked",
+      "reason": "Dependency t10-weapon-contract-audit needs primary review first."
+    },
+    {
+      "id": "t10-weather-terrain-audit",
+      "title": "天气、地形、水域与环境顺序审计",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-webs-nets",
+      "title": "蛛网、渔网陷阱与渔网契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    },
+    {
+      "id": "t10-workshop-data",
+      "title": "游戏内工坊的离线请求契约",
+      "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+      "status": "available"
+    }
+  ],
+  "next": "Claim one assigned, unblocked packet; one writer and one packet per secondary PR."
+}

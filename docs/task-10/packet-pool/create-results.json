@@ -1,0 +1,882 @@
+[
+  {
+    "id": "t10-keys-coins",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-keys-coins.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-scroll-core",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-scroll-core.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-chess-pieces",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-chess-pieces.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-trap-core",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-trap-core.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-conveyor-items",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-conveyor-items.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-bandages-flares",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-bandages-flares.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-pulse-pressure-switches",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-pulse-pressure-switches.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-color-switches",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-color-switches.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-challenge-stone",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-challenge-stone.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-obstacles-obsidian",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-obstacles-obsidian.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-liquid-buckets",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-liquid-buckets.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-poison-smoke-items",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-poison-smoke-items.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-basin-compass",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-basin-compass.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-camp-services",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-camp-services.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-merchants-well",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-merchants-well.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-altar-core",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-altar-core.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-torch-fire",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-torch-fire.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-webs-nets",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-webs-nets.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-thorn-plants",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-thorn-plants.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-guard-ranged-plants",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-guard-ranged-plants.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-energy-plants-furnace",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-energy-plants-furnace.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-spawners-whirlwinds",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-spawners-whirlwinds.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-portal-items",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-portal-items.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-map-quest-items",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-map-quest-items.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-crystal-runes",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-crystal-runes.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-containers",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-containers.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-fences",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-fences.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-bomb-core",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-bomb-core.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-display-logic-items",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-display-logic-items.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-books-formulas",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-books-formulas.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-npc-contract-item",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-npc-contract-item.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-path-primitives",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-path-primitives.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-portal-geometry",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-portal-geometry.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-color-math",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-color-math.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-fusion-list-helpers",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-fusion-list-helpers.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-spawn-selection",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-spawn-selection.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-ending-certificates",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-ending-certificates.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-editor-history",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-editor-history.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-cave-kernel",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-cave-kernel.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-sokoban-solver",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-sokoban-solver.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-seed-search",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-seed-search.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-manager-data",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-manager-data.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-workshop-data",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-workshop-data.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-monster-contract-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-monster-contract-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-pet-contract-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-pet-contract-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-turn-movement-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-turn-movement-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-inventory-actions-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-inventory-actions-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-main-generation-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-main-generation-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-special-floors-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-special-floors-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-tutorial-professions-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-tutorial-professions-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-weather-terrain-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-weather-terrain-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-fusion-engine-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-fusion-engine-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-save-items-cells-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-save-items-cells-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-save-monsters-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-save-monsters-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-save-floors-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-save-floors-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-save-envelope-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-save-envelope-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-script-facade-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-script-facade-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-editor-tools-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-editor-tools-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-editor-ui-import-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-editor-ui-import-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-main-canvas-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-main-canvas-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-minimap-camera-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-minimap-camera-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-input-hud-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-input-hud-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-menus-inventory-ui-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-menus-inventory-ui-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-manager-ui-launch-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-manager-ui-launch-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-socket-contract-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-socket-contract-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-cdn-bootstrap-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-cdn-bootstrap-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-challenge-runtime-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-challenge-runtime-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-portal-runtime-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-portal-runtime-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-potion-restoration",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-potion-restoration.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-potion-stealth-mystery",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-potion-stealth-mystery.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-potion-harmful-elements",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-potion-harmful-elements.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-potion-terrain",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-potion-terrain.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-trap-advanced",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-trap-advanced.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-scroll-buffs",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-scroll-buffs.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-scroll-spatial",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-scroll-spatial.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-scroll-solar-verbal",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-scroll-solar-verbal.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-scroll-enchantment-audit",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-scroll-enchantment-audit.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-altar-rewards",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-altar-rewards.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-potion-bomb",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-potion-bomb.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-weapon-core",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-weapon-core.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-weapons-melee",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-weapons-melee.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-weapons-sweep-whip",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-weapons-sweep-whip.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-weapons-projectiles",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-weapons-projectiles.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-weapons-frost-fire",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-weapons-frost-fire.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-weapons-lightning",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-weapons-lightning.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-weapons-force",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-weapons-force.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-weapons-summon-wind",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-weapons-summon-wind.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-weapons-economy-tools",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-weapons-economy-tools.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-weapons-special-magic",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-weapons-special-magic.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-monster-core",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-monster-core.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-monsters-basic",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-monsters-basic.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-monsters-ghost-water",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-monsters-ghost-water.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-monsters-centipede",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-monsters-centipede.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-monsters-giant",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-monsters-giant.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-monsters-guard-projectiles",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-monsters-guard-projectiles.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-boss-throne",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-boss-throne.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-boss-wizards",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-boss-wizards.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-monsters-status-thieves",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-monsters-status-thieves.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-monsters-summoners",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-monsters-summoners.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-monsters-slimes-teleport",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-monsters-slimes-teleport.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-monsters-hazards-patrol",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-monsters-hazards-patrol.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-boss-minotaur",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-boss-minotaur.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-pet-core",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-pet-core.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-pets-mount-panda",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-pets-mount-panda.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-pets-elemental",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-pets-elemental.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-path-search",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-path-search.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-main-room-geometry",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-main-room-geometry.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-maze-kernel",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-maze-kernel.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-chess-solver",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-chess-solver.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  },
+  {
+    "id": "t10-fusion-buff-engine",
+    "exit_code": 0,
+    "result": {
+      "packet": ".context/collaboration/packets/t10-fusion-buff-engine.json",
+      "next": "Update STATE, commit and push the packet with this primary fingerprint. Secondary sessions may claim it after that checkpoint; no owner merge is needed to start the candidate work."
+    }
+  }
+]

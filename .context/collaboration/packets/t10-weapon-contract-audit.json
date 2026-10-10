@@ -1,0 +1,27 @@
+{
+  "id": "t10-weapon-contract-audit",
+  "title": "Audit and exercise the original weapon class before implementation",
+  "objective": "Make the unfinished U03e weapon work reviewable by establishing exact source contracts, dependencies and trace evidence that a primary turn can use to define the implementation boundary.",
+  "allowed_paths": [
+    "app/test/weapon-source-contracts.test.ts",
+    "app/test/oracle/weapon-source-fixture.ts",
+    "docs/task-10/audits/weapon-contracts.md"
+  ],
+  "acceptance": [
+    "Audit the entire exact 武器类 declaration at inline-JS lines 13614-14260 of ChineseDungeon.html, checking source/AST anchors. Cover constructor, 最终攻击范围, 最终冷却回合, 使用, 触发通用附魔, 触发连锁, 寻找连锁目标, 获取提示, 获取名称, 攻击力 and 耐久消耗; the earlier constructor/getter inspection is not a full audit.",
+    "For each method, record parameters, read/written fields and external globals, actor/instanceof and identity assumptions, coercions, branch/early-return/error behavior, callback ordering and RNG draws. Separate observed source facts from implementation questions requiring a primary decision.",
+    "Build a test-only fixture using exact original declarations via the existing createOracle helper, with explicit deterministic actor/item/status/grid/UI/time/RNG doubles. Exercise representative success and boundary paths for attack, cooldown/wet refusal, enchantment, chain target selection and durability; include event/draw transcripts and describe any unexercised branches.",
+    "Do not introduce a candidate Weapon class, edit production modules or shared oracle helpers, or execute the complete source page. Characterization tests establish original behavior only; they do not establish rewrite parity or approve an architecture or source bug fix.",
+    "Document the gaps between existing ItemCore/armor/status ports and weapon needs, with source evidence and a concrete primary handoff. No task-contract, scope, dependency, UI or save-facade decisions may be silently made in this audit."
+  ],
+  "verification": [
+    "From app: npm ci --ignore-scripts if needed; npm run typecheck; npm test -- test/weapon-source-contracts.test.ts. Record actual source-only tests, event/draw assertions and uncovered paths.",
+    "Before the final audit handoff, run npm run check from app, preserving all reference hashes, existing consistency tests and the build.",
+    "Cross-check the documented method list and source anchors against the exact AST declaration, and verify that no app/src, immutable reference or shared protocol file changed."
+  ],
+  "depends_on": [],
+  "schema": 1,
+  "task_issue": 10,
+  "accepted_branch": "task/10/main",
+  "issued_by": ".context/fingerprints/20261009T045933Z-88646267/report.json"
+}

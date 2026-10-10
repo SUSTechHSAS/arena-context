@@ -1,0 +1,121 @@
+{
+  "schema": 2,
+  "turn_id": "20261009T045933Z-88646267",
+  "branch": "arena/db5ddb58-arena-context",
+  "scope": "user-turn",
+  "same_model_within_turn": "assumed_by_user",
+  "identity_verified": false,
+  "arena_protocol_calibrated": false,
+  "sample_count": 3,
+  "raw_sha256": "f3f142c5c36a8df3ac9618c896b0391410f99c15f4daf77b32c013cbd796fae6",
+  "package_id": "f7e5afbad329e7afcab36cca62ee3375f8fbe3dd65ff8cf471e82fd556b3071c",
+  "bank_version": "2026-10-08T13:07:32.556925+00:00",
+  "bank_sha256": "5b7e0cc1e29c07ed2f074cff9825caa73456a61318872381ac993dff297c556f",
+  "freshness": "fresh",
+  "refresh_error": null,
+  "scored_at": "2026-10-09T05:02:08.992Z",
+  "provider": "fingerpoint",
+  "detector_sha256": "1f4275364dcfeb1d72a3de5a27edd24076ef6beef6e8488dbf72fa8bd93f5d15",
+  "source_commit": "97eb41f78722d32524265bb259fe6258856ca470",
+  "identified_candidate": null,
+  "probability_scope": "reference-closed-set",
+  "reference_mass_min": 0.95,
+  "upstream_decision": "not_confirmed",
+  "parsed_numbers": [
+    301,
+    319,
+    327
+  ],
+  "input_checks": [
+    {
+      "parsed_numbers": 301,
+      "expected_count": 301,
+      "minimum_numbers": 166,
+      "exact_count": true,
+      "level": "ok",
+      "reason": null
+    },
+    {
+      "parsed_numbers": 319,
+      "expected_count": 319,
+      "minimum_numbers": 176,
+      "exact_count": true,
+      "level": "ok",
+      "reason": null
+    },
+    {
+      "parsed_numbers": 327,
+      "expected_count": 327,
+      "minimum_numbers": 180,
+      "exact_count": true,
+      "level": "ok",
+      "reason": null
+    }
+  ],
+  "reference_classes": [
+    "gpt-6-astra"
+  ],
+  "reference_models": [
+    "gpt-6-astra",
+    "gpt-6.1-sol"
+  ],
+  "reference_mass": 0.9995114590939725,
+  "status": "reference_ambiguity",
+  "nearest_model": "gpt-6-astra",
+  "nearest_class": "gpt-6-astra",
+  "family": "gpt",
+  "calibration": {
+    "method": "ranking-temperature",
+    "run": ".training/20261008T130734200400Z/calibration",
+    "tau": 4.781249958634198,
+    "sha256": "5c9637930e6da3322882a163b22c71e2cbb3c1f25e5d040ed70c2c824afcc11a"
+  },
+  "candidates": [
+    {
+      "model": "gpt-6-astra",
+      "models": [
+        "gpt-6-astra",
+        "gpt-6.1-sol"
+      ],
+      "display_name": "gpt-6-astra/6.1-sol",
+      "family": "gpt",
+      "score": 3.465444663206359,
+      "reference_probability": 0.9995114590939725
+    },
+    {
+      "model": "gpt-6-sol",
+      "models": [
+        "gpt-6-sol"
+      ],
+      "display_name": "gpt-6-sol",
+      "family": "gpt",
+      "score": 1.847088769920585,
+      "reference_probability": 0.0004358324366439014
+    },
+    {
+      "model": "qwen3.8-omni-flash",
+      "models": [
+        "qwen3.8-omni-flash"
+      ],
+      "display_name": "qwen3.8-omni-flash",
+      "family": "qwen",
+      "score": 1.2115569058149338,
+      "reference_probability": 0.000020876437922704252
+    }
+  ],
+  "policy_source": "https://api.github.com/repos/SUSTechHSAS/arena-context/contents/.github/fingerprint-policy.json?ref=main",
+  "gate": {
+    "policy_sha256": "7b2bc6888ac13670f69cfc03cd44309de2917ee977f646f5c0783cbb19474331",
+    "accepted_model_count": 11,
+    "allowed": true,
+    "action": "CONTINUE",
+    "role": "primary",
+    "scope": "task",
+    "reason": "accepted_reference_set",
+    "models": [
+      "gpt-6-astra",
+      "gpt-6.1-sol"
+    ]
+  },
+  "next": "Record this fingerprint and Model role: primary in STATE. Continue task work, issue bounded packets, or review secondary work."
+}

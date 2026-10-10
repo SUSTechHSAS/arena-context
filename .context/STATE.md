@@ -1,46 +1,43 @@
 # Current handoff
 
 - Task: #10
-- Unit: Primary and secondary model collaboration maintenance
-- Work branch / PR: meta/10/model-collaboration
-- Accepted base at unit start: task/10/main@afa4a5645633e26432c46edfd6f65b732b479c04
-- Updated: 2026-10-09T03:52:38.771378+00:00
-- Latest session: owner-requested protocol maintenance
-- Candidate stage: maintenance proposal; awaiting owner review
-- Fingerprint: not recorded
-- Model role: not applicable to owner-requested meta maintenance
-- Work packet: none
-- Primary review: not applicable to protocol maintenance
+- Unit: Expanded collaboration work pool
+- Work branch / PR: arena/db5ddb58-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/19
+- Accepted base at unit start: task/10/main@45f8811ce9c7ec910ff6346d7c6b489fb1cf8f5e
+- Inherited candidate at unit start: 133f40042356f49e3f5e98dc4f3abf28ecf09197
+- Updated: 2026-10-09
+- Fingerprint: .context/fingerprints/20261009T091343Z-0e4cf368/report.json
+- Model role: primary
+- Work packet: none; primary published the assignment pool
+- Primary review: not applicable; no secondary output is claimed here
+- Candidate stage: 114 packets published; 73 available, 41 waiting for dependency review
+- Pool introduction: 4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596 (original four remain at 04c2f6d)
+- Last verified remote before this checkpoint: 7260a950771e0fe08c60f5f28a1956c987b80c65
 
-This card does not establish approval; check the actual task branch and PR.
+Only Kibiandkimi decides acceptance; this card is not approval.
 
 ## Current objective
 
-Apply the primary/secondary collaboration protocol from [PR #23](https://github.com/SUSTechHSAS/arena-context/pull/23) to this existing task.
-
-The domain task remains the modern rewrite of chinese-dungeon with behavior-consistency tests against its source. Continue only the assigned candidate PR and read its current owner feedback.
+Provide enough bounded assignments for many secondary sessions between scarce primary turns, as requested by the owner. The full modern rewrite and source-consistency acceptance in TASK.md remain unchanged.
 
 ## Candidate progress
 
-The original six accepted models remain primary. Only Haiku 5.5, Opus 5, Fable 5, GPT-5.6 Sol, and GPT-6 Luna are added as secondary; any unlisted reference-set member still denies the turn. Added bounded primary-issued work packets, per-turn secondary run evidence, primary review of current outputs, role/scope/dependency checks, templates, and operating instructions.
+Preserved the original four immutable packets and added 110: 68 class-contract implementations, 16 algorithm/data-interface implementations, and 26 executable source audits. Every named main-page class declaration in the static AST maps to existing work or an implementation/audit assignment. This is assignment coverage, not completed game coverage.
 
-Shared protocol files match 3739acbce2322a25df922ca162c6c1d8f2509fe0. Task contract and domain artifacts are preserved. Earlier handoff evidence remains available at [the accepted base](https://github.com/SUSTechHSAS/arena-context/blob/afa4a5645633e26432c46edfd6f65b732b479c04/.context/STATE.md).
+The [pool guide and full directory](../docs/task-10/packet-pool/README.md) give exact definitions, dependency chains and review priorities. Work spans items, weapons, monsters, pets, generation, puzzles, storage, editor, UI, workshop/socket and action contracts. New task paths are pairwise disjoint, including against the original packets.
+
+ItemCore now permits source-compatible action arguments and boolean/numeric/empty hook results; the inherited bush hook annotation matches. Existing runtime return values and state updates are preserved. This prevents independent subclasses from each needing to edit the shared base.
 
 ## Verification
 
-The shared implementation passed all 72 tests with `node --test .github/scripts/*.test.*`, including final CLI denial and dependency handoff checks. [Protocol tests run 37881163889](https://github.com/SUSTechHSAS/arena-context/actions/runs/37881163889) passed on shared commit `3739acbce2322a25df922ca162c6c1d8f2509fe0`; its protocol CI passed as well. All 23 copied files are byte-identical to that commit. The actual task maintenance route passed, and the task contract and domain files were verified unchanged. CI for this published head will independently rerun the suite. Regression samples are test fixtures, not this maintenance session's model fingerprint.
+At `0ec3698`, 8 source hashes, 5 integrity tests, strict types, 110 domain tests and the build passed. A compiler fixture also accepts multi-argument/numeric/empty-return subclasses. The first narrow bush annotation error was corrected before the successful regression. Logs: `docs/task-10/packet-pool/verification.json`.
 
-No domain-task verification was performed by this protocol maintenance.
+110 CLI creation commands and 503 exact AST anchor checks passed; the dependency graph has no missing IDs/cycles, and scopes do not overlap. At published `4cc1298`, collaboration.mjs status verified 114 packets: 73 available, 41 blocked only by required primary dependency review, zero unexpected blockers. Saved output: `docs/task-10/packet-pool/status.json`. Its remote arena/protocol check passed. Original packet definitions, fingerprint records, TASK and shared protocol files are preserved.
 
 ## Blockers and unresolved owner feedback
 
-Human review and merge are pending. Merge the existing-task compatibility updates before PR #23 enables the schema-2 policy on main. This code also supports the old primary-only schema-1 policy during that transition. Domain feedback belongs to the assigned task PR and must be read before resuming that work.
+No owner comments or unresolved reviews were present at the latest PR check. The 41 dependency waits are intentional; use one of the 73 available packets first. Check open task PRs before choosing because status is branch-local. Complete gameplay, real actor/world integration, UI, save cross-load and live-service behavior remain unfinished. PR #19 stays Draft.
 
 ## Next action
 
-Kibiandkimi reviews this maintenance PR and PR #23. After acceptance, bring the assigned work branch up to the accepted task protocol and obtain a fresh per-turn fingerprint. A primary turn can then issue bounded packets; secondary turns claim one available packet and keep their PR Draft until primary review. Final merge remains the human reviewer's action.
-
-## Read next, only if needed
-
-- [Collaboration commands and migration order](../docs/COLLABORATION.md)
-- [Accepted task contract](TASK.md)
+Start separate Arena branches from the latest published primary checkpoint containing this pool. Each turn fingerprints; secondary turns claim one packet before edits and keep one packet per PR. Primary turns should prioritize source audits and base-class/kernel results that unlock multiple descendants, then review actual committed outputs. Kibiandkimi retains human review and final merge.

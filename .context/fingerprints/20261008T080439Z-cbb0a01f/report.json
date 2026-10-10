@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "turn_id": "20261008T080439Z-cbb0a01f",
+  "branch": "arena/db5ddb58-arena-context",
+  "scope": "user-turn",
+  "same_model_within_turn": "assumed_by_user",
+  "identity_verified": false,
+  "arena_protocol_calibrated": false,
+  "sample_count": 1,
+  "raw_sha256": "3cceb63525555450df15e191eb5ae71e8479a4139f09663dbba6e63cc2e730ae",
+  "package_id": "072a76d2f51a70cf691f5f79532019eebe546b08a960e51bacf9f5ccc384086a",
+  "bank_version": "2026.10.2",
+  "bank_sha256": "d8c7cf308c5f3d2b7d7492542a1a059b0d54725add7f6e33085d34e5256033f9",
+  "freshness": "cached-fallback",
+  "refresh_error": "offline_requested",
+  "scored_at": "2026-10-08T08:05:26.655Z",
+  "parsed_numbers": 301,
+  "exact_count": true,
+  "input_gate": {
+    "level": "ok",
+    "rule": null,
+    "stats": {
+      "length": 301,
+      "unique_count": 291,
+      "unique_ratio": 0.9667774086378738,
+      "monotone_fraction": 0.5433333333333333,
+      "arithmetic_fraction": 0.023333333333333334,
+      "min_length": 166
+    }
+  },
+  "status": "family_only",
+  "nearest_model": "gpt-6.1-sol",
+  "identified_candidate": null,
+  "family": "gpt",
+  "fit": 0.3011704074158574,
+  "separation": -0.00943049625950837,
+  "ambiguous_models": [
+    "gpt-6.1-sol",
+    "gpt-6-astra"
+  ],
+  "candidates": [
+    {
+      "model": "gpt-6.1-sol",
+      "display_name": "gpt-6.1-sol",
+      "family": "gpt",
+      "fit": 0.3011704074158574
+    },
+    {
+      "model": "gpt-6-astra",
+      "display_name": "gpt-6-astra",
+      "family": "gpt",
+      "fit": 0.31060090367536575
+    },
+    {
+      "model": "gpt-6-sol",
+      "display_name": "gpt-6-sol",
+      "family": "gpt",
+      "fit": 0.21263112104477608
+    }
+  ],
+  "policy_source": "https://api.github.com/repos/SUSTechHSAS/arena-context/contents/.github/fingerprint-policy.json?ref=main",
+  "gate": {
+    "policy_sha256": "84453e964a63118f8b0ad012240a70fdfa2741b70661c5465c8359ddd4168a02",
+    "accepted_model_count": 6,
+    "allowed": true,
+    "action": "CONTINUE",
+    "reason": "accepted_ambiguity",
+    "models": [
+      "gpt-6.1-sol",
+      "gpt-6-astra"
+    ]
+  }
+}
