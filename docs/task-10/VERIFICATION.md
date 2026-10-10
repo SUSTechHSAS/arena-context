@@ -184,6 +184,9 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
 - **Unit 50** — `world/path-overlay.ts`: `drawPath` (the dashed click-move path overlay) with canvas, camera, cell size, device pixel ratio and player as explicit inputs (the camera belongs to the audit-only area `t10-minimap-camera-audit`). Tests: `app/test/world-path-overlay.test.ts`.
   - Evidence: 3 000 random paths of length 0–6 drawn on a recording canvas produce the same sequence of method calls and property writes as the source; numbers are compared exactly, including `-0` and `NaN`. Inputs include tiny, huge and fractional coordinates, zero/negative cell sizes and a zero DPR; over 500 cases each draw and skip.
   - Mutation: 10 mutants, all detected (after the value ranges were widened so reassociating `+ 0.5` changes rounding). No source quirk recorded.
+- **Unit 51** — `world/creative-death.ts`: `处理创意关卡死亡事件` (online creative-level death markers). The Supabase `death_locations` select/insert, viewport, DOM class toggle, marker list, clock, RNG, animation frames, `绘制` and `显示死亡界面` are ports. Tests: `app/test/world-creative-death.test.ts`.
+  - Evidence: 400 seeded async runs × 8 sessions match the source (ordered calls including RNG draws, final `玩家属性`, markers, pending frames). They cover synchronous fetch throws, rejected fetches, error objects, falsy errors, `null` data, empty/partial/fully visible death sets, zero-size viewports, synchronous insert throws, upload errors and animation frames before, at and after 2.5 s.
+  - Mutation: 19 mutants, all detected (after two stubs were widened: the class-removal stub now records `允许移动`, and `null` data now arrives without an error). DEVIATIONS SRC-37.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
