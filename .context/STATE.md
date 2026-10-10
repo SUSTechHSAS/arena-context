@@ -36,6 +36,7 @@ This session:
 12. World kernel unit 11: `world/features.ts` — `生成时间随机数` (clock port), `生成水怪`, `生成毒气陷阱群`, `揭示并激活陷阱群`, `创建楼梯实例`. Tests: `app/test/world-features.test.ts`.
 13. World kernel unit 12: `world/cave-dungeon.ts` — the async `生成洞穴地牢` orchestrator. Pure helpers are called directly; the cave kernel, fallback, placement, weather, walls, viewport and UI are ports. Tests: `app/test/world-cave-dungeon.test.ts`. FEATURE-MATRIX row updated.
 14. World kernel unit 13: `world/room-content.ts` — `生成陷阱` and `刷新房间内容`. Tests: `app/test/world-room-content.test.ts`. DEVIATIONS SRC-07.
+15. World kernel unit 14: `world/special-rooms.ts` — `连接特殊房间`, `尝试进入特殊房间`, `处理单向房间`. Tests: `app/test/world-special-rooms.test.ts`. DEVIATIONS SRC-08.
 
 ## Verification
 
@@ -45,6 +46,7 @@ This session:
 - Unit 1: 23 new tests pass; each of 20 declarations is graph-equal to the exact source AST declaration; the cell is graph-equal for 5 coordinate cases and colour lookup over 460 cases. Manual mutants (`||`→`??` fallback, swapped property order) both failed the suite; originals restored. `tsc --noEmit` clean.
 - Unit 2: 101 new tests pass; each of 98 keys is graph-equal to the value from evaluating its exact source declaration (WeakMaps checked by brand); `createRoomMap` matches the source initializer for 8 sizes, including RangeError cases; containers are unshared. Mutants (`剔除死胡同` drift, Set→Map) were detected; originals restored. `tsc --noEmit` clean.
 - Unit 4: across 120 seeded worlds, results match the four source functions with stubbed collaborators: sight range, room-ID Set order, light-map insertion order, about 10k lit checks, and the exact sequence of line-of-sight and canvas calls. A non-vacuity guard checks for >40 nights, >500 lit cells and >8000 checks. Three mutants (the x = 0 quirk, canvas-query order, the range boundary) were detected; originals restored.
+- Unit 14: 300 seeded worlds match the source (nearest-room ties, loose id matching, ring consumption, multiplayer guard, entrance reopening, first-entry door choice, pair handling, throws). Nine mutants detected; the `oldX !== undefined` guard is equivalent for in-range targets.
 - Unit 13: 200 seeded worlds match the source (random-comparator shuffle, density lookup, locked-room empowerment, key/stair skip, timer, inventory and status cleanup, weighted respawn, coin/item fallback). Nine mutants detected; `<=`→`<` on a continuous roll is equivalent.
 - Unit 12: 120 seeds match the source in state rebuild (including position-object identity and a fresh `所有怪物`), call and prng order, the fallback path with `await`, coin draws (x and y taken from different points), shared trap-room identity and the density lookup. Nine mutants detected after stubs were made to log the state visible at call time.
 - Unit 11: 200 seeded worlds composed with the ported placement functions match the source (constructor options, prng/clock/notify/floor-change order, grid, monsters, timers, stair objects, `颜色表` identity). Eight mutants detected. The two survivors are equivalent and show unreachable source code (trap-size threshold, arm-length re-roll).
@@ -62,4 +64,4 @@ No owner comments on PR #19 or #27 at takeover. Full game, UI, saves and service
 
 ## Next action
 
-Continue the lane with the next uncovered world logic (next: survey the remaining unassigned orchestrators, e.g. 处理单向房间 / 尝试进入特殊房间 / 连接特殊房间 / 生成特殊房间, and pick the next slice), checking packet anchors first. RNG wiring belongs to the `t10-seed-search` packet (`初始化随机数生成器`) and is left there.
+Continue the lane with the next uncovered world logic (next: survey the remaining unassigned orchestrators, e.g. 生成特殊房间 / 检查防化服防护 / 克隆物品 / 怪物放置物品 / 玩家放置物品, and pick the next slice), checking packet anchors first. RNG wiring belongs to the `t10-seed-search` packet (`初始化随机数生成器`) and is left there.
