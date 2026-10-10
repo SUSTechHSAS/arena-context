@@ -106,6 +106,12 @@ Each unit ports unassigned main-page functions into `app/src/game/world/` and co
     - pickups, chess pieces, NPCs, `尝试互动` hooks, placed pets (`==` floor match), strength-trial altars, locked doors with keys and paired cells, line-checked neighbours
     - weapon attacks with dead-target refiltering, burst enchantments, pet follow-up attacks, the always-run monster search, off-grid sizes, missing player cells
   - Mutation: 67 mutants run, all detected. DEVIATIONS SRC-16.
+- **Unit 28** — `world/dungeon.ts`: `生成地牢(编辑器模式)` (async) and `生成寻宝戒指()`. Every callee (room placement and connection, corridors, special rooms, walls, locks/keys, barricades, coins, items, red-blue puzzles, distance maps, monsters, recipe scrolls, environment, water monsters, traps, stairs, waiting UI, console) is a port; the grid and room map use `createGrid` / `createRoomMap`. Tests: `app/test/world-dungeon.test.ts`.
+  - Evidence: 300 seeded sessions (two generations each without reset, async sokoban tasks) match the source:
+    - cave/maze dispatch, room-chain geometry in all four directions, clamping, room kinds and challenge state, string-sorted pair keys, extra corridors
+    - placement failures (blocked 300-call bursts) and the stale-room `回溯` path, special rooms with treasure rings, locked rooms, red-blue puzzles on floors 7/11, starter sword on floor 0
+    - farthest-room stairs with `undefined`/`Infinity` distances and locked rooms, the random fallback, up stairs, patrol initialisation, the single-room throw, direct ring generation with empty/no-`房间` pools
+  - Mutation: 59 mutants run, 57 detected; the 2 survivors are equivalent (`return` vs `return await` on the cave branch; a room pair cannot repeat within one call, so the `已连接房间对` guard is never false). DEVIATIONS SRC-17.
 
 ## Work-pool expansion — later primary turn, 2026-10-09
 
