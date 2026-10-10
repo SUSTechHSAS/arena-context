@@ -24,12 +24,14 @@ Modern rewrite of chinese-dungeon with source-consistency tests (TASK.md). The 1
 2. World kernel unit 1: `world/constants.ts` (cell/env/colour/effect tables, weather list, versions, DEFAULT_* tunables) and `world/cell.ts` (`单元格` data contract + `获取物品颜色`). Tests: `app/test/world-kernel.test.ts`.
 3. World kernel unit 2: `world/state.ts` — `createWorldState()` holds 98 source-named gameplay/persisted globals with fresh containers per session, plus default settings, player-attribute, custom-setting and room-map factories. DOM/input/timer/sound/camera globals are excluded by design (listed in the file header). Tests: `app/test/world-state.test.ts`. Unit 3 added `NPC互动中`/`当前NPC`, bringing it to 100 keys.
 4. World kernel unit 3: `world/reset.ts` — `resetAllGameState(state, ports)` ports the source `重置所有游戏状态`, with UI effects behind `ResetPorts` and statement order preserved. Source quirks are preserved and logged as SRC-01/SRC-02 in `docs/task-10/DEVIATIONS.md`. Tests: `app/test/world-reset.test.ts`.
+5. World kernel unit 4: `world/lighting.ts` — sight range, `是否在光源范围内`, `更新光源地图` (filled in place) and `获取视野内房间ID`. Line of sight, the torch type and the canvas size come in through `LightingPorts`, since those belong to the path-search and torch packets and the render layer. SRC-03 is preserved. Tests: `app/test/world-lighting.test.ts`.
 
 ## Verification
 
 - Inherited baseline rerun at 9539c29: `npm run check` passed (8 reference hashes, 5 integrity tests, strict types, 110 tests, build).
 - Unit 1: 23 new tests pass; each of 20 declarations is graph-equal to the exact source AST declaration; the cell is graph-equal for 5 coordinate cases and colour lookup over 460 cases. Manual mutants (`||`→`??` fallback, swapped property order) both failed the suite; originals restored. `tsc --noEmit` clean.
 - Unit 2: 101 new tests pass; each of 98 keys is graph-equal to the value from evaluating its exact source declaration (WeakMaps checked by brand); `createRoomMap` matches the source initializer for 8 sizes, including RangeError cases; containers are unshared. Mutants (`剔除死胡同` drift, Set→Map) were detected; originals restored. `tsc --noEmit` clean.
+- Unit 4: across 120 seeded worlds, results match the four source functions with stubbed collaborators: sight range, room-ID Set order, light-map insertion order, about 10k lit checks, and the exact sequence of line-of-sight and canvas calls. A non-vacuity guard checks for >40 nights, >500 lit cells and >8000 checks. Three mutants (the x = 0 quirk, canvas-query order, the range boundary) were detected; originals restored.
 - Unit 3: the source function runs in a VM with the exact declarations, against the same dirty-world script executed in both realms, across 4 variants (developer mode off/on/throwing, empty scroll set). The final state, the combined cross-key alias graph, the WeakMap identity rules and the ordered side-effect log all match. Four mutants of the real implementation (statement order, aliasing, settings shape, old-attribute write) each failed 4/5 tests; originals restored.
 
 ## Blockers and unresolved owner feedback
@@ -38,4 +40,4 @@ No owner comments on PR #19 or #27 at takeover. Full game, UI, saves and service
 
 ## Next action
 
-World kernel unit 4: session random stream wiring (`prng`, `随机数状态`, `当前游戏种子`) on top of `DungeonRandom`, then the grid initialisation used by generation.
+Run the full `npm run check` and update FEATURE-MATRIX/PLAN with the world-kernel lane. Then continue the lane with uncovered world helpers (`获取墙壁字符`, the grid-creation helpers). RNG wiring belongs to the `t10-seed-search` packet (`初始化随机数生成器`) and is left there.
