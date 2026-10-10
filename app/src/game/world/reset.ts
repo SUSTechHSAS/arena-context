@@ -25,8 +25,8 @@ export interface ResetPorts {
  * Source `重置所有游戏状态` applied to a session. Statement order is preserved because
  * monster, status and scroll callbacks may observe the partially reset state.
  * Source quirks preserved on purpose (see docs/task-10/DEVIATIONS.md):
- * - the reset 自定义全局设置 shape differs from the initial declaration
- *   (死亡次数限制 moves under 玩家属性, 胜利条件 loses it, 禁用大地图 is dropped);
+ * - SRC-01 fixed (owner rule 2026-10-10): 自定义全局设置 is rebuilt in its declaration shape (the source moved
+ *   死亡次数限制 under 玩家属性 and dropped 禁用大地图);
  * - 玩家属性 becomes a SHALLOW copy of 初始玩家属性, so both share 已获得神龛效果;
  * - 当前生命值/当前能量值 are first written from the OLD settings onto the old attribute object.
  * 地牢生成方式, 当前关卡存档数据字符串 and 自定义游戏设置 are intentionally not reset by the source.
@@ -61,9 +61,9 @@ export function resetAllGameState(state: WorldState, ports: ResetPorts): void {
   state.绿紫开关状态 = '绿';
   state.自定义全局设置 = {
     初始生命值: 100, 初始能量值: 100, 初始背包容量: 12,
-    玩家属性: { 移动步数: 1, 攻击加成: 0, 防御加成: 0, 死亡次数限制: 0 },
-    胜利条件: { 回合数限制: 0, 伤害限制: 0, 生命下限: 0, 清除所有怪物: false },
-    全局天气: [], 禁用传送菜单: false, 诡魅天气怪物层级: 1, 奖励物品层级: 1,
+    玩家属性: { 移动步数: 1, 攻击加成: 0, 防御加成: 0 },
+    胜利条件: { 回合数限制: 0, 伤害限制: 0, 生命下限: 0, 清除所有怪物: false, 死亡次数限制: 0 },
+    全局天气: [], 禁用传送菜单: false, 禁用大地图: false, 诡魅天气怪物层级: 1, 奖励物品层级: 1,
   } as unknown as WorldState['自定义全局设置'];
   state.初始玩家属性 = createPlayerAttributes() as PlayerAttributes;
   ports.resetEditorState();

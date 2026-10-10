@@ -3,7 +3,7 @@ import { types } from 'node:util';
 import { describe, expect, it } from 'vitest';
 import { createWorldState, type WorldState } from '../src/game/world/state';
 import { resetAllGameState, type ResetPorts } from '../src/game/world/reset';
-import { declaration } from './oracle/source';
+import { declaration, originalDeclaration } from './oracle/source';
 import { graphSnapshot } from './oracle/graph';
 
 const keys = Object.keys(createWorldState());
@@ -44,7 +44,7 @@ const dirty = (variant: number) => `
   globalThis.throwDebug = ${variant === 3};
 `;
 
-function runSource(variant: number) {
+function runSource(variant: number, sourceOf: (name: string) => string = declaration) {
   const events: unknown[][] = [];
   const context = vm.createContext({
     log: (...args: unknown[]) => events.push(args),
@@ -59,7 +59,7 @@ function runSource(variant: number) {
     击杀提示: { 更新(o: { 内容: string }) { events.push(['hint', '击杀提示', o.内容]); } },
   });
   const texts = [...new Set(['地牢大小', ...keys, ...UI_GLOBALS].map(name => declaration(name)))];
-  new vm.Script(texts.join('\n') + '\n' + declaration('重置所有游戏状态') + `
+  new vm.Script(texts.join('\n') + '\n' + sourceOf('重置所有游戏状态') + `
     class 调试工具 { constructor(config) { this.kind = 'debug'; log('debug-ctor', JSON.stringify(config)); } }
     function 尝试收集物品(item, flag) { log('collect', item.kind, flag); if (globalThis.throwDebug) throw new Error('debug'); }
   `).runInContext(context);
@@ -113,6 +113,15 @@ describe('重置所有游戏状态 on a session', () => {
       expect(mine.state.玩家属性.已获得神龛效果).toBe(mine.state.初始玩家属性.已获得神龛效果);
     });
   }
+  it('SRC-01 (fixed): the reset settings equal the declaration shape; the unpatched source differs', () => {
+    const fresh = vm.createContext({});
+    const initial = new vm.Script(`${declaration('自定义全局设置')}; JSON.stringify(自定义全局设置)`).runInContext(fresh) as string;
+    for (const variant of [0, 1, 2, 3]) {
+      expect(JSON.stringify(runRewrite(variant).state.自定义全局设置)).toBe(initial);
+      expect(runSource(variant).read('JSON.stringify(自定义全局设置)')).toBe(initial);
+      expect(runSource(variant, originalDeclaration).read('JSON.stringify(自定义全局设置)')).not.toBe(initial);
+    }
+  });
   it('the differential harness detects a reordered statement (mutation check)', () => {
     const source = runSource(1); const mine = runRewrite(1);
     const swapped = [...mine.events]; const index = swapped.findIndex(event => event[0] === 'scroll');

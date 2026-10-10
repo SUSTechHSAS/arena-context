@@ -9,6 +9,15 @@ export interface SourcePatch { id: string; declaration: string; edits: readonly 
 
 export const SOURCE_PATCHES: readonly SourcePatch[] = [
   {
+    id: 'SRC-01', declaration: '重置所有游戏状态',
+    reason: 'the reset must rebuild 自定义全局设置 in the shape of its declaration, which every reader expects',
+    edits: [
+      { find: '防御加成: 0,\n\t\t\t        死亡次数限制: 0,\n', replace: '防御加成: 0,\n' },
+      { find: '清除所有怪物: false,\n', replace: '清除所有怪物: false,\n\t\t\t        死亡次数限制: 0,\n' },
+      { find: '禁用传送菜单: false,\n', replace: '禁用传送菜单: false,\n\t\t\t    禁用大地图: false,\n' },
+    ],
+  },
+  {
     id: 'SRC-03', declaration: '更新光源地图',
     reason: 'a light timer at column x = 0 is a valid position, not a missing one',
     edits: [{ find: '&& 计时器?.x) {', replace: '&& 计时器?.x != null) {' }],
