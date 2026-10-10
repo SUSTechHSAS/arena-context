@@ -41,6 +41,12 @@ export const 所有天气列表: readonly string[] = (['雷暴', '诡魅', '大�
 export const 大风吹动概率 = 0.3;
 export const 怪物移动动画时长 = 300;
 export const 调试序列: readonly string[] = (['上', '上', '下', '下', '左', '右', '左', '右']);
+/** Source hard-coded fusion recipes (`输入` arrays are sorted at declaration time, as in the source). */
+export const 融合配方列表: { 输入: string[]; 输出类: string; 输出数量: number; 输出配置?: Record<string, unknown> }[] = [
+  { 输入: ['治疗药水', '治疗药水'].sort(), 输出类: '治疗药水', 输出数量: 1, 输出配置: { 强化: true } },
+  { 输入: ['钢制长剑', '治疗药水'].sort(), 输出类: '吸血剑', 输出数量: 1 },
+  { 输入: ['钢制长剑', '钢制长剑'].sort(), 输出类: '钢制长剑', 输出数量: 1, 输出配置: { 强化: true } },
+];
 export const 数据完整性密钥 = 'f_SECRET_KEY_FOR_CHINESE_DUNGEON';
 export const Q字形图案: readonly string[] = ([' XXXX ', 'X    X', 'X    X', 'X    X', 'X  XX ', ' XXX X']);
 

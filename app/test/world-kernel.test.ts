@@ -14,7 +14,7 @@ describe('main-game world constants', () => {
     ['效果名称编号映射', constants.效果名称编号映射], ['环境类型', constants.环境类型],
     ['房间尺寸范围', constants.房间尺寸范围], ['最大堆叠数', constants.最大堆叠数], ['最大怪物数', constants.最大怪物数], ['存档版本', constants.存档版本],
     ['游戏版本', constants.游戏版本], ['所有天气列表', constants.所有天气列表], ['大风吹动概率', constants.大风吹动概率],
-    ['怪物移动动画时长', constants.怪物移动动画时长], ['调试序列', constants.调试序列], ['Q字形图案', constants.Q字形图案], ['数据完整性密钥', constants.数据完整性密钥], ['材质', MATERIALS],
+    ['怪物移动动画时长', constants.怪物移动动画时长], ['调试序列', constants.调试序列], ['Q字形图案', constants.Q字形图案], ['数据完整性密钥', constants.数据完整性密钥], ['融合配方列表', constants.融合配方列表], ['材质', MATERIALS],
     ['单元格大小', constants.DEFAULT_单元格大小], ['最大房间数', constants.DEFAULT_最大房间数],
     ['相机显示边长', constants.DEFAULT_相机显示边长], ['地牢大小', constants.DEFAULT_地牢大小],
   ];
