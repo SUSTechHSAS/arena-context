@@ -1,16 +1,16 @@
 # Current handoff
 
 - Task: #10
-- Unit: Integration P5 — game start (audit + main generation)
-- Work branch / PR: arena/5d1da57f-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/30
-- Accepted base at unit start: task/10/main@380470815a435dbe7f9a28f8ce2dffb9bfc14761 (PR #27 merged)
-- Inherited candidate at unit start: ebd5eb0642e730030c6656e26a34fb704602e176 (PR #30 review checkpoint, merged with the accepted head)
+- Unit: Integration P5 — game start (audit + main generation), secondary session turn 20261011T032501Z-38446eb4
+- Work branch / PR: arena/50f39341-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/31 (Draft; predecessor arena/5d1da57f-arena-context = PR #30, merged into task/10/main at 545e0f1)
+- Accepted base at unit start: task/10/main@545e0f10416b23efc515b0ee4b9ce4673752eb4a (PR #30 merged)
+- Inherited candidate at unit start: 545e0f10416b23efc515b0ee4b9ce4673752eb4a (accepted head; identical to PR #30 merge)
 - Updated: 2026-10-11
-- Fingerprint: .context/fingerprints/20261011T024418Z-379be7cd/report.json
-- Model role: primary
-- Work packet: none; primary lane outside all packet paths (DECISIONS 2026-10-10)
-- Primary review: not applicable; no secondary run exists in this history
-- Candidate stage: in progress; Draft
+- Fingerprint: .context/fingerprints/20261011T032501Z-38446eb4/report.json
+- Model role: secondary
+- Work packet: .context/collaboration/packets/t10-color-math.json
+- Primary review: not applicable yet (no primary review for t10-color-math)
+- Candidate stage: awaiting-primary-review (secondary run 20261011T032501Z-38446eb4, result.md; targeted tests 10/10; clean full run 77 files / 350 tests, check:reference 5/5, typecheck, build pass)
 
 Only Kibiandkimi decides acceptance; this card is not approval.
 
@@ -46,4 +46,6 @@ No owner response yet to the PR #27 review comment (process questions: oracle pa
 
 ## Next action
 
-P5 game start: first `t10-main-generation-audit` (`生成奖励`, `应用难度预设`, `放置楼梯`, `生成金币`, `生成迷宫地牢`), then the `t10-tutorial-professions-audit` logic (`启动游戏`, `应用职业效果`, `重置玩家状态`; the profession/tutorial windows go to P6). After that, a composition root that wires the P1–P5 runtime modules and world kernel into one session.
+Secondary turn 20261011T032501Z-38446eb4 stops at `awaiting-primary-review` for packet t10-color-math (PR #31, Draft, base `task/10/main`). Next primary turn: fingerprint, inspect `app/src/domain/color-math.ts`, `app/test/color-math.test.ts`, `app/test/oracle/color-math-fixture.ts`, `docs/task-10/packets/color-math.md` and the run `result.md`, rerun the targeted test, then `collaboration.mjs review t10-color-math`. Decide on the recorded source quirks (alpha 0 opaque branch at HTML 44251; '#' not stripped in hexToRgba) before any SRC entry. The P5 game-start plan remains with primary sessions.
+
+Blocker note: `test/world-cave.test.ts` runs at ~29 s against the 30 s testTimeout on this 2-CPU sandbox (passes alone; flaked once under parallel load). Pre-existing; not changed by this packet.
