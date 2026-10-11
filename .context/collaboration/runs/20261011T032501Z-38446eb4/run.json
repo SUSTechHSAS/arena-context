@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "turn_id": "20261011T032501Z-38446eb4",
+  "packet": ".context/collaboration/packets/t10-color-math.json",
+  "source_commit": "4cc1298712ebfffcdd2bd1beb9ce4c8e046bd596",
+  "start_head": "545e0f10416b23efc515b0ee4b9ce4673752eb4a",
+  "fingerprint": ".context/fingerprints/20261011T032501Z-38446eb4/report.json",
+  "branch": "arena/50f39341-arena-context"
+}
