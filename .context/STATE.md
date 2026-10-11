@@ -8,9 +8,9 @@
 - Updated: 2026-10-11
 - Fingerprint: .context/fingerprints/20261011T032501Z-38446eb4/report.json
 - Model role: secondary
-- Work packet: .context/collaboration/packets/t10-color-math.json (claimed this turn; run .context/collaboration/runs/20261011T032501Z-38446eb4/, result.md)
+- Work packet: .context/collaboration/packets/t10-color-math.json
 - Primary review: not applicable yet (no primary review for t10-color-math)
-- Candidate stage: awaiting-primary-review (secondary; packet t10-color-math; targeted tests 10/10; clean full run 77 files / 350 tests, check:reference 5/5, typecheck, build pass)
+- Candidate stage: awaiting-primary-review (secondary run 20261011T032501Z-38446eb4, result.md; targeted tests 10/10; clean full run 77 files / 350 tests, check:reference 5/5, typecheck, build pass)
 
 Only Kibiandkimi decides acceptance; this card is not approval.
 
