@@ -1,12 +1,12 @@
 # Current handoff
 
 - Task: #10
-- Unit: Integration P4 — inventory actions
+- Unit: Integration P5 — game start (audit + main generation)
 - Work branch / PR: arena/5d1da57f-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/30
 - Accepted base at unit start: task/10/main@380470815a435dbe7f9a28f8ce2dffb9bfc14761 (PR #27 merged)
 - Inherited candidate at unit start: ebd5eb0642e730030c6656e26a34fb704602e176 (PR #30 review checkpoint, merged with the accepted head)
 - Updated: 2026-10-11
-- Fingerprint: .context/fingerprints/20261011T014100Z-31047a67/report.json
+- Fingerprint: .context/fingerprints/20261011T024418Z-379be7cd/report.json
 - Model role: primary
 - Work packet: none; primary lane outside all packet paths (DECISIONS 2026-10-10)
 - Primary review: not applicable; no secondary run exists in this history
