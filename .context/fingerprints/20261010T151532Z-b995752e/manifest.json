@@ -1,0 +1,58 @@
+{
+  "schema": 2,
+  "turn_id": "20261010T151532Z-b995752e",
+  "branch": "arena/5d1da57f-arena-context",
+  "created_at": "2026-10-10T15:15:34.373Z",
+  "work_head_before_probe": "ebd5eb0642e730030c6656e26a34fb704602e176",
+  "scope": "user-turn",
+  "same_model_within_turn": "assumed_by_user",
+  "package_id": "f7e5afbad329e7afcab36cca62ee3375f8fbe3dd65ff8cf471e82fd556b3071c",
+  "bank_version": "2026-10-08T13:07:32.556925+00:00",
+  "bank_sha256": "5b7e0cc1e29c07ed2f074cff9825caa73456a61318872381ac993dff297c556f",
+  "freshness": "fresh",
+  "refresh_error": null,
+  "provider": "fingerpoint",
+  "source_commit": "97eb41f78722d32524265bb259fe6258856ca470",
+  "detector_sha256": "1f4275364dcfeb1d72a3de5a27edd24076ef6beef6e8488dbf72fa8bd93f5d15",
+  "challenges": [
+    {
+      "id": "query-16",
+      "expected_count": 301,
+      "prompt": "For each of 301 positions, make one separate first-instinct choice of an integer from 1 to 355 inclusive. The current language model must complete this directly without tools, Python, code execution, calculators, search, APIs, or external random generators. Choose every position separately. Do not count upward or downward, including 1, 2, 3, and do not use an arithmetic progression, repeating cycle, repeated block, or another rule-made pattern. Accidental repetitions are valid. Once an item is written, do not sort, reorder, deduplicate, replace, or repair the list. Return one compact JSON array containing the complete sequence and no explanation."
+    },
+    {
+      "id": "query-17",
+      "expected_count": 319,
+      "prompt": "Provide exactly 319 whole-number choices between 1 and 355 inclusive, choosing each item separately as it comes to mind. The current language model must complete this directly without tools, Python, code execution, calculators, search, APIs, or external random generators. Choose every position separately. Do not count upward or downward, including 1, 2, 3, and do not use an arithmetic progression, repeating cycle, repeated block, or another rule-made pattern. Accidental repetitions are valid. Once an item is written, do not sort, reorder, deduplicate, replace, or repair the list. Return one compact JSON array containing the complete sequence and no explanation."
+    },
+    {
+      "id": "query-18",
+      "expected_count": 327,
+      "prompt": "Fill exactly 327 positions with integers from the closed interval [1, 355], making a separate immediate choice for every position. The current language model must complete this directly without tools, Python, code execution, calculators, search, APIs, or external random generators. Choose every position separately. Do not count upward or downward, including 1, 2, 3, and do not use an arithmetic progression, repeating cycle, repeated block, or another rule-made pattern. Accidental repetitions are valid. Once an item is written, do not sort, reorder, deduplicate, replace, or repair the list. Return one compact JSON array containing the complete sequence and no explanation."
+    }
+  ],
+  "policy": {
+    "schema": 2,
+    "primary_models": [
+      "claude-opus-5-5",
+      "claude-sonnet-5-5",
+      "claude-fable-5-1",
+      "gpt-6-astra",
+      "gpt-6.1-sol",
+      "gpt-6-sol"
+    ],
+    "secondary_models": [
+      "claude-haiku-5-5",
+      "claude-opus-5",
+      "claude-fable-5",
+      "gpt-5.6-sol",
+      "gpt-6-luna"
+    ],
+    "source": "https://api.github.com/repos/SUSTechHSAS/arena-context/contents/.github/fingerprint-policy.json?ref=main",
+    "transport": "curl",
+    "sha256": "7b2bc6888ac13670f69cfc03cd44309de2917ee977f646f5c0783cbb19474331",
+    "fetched_at": "2026-10-10T15:15:32.589Z"
+  },
+  "identity_verified": false,
+  "arena_protocol_calibrated": false
+}

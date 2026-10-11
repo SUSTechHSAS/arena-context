@@ -16,6 +16,9 @@ const originalViewer: Plugin = {
 
 export default defineConfig({
   plugins: [react(), ...(process.env.ORACLE_TEST_MODE === '1' ? [originalViewer] : [])],
+  // K1 (PLAN.md): source class/function names are runtime data (saves, recipe seeds, pools);
+  // the default minifier would turn `class 物品` into `var e=class{}`.
+  build: { rolldownOptions: { output: { keepNames: true } } },
   server: { host: '0.0.0.0', allowedHosts: ['.e2b.app', 'localhost'], port: 5173 },
   preview: { host: '0.0.0.0', allowedHosts: ['.e2b.app', 'localhost'], port: 4173 },
 });
