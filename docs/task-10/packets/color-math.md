@@ -48,7 +48,12 @@
 - `cd app && npm ci --ignore-scripts`（本轮首次安装，68 个包）
 - `npm run typecheck`：通过（退出码 0）
 - `npx vitest run test/color-math.test.ts`：10/10 通过（约 10 s）
-- `npm run check`（含 `check:reference`、typecheck、全量 `npm test`、`vite build`）：结果见本轮 `result.md`。
+- `npm run check` 各步骤（本轮在干净负载下执行）：
+  - `check:reference`：5/5 通过（`node --test ../tests/reference.test.mjs` 与参考清单校验）
+  - `npm run typecheck`：退出码 0
+  - `npm test`：**77 个测试文件、350 个测试全部通过**（`TEST_EXIT=0`，约 19 分钟）
+  - `npm run build`：退出码 0（`dist/` 由 `.gitignore` 忽略）
+- 注：前一次并行完整运行中，既有测试 `test/world-cave.test.ts` 因 30 秒超时失败（同文件单独运行 29.3 秒通过，文件未改动）；同次运行还收集了本轮为统计行数而临时创建、随即删除的文件。两者均不属于本包改动，已在本轮 `result.md` 中记录，干净的完整运行已通过。
 
 ## 下一步
 

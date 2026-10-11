@@ -17,7 +17,12 @@ Start: `545e0f10416b23efc515b0ee4b9ce4673752eb4a` (accepted `task/10/main`). Bra
 - `npm run typecheck`: exit 0 (after one type-only non-null assertion in the candidate).
 - `npx vitest run test/color-math.test.ts`: 10 passed / 10.
 - Mutant kills: hexToRgb length boundary, hexToRgba alpha truthiness, hslToRgb rounding (round→floor), rgbToHsl hue-wrap ordering: all detected.
-- `npm run check` (full, includes full `npm test` and build): running at checkpoint time; final result is recorded below when it completes.
+- `npm run check`, executed as its four steps on a clean run:
+  - `check:reference`: 5/5 pass.
+  - `npm run typecheck`: exit 0.
+  - `npm test` (full suite): 77 files, 350 tests, all pass (`TEST_EXIT=0`).
+  - `npm run build`: exit 0.
+- Earlier parallel full run: 349/350 with `test/world-cave.test.ts` timing out at 30 s under load (the file is untouched and passes alone in 29.3 s). That run also collected a temporary counting test file I created and deleted mid-run (`Cannot find module`). Neither is caused by this packet; the clean full run above supersedes it. The near-30 s duration of `world-cave` is a pre-existing timing risk for owner awareness.
 
 ## Gaps and handoff
 
@@ -27,4 +32,4 @@ Start: `545e0f10416b23efc515b0ee4b9ce4673752eb4a` (accepted `task/10/main`). Bra
 
 ## Next action
 
-Primary review of this packet: inspect the diff against the accepted reference, rerun meaningful verification, and decide on the recorded quirks. Status: awaiting-primary-review (once full check result is recorded).
+Primary review of this packet: inspect the diff against the accepted reference, rerun meaningful verification, and decide on the recorded quirks. Status: awaiting-primary-review.
