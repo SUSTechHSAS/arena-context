@@ -2,7 +2,7 @@
 
 - Task: #10
 - Unit: Integration P5 — game start (audit + main generation), secondary session turn 20261011T032501Z-38446eb4
-- Work branch / PR: arena/50f39341-arena-context (actual branch; no PR yet; predecessor arena/5d1da57f-arena-context = PR #30, merged into task/10/main at 545e0f1)
+- Work branch / PR: arena/50f39341-arena-context / https://github.com/SUSTechHSAS/arena-context/pull/31 (Draft; predecessor arena/5d1da57f-arena-context = PR #30, merged into task/10/main at 545e0f1)
 - Accepted base at unit start: task/10/main@545e0f10416b23efc515b0ee4b9ce4673752eb4a (PR #30 merged)
 - Inherited candidate at unit start: 545e0f10416b23efc515b0ee4b9ce4673752eb4a (accepted head; identical to PR #30 merge)
 - Updated: 2026-10-11
@@ -10,7 +10,7 @@
 - Model role: secondary
 - Work packet: .context/collaboration/packets/t10-color-math.json (claimed this turn; run .context/collaboration/runs/20261011T032501Z-38446eb4/, result.md)
 - Primary review: not applicable yet (no primary review for t10-color-math)
-- Candidate stage: in progress (secondary; packet t10-color-math claimed; no output yet)
+- Candidate stage: in progress (secondary; packet t10-color-math implemented in PR #31 checkpoint; targeted tests 10/10; full `npm run check` pending)
 
 Only Kibiandkimi decides acceptance; this card is not approval.
 
